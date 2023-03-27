@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Button, Modal } from 'antd';
+import { Col, Row, Button, Space, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import { Typography } from '@mui/material';
 
@@ -46,25 +46,44 @@ export const FrontMain = () => {
                 style={{
                     zIndex: 999
                 }}
+                closable={false}
                 footer={[]}
             >
-                <MainCard style={{ marginTop: 30 }}>
+                <Row variant="body1" style={{ marginBottom: 20 }}>
+                    <Col span={20} style={{ textAlign: 'left' }}>
+                        학습
+                    </Col>
+                    <Col span={4} style={{ textAlign: 'right' }}>
+                        <Button
+                            style={{
+                                width: '100px',
+                                borderRadius: '5px',
+                                backgroundColor: '#e6f4ff',
+                                boxShadow: '2px 2px 0px 0px #dbdbdb'
+                            }}
+                        >
+                            반입금지물품
+                        </Button>
+                    </Col>
+                </Row>
+                <MainCard>
                     <Typography variant="body1">
                         <Row>
                             <Col span={20} style={{ textAlign: 'left' }}>
                                 학습
                             </Col>
                             <Col span={4} style={{ textAlign: 'right' }}>
-                                <Button
-                                    type="primary"
-                                    disabled
-                                    block
-                                    onClick={Edu_handleCancel}
-                                    style={{ width: '100px', borderRadius: '5px', boxShadow: '2px 3px 0px 0px #dbdbdb' }}
-                                >
-                                    {' '}
-                                    Close
-                                </Button>
+                                <Space align="center">
+                                    <Button
+                                        type="primary"
+                                        disabled
+                                        block
+                                        onClick={Edu_handleCancel}
+                                        style={{ width: '100px', borderRadius: '5px', boxShadow: '2px 3px 0px 0px #dbdbdb' }}
+                                    >
+                                        Close
+                                    </Button>
+                                </Space>
                             </Col>
                         </Row>
                     </Typography>
