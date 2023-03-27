@@ -75,13 +75,18 @@ export const FrontMain = () => {
                             <Col span={4} style={{ textAlign: 'right' }}>
                                 <Space align="center">
                                     <Button
-                                        type="primary"
+                                        onClick={Edu_handleCancel}
+                                        style={{ width: '100px', borderRadius: '5px', boxShadow: '2px 3px 0px 0px #dbdbdb' }}
+                                    >
+                                        Start
+                                    </Button>
+                                    <Button
                                         disabled
                                         block
                                         onClick={Edu_handleCancel}
                                         style={{ width: '100px', borderRadius: '5px', boxShadow: '2px 3px 0px 0px #dbdbdb' }}
                                     >
-                                        Close
+                                        End / Close
                                     </Button>
                                 </Space>
                             </Col>
