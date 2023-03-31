@@ -34,9 +34,7 @@ export const FrontMain = () => {
 
     return (
         <>
-            <MainCard>
-                <Typography variant="body1">Main Edu</Typography>
-            </MainCard>
+            <MainCard>XBT Education</MainCard>
 
             <Modal
                 open={eduModalopen}
