@@ -3,7 +3,7 @@
 import MainLayout from 'layout/MainLayout';
 
 // 메인 대시보드
-import { LoginMain } from 'pages/frontmain/LoginMain';
+import { Login } from 'pages/frontmain/Login';
 import { FrontMain } from 'pages/frontmain/FrontMain';
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -15,7 +15,7 @@ const MainRoutes = {
         {
             // 데시보드
             path: '/',
-            element: <LoginMain />
+            element: <Login />
         },
         {
             // 데시보드

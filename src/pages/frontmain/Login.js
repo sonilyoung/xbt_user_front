@@ -1,99 +1,140 @@
-import React, { useState, useEffect } from 'react';
 /* eslint-disable*/
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'assets/css/content.css';
 import 'assets/css/default.css';
 import 'assets/css/login.css';
 import 'assets/css/reset.css';
 
-const [isOpened, setIsOpened] = useState(false);
 
-function toggle() {
-    setIsOpened(wasOpened => !wasOpened);
-}
-
-const login = () =>{
-    setIsOpened(true);
-}
 
 // ================================|| LOGIN ||================================ //
+export const Login = () => {
 
-export const LoginMain = () => {
+    const [id] = useState("user");
+    const [password] = useState("test");
+    const[params, setParams] = useState({
+        "id" : "",
+        "password" : "",
+    });
+    
+    const [isOpened, setIsOpened] = useState(false);
+    const [loginOk, setLoginOk] = useState(false);
+    const [loginFail, setLoginFail] = useState(false);
+
+    function toggle() {
+        setIsOpened(wasOpened => !wasOpened);
+    }
+    
+    const login = () =>{
+        setIsOpened(true);
+    }    
+
+    const handleLogin = () =>{
+        console.log("id:", params.id);
+        console.log("password:", params.password);
+
+        if(params.id!=='admin'){
+            setLoginFail(true);
+        }
+
+        if(params.password!=='test'){
+            setLoginFail(true);
+        }else{
+            setLoginOk(true);
+        }
+
+    }
 
     return(
         <>
-            <body>
-                <div id="wrap" class="mbg">
+                <div id="wrap" className="mbg">
                     <div id="wlayer">
-                        <div class="mcontent">
-                            <div class="login_con">
+                        <div className="mcontent">
+                            <div className="login_con">
                                 <h3>X-RAY 보안 훈련 시스템 교육생 전용</h3>
                                 <h1>X-ray Security Training</h1>
                                 <p>
                                     X-ray 보안 시스템 훈련을 통해 보안 전문 역량을 강화할 수 있도록<br/>
                                     체계적인 교육훈련 프로그램을 제공합니다.
                                 </p>
-
                                 {isOpened && (
-                                    <div id="first-modal" class="modal-wrapper modal_blur">
-                                        <div class="modal md_width1">
-                                            <h3 class="login_txt">X-ray 보안 훈련 시스템 교육생 전용</h3>
-                                            <h1 class="login_tit">X-ray Security Training<span>trainee</span></h1>
-                                            <div class="language">
-                                                <a class="kor">한국어
-                                                    <span class="arrow"><img src="../../assets/images/login/arrow_lower.svg" alt=""/></span>
-                                                </a>
-                                                <ul>
-                                                    <li class="selected">
-                                                        <a class="kor">한국어
-                                                            <span class="arrow"><img src="../images/login/arrow_up.svg" alt=""/></span>
-                                                        </a>
-                                                    </li>
-                                                    <li><a href="" class="eng">English</a></li>
-                                                    <li><a href="" class="jp">日本語</a></li>
-                                                    <li><a href="" class="cn">汉语</a></li>
-                                                </ul>
+                                <div id="first-modal" className="modal-wrapper modal_blur">
+                                    <div className="modal md_width1">
+                                        <h3 className="login_txt">X-ray 보안 훈련 시스템 교육생 전용</h3>
+                                        <h1 className="login_tit">X-ray Security Training<span>trainee</span></h1>
+                                        <div className="language">
+                                            <a className="kor">한국어
+                                                <span className="arrow"><img src="../../assets/images/login/arrow_lower.svg" alt=""/></span>
+                                            </a>
+                                            <ul>
+                                                <li className="selected">
+                                                    <a className="kor">한국어
+                                                        <span className="arrow"><img src="../images/login/arrow_up.svg" alt=""/></span>
+                                                    </a>
+                                                </li>
+                                                <li><a href="" className="eng">English</a></li>
+                                                <li><a href="" className="jp">日本語</a></li>
+                                                <li><a href="" className="cn">汉语</a></li>
+                                            </ul>
+                                        </div>
+                                        <div className="login_box">
+                                            <div className="form-group id">
+                                                <input type="text" name="id" className="form-input border-animation set-1" placeholder="아이디" 
+                                                    onChange={(e) => setParams({ ...params, "id": e.target.value })}                                                
+                                                />
                                             </div>
-                                            <div class="login_box">
-                                                <div class="form-group id">
-                                                    <input type="text" name="id" class="form-input border-animation set-1" placeholder="아이디" maxlength="16"/>
-                                                </div>
-                                                <div class="form-group pw">
-                                                    <input type="password" name="pwd" class="form-input border-animation set-1" placeholder="비밀번호" maxlength="32"/>
-                                                </div>
+                                            <div className="form-group pw">
+                                                <input type="password" name="pwd" className="form-input border-animation set-1" placeholder="비밀번호" 
+                                                    onChange={(e) => setParams({ ...params, "password": e.target.value })}
+                                                />
                                             </div>
-                                            <button id="open-second-modal" data-mact="open" data-minfo="second-modal" class="modal_btn blue_btn wide_btn">로그인</button>
-                                            <button id="close-first-modal" data-mact="close"  data-minfo="first-modal" class="modal_btn close_btn"></button>
+                                        </div>
+                                        <button id="open-second-modal" onClick={()=>handleLogin()} data-mact="open" data-minfo="second-modal" className="modal_btn blue_btn wide_btn">로그인</button>
+                                        <button id="close-first-modal" onClick={()=>{setIsOpened(false);setParams(null)}}data-mact="close"  data-minfo="first-modal" className="modal_btn close_btn"></button>
+                                    </div>
+                                </div> 
+                                )}
+
+                                {loginOk && (
+                                    <div id="second-modal" className="modal-wrapper modal_blind">
+                                        <div className="modal md_width2">
+                                            <div className="img">
+                                                <img src="../images/login/success.svg" alt=""/>
+                                            </div>
+                                            <p className="login_txt">로그인 성공!<b/></p>
+                                            <button id="open-second-modal" onClick={()=>setLoginOk(false)}  data-mact="open" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>
+                                            <button id="close-second-modal" onClick={()=>setLoginOk(false)}  data-mact="close"  data-minfo="second-modal" className="modal_btn close_btn"></button>
                                         </div>
                                     </div>
                                 )}
 
-                                <div id="second-modal" class="modal-wrapper modal_blind">
-                                    <div class="modal md_width2">
-                                        <div class="img">
-                                            <img src="../images/login/success.svg" alt=""/>
+                                {loginFail && (
+                                    <div id="th-modal" className="modal-wrapper modal_blind">
+                                        <div className="modal md_width2">
+                                            <div className="img">
+                                                <img src="../images/login/fail.svg" alt=""/>
+                                            </div>
+                                            <p className="login_txt">로그인에 실패하였습니다.</p>
+                                            <button id="close-second-modal" onClick={()=>{setLoginFail(false);setParams(null)}}  data-mact="close" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>
+                                            <button id="close-second-modal" onClick={()=>setLoginFail(false)}  data-mact="close"  data-minfo="th-modal" className="modal_btn close_btn"></button>
                                         </div>
-                                        <p class="login_txt">로그인 성공!<b/></p>
-                                        <button id="open-second-modal" data-mact="open" data-minfo="th-modal" class="modal_btn blue_btn small_btn">확인</button>
-                                        <button id="close-second-modal" data-mact="close"  data-minfo="second-modal" class="modal_btn close_btn"></button>
-                                    </div>
-                                </div>
-                                <div id="th-modal" class="modal-wrapper modal_blind">
-                                    <div class="modal md_width2">
-                                        <div class="img">
-                                            <img src="../images/login/fail.svg" alt=""/>
-                                        </div>
-                                        <p class="login_txt">로그인에 실패하였습니다.</p>
-                                        <button id="close-second-modal" data-mact="close" data-minfo="th-modal" class="modal_btn blue_btn small_btn">확인</button>
-                                        <button id="close-second-modal" data-mact="close"  data-minfo="th-modal" class="modal_btn close_btn"></button>
-                                    </div>
-                                </div>
-                                <button id="open-first-modal" onClick={()=>login()}  data-mact="open" data-minfo="first-modal"    class="login_btn modal_btn">로그인</button>
+                                    </div>                                    
+                                )}
+
+                                <button id="open-first-modal" data-mact="open" data-minfo="first-modal"  onClick={()=>login()} className="login_btn modal_btn">로그인</button>
                             </div>
                         </div>
                     </div>
+
+                    <div className="copyright">
+                        <div className="copy_con">
+                            ©2023 JUN, All rights reserved.
+                        </div>
+                    </div>                      
                 </div>
-            </body>            
+                
+              
         </>
     )
 };

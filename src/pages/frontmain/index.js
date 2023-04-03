@@ -1,2 +1,2 @@
 //export { FrontMain } from './FrontMain';
-export { LoginMain } from './LoginMain';
+export { Login } from './Login';
