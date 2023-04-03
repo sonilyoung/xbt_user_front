@@ -1,16 +1,22 @@
 /* eslint-disable*/
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import 'assets/css/content.css';
 import 'assets/css/default.css';
 import 'assets/css/login.css';
 import 'assets/css/reset.css';
 
 
+import arrow_lower from 'assets/images/login/arrow_lower.svg';
+import arrow_up from 'assets/images/login/arrow_up.svg';
+import success from 'assets/images/login/success.svg';
+import fail from 'assets/images/login/fail.svg';
+
+
 
 // ================================|| LOGIN ||================================ //
 export const Login = () => {
-
+    const navigate = useNavigate();
     const [id] = useState("user");
     const [password] = useState("test");
     const[params, setParams] = useState({
@@ -34,14 +40,18 @@ export const Login = () => {
         console.log("id:", params.id);
         console.log("password:", params.password);
 
-        if(params.id!=='admin'){
+        if(params.id!=='admin'){ //로그인실패
             setLoginFail(true);
+            setLoginOk(false);
         }
 
-        if(params.password!=='test'){
+        if(params.password!=='test'){ //로그인실패
             setLoginFail(true);
-        }else{
+            setLoginOk(false);
+        }else{//로그인성공
             setLoginOk(true);
+            setLoginFail(false);
+            navigate("/main");
         }
 
     }
@@ -53,24 +63,24 @@ export const Login = () => {
                         <div className="mcontent">
                             <div className="login_con">
                                 <h3>X-RAY 보안 훈련 시스템 교육생 전용</h3>
-                                <h1>X-ray Security Training</h1>
+                                <h1>X-ray Security Training<br/><span>System</span></h1>
                                 <p>
                                     X-ray 보안 시스템 훈련을 통해 보안 전문 역량을 강화할 수 있도록<br/>
                                     체계적인 교육훈련 프로그램을 제공합니다.
                                 </p>
                                 {isOpened && (
                                 <div id="first-modal" className="modal-wrapper modal_blur">
-                                    <div className="modal md_width1">
+                                    <div class="modal md_width1">
                                         <h3 className="login_txt">X-ray 보안 훈련 시스템 교육생 전용</h3>
-                                        <h1 className="login_tit">X-ray Security Training<span>trainee</span></h1>
+                                        <h1 className="login_tit">X-ray Security Training<span>System</span></h1>
                                         <div className="language">
                                             <a className="kor">한국어
-                                                <span className="arrow"><img src="../../assets/images/login/arrow_lower.svg" alt=""/></span>
+                                                <span className="arrow"><img src={arrow_lower} alt=""/></span>
                                             </a>
                                             <ul>
                                                 <li className="selected">
                                                     <a className="kor">한국어
-                                                        <span className="arrow"><img src="../images/login/arrow_up.svg" alt=""/></span>
+                                                        <span className="arrow"><img src={arrow_up} alt=""/></span>
                                                     </a>
                                                 </li>
                                                 <li><a href="" className="eng">English</a></li>
@@ -100,11 +110,11 @@ export const Login = () => {
                                     <div id="second-modal" className="modal-wrapper modal_blind">
                                         <div className="modal md_width2">
                                             <div className="img">
-                                                <img src="../images/login/success.svg" alt=""/>
+                                                <img src={success} alt=""/>
                                             </div>
                                             <p className="login_txt">로그인 성공!<b/></p>
-                                            <button id="open-second-modal" onClick={()=>setLoginOk(false)}  data-mact="open" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>
-                                            <button id="close-second-modal" onClick={()=>setLoginOk(false)}  data-mact="close"  data-minfo="second-modal" className="modal_btn close_btn"></button>
+                                            <button id="open-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);}}  data-mact="open" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>
+                                            <button id="close-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);}}  data-mact="close"  data-minfo="second-modal" className="modal_btn close_btn"></button>
                                         </div>
                                     </div>
                                 )}
@@ -113,7 +123,7 @@ export const Login = () => {
                                     <div id="th-modal" className="modal-wrapper modal_blind">
                                         <div className="modal md_width2">
                                             <div className="img">
-                                                <img src="../images/login/fail.svg" alt=""/>
+                                                <img src={fail} alt=""/>
                                             </div>
                                             <p className="login_txt">로그인에 실패하였습니다.</p>
                                             <button id="close-second-modal" onClick={()=>{setLoginFail(false);setParams(null)}}  data-mact="close" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>

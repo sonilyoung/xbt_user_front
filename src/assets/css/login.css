@@ -48,8 +48,10 @@
 
 /* modal 창 */
 .login_con .md_width1 {
+    left: calc(50% - 280px);
+    top: calc(50% - 251px);	
 	text-align: center;
-	width: 560px;
+	width: 560px;	
 	padding: 50px;
 }
 
@@ -296,6 +298,8 @@ input[type="text"]:disabled {
 
 /* 로그인 결과 창 */
 .login_con .md_width2 {
+    left: calc(50% - 220px);
+    top: calc(50% - 170px);
 	text-align: center;
 	width: 434px;
 	padding: 60px 0 40px;
