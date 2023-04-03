@@ -1,13 +1,13 @@
 // ==============================|| THEME CONFIG  ||============================== //
 const config = {
-    defaultPath: '/',
-    fontFamily: `'Public Sans', sans-serif`,
-    i18n: 'en',
-    miniDrawer: true,
-    container: true,
-    mode: 'dark',
-    presetColor: 'default',
-    themeDirection: 'ltr'
+    //defaultPath: '/',
+    //fontFamily: `'Public Sans', sans-serif`,
+    //i18n: 'en',
+    //miniDrawer: true,
+    //container: true,
+    //mode: 'dark',
+    //presetColor: 'default',
+    //themeDirection: 'ltr'
 };
 
 export default config;

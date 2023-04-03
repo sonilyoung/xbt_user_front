@@ -1,0 +1,427 @@
+@charset "utf-8";
+
+/* ==================================================
+	공통사항
+================================================== */
+.contit {
+	font-size: 24px;
+	font-weight: 700;
+	color: #666666;
+}
+
+.conname {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+/* ==================================================
+	학습 상단
+================================================== */
+.learn_md {
+	width: 85%;
+}
+
+.learn_con {
+	padding: 25px 25px 0 25px;
+}
+
+.learnct01>ul {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: (1fr)[3];
+	grid-template-columns: repeat(3, 1fr);
+	align-items: center;
+	padding: 0 6px;
+}
+
+.learnct01>ul>li:last-child {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.learnct01>ul>li h3 {
+	font-size: 17px;
+	font-weight: 700;
+	color: #0e276c;
+	text-align: center;
+}
+
+.learnct01>ul>li h2 {
+	padding: 0 25px;
+}
+
+.learnct01>ul>li button {
+	font-family: 'SUIT';
+	font-size: 16px;
+	font-weight: 600;
+	padding: 8px 13px;
+	color: #fff;
+	background: #1d377d;
+	border-radius: 4px;
+	box-shadow: inset 0px -3px 4px rgba(0, 0, 0, 0.26);
+	filter: drop-shadow(1px 3px 2px rgba(0, 0, 0, 0.23));
+}
+
+.learnct02 {
+	background: #fff;
+	border: 1px solid #aac1ff;
+	border-radius: 8px;
+	margin-top: 15px;
+	padding: 20px 23px 20px 0;
+}
+
+.learnct02>ul {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: (1fr)[3];
+	grid-template-columns: repeat(3, 1fr);
+	align-items: center;
+}
+
+.learnct02>ul>li:last-child {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+/* 타이틀 */
+.learntit_con {
+	max-width: 500px;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: (1fr)[3];
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0;
+}
+
+.learntit {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 42px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #666;
+}
+
+.learntit:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 1px;
+	height: 100%;
+	background: #AAC1FF;
+}
+
+/* 문제 문항수 */
+.learnct02_center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.question {
+	font-weight: 600;
+	font-size: 18px;
+	color: #9E9E9E;
+}
+
+.question>span {
+	font-family: 'Outfit';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 24px;
+	color: #0e276c;
+}
+
+/* 학습시간 분:초 */
+.question_box {
+	padding-left: 50px;
+}
+
+.question_box>dl {
+	display: flex;
+	align-items: center;
+}
+
+.question_box>dl>dd {
+	font-family: 'Outfit';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 24px;
+	color: #D9D9D9;
+}
+
+.question_box>dl>dd.qsbox {
+	padding: 10px;
+	background: linear-gradient(180deg, #5A5A5A 0%, #424242 100%);
+	border-radius: 4px;
+	color: #fff;
+}
+
+.qsb_pd {
+	padding: 0 6px;
+}
+
+/* 시작&종료 */
+.learnbtn {
+	width: 178px;
+	padding: 9px 0;
+	font-family: 'SUIT';
+	font-size: 17px;
+	font-weight: 600;
+	color: #fff;
+	border-radius: 4px;
+}
+
+.btn_start {
+	background: #1D377D;
+	box-shadow: inset 0px -3px 4px rgba(0, 0, 0, 0.26);
+	filter: drop-shadow(1px 3px 2px rgba(0, 0, 0, 0.23));
+}
+
+.btn_end {
+	margin-left: 23px;
+	background: #666666;
+	box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.23), inset 0px -3px 4px rgba(0, 0, 0, 0.26);
+}
+
+/* ==================================================
+	X-RAY 이미지 나오는 컨텐츠
+================================================== */
+.learnc_img {
+	margin: 20px 0;
+}
+
+/* Frame */
+.frame {
+	height: 510px;
+	overflow: hidden;
+}
+
+.frame ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.frame ul li {
+	float: left;
+	height: 100%;
+	margin: 0 1px 0 0;
+	padding: 0;
+	text-align: center;
+	cursor: pointer;
+}
+
+.frame ul li.active {
+	color: #fff;
+}
+
+/* Scrollbar */
+.scrollbar {
+	height: 8px;
+	border-radius: 8px;
+	background: #dce0e8;
+}
+
+.scrollbar .handle {
+	height: 100%;
+	background: #3895fd;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.scrollbar .handle .mousearea {
+	position: absolute;
+	top: -9px;
+	left: 0;
+	width: 100%;
+	height: 8px;
+}
+
+/* ==================================================
+	학습 하단부
+================================================== */
+.learn_bottom {
+	width: 100%;
+	background: #555555;
+	padding: 20px 40px;
+	border-radius: 0 0 8px 8px;
+}
+
+.learn_btcon {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.learn_btcon>div {
+	position: relative;
+}
+
+/* 왼쪽 아이콘 */
+.learnbtc01 {
+	display: flex;
+	align-items: center;
+	height: 79px;
+	padding-right: 40px;
+}
+
+.learnbtc01:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 1px;
+	height: 100%;
+	background: #9E9E9E
+}
+
+.learnbtc01>ul {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: (1fr)[4];
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px 30px;
+}
+
+/* 흑백명도 */
+.learnbtc02 {
+	position: relative;
+	margin: 0 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.learnbtc02>ul {
+	display: flex;
+	justify-content: space-between;
+}
+
+.learnbtc02>ul:last-child {
+	margin-top: 10px;
+}
+
+/* 이미지 관련 아이콘 */
+.learnbtc03 {
+	display: flex;
+	align-items: center;
+	height: 79px;
+	padding: 0 40px;
+}
+
+.learnbtc03:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1px;
+	height: 100%;
+	background: #9E9E9E
+}
+
+.learnbtc03:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 1px;
+	height: 100%;
+	background: #9E9E9E
+}
+
+.learnbtc03>ul {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: (1fr)[2];
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px 30px;
+}
+
+/* Pass / Open / Prohibited */
+.learnbtc04 {
+	display: flex;
+	align-items: center;
+	height: 79px;
+	padding: 0 50px;
+}
+
+.learnbtc04:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 1px;
+	height: 100%;
+	background: #9E9E9E
+}
+
+.learnbtc04>ul {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: (1fr)[3];
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0 50px;
+}
+
+.learnbtc04>ul>li {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.lnbtc_btn {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.lnbtc_btn>span {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 49px;
+	height: 49px;
+	background: #666666;
+	box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.23), inset 0px -3px 4px rgba(0, 0, 0, 0.26);
+	border-radius: 5px;
+}
+
+.lnbtc_btnon>span {
+	background: #1D377D;
+}
+
+.lnbtc_btn>p {
+	font-family: 'Outfit';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	color: #dce0e8;
+	padding-top: 5px;
+}
+
+/* Stop */
+.learnbtc05 {
+	display: flex;
+	align-items: center;
+	padding-left: 46px;
+}
+
+/* 썸네일 */
+.learnbtc06 {
+	margin-left: auto;
+}
+
+.learnbtc06 img {
+	width: 100%;
+	max-width: 106px;
+	border-radius: 4px;
+}

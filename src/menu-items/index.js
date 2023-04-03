@@ -1,10 +1,10 @@
 // project import
-import { FrontMain } from 'pages/frontmain/FrontMain';
+import { LoginMain } from 'pages/frontmain/LoginMain';
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [FrontMain]
+    items: [LoginMain]
 };
 
 export default menuItems;

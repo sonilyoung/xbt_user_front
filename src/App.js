@@ -3,7 +3,7 @@
 import Routes from 'routes';
 import ThemeCustomization from 'themes';
 import ScrollTop from 'components/ScrollTop';
-import './Style.css';
+//import './Style.css';
 
 // ==============================|| APP - THEME, ROUTER, LOCAL  ||============================== //
 
