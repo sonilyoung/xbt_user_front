@@ -24,15 +24,19 @@ export const Login = () => {
         "password" : "",
     });
     
-    const [isOpened, setIsOpened] = useState(false);
-    const [loginOk, setLoginOk] = useState(false);
-    const [loginFail, setLoginFail] = useState(false);
+    const [isLanguage, setIsLanguage] = useState("eng");//언어선택
+    const [isOpened, setIsOpened] = useState(false);//로그인팝업창
+    const [loginOk, setLoginOk] = useState(false);//로그인성공
+    const [loginFail, setLoginFail] = useState(false);//로그인실패
+    const [lanSelect, setLanSelect] = useState("lan_select");//언어 slectbox class
+
 
     function toggle() {
         setIsOpened(wasOpened => !wasOpened);
     }
     
     const login = () =>{
+        console.log('팝업');
         setIsOpened(true);
     }    
 
@@ -45,47 +49,81 @@ export const Login = () => {
             setLoginOk(false);
         }
 
-        if(params.password!=='test'){ //로그인실패
-            setLoginFail(true);
-            setLoginOk(false);
-        }else{//로그인성공
+        if(params.id==='admin' && params.password==='test'){ //로그인성공
             setLoginOk(true);
             setLoginFail(false);
-            navigate("/main");
+        }else{
+            setLoginFail(true);
+            setLoginOk(false);
         }
 
+    }
+
+    //메인페이지 이동
+    const moveMainPage = () =>{
+        navigate("/main");            
+    }
+
+    const handleLangSelect = () =>{
+        setLanSelect("lan_select active");
+    }
+
+    const handleLanguage = (e) =>{
+        setLanSelect("lan_select");
+        setIsLanguage(isLanguage => e);
+        console.log('언어:', isLanguage);
     }
 
     return(
         <>
                 <div id="wrap" className="mbg">
-                    <div id="wlayer">
+                    <div id="wlayer" class="login_layer">
                         <div className="mcontent">
                             <div className="login_con">
                                 <h3>X-RAY 보안 훈련 시스템 교육생 전용</h3>
-                                <h1>X-ray Security Training<br/><span>System</span></h1>
+                                <h1>X-ray Security<br/>Training<br/><span>System</span></h1>
                                 <p>
                                     X-ray 보안 시스템 훈련을 통해 보안 전문 역량을 강화할 수 있도록<br/>
                                     체계적인 교육훈련 프로그램을 제공합니다.
                                 </p>
                                 {isOpened && (
                                 <div id="first-modal" className="modal-wrapper modal_blur">
-                                    <div class="modal md_width1">
+                                    <div className="modal md_width1" style={{left: 'calc(50% - 280px)', top: 'calc(50% - 251px)'}}>
                                         <h3 className="login_txt">X-ray 보안 훈련 시스템 교육생 전용</h3>
                                         <h1 className="login_tit">X-ray Security Training<span>System</span></h1>
-                                        <div className="language">
-                                            <a className="kor">한국어
-                                                <span className="arrow"><img src={arrow_lower} alt=""/></span>
-                                            </a>
-                                            <ul>
-                                                <li className="selected">
-                                                    <a className="kor">한국어
-                                                        <span className="arrow"><img src={arrow_up} alt=""/></span>
-                                                    </a>
+                                        <div className= {lanSelect}>
+                                            <button onClick={()=>handleLangSelect()} className= {
+                                                isLanguage === "kor" ? "label kor" 
+                                                : isLanguage === "eng" ? "label eng" 
+                                                : isLanguage === "jp" ? "label jp" 
+                                                : isLanguage === "cn" ? "label cn" 
+                                                : ''
+                                            }> 
+                                                {
+                                                    isLanguage === "kor" ? "한국어"
+                                                    :
+                                                    isLanguage === "eng" ? "English"
+                                                    :
+                                                    isLanguage === "jp" ? "日本語"
+                                                    :
+                                                    isLanguage === "cn" ? "汉语"
+                                                    :
+                                                    ''
+                                                }                                             
+                                            </button>
+                                            <ul className="lan_optionList">
+                                                <li onClick={()=>handleLanguage("eng")} className = {"lan_item eng"}>
+                                                    English
+                                                </li>                                                
+                                                <li onClick={()=>handleLanguage("kor")} className = {"lan_item kor"}>
+                                                    한국어
                                                 </li>
-                                                <li><a href="" className="eng">English</a></li>
-                                                <li><a href="" className="jp">日本語</a></li>
-                                                <li><a href="" className="cn">汉语</a></li>
+                                                <li onClick={()=>handleLanguage("jp")} className = {"lan_item jp"}>
+                                                    日本語
+                                                </li>
+                                                <li onClick={()=>handleLanguage("cn")} className = {"lan_item cn"}>
+                                                    汉语
+                                                </li>
                                             </ul>
                                         </div>
                                         <div className="login_box">
@@ -113,7 +151,7 @@ export const Login = () => {
                                                 <img src={success} alt=""/>
                                             </div>
                                             <p className="login_txt">로그인 성공!<b/></p>
-                                            <button id="open-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);}}  data-mact="open" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>
+                                            <button id="open-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);moveMainPage();}}  data-mact="open" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>
                                             <button id="close-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);}}  data-mact="close"  data-minfo="second-modal" className="modal_btn close_btn"></button>
                                         </div>
                                     </div>
