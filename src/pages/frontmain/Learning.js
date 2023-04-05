@@ -113,9 +113,9 @@ export const Learning = () =>{
     }
 
     useEffect(()=>{    
-        var slide_speed = 5; //이동 거리(px)
-        var slide_time = 10; //이동 시간(ms, 1/1000초)
-        var cut_time = 3000; //컷 시간
+        let slide_speed = 5; //이동 거리(px)
+        let slide_time = 10; //이동 시간(ms, 1/1000초)
+        let cut_time = 3000; //컷 시간
 
 
         
@@ -158,11 +158,11 @@ export const Learning = () =>{
         }  
 
 
-        var time_out;				//이미지가 움직임 예약
-        var animation;				//이미지가 움직이는 상태 저장
-        var position;				//이미지와 스크롤바 이동
-        var $currentImage;			//현재 움직이는 이미지
-        var is_learn01_play = false;
+        let time_out;				//이미지가 움직임 예약
+        let animation;				//이미지가 움직이는 상태 저장
+        let position;				//이미지와 스크롤바 이동
+        let $currentImage;			//현재 움직이는 이미지
+        let is_learn01_play = false;
     
         $("#close-first-modal").click(function(){
             if(is_learn01_play){
@@ -178,8 +178,8 @@ export const Learning = () =>{
             }
 
             setStartLearning(false);
-            $("#learn01_start").hide();
-            $("#learn01_start_on").show();
+            $("#learn01_start").show();
+            $("#learn01_start_on").hide();
         });
     
         //학습시작-슬라이더 타입의 시작 버튼 누르면 실행
@@ -187,23 +187,23 @@ export const Learning = () =>{
             handleStart();//타이머
 
 
-            var containerWidth = $("#learn01_img").width();	//이미지가 움직일 공간 크기
-            var isPaused = false;		//일시정지 상태 저장
-            var current_image = 0;		//현재 움직이는 이미지가 몇번째인가
-            var start_count = 0 ;
+            let containerWidth = $("#learn01_img").width();	//이미지가 움직일 공간 크기
+            let isPaused = false;		//일시정지 상태 저장
+            let current_image = 0;		//현재 움직이는 이미지가 몇번째인가
+            let start_count = 0 ;
             
-            var origin_img=[];
-            var thum_img=[];
+            let origin_img=[];
+            let thum_img=[];
             $('#learn01_img img').each(function(i) {
                 
                 origin_img[i] = $(this);
                 thum_img[i] = $(this).data("thum") ;
             });
     
-            var images = origin_img; //이미지 목록(배열)
+            let images = origin_img; //이미지 목록(배열)
             
-            var move_timer = 10;		//움직이는 시간(ms, 1/1000초)
-            var move_distance = 5; 		//움직일 거리
+            let move_timer = 10;		//움직이는 시간(ms, 1/1000초)
+            let move_distance = 5; 		//움직일 거리
     
             is_learn01_play = true;
     
@@ -255,14 +255,14 @@ export const Learning = () =>{
 
                     setStartLearning(false);
                 } else {
-                    var $nextImage = $(images[current_image]); 
+                    let $nextImage = $(images[current_image]); 
                     $nextImage.css("left", containerWidth); 
                     $("#learn01_bimg").attr("src",$nextImage.data('thum'));
                     animation = $nextImage.animate({left: "-="+move_distance}, move_timer, function(){
                         time_out = setTimeout(image_position, move_timer);
                     });
 
-                    var problrems = start_count+1;
+                    let problrems = start_count+1;
                     //문제출제수
                     setProblremCnt(problrems);
                 }
@@ -275,8 +275,8 @@ export const Learning = () =>{
             //이미지가 화면 밖으로 사라질 경우 resetImage() 호출
             function image_position(){
                 $currentImage = $(images[current_image]);
-                var imageWidth = $currentImage.width();
-                var image_left = $currentImage.position().left;
+                let imageWidth = $currentImage.width();
+                let image_left = $currentImage.position().left;
                 if(image_left < -(imageWidth+50)){
                     clearInterval(animation);
                     //current_image++; 
@@ -293,8 +293,8 @@ export const Learning = () =>{
             //하단 버튼과 이미지의 위치를 동기화
             function set_position(){
                 $currentImage = $(images[current_image]); 
-                var imageWidth = $currentImage.width(); 
-                var currentPosition = $currentImage.position().left + (imageWidth / 2); 
+                let imageWidth = $currentImage.width(); 
+                let currentPosition = $currentImage.position().left + (imageWidth / 2); 
 
                 $("#myRange").val(currentPosition);
             }
@@ -307,8 +307,8 @@ export const Learning = () =>{
                 if(isPaused){
                     position = $("#myRange").val();
                     $currentImage = $(images[current_image]);
-                    var imageWidth = $currentImage.width();
-                    var image_left = Number(position) - (imageWidth / 2);
+                    let imageWidth = $currentImage.width();
+                    let image_left = Number(position) - (imageWidth / 2);
                     $currentImage.attr("style","left:"+image_left+"px"); 
                 }
             });
@@ -371,18 +371,18 @@ export const Learning = () =>{
             //======================>
     
             $("#learn01_bimg").click(function(){
-                var image_src = $(this).attr("src");
+                let image_src = $(this).attr("src");
                 $currentImage = $(images[current_image]);
                 $(this).attr("src",$currentImage.attr('src'));
                 $currentImage.attr("src",image_src);
             });
         });
     
-        var timer;							//이미지가 보여지는 타이머
-        var timeout;						//시험종료를 위한 타이머
-        var progressBar = $('#learn02_progress'); //남은시간 게이지
-        var images = $('#learn02_img img');	//이미지 목록
-        var is_learn02_play = false;
+        let timer;							//이미지가 보여지는 타이머
+        let timeout;						//시험종료를 위한 타이머
+        let progressBar = $('#learn02_progress'); //남은시간 게이지
+        let images = $('#learn02_img img');	//이미지 목록
+        let is_learn02_play = false;
     
         $("#close-second-modal").click(function(){
             if(is_learn02_play){
@@ -399,11 +399,11 @@ export const Learning = () =>{
     
         //학습시작-컷 타입의 시작 버튼 누르면 실행
         $("#learn02_start").click(function() {
-            var currentImageIndex = 0;			//현재 보여지는 이미지 순서
-            var start_time;						//이미지가 보여지기 시작한 시간
-            var stop_time;						//일시정지 버튼을 누른 시간
-            var status = 0;						//일시정지 버튼 상태
-            var learn_time = 5000; 				//이미지를 보여줄 시간(ms, 1/1000초)
+            let currentImageIndex = 0;			//현재 보여지는 이미지 순서
+            let start_time;						//이미지가 보여지기 시작한 시간
+            let stop_time;						//일시정지 버튼을 누른 시간
+            let status = 0;						//일시정지 버튼 상태
+            let learn_time = 5000; 				//이미지를 보여줄 시간(ms, 1/1000초)
             is_learn02_play = true;
     
             //남은시간 표시
@@ -459,14 +459,14 @@ export const Learning = () =>{
             function pause() {
                 clearTimeout(timer);
                 clearTimeout(timeout);
-                var progressBar = $('#learn02_progress');
+                let progressBar = $('#learn02_progress');
                 progressBar.stop();
                 stop_time = Date.now();
             }
             //다시시작
-            var paused_time = 0;
+            let paused_time = 0;
             function resume() {
-                var remaining_time = learn_time - (stop_time - start_time) + paused_time;
+                let remaining_time = learn_time - (stop_time - start_time) + paused_time;
                 timer = setTimeout(displayNextImage, remaining_time);
                 clearTimeout(timeout); 
                 updateProgressBar(remaining_time, true);
@@ -549,7 +549,7 @@ export const Learning = () =>{
             start_time = Date.now();
             paused_time = 0;
             $("#learn02_bimg").click(function(){
-                var image_src = $(this).attr("src");
+                let image_src = $(this).attr("src");
                 $currentImage = $(images[currentImageIndex]);
                 $(this).attr("src",$currentImage.attr('src'));
                 $currentImage.attr("src",image_src);
