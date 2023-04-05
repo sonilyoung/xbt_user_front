@@ -38,7 +38,7 @@ export const FrontMain = () => {
                 
                 <div className="mcontent">
                     {mContents &&(
-                        <div id="first-modal" className="modal-wrapper modal_blur" >
+                        <div id="first-modal" className="modal-wrapper modal_blur" style={{display:'block'}}>
                             <div className="modal xbt_md" style={{left: 'calc(50% - 816px)' ,top: 'calc(50% - 383px)'}}>
                                 {/* xbt_content */}
                                 <div className="xbt_content">

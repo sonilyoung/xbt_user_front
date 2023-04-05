@@ -7,6 +7,7 @@ import { Login } from 'pages/frontmain/Login';
 import { FrontMain } from 'pages/frontmain/FrontMain';
 import { Learning } from 'pages/frontmain/Learning';
 import { StopWatch } from 'pages/frontmain/StopWatch';
+import { ImageSize } from 'pages/frontmain/ImageSize';
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -32,6 +33,11 @@ const MainRoutes = {
             // 테스트
             path: '/test',
             element: <StopWatch />
+        },
+        {
+            // 테스트
+            path: '/ImageSize',
+            element: <ImageSize />
         }
     ]
 };

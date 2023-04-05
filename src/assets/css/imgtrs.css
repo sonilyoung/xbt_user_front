@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+/* ==================================================
+	이미지 확대축소 버그 수정
+================================================== */
+
+.react-transform-component {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.react-transform-element {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.react-transform-component {
+    width: unset !important;
+    height: unset !important;
+}
+
+.react-transform-element {
+    width: unset !important;
+    height: unset !important;
+}
+
+.transform-component-module_content__FBWxo{
+	display: flex;
+	flex-wrap: wrap;
+	width: unset -moz-fit-content;
+	width: unset fit-content;
+	height: unset -moz-fit-content;
+	height: unset fit-content;
+	margin: 0;
+	padding: 0;
+	transform-origin: 0% 0%;
+}

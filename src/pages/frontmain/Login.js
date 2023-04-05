@@ -87,7 +87,7 @@ export const Login = () => {
                                     체계적인 교육훈련 프로그램을 제공합니다.
                                 </p>
                                 {isOpened && (
-                                <div id="first-modal" className="modal-wrapper modal_blur">
+                                <div id="first-modal" className="modal-wrapper modal_blur" style={{display:'block'}}>
                                     <div className="modal md_width1" style={{left: 'calc(50% - 280px)', top: 'calc(50% - 251px)'}}>
                                         <h3 className="login_txt">X-ray 보안 훈련 시스템 교육생 전용</h3>
                                         <h1 className="login_tit">X-ray Security Training<span>System</span></h1>
@@ -145,7 +145,7 @@ export const Login = () => {
                                 )}
 
                                 {loginOk && (
-                                    <div id="second-modal" className="modal-wrapper modal_blind">
+                                    <div id="second-modal" className="modal-wrapper modal_blind" style={{display:'block'}}>
                                         <div className="modal md_width2">
                                             <div className="img">
                                                 <img src={success} alt=""/>
@@ -158,7 +158,7 @@ export const Login = () => {
                                 )}
 
                                 {loginFail && (
-                                    <div id="th-modal" className="modal-wrapper modal_blind">
+                                    <div id="th-modal" className="modal-wrapper modal_blind" style={{display:'block'}}>
                                         <div className="modal md_width2">
                                             <div className="img">
                                                 <img src={fail} alt=""/>

@@ -1,11 +1,15 @@
 /* eslint-disable*/
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect, Component ,useRef } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import $ from 'jquery';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
 import 'assets/css/content.css';
 import 'assets/css/default.css';
 import 'assets/css/login.css';
 import 'assets/css/reset.css';
+import 'assets/css/imgtrs.css';
+
 
 
 import learning_01 from 'assets/images/learning/learning_01.jpg';
@@ -43,13 +47,70 @@ import open from 'assets/images/learning/open.png';
 import prohibited from 'assets/images/learning/prohibited.png';
 import stop from 'assets/images/learning/stop.png';
 
-
-
-
 // ================================|| 학습 ||================================ //
 export const Learning = () =>{
-    const [problremCnt, setProblremCnt] = useState();
+    const [problremCnt, setProblremCnt] = useState(1);//문제출제수
+    const [startLearning, setStartLearning] = useState(true);
+    const [imgSlideDisplay, setImgSlideDisplay] = useState('block');//슬라이드이미지
+    const [imgDisplay, setImgDisplay] = useState('none');//확대축소이미지
+    const [targetImg, setTargetImg] = useState([]);
 
+    const [zin, setZin] = useState();
+    const [zout, setZout] = useState();
+
+    
+
+    //타이머셋팅
+    const [timer, setTimer] = useState(0);
+    const [isActive, setIsActive] = useState(false);
+    const increment = useRef(null);
+
+    const handleStart = () => {
+        setIsActive(!isActive);
+        {
+          !isActive ?
+          (increment.current = setInterval(() => {
+            setTimer((timer) => timer + 1)
+          }, 1000 ))
+          :
+          (clearInterval(increment.current))
+        }
+    }
+
+    const handleReset = () => {
+        clearInterval(increment.current);
+        setIsActive(false);
+        setTimer(0);
+    }    
+
+    //분
+    const formatMinuite = () => {
+        const getSeconds = `0${(timer % 60)}`.slice(-2)
+        const minutes = `${Math.floor(timer / 60)}`
+        const getMinutes = `0${minutes % 60}`.slice(-2)
+        const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
+        return `${getMinutes}`;
+    }    
+
+    //초
+    const formatSeconds = () => {
+        const getSeconds = `0${(timer % 60)}`.slice(-2)
+        const minutes = `${Math.floor(timer / 60)}`
+        const getMinutes = `0${minutes % 60}`.slice(-2)
+        const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
+        return `${getSeconds}`;
+    }    
+
+    const showImgControl=(e)=>{
+        if(e==='Y'){//확대축소 영역 show
+            setImgDisplay('block');
+            setImgSlideDisplay('none');
+        }else{
+            setImgDisplay('none');
+            setImgSlideDisplay('block');
+        }
+
+    }
 
     useEffect(()=>{    
         var slide_speed = 5; //이동 거리(px)
@@ -113,11 +174,19 @@ export const Learning = () =>{
                 is_learn01_play = false;
                 $("#learn01_bimg").hide();
                 $("#myRange").css("visibility","hidden");
+                handleReset();
             }
+
+            setStartLearning(false);
+            $("#learn01_start").hide();
+            $("#learn01_start_on").show();
         });
     
         //학습시작-슬라이더 타입의 시작 버튼 누르면 실행
         $("#learn01_start").click(function() {
+            handleStart();//타이머
+
+
             var containerWidth = $("#learn01_img").width();	//이미지가 움직일 공간 크기
             var isPaused = false;		//일시정지 상태 저장
             var current_image = 0;		//현재 움직이는 이미지가 몇번째인가
@@ -165,6 +234,9 @@ export const Learning = () =>{
             //마지막 이미지가 끝났을 경우 시험 종료
             function resetImage() {
                 $currentImage = $(images[current_image]); 
+
+                setTargetImg($currentImage[0].src);//테스트
+
                 if(start_count > 0){
                     $currentImage.remove(); 
                     //$currentImage.hide();
@@ -180,6 +252,8 @@ export const Learning = () =>{
                     $("#learn01_bimg").hide();
                     $("#myRange").css("visibility","hidden");
                     is_learn01_play = false;
+
+                    setStartLearning(false);
                 } else {
                     var $nextImage = $(images[current_image]); 
                     $nextImage.css("left", containerWidth); 
@@ -187,9 +261,13 @@ export const Learning = () =>{
                     animation = $nextImage.animate({left: "-="+move_distance}, move_timer, function(){
                         time_out = setTimeout(image_position, move_timer);
                     });
+
+                    var problrems = start_count+1;
+                    //문제출제수
+                    setProblremCnt(problrems);
                 }
                 start_count++;
-                setProblremCnt(start_count);
+                
             }
 
     
@@ -238,6 +316,8 @@ export const Learning = () =>{
             //진행중일때 Stop 버튼을 누르면 일시정지
             //일시정지일때 Stop 버튼을 누르면 다시재생
             $("#learn01_stop").click(function() {
+                setImgDisplay('none');
+                setImgSlideDisplay('block');                
                 if(is_learn01_play){
                     if (!isPaused) {
                         isPaused = true;
@@ -475,8 +555,33 @@ export const Learning = () =>{
                 $currentImage.attr("src",image_src);
             });
         });        
-    });
+    },[startLearning]);
 
+
+    const inputRef1 = useRef(null);
+    const inputRef2 = useRef(null);
+    const inputRef3 = useRef(null);
+
+    //확대
+    const targetZoomIn = () => {
+        if (inputRef1.current) {
+          inputRef1.current.dispatchEvent(new Event('click', { bubbles: true }));
+        }
+    }
+
+    //축소
+    const targetZoomOut = () => {
+        if (inputRef2.current) {
+          inputRef2.current.dispatchEvent(new Event('click', { bubbles: true }));
+        }
+    }
+
+    //리셋
+    const targetZoomReset = () => {
+        if (inputRef3.current) {
+          inputRef3.current.dispatchEvent(new Event('click', { bubbles: true }));
+        }
+    }    
 
 
     return(
@@ -523,12 +628,12 @@ export const Learning = () =>{
                                                     <div className="learntit">레벨 : 1</div>
                                                 </li>
                                                 <li className="learnct02_center">
-                                                    <div className="question">문항 <span>{problremCnt}/30</span></div>
+                                                    <div className="question">문항 <span>{problremCnt}/5</span></div>
                                                     <div className="question_box">
                                                         <dl>
-                                                            <dd className="qsbox">00</dd>
+                                                            <dd className="qsbox">{formatMinuite()}</dd>
                                                             <dd className="qsb_pd">:</dd>
-                                                            <dd className="qsbox">00</dd>
+                                                            <dd className="qsbox">{formatSeconds()}</dd>
                                                         </dl>
                                                     </div>
                                                 </li>
@@ -540,16 +645,46 @@ export const Learning = () =>{
                                             </ul>
                                         </div>
                                     </div>
+
                                     {/* learnc_img */}
-                                    <div className="learnc_img" id="learn01_img" style={{height:"520px"}}>
+                                    <div className="learnc_img" id="learn01_img" style={{height:"520px", display:imgSlideDisplay}}>
                                         <img src={learning_01} data-thum={learning_01_1} className="image" alt="image" />
                                         <img src={learning_02} data-thum={learning_02_1} className="image" alt="image" />
                                         <img src={learning_03} data-thum={learning_03_1} className="image" alt="image" />
                                         <img src={learning_04} data-thum={learning_04_1} className="image" alt="image" />
                                         <img src={learning_05} data-thum={learning_05_1} className="image" alt="image" />
                                     </div>
-                                    <input type="range" name="" id="myRange" max="1000" disabled style={{width:"100%", visibility:"hidden"}} />
 
+                                    
+                                        <TransformWrapper
+                                            initialScale={1}
+                                            minScale= {0.5}
+                                            maxScale= {100}                                            
+                                            initialPositionX={200}
+                                            initialPositionY={100}
+                                            alignmentAnimation={{ sizeX: 0, sizeY: 0 }}
+                                            centerZoomedOut={true}
+                                            //limitToBounds={true}
+                                            >
+                                            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                                                <React.Fragment>
+
+                                                <div className="tools" style={{visibility:"hidden"}}>
+                                                    <button ref={inputRef1} onClick={() => zoomIn()}>+</button>
+                                                    <button ref={inputRef2} onClick={() => zoomOut()}>-</button>
+                                                    <button ref={inputRef3} onClick={() => resetTransform()}>x</button>
+                                                </div>
+                                                <TransformComponent>
+                                                    <div className="learnc_img_sub" id="learn01_img_sub" style={{ textAlign:"center !important", width: "100%", height: "100%", display:imgDisplay}}>
+                                                        <img src={targetImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
+                                                    </div>
+                                                </TransformComponent>
+                                                </React.Fragment>
+                                            )}
+                                        </TransformWrapper>    
+
+
+                                    <input type="range" name="" id="myRange" max="1000" disabled style={{width:"100%", visibility:"hidden"}} />                                    
                                 </div>
                                 {/* learn_bottom */}
                                 <div className="learn_bottom">
@@ -590,10 +725,10 @@ export const Learning = () =>{
                                         {/* learnbtc03 */}
                                         <div className="learnbtc03">
                                             <ul>
-                                                <li><a href="#"><img src={glas_plus} alt=""/></a></li>
-                                                <li><a href="#"><img src={transform} alt=""/></a></li>
-                                                <li><a href="#"><img src={glas_minus} alt=""/></a></li>
-                                                <li><a href="#"><img src={restoration} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('Y');targetZoomIn()}}><img src={glas_plus} alt="이미지 확대"/></a></li>
+                                                <li><a href="#" ><img src={transform} alt="이미지 반전"/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('Y');targetZoomOut()}}><img src={glas_minus} alt="이미지 축소"/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('Y');targetZoomReset()}}><img src={restoration} alt="이미지 reset"/></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc04 */}
@@ -634,6 +769,15 @@ export const Learning = () =>{
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+
+
+
+
                         {/* 학습시작-컷 타입 */}
                         <div id="second-modal" className="modal-wrapper modal_blur">
                             <div className="modal xbt_md">
