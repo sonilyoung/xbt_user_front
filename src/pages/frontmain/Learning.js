@@ -655,11 +655,11 @@ export const Learning = () =>{
                                         <img src={learning_05} data-thum={learning_05_1} className="image" alt="image" />
                                     </div>
 
-                                    
+                                    <div className="learnc_img_sub" id="learn01_img_sub" style={{ textAlign:"center !important", width: "100%", height: "100%", display:imgDisplay}}>
                                         <TransformWrapper
                                             initialScale={1}
                                             minScale= {0.5}
-                                            maxScale= {100}                                            
+                                            maxScale= {10}                                            
                                             initialPositionX={200}
                                             initialPositionY={100}
                                             alignmentAnimation={{ sizeX: 0, sizeY: 0 }}
@@ -675,14 +675,12 @@ export const Learning = () =>{
                                                     <button ref={inputRef3} onClick={() => resetTransform()}>x</button>
                                                 </div>
                                                 <TransformComponent>
-                                                    <div className="learnc_img_sub" id="learn01_img_sub" style={{ textAlign:"center !important", width: "100%", height: "100%", display:imgDisplay}}>
                                                         <img src={targetImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
-                                                    </div>
                                                 </TransformComponent>
                                                 </React.Fragment>
                                             )}
                                         </TransformWrapper>    
-
+                                    </div>               
 
                                     <input type="range" name="" id="myRange" max="1000" disabled style={{width:"100%", visibility:"hidden"}} />                                    
                                 </div>
