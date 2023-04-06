@@ -12,8 +12,8 @@ import 'assets/css/imgtrs.css';
 
 // ================================|| 데모이미지 ||================================ //
 //정면이미지
-import learning_01 from 'assets/images/demo/X05231-101.jpg';
-import learning_02 from 'assets/images/demo/X05228-101.jpg';
+import t_learning_01 from 'assets/images/demo/X05231-101.jpg';
+import t_learning_02 from 'assets/images/demo/X05228-101.jpg';
 import learning_03 from 'assets/images/demo/X05227-101.jpg';
 import learning_04 from 'assets/images/demo/X05182-101.jpg';
 import learning_05 from 'assets/images/demo/X05180-101.jpg';
@@ -24,6 +24,8 @@ import learning_02_1 from 'assets/images/demo/X05228-201.jpg';
 import learning_03_1 from 'assets/images/demo/X05227-201.jpg';
 import learning_04_1 from 'assets/images/demo/X05182-201.jpg';
 import learning_05_1 from 'assets/images/demo/X05180-201.jpg';
+
+
 
 
 // ================================|| 하단 이미지 컨트롤 변경 적용 ||================================ //
@@ -86,6 +88,12 @@ export const Learning = () =>{
 
     const [zin, setZin] = useState();
     const [zout, setZout] = useState();
+
+    
+    const [learning_01, setLearning_01] = useState(t_learning_01);
+    const [learning_02, setLearning_02] = useState(t_learning_02);
+    
+    const [transImg, setTransImg] = useState();
 
     
 
@@ -403,6 +411,12 @@ export const Learning = () =>{
                 $(this).attr("src",$currentImage.attr('src'));
                 $currentImage.attr("src",image_src);
             });
+
+            $("#transTarget").click(function(){
+                console.log('이미지변경');
+                console.log(transImg);
+                $currentImage.attr("src",transImg);
+            });            
         });
     
         let timer;							//이미지가 보여지는 타이머
@@ -624,6 +638,8 @@ export const Learning = () =>{
 
         }else if(e==='color2'){//컬러유기물강조
 
+            console.log('확인');
+            setLearning_01(t_learning_02);
         }else if(e==='color3'){//컬러무기물강조
 
         }else if(e==='color4'){//컬러반전
