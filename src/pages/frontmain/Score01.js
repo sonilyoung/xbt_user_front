@@ -7,8 +7,7 @@ import 'assets/css/content.css';
 import 'assets/css/default.css';
 import 'assets/css/login.css';
 import 'assets/css/reset.css';
-import 'assets/css/tab.css';
-import img from 'assets/images/score/tab_img01.png';
+import 'assets/css/frontMain.css';
 
 export class Score01 extends React.Component {    
     constructor(props) {

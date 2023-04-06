@@ -33,43 +33,43 @@ body {
 @font-face {
 	font-family: 'SUIT';
 	font-weight: 300;
-	src: url('assets/css/font/suit/SUIT-Light.woff2') format('woff2');
+	src: url('./font/suit/SUIT-Light.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'SUIT';
 	font-weight: 400;
-	src: url('assets/css/font/suit/SUIT-Regular.woff2') format('woff2');
+	src: url('./font/suit/SUIT-Regular.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'SUIT';
 	font-weight: 500;
-	src: url('assets/css/font/suit/SUIT-Medium.woff2') format('woff2');
+	src: url('./font/suit/SUIT-Medium.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'SUIT';
 	font-weight: 600;
-	src: url('assets/css/font/suit/SUIT-SemiBold.woff2') format('woff2');
+	src: url('./font/suit/SUIT-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'SUIT';
 	font-weight: 700;
-	src: url('assets/css/font/suit/SUIT-Bold.woff2') format('woff2');
+	src: url('./font/suit/SUIT-Bold.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'SUIT';
 	font-weight: 800;
-	src: url('assets/css/font/suit/SUIT-ExtraBold.woff2') format('woff2');
+	src: url('./font/suit/SUIT-ExtraBold.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'SUIT';
 	font-weight: 900;
-	src: url('assets/css/font/suit/SUIT-Heavy.woff2') format('woff2');
+	src: url('./font/suit/SUIT-Heavy.woff2') format('woff2');
 }
 
 /* OUTFIT */
@@ -79,17 +79,17 @@ body {
 	font-family: 'Outfit';
 	font-style: normal;
 	font-weight: 200;
-	src: url('assets/css/font/outfit/outfit-v6-latin-200.eot');
+	src: url('./font/outfit/outfit-v6-latin-200.eot');
 	/* IE9 Compat Modes */
-	src: url('assets/css/font/outfit/outfit-v6-latin-200.eot?#iefix') format('embedded-opentype'),
+	src: url('./font/outfit/outfit-v6-latin-200.eot?#iefix') format('embedded-opentype'),
 		/* IE6-IE8 */
-		url('assets/css/font/outfit/outfit-v6-latin-200.woff2') format('woff2'),
+		url('./font/outfit/outfit-v6-latin-200.woff2') format('woff2'),
 		/* Super Modern Browsers */
-		url('assets/css/font/outfit/outfit-v6-latin-200.woff') format('woff'),
+		url('./font/outfit/outfit-v6-latin-200.woff') format('woff'),
 		/* Modern Browsers */
-		url('assets/css/font/outfit/outfit-v6-latin-200.ttf') format('truetype'),
+		url('./font/outfit/outfit-v6-latin-200.ttf') format('truetype'),
 		/* Safari, Android, iOS */
-		url('assets/css/font/outfit/outfit-v6-latin-200.svg#Outfit') format('svg');
+		url('./font/outfit/outfit-v6-latin-200.svg#Outfit') format('svg');
 	/* Legacy iOS */
 }
 
@@ -99,17 +99,17 @@ body {
 	font-family: 'Outfit';
 	font-style: normal;
 	font-weight: 400;
-	src: url('assets/css/font/outfit/outfit-v6-latin-regular.eot');
+	src: url('./font/outfit/outfit-v6-latin-regular.eot');
 	/* IE9 Compat Modes */
-	src: url('assets/css/font/outfit/outfit-v6-latin-regular.eot?#iefix') format('embedded-opentype'),
+	src: url('./font/outfit/outfit-v6-latin-regular.eot?#iefix') format('embedded-opentype'),
 		/* IE6-IE8 */
-		url('assets/css/font/outfit/outfit-v6-latin-regular.woff2') format('woff2'),
+		url('./font/outfit/outfit-v6-latin-regular.woff2') format('woff2'),
 		/* Super Modern Browsers */
-		url('assets/css/font/outfit/outfit-v6-latin-regular.woff') format('woff'),
+		url('./font/outfit/outfit-v6-latin-regular.woff') format('woff'),
 		/* Modern Browsers */
-		url('assets/css/font/outfit/outfit-v6-latin-regular.ttf') format('truetype'),
+		url('./font/outfit/outfit-v6-latin-regular.ttf') format('truetype'),
 		/* Safari, Android, iOS */
-		url('assets/css/font/outfit/outfit-v6-latin-regular.svg#Outfit') format('svg');
+		url('./font/outfit/outfit-v6-latin-regular.svg#Outfit') format('svg');
 	/* Legacy iOS */
 }
 
@@ -119,17 +119,17 @@ body {
 	font-family: 'Outfit';
 	font-style: normal;
 	font-weight: 500;
-	src: url('assets/css/font/outfit/outfit-v6-latin-500.eot');
+	src: url('./font/outfit/outfit-v6-latin-500.eot');
 	/* IE9 Compat Modes */
-	src: url('assets/css/font/outfit/outfit-v6-latin-500.eot?#iefix') format('embedded-opentype'),
+	src: url('./font/outfit/outfit-v6-latin-500.eot?#iefix') format('embedded-opentype'),
 		/* IE6-IE8 */
-		url('assets/css/font/outfit/outfit-v6-latin-500.woff2') format('woff2'),
+		url('./font/outfit/outfit-v6-latin-500.woff2') format('woff2'),
 		/* Super Modern Browsers */
-		url('assets/css/font/outfit/outfit-v6-latin-500.woff') format('woff'),
+		url('./font/outfit/outfit-v6-latin-500.woff') format('woff'),
 		/* Modern Browsers */
-		url('assets/css/font/outfit/outfit-v6-latin-500.ttf') format('truetype'),
+		url('./font/outfit/outfit-v6-latin-500.ttf') format('truetype'),
 		/* Safari, Android, iOS */
-		url('assets/css/font/outfit/outfit-v6-latin-500.svg#Outfit') format('svg');
+		url('./font/outfit/outfit-v6-latin-500.svg#Outfit') format('svg');
 	/* Legacy iOS */
 }
 
@@ -139,17 +139,17 @@ body {
 	font-family: 'Outfit';
 	font-style: normal;
 	font-weight: 600;
-	src: url('assets/css/font/outfit/outfit-v6-latin-600.eot');
+	src: url('./font/outfit/outfit-v6-latin-600.eot');
 	/* IE9 Compat Modes */
-	src: url('assets/css/font/outfit/outfit-v6-latin-600.eot?#iefix') format('embedded-opentype'),
+	src: url('./font/outfit/outfit-v6-latin-600.eot?#iefix') format('embedded-opentype'),
 		/* IE6-IE8 */
-		url('assets/css/font/outfit/outfit-v6-latin-600.woff2') format('woff2'),
+		url('./font/outfit/outfit-v6-latin-600.woff2') format('woff2'),
 		/* Super Modern Browsers */
-		url('assets/css/font/outfit/outfit-v6-latin-600.woff') format('woff'),
+		url('./font/outfit/outfit-v6-latin-600.woff') format('woff'),
 		/* Modern Browsers */
-		url('assets/css/font/outfit/outfit-v6-latin-600.ttf') format('truetype'),
+		url('./font/outfit/outfit-v6-latin-600.ttf') format('truetype'),
 		/* Safari, Android, iOS */
-		url('assets/css/font/outfit/outfit-v6-latin-600.svg#Outfit') format('svg');
+		url('./font/outfit/outfit-v6-latin-600.svg#Outfit') format('svg');
 	/* Legacy iOS */
 }
 
@@ -157,7 +157,7 @@ body {
 @font-face {
 	font-family: 'Noto_Sans_JP';
 	font-weight: 400;
-	src: local('assets/css/font/Noto_Sans_JP_Regular'), local('assets/css/font/Noto_Sans_JP_Regular'), url('assets/css/font/Noto_Sans_JP_Regular.woff') format('woff');
+	src: local('./font/Noto_Sans_JP_Regular'), local('./font/Noto_Sans_JP_Regular'), url('./font/Noto_Sans_JP_Regular.woff') format('woff');
 }
 
 /* 본고딕 - 중문 */
@@ -166,7 +166,7 @@ body {
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: local('assets/css/font/Noto_Sans_SC_Regular'), local('assets/css/font/NotoSansSC-Regular'), url('assets/css/font/Noto_Sans_SC_Regular.woff') format('woff');
+	src: local('./font/Noto_Sans_SC_Regular'), local('./font/NotoSansSC-Regular'), url('./font/Noto_Sans_SC_Regular.woff') format('woff');
 }
 
 /* ==================================================
@@ -180,9 +180,16 @@ body {
 }
 
 .mbg {
-	background-image: url('assets/images/common/bg.png');
+	background-image: url('../images/common/bg.png');
 	background-repeat: no-repeat;
 	background-position: calc(100% - 3rem) center;
+}
+
+/* 노트북 사이즈 */ 
+@media screen and (max-width: 1700px) {/* 2023.04.04 yj css 추가 */
+	.mbg_none {
+		background: 0;
+	}
 }
 
 /* ==================================================
@@ -221,8 +228,18 @@ body {
 /* ==================================================
 	모달창
 ================================================== */
-.xbt_md {    
+.xbt_md {
 	width: 85%;
+}
+
+.notice_md {/* 23.04.04 YJ-css 수정 */
+	width: 800px;
+	background: #fff !important;
+}
+
+.noticerw_md {/* 23.04.04 YJ-css 수정 */
+	width: 680px;
+	background: #fff !important;
 }
 
 .modal-wrapper {
@@ -276,12 +293,14 @@ body {
 }
 
 /* 닫기버튼 */
-.xbt_md .close_btn {
-	top: 27px;
+.xbt_md .close_btn,
+.notice_md .close_btn,
+.noticerw_md .close_btn {
+	top: 25px;
 	right: 20px;
 	width: 25px;
 	height: 24px;
-	background: url('assets/images/login/close.svg') center no-repeat;
+	background: url('../images/login/close.svg') center no-repeat;
 }
 
 .close_btn02 {
@@ -290,7 +309,7 @@ body {
 	right: 18px;
 	width: 21px;
 	height: 20px;
-	background: url('assets/images/login/close.svg') center no-repeat;
+	background: url('../images/login/close.svg') center no-repeat;
 }
 
 /* ==================================================
@@ -301,7 +320,7 @@ body {
 	left: 0;
 	right: 0;
 	top: 0;
-	z-index:1;
+	z-index: 1;
 	width: 100%;
 	height: 80px;
 	padding: 0 52px;
@@ -353,7 +372,7 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	font-size: 1.4rem;
-	color: #fff;
+	color: #dce0e8;
 }
 
 /* ==================================================

@@ -10,7 +10,8 @@ import 'assets/css/login.css';
 import 'assets/css/reset.css';
 import 'assets/css/imgtrs.css';
 
-// ================================|| 데모이미지 ||================================ //
+
+
 import learning_01 from 'assets/images/learning/learning_01.jpg';
 import learning_02 from 'assets/images/learning/learning_02.jpg';
 import learning_03 from 'assets/images/learning/learning_03.jpg';
@@ -23,6 +24,8 @@ import learning_03_1 from 'assets/images/learning/learning_03_1.jpg';
 import learning_04_1 from 'assets/images/learning/learning_04_1.jpg';
 import learning_05_1 from 'assets/images/learning/learning_05_1.jpg';
 
+
+
 import learnc_ic01_01 from 'assets/images/learning/learnc_ic01_01.png';
 import learnc_ic01_02 from 'assets/images/learning/learnc_ic01_02.png';
 import learnc_ic01_03 from 'assets/images/learning/learnc_ic01_03.png';
@@ -33,17 +36,16 @@ import learnc_ic02_02 from 'assets/images/learning/learnc_ic02_02.png';
 import learnc_ic02_03 from 'assets/images/learning/learnc_ic02_03.png';
 import learnc_ic02_04 from 'assets/images/learning/learnc_ic02_04.png';
 
-
-// ================================|| 아이콘 ||================================ //
 import glas_plus from 'assets/images/learning/glas_plus.png';
 import transform from 'assets/images/learning/transform.png';
 import glas_minus from 'assets/images/learning/glas_minus.png';
 import restoration from 'assets/images/learning/restoration.png';
+
+
 import pass from 'assets/images/learning/pass.png';
 import open from 'assets/images/learning/open.png';
 import prohibited from 'assets/images/learning/prohibited.png';
 import stop from 'assets/images/learning/stop.png';
-
 
 // ================================|| 학습 ||================================ //
 export const Learning = () =>{

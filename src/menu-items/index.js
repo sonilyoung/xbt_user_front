@@ -1,5 +1,5 @@
 // project import
-import { Login } from 'pages/frontmain/Login';
+import { Login } from 'pages/frontmain/login/Login';
 
 // ==============================|| MENU ITEMS ||============================== //
 

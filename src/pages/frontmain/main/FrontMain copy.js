@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from 'react';
 
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import {Score01} from './Score01';
-import {Score02} from './Score02';
-import {Score03} from './Score03';
+import {Score01} from '../Score01';
+import {Score02} from '../Score02';
+import {Score03} from '../Score03';
 
 import 'assets/css/content.css';
 import 'assets/css/default.css';
 import 'assets/css/login.css';
 import 'assets/css/reset.css';
-import 'assets/css/tab.css';
+import 'assets/css/frontMain.css';
 
 
 export const FrontMain = () => {

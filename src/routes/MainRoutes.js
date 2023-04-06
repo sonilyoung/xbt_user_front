@@ -3,8 +3,8 @@
 import MainLayout from 'layout/MainLayout';
 
 // 메인 대시보드
-import { Login } from 'pages/frontmain/Login';
-import { FrontMain } from 'pages/frontmain/FrontMain';
+import { Login } from 'pages/frontmain/login/Login';
+import { FrontMain } from 'pages/frontmain/main/FrontMain';
 import { Learning } from 'pages/frontmain/Learning';
 import { StopWatch } from 'pages/frontmain/StopWatch';
 import { ImageSize } from 'pages/frontmain/ImageSize';

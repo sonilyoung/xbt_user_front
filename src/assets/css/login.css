@@ -46,11 +46,10 @@
 	padding: 1.6rem 4rem;
 }
 
-
 /* modal 창 */
 .login_con .md_width1 {
 	text-align: center;
-	width: 560px;	
+	width: 560px;
 	padding: 50px;
 }
 
@@ -93,7 +92,7 @@
 	border: solid 1px #A9C0FF;
 	border-radius: 15px;
 	background-color: #0E276C;
-	background-image: url('assets/images/login/arrow_lower.svg');
+	background-image: url('../images/login/arrow_lower.svg');
 	background-position-x: calc(100% - 15px);
 	background-position-y: center;
 	background-repeat: no-repeat;
@@ -103,7 +102,7 @@
 
 .lan_select.active {
 	border-radius: 17px 17px 0 0;
-	background-image: url('assets/images/login/arrow_up.svg');
+	background-image: url('../images/login/arrow_up.svg');
 	transition: .1s;
 }
 
@@ -183,24 +182,24 @@
 }
 
 .lan_select .kor {
-	background: url('assets/images/login/kor_icon.svg') 20px center no-repeat;
+	background: url('../images/login/kor_icon.svg') 20px center no-repeat;
 }
 
 .lan_select .eng {
-	background: url('assets/images/login/eng_icon.svg') 20px center no-repeat;
+	background: url('../images/login/eng_icon.svg') 20px center no-repeat;
 }
 
 .lan_select .jp {
 	font-family: 'Noto_Sans_JP';
 	font-weight: 400;
-	background: url('assets/images/login/jp_icon.svg') 20px center no-repeat;
+	background: url('../images/login/jp_icon.svg') 20px center no-repeat;
 }
 
 .lan_select .cn {
 	font-family: 'Noto_Sans_SC';
 	font-style: normal;
 	font-weight: 400;
-	background: url('assets/images/login/cn_icon.svg') 20px center no-repeat;
+	background: url('../images/login/cn_icon.svg') 20px center no-repeat;
 }
 
 .lan_select span {
@@ -241,21 +240,21 @@ input[type="text"] {
 }
 
 input[type="text"] {
-	background: url('assets/images/login/id.svg') 23px center no-repeat;
+	background: url('../images/login/id.svg') 23px center no-repeat;
 }
 
 input[type="text"]:active,
 input[type="text"]:hover,
 input[type="text"]:visited {
-	background: url('assets/images/login/id_act.svg') 23px center no-repeat;
+	background: url('../images/login/id_act.svg') 23px center no-repeat;
 }
 
 input[type="password"] {
-	background: url('assets/images/login/lock.svg') 25px center no-repeat;
+	background: url('../images/login/lock.svg') 25px center no-repeat;
 }
 
 input[type="password"]:hover {
-	background: url('assets/images/login/lock_act.svg') 25px center no-repeat;
+	background: url('../images/login/lock_act.svg') 25px center no-repeat;
 }
 
 input[type="password"]:disabled,
@@ -296,7 +295,7 @@ input[type="text"]:disabled {
 	right: 1rem;
 	width: 20px;
 	height: 20px;
-	background: url('assets/images/login/close.svg') center no-repeat;
+	background: url('../images/login/close.svg') center no-repeat;
 }
 
 .login_con .modal .modal_btn {
