@@ -26,9 +26,11 @@ export const FrontMain = () => {
         console.log("컨텐츠 확인", e);
     }
 
-    //메인페이지 이동
-    const moveMainPage = () =>{
-        navigate("/Learning");            
+    //학습페이지 이동
+    const movePage = (e) =>{
+        if(e==='Learning'){//학습페이지
+            navigate("/Learning");            
+        }
     }    
 
     useEffect(()=>{
@@ -147,7 +149,7 @@ export const FrontMain = () => {
                                     <div className="mrcon_ic">
                                         <ul>
                                             <li>
-                                                <button id="open-two-md" data-mact="open" data-minfo="two-md">
+                                                <button id="open-two-md"   data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/xrayrd_ic01.png')} alt=""/>
                                                     </div>
@@ -155,7 +157,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button id="open-two-md" data-mact="open" data-minfo="two-md">
+                                                <button id="open-two-md" onClick={()=>movePage('Learning')} data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/xrayrd_ic02.png')} alt=""/>
                                                     </div>

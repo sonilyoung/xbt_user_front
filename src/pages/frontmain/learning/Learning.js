@@ -175,6 +175,7 @@ export const Learning = () =>{
                 handleReset();
             }
 
+            setStartLearning(false);
             $("#learn01_start").show();
             $("#learn01_start_on").hide();
         });
@@ -551,7 +552,7 @@ export const Learning = () =>{
                 $currentImage.attr("src",image_src);
             });
         });        
-    },[]);
+    },[startLearning]);
 
 
     const inputRef1 = useRef(null);

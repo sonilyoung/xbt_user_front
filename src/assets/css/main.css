@@ -342,7 +342,8 @@
 	width: 100%;
 	display: flex;
 	align-items: center;
-	padding: 40px 0;
+	/*padding: 40px 0; 원본 화면이 깨져서 아래와 같이 수정*/ 
+	padding: 41px 0 0 0;
 	border-bottom: 1px solid #AAC1FF;
 }
 
