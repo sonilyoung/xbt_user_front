@@ -11,18 +11,47 @@ import 'assets/css/reset.css';
 import 'assets/css/imgtrs.css';
 
 // ================================|| 데모이미지 ||================================ //
-import learning_01 from 'assets/images/learning/learning_01.jpg';
-import learning_02 from 'assets/images/learning/learning_02.jpg';
-import learning_03 from 'assets/images/learning/learning_03.jpg';
-import learning_04 from 'assets/images/learning/learning_04.jpg';
-import learning_05 from 'assets/images/learning/learning_05.jpg';
+//정면이미지
+import learning_01 from 'assets/images/demo/X05231-101.jpg';
+import learning_02 from 'assets/images/demo/X05228-101.jpg';
+import learning_03 from 'assets/images/demo/X05227-101.jpg';
+import learning_04 from 'assets/images/demo/X05182-101.jpg';
+import learning_05 from 'assets/images/demo/X05180-101.jpg';
 
-import learning_01_1 from 'assets/images/learning/learning_01_1.jpg';
-import learning_02_1 from 'assets/images/learning/learning_02_1.jpg';
-import learning_03_1 from 'assets/images/learning/learning_03_1.jpg';
-import learning_04_1 from 'assets/images/learning/learning_04_1.jpg';
-import learning_05_1 from 'assets/images/learning/learning_05_1.jpg';
+//측면이미지
+import learning_01_1 from 'assets/images/demo/X05231-201.jpg';
+import learning_02_1 from 'assets/images/demo/X05228-201.jpg';
+import learning_03_1 from 'assets/images/demo/X05227-201.jpg';
+import learning_04_1 from 'assets/images/demo/X05182-201.jpg';
+import learning_05_1 from 'assets/images/demo/X05180-201.jpg';
 
+
+// ================================|| 하단 이미지 컨트롤 변경 적용 ||================================ //
+//================================정면이미지
+//컬러
+//컬러유기물강조
+//컬러무기물강조
+//컬러반전
+
+//흑백
+//흑백유기물강조
+//흑백무기물강조
+//흑백반전
+
+//================================측면이미지
+//컬러
+//컬러유기물강조
+//컬러무기물강조
+//컬러반전
+
+//흑백
+//흑백유기물강조
+//흑백무기물강조
+//흑백반전
+
+
+// ================================|| 아이콘 ||================================ //
+//xbt아이콘
 import learnc_ic01_01 from 'assets/images/learning/learnc_ic01_01.png';
 import learnc_ic01_02 from 'assets/images/learning/learnc_ic01_02.png';
 import learnc_ic01_03 from 'assets/images/learning/learnc_ic01_03.png';
@@ -33,8 +62,6 @@ import learnc_ic02_02 from 'assets/images/learning/learnc_ic02_02.png';
 import learnc_ic02_03 from 'assets/images/learning/learnc_ic02_03.png';
 import learnc_ic02_04 from 'assets/images/learning/learnc_ic02_04.png';
 
-
-// ================================|| 아이콘 ||================================ //
 import glas_plus from 'assets/images/learning/glas_plus.png';
 import transform from 'assets/images/learning/transform.png';
 import glas_minus from 'assets/images/learning/glas_minus.png';
@@ -43,6 +70,10 @@ import pass from 'assets/images/learning/pass.png';
 import open from 'assets/images/learning/open.png';
 import prohibited from 'assets/images/learning/prohibited.png';
 import stop from 'assets/images/learning/stop.png';
+
+
+
+
 
 
 // ================================|| 학습 ||================================ //
@@ -557,6 +588,7 @@ export const Learning = () =>{
     const inputRef1 = useRef(null);
     const inputRef2 = useRef(null);
     const inputRef3 = useRef(null);
+    const inputRef4 = useRef(null);
 
     //확대
     const targetZoomIn = () => {
@@ -579,6 +611,57 @@ export const Learning = () =>{
         }
     }    
 
+    //이미지위치변경
+    const targetReplaceImg = () => {
+        if (inputRef4.current) {
+            inputRef4.current.dispatchEvent(new Event('click', { bubbles: true }));
+        }
+    }    
+
+    //하단 이미지컨트롤 아이콘 통합
+    const imgTransControl = (e) =>{
+        if(e==='color1'){//컬러
+
+        }else if(e==='color2'){//컬러유기물강조
+
+        }else if(e==='color3'){//컬러무기물강조
+
+        }else if(e==='color4'){//컬러반전
+
+        }else if(e==='blackWhite1'){//흑백
+
+        }else if(e==='blackWhite2'){//흑백유기물강조
+
+        }else if(e==='blackWhite3'){//흑백무기물강조
+
+        }else if(e==='blackWhite4'){//흑백반전
+
+        }else if(e==='cd1'){//컬러채도1
+
+        }else if(e==='cd2'){//컬러채도2
+
+        }else if(e==='cd3'){//컬러채도3
+
+        }else if(e==='cd4'){//컬러채도4
+
+        }else if(e==='cd5'){//컬러채도5
+
+        }else if(e==='cd6'){//컬러채도6
+
+        }else if(e==='cd7'){//흑백채도7
+
+        }else if(e==='cd8'){//흑백채도8
+
+        }else if(e==='cd9'){//흑백채도9
+
+        }else if(e==='cd10'){//흑백채도10
+
+        }else if(e==='cd11'){//흑백채도11
+
+        }else if(e==='cd12'){//흑백채도12
+
+        }
+    }
 
     return(
         <>
@@ -671,7 +754,7 @@ export const Learning = () =>{
                                                     <button ref={inputRef3} onClick={() => resetTransform()}>x</button>
                                                 </div>
                                                 <TransformComponent>
-                                                        <img src={targetImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
+                                                    <img src={targetImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
                                                 </TransformComponent>
                                                 </React.Fragment>
                                             )}
@@ -684,43 +767,43 @@ export const Learning = () =>{
                                 <div className="learn_bottom">
                                     {/* learn_btcon */}
                                     <div className="learn_btcon">
-                                        {/* learnbtc01 */}
+                                        {/* learnbtc01 이미지컨트롤 아이콘 영역*/}
                                         <div className="learnbtc01">
                                             <ul>
-                                                <li><a href="#"><img src={learnc_ic01_01} alt=""/></a></li>
-                                                <li><a href="#"><img src={learnc_ic01_02} alt=""/></a></li>
-                                                <li><a href="#"><img src={learnc_ic01_03} alt=""/></a></li>
-                                                <li><a href="#"><img src={learnc_ic01_04} alt=""/></a></li>
-                                                <li><a href="#"><img src={learnc_ic02_01} alt=""/></a></li>
-                                                <li><a href="#"><img src={learnc_ic02_02} alt=""/></a></li>
-                                                <li><a href="#"><img src={learnc_ic02_03} alt=""/></a></li>
-                                                <li><a href="#"><img src={learnc_ic02_04} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('color1')}><img src={learnc_ic01_01} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('color2')}><img src={learnc_ic01_02} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('color3')}><img src={learnc_ic01_03} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('color4')}><img src={learnc_ic01_04} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite1')}><img src={learnc_ic02_01} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite2')}><img src={learnc_ic02_02} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite3')}><img src={learnc_ic02_03} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite4')}><img src={learnc_ic02_04} alt=""/></a></li>
                                             </ul>
                                         </div>
-                                        {/* learnbtc02 */}
+                                        {/* learnbtc02 이미지 채도 아이콘 영역*/}
                                         <div className="learnbtc02">
                                             <ul>
-                                                <li><a href="#"><span className="brig_ic01_01"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic01_02"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic01_03"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic01_04"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic01_05"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic01_06"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd1')}><span className="brig_ic01_01"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd2')}><span className="brig_ic01_02"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd3')}><span className="brig_ic01_03"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd4')}><span className="brig_ic01_04"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd5')}><span className="brig_ic01_05"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd6')}><span className="brig_ic01_06"></span></a></li>
                                             </ul>
                                             <ul>
-                                                <li><a href="#"><span className="brig_ic02_01"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic02_02"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic02_03"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic02_04"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic02_05"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic02_06"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd7')}><span className="brig_ic02_01"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd8')}><span className="brig_ic02_02"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd9')}><span className="brig_ic02_03"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd10')}><span className="brig_ic02_04"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd11')}><span className="brig_ic02_05"></span></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('cd12')}><span className="brig_ic02_06"></span></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc03 */}
                                         <div className="learnbtc03">
                                             <ul>
                                                 <li><a href="#" onClick={()=>{showImgControl('Y');targetZoomIn()}}><img src={glas_plus} alt="이미지 확대"/></a></li>
-                                                <li><a href="#" ><img src={transform} alt="이미지 반전"/></a></li>
+                                                <li><a href="#" onClick={()=>{targetReplaceImg()}}><img src={transform} alt="이미지 반전"/></a></li>
                                                 <li><a href="#" onClick={()=>{showImgControl('Y');targetZoomOut()}}><img src={glas_minus} alt="이미지 축소"/></a></li>
                                                 <li><a href="#" onClick={()=>{showImgControl('Y');targetZoomReset()}}><img src={restoration} alt="이미지 reset"/></a></li>
                                             </ul>
@@ -755,9 +838,9 @@ export const Learning = () =>{
                                                 <p>Stop</p>
                                             </button>
                                         </div>
-                                        {/* learnbtc06 */}
-                                        <div className="learnbtc06" style={{display:"none"}}>
-                                            <img src="../images/learning/learning_01_1.jpg" id="learn01_bimg" alt=""/>
+                                        {/* learnbtc06 측면이미지 */}
+                                        <div className="learnbtc06" >
+                                            <img src={learning_01_1} ref={inputRef4} id="learn01_bimg" style={{display:"none"}} alt=""/>
                                         </div>
                                     </div>
                                 </div>
