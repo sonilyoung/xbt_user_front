@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-
+import $ from 'jquery';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import {Score01} from '../Score01';
-import {Score02} from '../Score02';
-import {Score03} from '../Score03';
+import {Score01} from './Score01';
+import {Score02} from './Score02';
+import {Score03} from './Score03';
 
 import 'assets/css/content.css';
 import 'assets/css/default.css';
@@ -31,6 +31,47 @@ export const FrontMain = () => {
         navigate("/Learning");            
     }    
 
+    useEffect(()=>{
+        /*
+            버튼에 modal_btn 클래스 넣으면 작동
+            data-mact="open"  open, close 
+            data-minfo="first-modal" 오픈시킬 창아이디 			
+        */
+        const modals = document.querySelectorAll('.modal_btn');
+
+        modals.forEach(function (modal) {
+            modal.addEventListener("click", modal_popup_open, false);
+        });
+
+        function modal_popup_open() {
+            let tar_act = this.getAttribute('data-mact');
+            let tar = this.getAttribute('data-minfo');
+            if (tar_act == "open") {
+                //const tar_class = this.getAttribute('data-mclass');
+                document.getElementById(tar).style.display = "block";
+
+                if (typeof sly_exe === "function") {
+                    //alert("sss");
+                    //sly_exe();
+                } 
+
+                // 첫번째 모달창 가운데 정렬
+                let firstModal = document.querySelector("#" + tar + " .modal");
+                let modalWidth = firstModal.offsetWidth;
+                //alert(modalWidth);
+                let modalHeight = firstModal.offsetHeight;
+                firstModal.style.left = `calc(50% - ${modalWidth / 2}px)`;
+                //firstModal.style.left = `calc(50% - ${modalWidth}px)`;
+                firstModal.style.top = `calc(50% - ${modalHeight / 2}px)`;
+                //alert(modalWidth);
+            }
+            if (tar_act == "close") {
+                document.getElementById(tar).style.display = "none";
+            }
+        }  
+    },[mContents])
+
+
     return (
         <>
             {/* wrap */}
@@ -52,7 +93,7 @@ export const FrontMain = () => {
                                         <p>X-ray 판독 초급 2023 - 1차</p>
                                         <h3>홍길동</h3>
                                     </div>
-                                    <button id="open-one-md" data-mact="open" data-minfo="one-md" className="edu_btn modal_btn">교육정보</button>
+                                    <button id="open-one-md" onClick={()=>setMcontents(true)} data-mact="open" data-minfo="one-md" className="edu_btn modal_btn">교육정보</button>
                                 </div>
                                 {/* mnotice */}
                                 <div className="mnotice">
@@ -60,7 +101,7 @@ export const FrontMain = () => {
                                     <div className="nnc_top">
                                         <h1>Notice</h1>
                                         <button id="open-two-md" data-mact="open" data-minfo="two-md" className="nnct_plus modal_btn">
-                                            <img src="assets/images/main/plus.png" alt=""/>
+                                            <img src={require('assets/images/main/plus.png')} alt=""/>
                                         </button>
                                     </div>
                                     {/* notice_list */}
@@ -108,7 +149,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/xrayrd_ic01.png" alt=""/>
+                                                        <img src={require('assets/images/main/xrayrd_ic01.png')} alt=""/>
                                                     </div>
                                                     <p>물품연습</p>
                                                 </button>
@@ -116,7 +157,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/xrayrd_ic02.png" alt=""/>
+                                                        <img src={require('assets/images/main/xrayrd_ic02.png')} alt=""/>
                                                     </div>
                                                     <p>학습</p>
                                                 </button>
@@ -124,7 +165,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/xrayrd_ic03.png" alt=""/>
+                                                        <img src={require('assets/images/main/xrayrd_ic03.png')} alt=""/>
                                                     </div>
                                                     <p>AI 강화학습</p>
                                                 </button>
@@ -146,7 +187,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/learn_ic01.png" alt=""/>
+                                                        <img src={require('assets/images/main/learn_ic01.png')} alt=""/>
                                                     </div>
                                                     <p>오답문제 풀이</p>
                                                 </button>
@@ -154,7 +195,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/learn_ic02.png" alt=""/>
+                                                        <img src={require('assets/images/main/learn_ic02.png')} alt=""/>
                                                     </div>
                                                     <p>반입금지 물품연습</p>
                                                 </button>
@@ -162,7 +203,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/learn_ic03.png" alt=""/>
+                                                        <img src={require('assets/images/main/learn_ic03.png')} alt=""/>
                                                     </div>
                                                     <p>평가</p>
                                                 </button>
@@ -184,7 +225,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/actual_ic01.png" alt=""/>
+                                                        <img src={require('assets/images/main/actual_ic01.png')} alt=""/>
                                                     </div>
                                                     <p>실제 사례</p>
                                                 </button>
@@ -192,7 +233,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/actual_ic02.png" alt=""/>
+                                                        <img src={require('assets/images/main/actual_ic02.png')} alt=""/>
                                                     </div>
                                                     <p>물품분류변경</p>
                                                 </button>
@@ -200,7 +241,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/actual_ic03.png" alt=""/>
+                                                        <img src={require('assets/images/main/actual_ic03.png')} alt=""/>
                                                     </div>
                                                     <p>물품분류연습</p>
                                                 </button>
@@ -208,7 +249,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/actual_ic04.png" alt=""/>
+                                                        <img src={require('assets/images/main/actual_ic04.png')} alt=""/>
                                                     </div>
                                                     <p>물품분류평가</p>
                                                 </button>
@@ -230,7 +271,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/theory_ic01.png" alt=""/>
+                                                        <img src={require('assets/images/main/theory_ic01.png')} alt=""/>
                                                     </div>
                                                     <p>이론 I</p>
                                                 </button>
@@ -238,7 +279,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/xrayrd_ic01.png" alt=""/>
+                                                        <img src={require('assets/images/main/xrayrd_ic01.png')} alt=""/>
                                                     </div>
                                                     <p>이론 II</p>
                                                 </button>
@@ -246,7 +287,7 @@ export const FrontMain = () => {
                                             <li>
                                                 <button id="open-two-md" data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
-                                                        <img src="assets/images/main/xrayrd_ic01.png" alt=""/>
+                                                        <img src={require('assets/images/main/xrayrd_ic01.png')} alt=""/>
                                                     </div>
                                                     <p>설문조사</p>
                                                 </button>
@@ -272,19 +313,26 @@ export const FrontMain = () => {
                                                     {/*탭 메뉴 */}
                                                     <div id="layer_menu">
                                                         <ul>
-                                                            <li><button type="button" data-filename="score01" className="on">학습점수조회</button></li>
-                                                            <li><button type="button" data-filename="score02">교육평가조회</button></li>
-                                                            <li><button type="button" data-filename="score03">오답조회</button></li>
+                                                            <li><button type="button" onClick={()=>{handleContens('score01');setSelectMenu('score01');}} data-filename="score01" className={selectMenu==='score01' ? 'on': ''}>학습점수조회</button></li>
+                                                            <li><button type="button" onClick={()=>{handleContens('score02');setSelectMenu('score02');}} data-filename="score02" className={selectMenu==='score02' ? 'on': ''}>교육평가조회</button></li>
+                                                            <li><button type="button" onClick={()=>{handleContens('score03');setSelectMenu('score03');}} data-filename="score03" className={selectMenu==='score03' ? 'on': ''}>오답조회</button></li>
                                                         </ul>
                                                     </div>
                                                 </li>
                                             </ul>
                                             {/* score_img */}
                                             <div className="score_img conbox_sty conbox_pd01 mt20">
-                                                <div id="tab_div" style={{display: "block"}}></div>
+                                                <div id="tab_div">
+                                                    {
+                                                        selectMenu === 'score01' ? <Score01/>
+                                                        : selectMenu === 'score02' ? <Score02/>
+                                                        : selectMenu === 'score03' ? <Score03/>
+                                                        : ''
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
-                                        <button id="close-one-md" data-mact="close" data-minfo="one-md" className="modal_btn close_btn"></button>
+                                        <button id="close-one-md" onClick={()=>setMcontents(false)} data-mact="close" data-minfo="one-md" class="modal_btn close_btn"></button>
                                     </div>
                                 </div>
                             </div>

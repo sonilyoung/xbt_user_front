@@ -14,22 +14,27 @@ export class Score01 extends React.Component {
     super(props);
 
         this.state = {
-        
+          //colors: ['#C3E0FC','#A2C4E5','#C8D7E7','#7EA4CA','#9FBCD7','#DAE1E7','#6D9DCC']              
           series: [{
             name: '초급',
-            data: [44, 55, 57]
+            data: [44, 55, 57],
+            color:'#C3E0FC'
           }, {
             name: '초급심화',
-            data: [76, 85, 60]
+            data: [76, 85, 60],
+            color:'#A2C4E5'
           }, {
             name: '중급',
-            data: [76, 85, 20]
+            data: [76, 85, 20],
+            color:'#C8D7E7'
           }, {
             name: '중급심화',
-            data: [35, 41, 10]
+            data: [35, 41, 10],
+            color:'#7EA4CA'
           }, {
             name: '고급',
-            data: [35, 41, 30]
+            data: [35, 41, 30],
+            color:'#9FBCD7'
           }],
           options: {
             chart: {
@@ -44,7 +49,7 @@ export class Score01 extends React.Component {
               },
             },
             dataLabels: {
-              enabled: false
+              enabled: false,
             },
             stroke: {
               show: true,
@@ -52,20 +57,21 @@ export class Score01 extends React.Component {
               colors: ['transparent']
             },
             xaxis: {
-              categories: ['2023년 1차', '2023년 2차', '2023년 3차'],
+              categories: ['2023년 1차', '2023년 2차', '2023년 3차']
             },
             yaxis: {
               title: {
-                text: '점수'
+                text: 'score'
               }
             },
             fill: {
-              opacity: 1
+              opacity: 1,
+              colors: ['#C3E0FC','#A2C4E5','#C8D7E7','#7EA4CA','#9FBCD7','#DAE1E7','#6D9DCC']              
             },
             tooltip: {
               y: {
                 formatter: function (val) {
-                  return "$ " + val + " thousands"
+                  return val
                 }
               }
             }
