@@ -671,10 +671,9 @@ export const Learning = () =>{
                 setCurrentImage(current_image);//현재이미지순서를 기록
                 //setCurrentTransImage(imageList[current_image].learningImages);
                 setThumImg(imageList[current_image].learningThumImages);//썸네일이미지변경
-
-                $currentImage = $(images[current_image]); 
-
                 setTargetImg($currentImage[0].src);//이미지확대축소 셋팅
+                
+                $currentImage = $(images[current_image]); 
 
                 if(start_count > 0){
                     $currentImage.remove(); 
@@ -864,9 +863,18 @@ export const Learning = () =>{
             $("#learn02_start").hide();
             $("#learn02_start_on").show();
     
+            setCurrentImage(currentImageIndex);//현재이미지순서를 기록
+            //setCurrentTransImage(imageList[current_image].learningImages);
+            setThumImg(imageList[currentImageIndex].learningThumImages);//썸네일이미지변경
+            setTargetImg(images[currentImageIndex].src);//이미지확대축소 셋팅            
     
             //이미지를 지정된 시간만 노출 후 다음 이미지로 변경
             function displayNextImage() {
+                setCurrentImage(currentImageIndex);//현재이미지순서를 기록
+                //setCurrentTransImage(imageList[current_image].learningImages);
+                setThumImg(imageList[currentImageIndex].learningThumImages);//썸네일이미지변경
+                setTargetImg(images[currentImageIndex].src);//이미지확대축소 셋팅    
+                
                 start_time = Date.now();paused_time = 0;
                 $(images[currentImageIndex]).hide();
                 currentImageIndex++;
@@ -992,7 +1000,6 @@ export const Learning = () =>{
             });
             //====================>
         
-            
             $(images).hide();
             $(images[currentImageIndex]).show();
             updateProgressBar(learn_time);
@@ -1004,6 +1011,7 @@ export const Learning = () =>{
                 $currentImage = $(images[currentImageIndex]);
                 $(this).attr("src",$currentImage.attr('src'));
                 $currentImage.attr("src",image_src);
+                showImgControl('N');
             });
         });        
 
@@ -1294,7 +1302,7 @@ export const Learning = () =>{
                                         </div>
                                         {/* learnbtc06 측면이미지 */}
                                         <div className="learnbtc06" >
-                                            <img src={thumImg} ref={inputRef4} id="learn01_bimg" style={{display:"none"}} alt=""/>
+                                            <img src={thumImg} ref={inputRef4} id="learn02_bimg" style={{display:"none"}} alt=""/>
                                         </div>
                                     </div>
                                 </div>
