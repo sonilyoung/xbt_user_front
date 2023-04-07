@@ -12,10 +12,12 @@ import arrow_up from 'assets/images/login/arrow_up.svg';
 import success from 'assets/images/login/success.svg';
 import fail from 'assets/images/login/fail.svg';
 import {Copy} from '../Copy';
+import {Loading} from '../Loading';
 
 
 // ================================|| LOGIN ||================================ //
 export const Login = () => {
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [id] = useState("user");
     const [password] = useState("test");
@@ -41,21 +43,27 @@ export const Login = () => {
     }    
 
     const handleLogin = () =>{
+        setLoading(true);
+
         console.log("id:", params.id);
         console.log("password:", params.password);
 
-        if(params.id!=='admin'){ //로그인실패
-            setLoginFail(true);
-            setLoginOk(false);
-        }
 
-        if(params.id==='admin' && params.password==='test'){ //로그인성공
-            setLoginOk(true);
-            setLoginFail(false);
-        }else{
-            setLoginFail(true);
-            setLoginOk(false);
-        }
+        setTimeout(function() {
+            if(params.id!=='admin'){ //로그인실패
+                setLoginFail(true);
+                setLoginOk(false);
+            }
+    
+            if(params.id==='admin' && params.password==='test'){ //로그인성공
+                setLoginOk(true);
+                setLoginFail(false);
+            }else{
+                setLoginFail(true);
+                setLoginOk(false);
+            }
+            setLoading(false);
+        }, 2000);
 
     }
 
@@ -81,7 +89,7 @@ export const Login = () => {
     return(
         <>
             <div id="wrap" className="mbg">
-                <div id="wlayer" class="login_layer">
+                <div id="wlayer" className="login_layer">
                     <div className="mcontent">
                         <div className="login_con">
                             <h3>X-RAY 보안 훈련 시스템 교육생 전용</h3>
@@ -178,10 +186,9 @@ export const Login = () => {
                         </div>
                     </div>
                 </div>
-
                 <Copy/>
             </div>
-                
+            {loading &&(<Loading/>)}
               
         </>
     )

@@ -717,6 +717,8 @@ input[type=range]:disabled::-moz-range-thumb {
 	합격 / 불합격 / 완료
 ================================================== */
 .learn_scwd {
+	left: calc(50% - 220px);
+    top: calc(50% - 170px);
 	width: 542px;
 	text-align: center;
 	padding: 50px 0;

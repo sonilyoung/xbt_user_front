@@ -53,10 +53,6 @@ export const Learning = () =>{
     const [imgDisplay, setImgDisplay] = useState('none');//확대축소이미지
     const [targetImg, setTargetImg] = useState([]);
 
-    const [zin, setZin] = useState();
-    const [zout, setZout] = useState();
-
-    
 
     //타이머셋팅
     const [timer, setTimer] = useState(0);
@@ -765,7 +761,21 @@ export const Learning = () =>{
                             </div>
                         </div>
 
-
+                        {/* 완료 */}
+                        <div id="eig-modal" className="modal-wrapper modal_blind" style={{display:"block"}}>
+                            <div className="modal learn_scwd">
+                                <div className="scwd_txt01">
+                                    <h1>
+                                        학습을 마쳤습니다.
+                                    </h1>
+                                </div>
+                                <div className="scwd_txt02">
+                                    <p>학습이 끝났습니다. 수고하셨습니다.</p>
+                                </div>
+                                <button id="open-nine-modal" data-mact="open" data-minfo="six-modal" className="modal_btn conbtn01">확인</button>
+                                <button id="close-eig-modal" data-mact="close" data-minfo="eig-modal" className="modal_btn close_btn02"></button>
+                            </div>
+                        </div>
 
 
 

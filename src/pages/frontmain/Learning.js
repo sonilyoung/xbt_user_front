@@ -339,6 +339,9 @@ export const Learning = () =>{
     const [currentImage, setCurrentImage] = useState();//현재이미지
     const [currentTransImage, setCurrentTransImage] = useState();//현재변경이미지
     const [tranTry, setTranTry] = useState(true);//현재이미지
+    const [nowSelect, setNowSelect] = useState();//현재선택된 아이콘
+    const [learningEnd, setLearningEnd] = useState(false);//학습완료 팝업
+    
 
     const learningImages = [
         {
@@ -490,7 +493,7 @@ export const Learning = () =>{
     //타이머셋팅
     const [timer, setTimer] = useState(0);
     const [isActive, setIsActive] = useState(false);
-    const increment = useRef(null);
+    const increment = useRef();
 
     const handleStart = () => {
         setIsActive(!isActive);
@@ -593,7 +596,8 @@ export const Learning = () =>{
     
         $("#close-first-modal").click(function(){
             if(is_learn01_play){
-                alert("시험이 종료되었습니다.");
+                //alert("시험이 종료되었습니다.");
+                setLearningEnd(true);
                 $currentImage.remove(); 
                 clearTimeout(animation);
                 clearTimeout(time_out);
@@ -675,7 +679,8 @@ export const Learning = () =>{
                 
                 //current_image++; 
                 if (current_image >= images.length) {
-                    alert("시험이 종료되었습니다.");
+                    //alert("시험이 종료되었습니다.");
+                    setLearningEnd(true);
                     clearTimeout(animation);
                     clearTimeout(time_out);
                     clearInterval(position);
@@ -804,6 +809,7 @@ export const Learning = () =>{
                 $currentImage = $(images[current_image]);
                 $(this).attr("src",$currentImage.attr('src'));
                 $currentImage.attr("src",image_src);
+                showImgControl('N');
             });
 
             $("#transTarget").click(function(){
@@ -824,7 +830,8 @@ export const Learning = () =>{
                 $(images).hide();
                 clearTimeout(timer); 
                 clearTimeout(timeout); 
-                alert("시험이 종료되었습니다.");
+                //alert("시험이 종료되었습니다.");
+                setLearningEnd(true);
                 progressBar.stop();
                 progressBar.css({width: '0%'});
                 is_learn02_play = false;
@@ -860,7 +867,8 @@ export const Learning = () =>{
                 if (currentImageIndex === images.length) {
                     clearTimeout(timer); 
                     clearTimeout(timeout); 
-                    alert("시험이 종료되었습니다.");
+                    //alert("시험이 종료되었습니다.");
+                    setLearningEnd(true);
                     progressBar.stop();
                     progressBar.css({width: '0%'});
                     $("#learn02_bimg").hide();
@@ -876,7 +884,8 @@ export const Learning = () =>{
                         currentImageIndex++;
                         if (currentImageIndex === images.length) {
                             clearTimeout(timer); 
-                            alert("시험이 종료되었습니다.");
+                            //alert("시험이 종료되었습니다.");
+                            setLearningEnd(true);
                             progressBar.stop();
                             progressBar.css({width: '0%'});
                             $("#learn02_bimg").hide();
@@ -942,7 +951,8 @@ export const Learning = () =>{
                     if (currentImageIndex === images.length) {
                         clearTimeout(timer);
                         clearTimeout(timeout);
-                        alert("시험이 종료되었습니다.");
+                        //alert("시험이 종료되었습니다.");
+                        setLearningEnd(true);
                         progressBar.stop();
                         $("#learn02_bimg").hide();
                         progressBar.css({width: '0%'});
@@ -993,10 +1003,10 @@ export const Learning = () =>{
     },[]);
 
 
-    const inputRef1 = useRef(null);
-    const inputRef2 = useRef(null);
-    const inputRef3 = useRef(null);
-    const inputRef4 = useRef(null);
+    const inputRef1 = useRef();
+    const inputRef2 = useRef();
+    const inputRef3 = useRef();
+    const inputRef4 = useRef();
 
     //확대
     const targetZoomIn = () => {
@@ -1028,6 +1038,9 @@ export const Learning = () =>{
 
     //하단 이미지컨트롤 아이콘 통합
     const imgTransControl = (e) =>{
+
+        setNowSelect(e);//현재선택된 아이콘
+
         if(e==='color1'){//컬러
             learningImages[currentImage].learningImages = transimages[currentImage].color;
             setImageList(learningImages);
@@ -1215,20 +1228,20 @@ export const Learning = () =>{
                                         {/* learnbtc02 이미지 채도 아이콘 영역*/}
                                         <div className="learnbtc02">
                                             <ul>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd1')}><span className="brig_ic01_01"></span></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd2')}><span className="brig_ic01_02"></span></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd3')}><span className="brig_ic01_03"></span></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd4')}><span className="brig_ic01_04"></span></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd5')}><span className="brig_ic01_05"></span></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd6')}><span className="brig_ic01_06"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd1' ? 'on' : ''} onClick={()=>imgTransControl('cd1')}><span className="brig_ic01_01"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd2' ? 'on' : ''} onClick={()=>imgTransControl('cd2')}><span className="brig_ic01_02"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd3' ? 'on' : ''} onClick={()=>imgTransControl('cd3')}><span className="brig_ic01_03"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd4' ? 'on' : ''} onClick={()=>imgTransControl('cd4')}><span className="brig_ic01_04"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd5' ? 'on' : ''} onClick={()=>imgTransControl('cd5')}><span className="brig_ic01_05"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd6' ? 'on' : ''} onClick={()=>imgTransControl('cd6')}><span className="brig_ic01_06"></span></a></li>
                                             </ul>
                                             <ul>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd7')}><span className="brig_ic02_01"></span></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd8')}><span className="brig_ic02_02"></span></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd9')}><span className="brig_ic02_03"></span></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd10')}><span className="brig_ic02_04"></span></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd11')}><span className="brig_ic02_05"></span></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('cd12')}><span className="brig_ic02_06"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd7' ? 'on' : ''} onClick={()=>imgTransControl('cd7')}><span className="brig_ic02_01"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd8' ? 'on' : ''} onClick={()=>imgTransControl('cd8')}><span className="brig_ic02_02"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd9' ? 'on' : ''} onClick={()=>imgTransControl('cd9')}><span className="brig_ic02_03"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd10' ? 'on' : ''} onClick={()=>imgTransControl('cd10')}><span className="brig_ic02_04"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd11' ? 'on' : ''} onClick={()=>imgTransControl('cd11')}><span className="brig_ic02_05"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd12' ? 'on' : ''} onClick={()=>imgTransControl('cd12')}><span className="brig_ic02_06"></span></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc03 */}
@@ -1278,11 +1291,6 @@ export const Learning = () =>{
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
 
 
 
@@ -1889,7 +1897,7 @@ export const Learning = () =>{
                             </div>
                         </div>
                         {/* 완료 */}
-                        <div id="eig-modal" className="modal-wrapper modal_blind">
+                        {learningEnd && (<div id="eig-modal" className="modal-wrapper modal_blind" style={{display: "block"}}>
                             <div className="modal learn_scwd">
                                 <div className="scwd_txt01">
                                     <h1>
@@ -1903,10 +1911,31 @@ export const Learning = () =>{
                                 <button id="close-eig-modal" data-mact="close" data-minfo="eig-modal" className="modal_btn close_btn02"></button>
                             </div>
                         </div>
+                        )} 
+                        
+                        {/* 학습완료 */}                            
+                        {learningEnd && (
+                            <div id="nine-modal" className="modal-wrapper modal_blind" style={{display: "block"}}>
+                                <div className="modal learn_scwd">
+                                    <div className="scwd_txt01">
+                                        <h1>
+                                            학습을 마쳤습니다.
+                                        </h1>
+                                    </div>
+                                    <div className="scwd_txt02">
+                                        <p>학습이 끝났습니다. 수고하셨습니다.</p>
+                                    </div>
+                                    <button id="open-nine-modal" onClick={()=>setLearningEnd(false)} data-mact="open" data-minfo="nine-modal" className="modal_btn conbtn01">확인</button>
+                                    <button id="close-nine-modal" onClick={()=>setLearningEnd(false)} data-mact="close" data-minfo="nine-modal" className="modal_btn close_btn02"></button>
+                                </div>
+                            </div>
+                        )} 
+
+
                         <button id="open-first-modal" data-mact="open" data-minfo="first-modal" className="login_btn modal_btn">학습시작-슬라이더 타입</button>
                         <button id="open-second-modal" data-mact="open" data-minfo="second-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>학습시작-컷 타입</button>
-                        <button id="open-th-modal" data-mact="open" data-minfo="th-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>학습시작-완료</button>
-                        <button id="open-fif-modal" data-mact="open" data-minfo="fif-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>학습시작 - 합격/불합격/완료</button>
+                        {/*<button id="open-th-modal" data-mact="open" data-minfo="th-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>학습시작-완료</button>*/}
+                        {/*<button id="open-fif-modal" data-mact="open" data-minfo="fif-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>학습시작 - 합격/불합격/완료</button>*/}
                     </div>
                 </div>
             </div>     
