@@ -865,11 +865,13 @@ export const Learning = () =>{
     
             setCurrentImage(currentImageIndex);//현재이미지순서를 기록
             //setCurrentTransImage(imageList[current_image].learningImages);
+            console.log('컷방식:', imageList[currentImageIndex].learningThumImages);
             setThumImg(imageList[currentImageIndex].learningThumImages);//썸네일이미지변경
             setTargetImg(images[currentImageIndex].src);//이미지확대축소 셋팅            
     
             //이미지를 지정된 시간만 노출 후 다음 이미지로 변경
             function displayNextImage() {
+
                 setCurrentImage(currentImageIndex);//현재이미지순서를 기록
                 //setCurrentTransImage(imageList[current_image].learningImages);
                 setThumImg(imageList[currentImageIndex].learningThumImages);//썸네일이미지변경
@@ -1302,7 +1304,7 @@ export const Learning = () =>{
                                         </div>
                                         {/* learnbtc06 측면이미지 */}
                                         <div className="learnbtc06" >
-                                            <img src={thumImg} ref={inputRef4} id="learn02_bimg" style={{display:"none"}} alt=""/>
+                                            <img src={thumImg} ref={inputRef4} id="learn02_bimg" style={{display:"block"}} alt=""/>
                                         </div>
                                     </div>
                                 </div>
