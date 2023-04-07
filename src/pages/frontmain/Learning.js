@@ -337,22 +337,10 @@ export const Learning = () =>{
     const [imgDisplay, setImgDisplay] = useState('none');//확대축소이미지 css
     const [targetImg, setTargetImg] = useState([]);//확대축소이미지
     const [currentImage, setCurrentImage] = useState();//현재이미지
+    const [currentTransImage, setCurrentTransImage] = useState();//현재변경이미지
+    const [tranTry, setTranTry] = useState(true);//현재이미지
 
-    //정면이미지
-    const [learning_01, setLearning_01] = useState(t_learning_01);
-    const [learning_02, setLearning_02] = useState(t_learning_02);
-    const [learning_03, setLearning_03] = useState(t_learning_03);
-    const [learning_04, setLearning_04] = useState(t_learning_04);
-    const [learning_05, setLearning_05] = useState(t_learning_05);
-
-    //측면이미지(썸네일)
-    const [learning_01_1, setLearning_01_1] = useState(t_learning_01_1);
-    const [learning_02_1, setLearning_02_1] = useState(t_learning_02_1);
-    const [learning_03_1, setLearning_03_1] = useState(t_learning_03_1);
-    const [learning_04_1, setLearning_04_1] = useState(t_learning_04_1);
-    const [learning_05_1, setLearning_05_1] = useState(t_learning_05_1);
-
-    const [imageList, setImageList] = useState([
+    const learningImages = [
         {
             "learningImages" : t_learning_01,
             "learningThumImages" : t_learning_01_1
@@ -372,11 +360,15 @@ export const Learning = () =>{
         {
             "learningImages" : t_learning_05,
             "learningThumImages" : t_learning_05_1 
-        },                                       
-    ]);
+        },  
+    ]
 
-    //슬라이드 이미지
-    const [transImg, setTransImg] = useState();
+    //슬라이드이미지
+    const [imageList, setImageList] = useState(learningImages);
+
+    //측면이미지(썸네일)
+    const [thumImg, setThumImg] = useState(imageList[0].learningThumImages);
+
 
     //하단아이콘유틸에 따라 변경되는 이미지유형
     const transimages = [
@@ -668,6 +660,9 @@ export const Learning = () =>{
             //마지막 이미지가 끝났을 경우 시험 종료
             function resetImage() {
                 setCurrentImage(current_image);//현재이미지순서를 기록
+                setCurrentTransImage(imageList[current_image].learningImages);
+                setThumImg(imageList[current_image].learningThumImages);//썸네일이미지변경
+
                 $currentImage = $(images[current_image]); 
 
                 setTargetImg($currentImage[0].src);//이미지확대축소 셋팅
@@ -1033,51 +1028,70 @@ export const Learning = () =>{
 
     //하단 이미지컨트롤 아이콘 통합
     const imgTransControl = (e) =>{
-
-        console.log("변경이미지:", transimages);
-
-        console.log("현재이미지:", currentImage);
         if(e==='color1'){//컬러
-
+            learningImages[currentImage].learningImages = transimages[currentImage].color;
+            setImageList(learningImages);
         }else if(e==='color2'){//컬러유기물강조
-            console.log('확인');
-            setLearning_01(t_learning_02);
+            //console.log(imgRef.current);
+            //imgRef.current = transimages[currentImage].colorUforce;
+            //setTranTry(false);
+            //setCurrentTransImage(transimages[currentImage].colorUforce);
+            learningImages[currentImage].learningImages = transimages[currentImage].colorUforce;
+            setImageList(learningImages);
         }else if(e==='color3'){//컬러무기물강조
-
+            learningImages[currentImage].learningImages = transimages[currentImage].colorMforce;
+            setImageList(learningImages);
         }else if(e==='color4'){//컬러반전
-
-        }else if(e==='blackWhite1'){//흑백
-
-        }else if(e==='blackWhite2'){//흑백유기물강조
-
-        }else if(e==='blackWhite3'){//흑백무기물강조
-
-        }else if(e==='blackWhite4'){//흑백반전
-
+            learningImages[currentImage].learningImages = transimages[currentImage].colorRevers;
+            setImageList(learningImages);
         }else if(e==='cd1'){//컬러채도1
-
+            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation1;
+            setImageList(learningImages);
         }else if(e==='cd2'){//컬러채도2
-
+            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation2;
+            setImageList(learningImages);
         }else if(e==='cd3'){//컬러채도3
-
+            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation3;
+            setImageList(learningImages);
         }else if(e==='cd4'){//컬러채도4
-
+            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation4;
+            setImageList(learningImages);
         }else if(e==='cd5'){//컬러채도5
-
+            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation5;
+            setImageList(learningImages);
         }else if(e==='cd6'){//컬러채도6
-
-        }else if(e==='cd7'){//흑백채도7
-
-        }else if(e==='cd8'){//흑백채도8
-
-        }else if(e==='cd9'){//흑백채도9
-
-        }else if(e==='cd10'){//흑백채도10
-
-        }else if(e==='cd11'){//흑백채도11
-
-        }else if(e==='cd12'){//흑백채도12
-
+            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation6;
+            setImageList(learningImages);            
+        }else if(e==='blackWhite1'){//흑백
+            learningImages[currentImage].learningImages = transimages[currentImage].blackWhite;
+            setImageList(learningImages);
+        }else if(e==='blackWhite2'){//흑백유기물강조
+            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteUforce;
+            setImageList(learningImages);
+        }else if(e==='blackWhite3'){//흑백무기물강조
+            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteMforce;
+            setImageList(learningImages);
+        }else if(e==='blackWhite4'){//흑백반전
+            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteRevers;
+            setImageList(learningImages);
+        }else if(e==='cd7'){//흑백채도1
+            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation1;
+            setImageList(learningImages);
+        }else if(e==='cd8'){//흑백채도2
+            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation2;
+            setImageList(learningImages);
+        }else if(e==='cd9'){//흑백채도3
+            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation3;
+            setImageList(learningImages);
+        }else if(e==='cd10'){//흑백채도4
+            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation4;
+            setImageList(learningImages);
+        }else if(e==='cd11'){//흑백채도5
+            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation5;
+            setImageList(learningImages);
+        }else if(e==='cd12'){//흑백채도6
+            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation6;
+            setImageList(learningImages);
         }
     }
 
@@ -1145,12 +1159,11 @@ export const Learning = () =>{
 
                                     {/* learnc_img 슬라이드 이미지 출력*/}
                                     <div className="learnc_img" id="learn01_img" style={{height:"520px", display:imgSlideDisplay}}>
-
                                         {
                                             imageList.map((target, index) => ([
                                                 <img src={target.learningImages} data-thum={target.learningThumImages} className="image" alt="image" />
                                             ]))
-                                        }                                        
+                                        }                                                                     
                                     </div>
 
                                     <div className="learnc_img_sub" id="learn01_img_sub" style={{ textAlign:"center !important", width: "100%", height: "520px", display:imgDisplay}}>
@@ -1259,7 +1272,7 @@ export const Learning = () =>{
                                         </div>
                                         {/* learnbtc06 측면이미지 */}
                                         <div className="learnbtc06" >
-                                            <img src={learning_01_1} ref={inputRef4} id="learn01_bimg" style={{display:"none"}} alt=""/>
+                                            <img src={thumImg} ref={inputRef4} id="learn01_bimg" style={{display:"none"}} alt=""/>
                                         </div>
                                     </div>
                                 </div>
