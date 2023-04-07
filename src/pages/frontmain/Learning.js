@@ -14,42 +14,297 @@ import 'assets/css/imgtrs.css';
 //정면이미지
 import t_learning_01 from 'assets/images/demo/X05231-101.jpg';
 import t_learning_02 from 'assets/images/demo/X05228-101.jpg';
-import learning_03 from 'assets/images/demo/X05227-101.jpg';
-import learning_04 from 'assets/images/demo/X05182-101.jpg';
-import learning_05 from 'assets/images/demo/X05180-101.jpg';
+import t_learning_03 from 'assets/images/demo/X05227-101.jpg';
+import t_learning_04 from 'assets/images/demo/X05182-101.jpg';
+import t_learning_05 from 'assets/images/demo/X05180-101.jpg';
 
 //측면이미지
-import learning_01_1 from 'assets/images/demo/X05231-201.jpg';
-import learning_02_1 from 'assets/images/demo/X05228-201.jpg';
-import learning_03_1 from 'assets/images/demo/X05227-201.jpg';
-import learning_04_1 from 'assets/images/demo/X05182-201.jpg';
-import learning_05_1 from 'assets/images/demo/X05180-201.jpg';
-
-
+import t_learning_01_1 from 'assets/images/demo/X05231-201.jpg';
+import t_learning_02_1 from 'assets/images/demo/X05228-201.jpg';
+import t_learning_03_1 from 'assets/images/demo/X05227-201.jpg';
+import t_learning_04_1 from 'assets/images/demo/X05182-201.jpg';
+import t_learning_05_1 from 'assets/images/demo/X05180-201.jpg';
 
 
 // ================================|| 하단 이미지 컨트롤 변경 적용 ||================================ //
-//================================정면이미지
+//================================이미지1
 //컬러
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
+import t_color_01_1 from 'assets/images/demo/X05231-101.jpg';
+import t_color_02_1 from 'assets/images/demo/X05231-102.jpg';
+import t_color_03_1 from 'assets/images/demo/X05231-103.jpg';
+import t_color_04_1 from 'assets/images/demo/X05231-104.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
+import t_bcolor_01_1 from 'assets/images/demo/X05231-111.jpg';
+import t_bcolor_02_1 from 'assets/images/demo/X05231-112.jpg';
+import t_bcolor_03_1 from 'assets/images/demo/X05231-113.jpg';
+import t_bcolor_04_1 from 'assets/images/demo/X05231-114.jpg';
+
+//채도
+import t_scolor_01_1 from 'assets/images/demo/X05231-115.jpg';
+import t_scolor_02_1 from 'assets/images/demo/X05231-116.jpg';
+import t_scolor_03_1 from 'assets/images/demo/X05231-117.jpg';
+import t_scolor_04_1 from 'assets/images/demo/X05231-118.jpg';
+import t_scolor_05_1 from 'assets/images/demo/X05231-119.jpg';
+import t_scolor_06_1 from 'assets/images/demo/X05231-120.jpg';
 
 //================================측면이미지
 //컬러
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
+import t_side_color_01_1 from 'assets/images/demo/X05231-201.jpg';
+import t_side_color_02_1 from 'assets/images/demo/X05231-202.jpg';
+import t_side_color_03_1 from 'assets/images/demo/X05231-203.jpg';
+import t_side_color_04_1 from 'assets/images/demo/X05231-204.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
+import t_side_bwcolor_01_1 from 'assets/images/demo/X05231-211.jpg';
+import t_side_bwcolor_02_1 from 'assets/images/demo/X05231-212.jpg';
+import t_side_bwcolor_03_1 from 'assets/images/demo/X05231-213.jpg';
+import t_side_bwcolor_04_1 from 'assets/images/demo/X05231-214.jpg';
+
+//채도
+import t_side_scolor_01_1 from 'assets/images/demo/X05231-215.jpg';
+import t_side_scolor_02_1 from 'assets/images/demo/X05231-216.jpg';
+import t_side_scolor_03_1 from 'assets/images/demo/X05231-217.jpg';
+import t_side_scolor_04_1 from 'assets/images/demo/X05231-218.jpg';
+import t_side_scolor_05_1 from 'assets/images/demo/X05231-219.jpg';
+import t_side_scolor_06_1 from 'assets/images/demo/X05231-220.jpg';
+//================================이미지1
+
+//================================이미지2
+//컬러
+//컬러유기물강조
+//컬러무기물강조
+//컬러반전
+import t_color_01_2 from 'assets/images/demo/X05228-101.jpg';
+import t_color_02_2 from 'assets/images/demo/X05228-102.jpg';
+import t_color_03_2 from 'assets/images/demo/X05228-103.jpg';
+import t_color_04_2 from 'assets/images/demo/X05228-104.jpg';
+
+//흑백
+//흑백유기물강조
+//흑백무기물강조
+//흑백반전
+import t_bcolor_01_2 from 'assets/images/demo/X05228-111.jpg';
+import t_bcolor_02_2 from 'assets/images/demo/X05228-112.jpg';
+import t_bcolor_03_2 from 'assets/images/demo/X05228-113.jpg';
+import t_bcolor_04_2 from 'assets/images/demo/X05228-114.jpg';
+
+//채도
+import t_scolor_01_2 from 'assets/images/demo/X05228-115.jpg';
+import t_scolor_02_2 from 'assets/images/demo/X05228-116.jpg';
+import t_scolor_03_2 from 'assets/images/demo/X05228-117.jpg';
+import t_scolor_04_2 from 'assets/images/demo/X05228-118.jpg';
+import t_scolor_05_2 from 'assets/images/demo/X05228-119.jpg';
+import t_scolor_06_2 from 'assets/images/demo/X05228-120.jpg';
+
+//================================측면이미지
+//컬러
+//컬러유기물강조
+//컬러무기물강조
+//컬러반전
+import t_side_color_01_2 from 'assets/images/demo/X05228-201.jpg';
+import t_side_color_02_2 from 'assets/images/demo/X05228-202.jpg';
+import t_side_color_03_2 from 'assets/images/demo/X05228-203.jpg';
+import t_side_color_04_2 from 'assets/images/demo/X05228-204.jpg';
+
+//흑백
+//흑백유기물강조
+//흑백무기물강조
+//흑백반전
+import t_side_bwcolor_01_2 from 'assets/images/demo/X05228-211.jpg';
+import t_side_bwcolor_02_2 from 'assets/images/demo/X05228-212.jpg';
+import t_side_bwcolor_03_2 from 'assets/images/demo/X05228-213.jpg';
+import t_side_bwcolor_04_2 from 'assets/images/demo/X05228-214.jpg';
+
+//채도
+import t_side_scolor_01_2 from 'assets/images/demo/X05228-215.jpg';
+import t_side_scolor_02_2 from 'assets/images/demo/X05228-216.jpg';
+import t_side_scolor_03_2 from 'assets/images/demo/X05228-217.jpg';
+import t_side_scolor_04_2 from 'assets/images/demo/X05228-218.jpg';
+import t_side_scolor_05_2 from 'assets/images/demo/X05228-219.jpg';
+import t_side_scolor_06_2 from 'assets/images/demo/X05228-220.jpg';
+//================================이미지2
+
+
+//================================이미지3
+//컬러
+//컬러유기물강조
+//컬러무기물강조
+//컬러반전
+import t_color_01_3 from 'assets/images/demo/X05227-101.jpg';
+import t_color_02_3 from 'assets/images/demo/X05227-102.jpg';
+import t_color_03_3 from 'assets/images/demo/X05227-103.jpg';
+import t_color_04_3 from 'assets/images/demo/X05227-104.jpg';
+
+//흑백
+//흑백유기물강조
+//흑백무기물강조
+//흑백반전
+import t_bcolor_01_3 from 'assets/images/demo/X05227-111.jpg';
+import t_bcolor_02_3 from 'assets/images/demo/X05227-112.jpg';
+import t_bcolor_03_3 from 'assets/images/demo/X05227-113.jpg';
+import t_bcolor_04_3 from 'assets/images/demo/X05227-114.jpg';
+
+//채도
+import t_scolor_01_3 from 'assets/images/demo/X05227-115.jpg';
+import t_scolor_02_3 from 'assets/images/demo/X05227-116.jpg';
+import t_scolor_03_3 from 'assets/images/demo/X05227-117.jpg';
+import t_scolor_04_3 from 'assets/images/demo/X05227-118.jpg';
+import t_scolor_05_3 from 'assets/images/demo/X05227-119.jpg';
+import t_scolor_06_3 from 'assets/images/demo/X05227-120.jpg';
+
+//================================측면이미지
+//컬러
+//컬러유기물강조
+//컬러무기물강조
+//컬러반전
+import t_side_color_01_3 from 'assets/images/demo/X05227-201.jpg';
+import t_side_color_02_3 from 'assets/images/demo/X05227-202.jpg';
+import t_side_color_03_3 from 'assets/images/demo/X05227-203.jpg';
+import t_side_color_04_3 from 'assets/images/demo/X05227-204.jpg';
+
+//흑백
+//흑백유기물강조
+//흑백무기물강조
+//흑백반전
+import t_side_bwcolor_01_3 from 'assets/images/demo/X05227-211.jpg';
+import t_side_bwcolor_02_3 from 'assets/images/demo/X05227-212.jpg';
+import t_side_bwcolor_03_3 from 'assets/images/demo/X05227-213.jpg';
+import t_side_bwcolor_04_3 from 'assets/images/demo/X05227-214.jpg';
+
+//채도
+import t_side_scolor_01_3 from 'assets/images/demo/X05227-215.jpg';
+import t_side_scolor_02_3 from 'assets/images/demo/X05227-216.jpg';
+import t_side_scolor_03_3 from 'assets/images/demo/X05227-217.jpg';
+import t_side_scolor_04_3 from 'assets/images/demo/X05227-218.jpg';
+import t_side_scolor_05_3 from 'assets/images/demo/X05227-219.jpg';
+import t_side_scolor_06_3 from 'assets/images/demo/X05227-220.jpg';
+//================================이미지3
+
+
+//================================이미지4
+//컬러
+//컬러유기물강조
+//컬러무기물강조
+//컬러반전
+import t_color_01_4 from 'assets/images/demo/X05182-101.jpg';
+import t_color_02_4 from 'assets/images/demo/X05182-102.jpg';
+import t_color_03_4 from 'assets/images/demo/X05182-103.jpg';
+import t_color_04_4 from 'assets/images/demo/X05182-104.jpg';
+
+//흑백
+//흑백유기물강조
+//흑백무기물강조
+//흑백반전
+import t_bcolor_01_4 from 'assets/images/demo/X05182-111.jpg';
+import t_bcolor_02_4 from 'assets/images/demo/X05182-112.jpg';
+import t_bcolor_03_4 from 'assets/images/demo/X05182-113.jpg';
+import t_bcolor_04_4 from 'assets/images/demo/X05182-114.jpg';
+
+//채도
+import t_scolor_01_4 from 'assets/images/demo/X05182-115.jpg';
+import t_scolor_02_4 from 'assets/images/demo/X05182-116.jpg';
+import t_scolor_03_4 from 'assets/images/demo/X05182-117.jpg';
+import t_scolor_04_4 from 'assets/images/demo/X05182-118.jpg';
+import t_scolor_05_4 from 'assets/images/demo/X05182-119.jpg';
+import t_scolor_06_4 from 'assets/images/demo/X05182-120.jpg';
+
+//================================측면이미지
+//컬러
+//컬러유기물강조
+//컬러무기물강조
+//컬러반전
+import t_side_color_01_4 from 'assets/images/demo/X05182-201.jpg';
+import t_side_color_02_4 from 'assets/images/demo/X05182-202.jpg';
+import t_side_color_03_4 from 'assets/images/demo/X05182-203.jpg';
+import t_side_color_04_4 from 'assets/images/demo/X05182-204.jpg';
+
+//흑백
+//흑백유기물강조
+//흑백무기물강조
+//흑백반전
+import t_side_bwcolor_01_4 from 'assets/images/demo/X05182-211.jpg';
+import t_side_bwcolor_02_4 from 'assets/images/demo/X05182-212.jpg';
+import t_side_bwcolor_03_4 from 'assets/images/demo/X05182-213.jpg';
+import t_side_bwcolor_04_4 from 'assets/images/demo/X05182-214.jpg';
+
+//채도
+import t_side_scolor_01_4 from 'assets/images/demo/X05182-215.jpg';
+import t_side_scolor_02_4 from 'assets/images/demo/X05182-216.jpg';
+import t_side_scolor_03_4 from 'assets/images/demo/X05182-217.jpg';
+import t_side_scolor_04_4 from 'assets/images/demo/X05182-218.jpg';
+import t_side_scolor_05_4 from 'assets/images/demo/X05182-219.jpg';
+import t_side_scolor_06_4 from 'assets/images/demo/X05182-220.jpg';
+//================================이미지4
+
+
+
+//================================이미지5
+//컬러
+//컬러유기물강조
+//컬러무기물강조
+//컬러반전
+import t_color_01_5 from 'assets/images/demo/X05180-101.jpg';
+import t_color_02_5 from 'assets/images/demo/X05180-102.jpg';
+import t_color_03_5 from 'assets/images/demo/X05180-103.jpg';
+import t_color_04_5 from 'assets/images/demo/X05180-104.jpg';
+
+//흑백
+//흑백유기물강조
+//흑백무기물강조
+//흑백반전
+import t_bcolor_01_5 from 'assets/images/demo/X05180-111.jpg';
+import t_bcolor_02_5 from 'assets/images/demo/X05180-112.jpg';
+import t_bcolor_03_5 from 'assets/images/demo/X05180-113.jpg';
+import t_bcolor_04_5 from 'assets/images/demo/X05180-114.jpg';
+
+//채도
+import t_scolor_01_5 from 'assets/images/demo/X05180-115.jpg';
+import t_scolor_02_5 from 'assets/images/demo/X05180-116.jpg';
+import t_scolor_03_5 from 'assets/images/demo/X05180-117.jpg';
+import t_scolor_04_5 from 'assets/images/demo/X05180-118.jpg';
+import t_scolor_05_5 from 'assets/images/demo/X05180-119.jpg';
+import t_scolor_06_5 from 'assets/images/demo/X05180-120.jpg';
+
+//================================측면이미지
+//컬러
+//컬러유기물강조
+//컬러무기물강조
+//컬러반전
+import t_side_color_01_5 from 'assets/images/demo/X05180-201.jpg';
+import t_side_color_02_5 from 'assets/images/demo/X05180-202.jpg';
+import t_side_color_03_5 from 'assets/images/demo/X05180-203.jpg';
+import t_side_color_04_5 from 'assets/images/demo/X05180-204.jpg';
+
+//흑백
+//흑백유기물강조
+//흑백무기물강조
+//흑백반전
+import t_side_bwcolor_01_5 from 'assets/images/demo/X05180-211.jpg';
+import t_side_bwcolor_02_5 from 'assets/images/demo/X05180-212.jpg';
+import t_side_bwcolor_03_5 from 'assets/images/demo/X05180-213.jpg';
+import t_side_bwcolor_04_5 from 'assets/images/demo/X05180-214.jpg';
+
+//채도
+import t_side_scolor_01_5 from 'assets/images/demo/X05180-215.jpg';
+import t_side_scolor_02_5 from 'assets/images/demo/X05180-216.jpg';
+import t_side_scolor_03_5 from 'assets/images/demo/X05180-217.jpg';
+import t_side_scolor_04_5 from 'assets/images/demo/X05180-218.jpg';
+import t_side_scolor_05_5 from 'assets/images/demo/X05180-219.jpg';
+import t_side_scolor_06_5 from 'assets/images/demo/X05180-220.jpg';
+//================================이미지5
 
 
 // ================================|| 아이콘 ||================================ //
@@ -74,26 +329,169 @@ import prohibited from 'assets/images/learning/prohibited.png';
 import stop from 'assets/images/learning/stop.png';
 
 
-
-
-
-
 // ================================|| 학습 ||================================ //
 export const Learning = () =>{
     const [problremCnt, setProblremCnt] = useState(1);//문제출제수
     const [startLearning, setStartLearning] = useState(true);
     const [imgSlideDisplay, setImgSlideDisplay] = useState('block');//슬라이드이미지
-    const [imgDisplay, setImgDisplay] = useState('none');//확대축소이미지
-    const [targetImg, setTargetImg] = useState([]);
+    const [imgDisplay, setImgDisplay] = useState('none');//확대축소이미지 css
+    const [targetImg, setTargetImg] = useState([]);//확대축소이미지
+    const [currentImage, setCurrentImage] = useState();//현재이미지
 
-    const [zin, setZin] = useState();
-    const [zout, setZout] = useState();
-
-    
+    //정면이미지
     const [learning_01, setLearning_01] = useState(t_learning_01);
     const [learning_02, setLearning_02] = useState(t_learning_02);
-    
+    const [learning_03, setLearning_03] = useState(t_learning_03);
+    const [learning_04, setLearning_04] = useState(t_learning_04);
+    const [learning_05, setLearning_05] = useState(t_learning_05);
+
+    //측면이미지(썸네일)
+    const [learning_01_1, setLearning_01_1] = useState(t_learning_01_1);
+    const [learning_02_1, setLearning_02_1] = useState(t_learning_02_1);
+    const [learning_03_1, setLearning_03_1] = useState(t_learning_03_1);
+    const [learning_04_1, setLearning_04_1] = useState(t_learning_04_1);
+    const [learning_05_1, setLearning_05_1] = useState(t_learning_05_1);
+
+    const [imageList, setImageList] = useState([
+        {
+            "learningImages" : t_learning_01,
+            "learningThumImages" : t_learning_01_1
+        },
+        {
+            "learningImages" : t_learning_02,
+            "learningThumImages" : t_learning_02_1
+        },
+        {
+            "learningImages" : t_learning_03,
+            "learningThumImages" : t_learning_03_1
+        },
+        {
+            "learningImages" : t_learning_04,
+            "learningThumImages" : t_learning_04_1
+        },
+        {
+            "learningImages" : t_learning_05,
+            "learningThumImages" : t_learning_05_1 
+        },                                       
+    ]);
+
+    //슬라이드 이미지
     const [transImg, setTransImg] = useState();
+
+    //하단아이콘유틸에 따라 변경되는 이미지유형
+    const transimages = [
+        {
+            "color": t_color_01_1,//컬러
+            "colorUforce" : t_color_02_1,//컬러유기물강조
+            "colorMforce" : t_color_03_1,//컬러무기물강조
+            "colorRevers" : t_color_04_1,//컬러반전
+            "colorSaturation1": t_scolor_01_1,//컬러채도
+            "colorSaturation2": t_scolor_02_1,//컬러채도
+            "colorSaturation3": t_scolor_03_1,//컬러채도
+            "colorSaturation4": t_scolor_04_1,//컬러채도
+            "colorSaturation5": t_scolor_05_1,//컬러채도
+            "colorSaturation6": t_scolor_06_1,//컬러채도
+            "blackWhite" : t_side_bwcolor_01_1,//흑백
+            "blackWhiteUforce" : t_side_bwcolor_02_1,//흑백유기물강조
+            "blackWhiteMforce" : t_side_bwcolor_03_1,//흑백무기물강조
+            "blackWhiteRevers" : t_side_bwcolor_04_1,//흑백반전
+            "blackWhiteSaturation1": t_side_scolor_01_1,//흑백채도	
+            "blackWhiteSaturation2": t_side_scolor_02_1,//흑백채도	
+            "blackWhiteSaturation3": t_side_scolor_03_1,//흑백채도	
+            "blackWhiteSaturation4": t_side_scolor_04_1,//흑백채도	
+            "blackWhiteSaturation5": t_side_scolor_05_1,//흑백채도	
+            "blackWhiteSaturation6": t_side_scolor_06_1//흑백채도	
+        },
+        {
+            "color": t_color_01_2,//컬러
+            "colorUforce" : t_color_02_2,//컬러유기물강조
+            "colorMforce" : t_color_03_2,//컬러무기물강조
+            "colorRevers" : t_color_04_2,//컬러반전
+            "colorSaturation1": t_scolor_01_2,//컬러채도
+            "colorSaturation2": t_scolor_02_2,//컬러채도
+            "colorSaturation3": t_scolor_03_2,//컬러채도
+            "colorSaturation4": t_scolor_04_2,//컬러채도
+            "colorSaturation5": t_scolor_05_2,//컬러채도
+            "colorSaturation6": t_scolor_06_2,//컬러채도
+            "blackWhite" : t_side_bwcolor_01_2,//흑백
+            "blackWhiteUforce" : t_side_bwcolor_02_2,//흑백유기물강조
+            "blackWhiteMforce" : t_side_bwcolor_03_2,//흑백무기물강조
+            "blackWhiteRevers" : t_side_bwcolor_04_2,//흑백반전
+            "blackWhiteSaturation1": t_side_scolor_01_2,//흑백채도	
+            "blackWhiteSaturation2": t_side_scolor_02_2,//흑백채도	
+            "blackWhiteSaturation3": t_side_scolor_03_2,//흑백채도	
+            "blackWhiteSaturation4": t_side_scolor_04_2,//흑백채도	
+            "blackWhiteSaturation5": t_side_scolor_05_2,//흑백채도	
+            "blackWhiteSaturation6": t_side_scolor_06_2//흑백채도	
+        },
+        {
+            "color": t_color_01_3,//컬러
+            "colorUforce" : t_color_02_3,//컬러유기물강조
+            "colorMforce" : t_color_03_3,//컬러무기물강조
+            "colorRevers" : t_color_04_3,//컬러반전
+            "colorSaturation1": t_scolor_01_3,//컬러채도
+            "colorSaturation2": t_scolor_02_3,//컬러채도
+            "colorSaturation3": t_scolor_03_3,//컬러채도
+            "colorSaturation4": t_scolor_04_3,//컬러채도
+            "colorSaturation5": t_scolor_05_3,//컬러채도
+            "colorSaturation6": t_scolor_06_3,//컬러채도
+            "blackWhite" : t_side_bwcolor_01_3,//흑백
+            "blackWhiteUforce" : t_side_bwcolor_02_3,//흑백유기물강조
+            "blackWhiteMforce" : t_side_bwcolor_03_3,//흑백무기물강조
+            "blackWhiteRevers" : t_side_bwcolor_04_3,//흑백반전
+            "blackWhiteSaturation1": t_side_scolor_01_3,//흑백채도	
+            "blackWhiteSaturation2": t_side_scolor_02_3,//흑백채도	
+            "blackWhiteSaturation3": t_side_scolor_03_3,//흑백채도	
+            "blackWhiteSaturation4": t_side_scolor_04_3,//흑백채도	
+            "blackWhiteSaturation5": t_side_scolor_05_3,//흑백채도	
+            "blackWhiteSaturation6": t_side_scolor_06_3//흑백채도	
+        },
+        {
+            "color": t_color_01_4,//컬러
+            "colorUforce" : t_color_02_4,//컬러유기물강조
+            "colorMforce" : t_color_03_4,//컬러무기물강조
+            "colorRevers" : t_color_04_4,//컬러반전
+            "colorSaturation1": t_scolor_01_4,//컬러채도
+            "colorSaturation2": t_scolor_02_4,//컬러채도
+            "colorSaturation3": t_scolor_03_4,//컬러채도
+            "colorSaturation4": t_scolor_04_4,//컬러채도
+            "colorSaturation5": t_scolor_05_4,//컬러채도
+            "colorSaturation6": t_scolor_06_4,//컬러채도
+            "blackWhite" : t_side_bwcolor_01_4,//흑백
+            "blackWhiteUforce" : t_side_bwcolor_02_4,//흑백유기물강조
+            "blackWhiteMforce" : t_side_bwcolor_03_4,//흑백무기물강조
+            "blackWhiteRevers" : t_side_bwcolor_04_4,//흑백반전
+            "blackWhiteSaturation1": t_side_scolor_01_4,//흑백채도	
+            "blackWhiteSaturation2": t_side_scolor_02_4,//흑백채도	
+            "blackWhiteSaturation3": t_side_scolor_03_4,//흑백채도	
+            "blackWhiteSaturation4": t_side_scolor_04_4,//흑백채도	
+            "blackWhiteSaturation5": t_side_scolor_05_4,//흑백채도	
+            "blackWhiteSaturation6": t_side_scolor_06_4//흑백채도	
+        },
+        {
+            "color": t_color_01_5,//컬러
+            "colorUforce" : t_color_02_5,//컬러유기물강조
+            "colorMforce" : t_color_03_5,//컬러무기물강조
+            "colorRevers" : t_color_04_5,//컬러반전
+            "colorSaturation1": t_scolor_01_5,//컬러채도
+            "colorSaturation2": t_scolor_02_5,//컬러채도
+            "colorSaturation3": t_scolor_03_5,//컬러채도
+            "colorSaturation4": t_scolor_04_5,//컬러채도
+            "colorSaturation5": t_scolor_05_5,//컬러채도
+            "colorSaturation6": t_scolor_06_5,//컬러채도
+            "blackWhite" : t_side_bwcolor_01_5,//흑백
+            "blackWhiteUforce" : t_side_bwcolor_02_5,//흑백유기물강조
+            "blackWhiteMforce" : t_side_bwcolor_03_5,//흑백무기물강조
+            "blackWhiteRevers" : t_side_bwcolor_04_5,//흑백반전
+            "blackWhiteSaturation1": t_side_scolor_01_5,//흑백채도	
+            "blackWhiteSaturation2": t_side_scolor_02_5,//흑백채도	
+            "blackWhiteSaturation3": t_side_scolor_03_5,//흑백채도	
+            "blackWhiteSaturation4": t_side_scolor_04_5,//흑백채도	
+            "blackWhiteSaturation5": t_side_scolor_05_5,//흑백채도	
+            "blackWhiteSaturation6": t_side_scolor_06_5//흑백채도	
+        },                                
+    ]    
+
 
     
 
@@ -269,6 +667,7 @@ export const Learning = () =>{
             //기존 이미지 제거하고 이동 시작
             //마지막 이미지가 끝났을 경우 시험 종료
             function resetImage() {
+                setCurrentImage(current_image);//현재이미지순서를 기록
                 $currentImage = $(images[current_image]); 
 
                 setTargetImg($currentImage[0].src);//이미지확대축소 셋팅
@@ -634,10 +1033,13 @@ export const Learning = () =>{
 
     //하단 이미지컨트롤 아이콘 통합
     const imgTransControl = (e) =>{
+
+        console.log("변경이미지:", transimages);
+
+        console.log("현재이미지:", currentImage);
         if(e==='color1'){//컬러
 
         }else if(e==='color2'){//컬러유기물강조
-
             console.log('확인');
             setLearning_01(t_learning_02);
         }else if(e==='color3'){//컬러무기물강조
@@ -741,13 +1143,14 @@ export const Learning = () =>{
                                         </div>
                                     </div>
 
-                                    {/* learnc_img */}
+                                    {/* learnc_img 슬라이드 이미지 출력*/}
                                     <div className="learnc_img" id="learn01_img" style={{height:"520px", display:imgSlideDisplay}}>
-                                        <img src={learning_01} data-thum={learning_01_1} className="image" alt="image" />
-                                        <img src={learning_02} data-thum={learning_02_1} className="image" alt="image" />
-                                        <img src={learning_03} data-thum={learning_03_1} className="image" alt="image" />
-                                        <img src={learning_04} data-thum={learning_04_1} className="image" alt="image" />
-                                        <img src={learning_05} data-thum={learning_05_1} className="image" alt="image" />
+
+                                        {
+                                            imageList.map((target, index) => ([
+                                                <img src={target.learningImages} data-thum={target.learningThumImages} className="image" alt="image" />
+                                            ]))
+                                        }                                        
                                     </div>
 
                                     <div className="learnc_img_sub" id="learn01_img_sub" style={{ textAlign:"center !important", width: "100%", height: "520px", display:imgDisplay}}>
