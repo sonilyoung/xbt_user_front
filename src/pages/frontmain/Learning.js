@@ -1335,12 +1335,12 @@ export const Learning = () =>{
                                                     <div className="learntit">레벨 : 1</div>
                                                 </li>
                                                 <li className="learnct02_center">
-                                                    <div className="question">문항 <span>1/15</span></div>
+                                                    <div className="question">문항 <span>{problremCnt}/5</span></div>
                                                     <div className="question_box">
                                                         <dl>
-                                                            <dd className="qsbox">00</dd>
+                                                            <dd className="qsbox">{formatMinuite()}</dd>
                                                             <dd className="qsb_pd">:</dd>
-                                                            <dd className="qsbox">00</dd>
+                                                            <dd className="qsbox">{formatSeconds()}</dd>
                                                         </dl>
                                                     </div>
                                                 </li>
@@ -1352,79 +1352,107 @@ export const Learning = () =>{
                                             </ul>
                                         </div>
                                     </div>
-                                    {/* learnc_img */}
-                                    <div className="learnc_img" id="learn02_img" style={{height:"520px"}}>
+                                    {/* learnc_img 컷방식*/}
+                                    <div className="learnc_img" id="learn02_img" style={{height:"520px", display:imgSlideDisplay}}>
                                         <div id="learn02_progress"></div>
-                                        <img src="../images/learning/learning_01.jpg" data-thum="../images/learning/learning_01_1.jpg" className="image" alt="image" />
-                                        <img src="../images/learning/learning_02.jpg" data-thum="../images/learning/learning_02_1.jpg" className="image" alt="image" />
-                                        <img src="../images/learning/learning_03.jpg" data-thum="../images/learning/learning_03_1.jpg" className="image" alt="image" />
-                                        <img src="../images/learning/learning_04.jpg" data-thum="../images/learning/learning_04_1.jpg" className="image" alt="image" />
-                                        <img src="../images/learning/learning_05.jpg" data-thum="../images/learning/learning_05_1.jpg" className="image" alt="image" />
+                                        {
+                                            imageList.map((target, index) => ([
+                                                <img src={target.learningImages} data-thum={target.learningThumImages} className="image" alt="image" />
+                                            ]))
+                                        }                                                                     
                                     </div>
+
+                                    <div className="learnc_img_sub" id="learn02_img_sub" style={{ textAlign:"center !important", width: "100%", height: "520px", display:imgDisplay}}>
+                                        <TransformWrapper
+                                            initialScale={1}
+                                            minScale= {0.5}
+                                            maxScale= {10}                                            
+                                            initialPositionX={200}
+                                            initialPositionY={100}
+                                            alignmentAnimation={{ sizeX: 0, sizeY: 0 }}
+                                            centerZoomedOut={true}
+                                            //limitToBounds={true}
+                                            >
+                                            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                                                <React.Fragment>
+
+                                                <div className="tools" style={{visibility:"hidden"}}>
+                                                    <button ref={inputRef1} onClick={() => zoomIn()}>+</button>
+                                                    <button ref={inputRef2} onClick={() => zoomOut()}>-</button>
+                                                    <button ref={inputRef3} onClick={() => resetTransform()}>x</button>
+                                                </div>
+                                                <TransformComponent>
+                                                    <img src={targetImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
+                                                </TransformComponent>
+                                                </React.Fragment>
+                                            )}
+                                        </TransformWrapper>    
+                                    </div>               
+
                                 </div>
                                 {/* learn_bottom */}
                                 <div className="learn_bottom">
                                     {/* learn_btcon */}
                                     <div className="learn_btcon">
-                                        {/* learnbtc01 */}
+                                        {/* learnbtc01 이미지컨트롤 아이콘 영역*/}
                                         <div className="learnbtc01">
                                             <ul>
-                                                <li><a href="#"><img src="../images/learning/learnc_ic01_01.png" alt=""/></a></li>
-                                                <li><a href="#"><img src="../images/learning/learnc_ic01_02.png" alt=""/></a></li>
-                                                <li><a href="#"><img src="../images/learning/learnc_ic01_03.png" alt=""/></a></li>
-                                                <li><a href="#"><img src="../images/learning/learnc_ic01_04.png" alt=""/></a></li>
-                                                <li><a href="#"><img src="../images/learning/learnc_ic02_01.png" alt=""/></a></li>
-                                                <li><a href="#"><img src="../images/learning/learnc_ic02_02.png" alt=""/></a></li>
-                                                <li><a href="#"><img src="../images/learning/learnc_ic02_03.png" alt=""/></a></li>
-                                                <li><a href="#"><img src="../images/learning/learnc_ic02_04.png" alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('color1')}><img src={learnc_ic01_01} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('color2')}><img src={learnc_ic01_02} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('color3')}><img src={learnc_ic01_03} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('color4')}><img src={learnc_ic01_04} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite1')}><img src={learnc_ic02_01} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite2')}><img src={learnc_ic02_02} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite3')}><img src={learnc_ic02_03} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite4')}><img src={learnc_ic02_04} alt=""/></a></li>
                                             </ul>
                                         </div>
-                                        {/* learnbtc02 */}
+                                        {/* learnbtc02 이미지 채도 아이콘 영역*/}
                                         <div className="learnbtc02">
                                             <ul>
-                                                <li><a href="#"><span className="brig_ic01_01"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic01_02"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic01_03"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic01_04"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic01_05"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic01_06"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd1' ? 'on' : ''} onClick={()=>imgTransControl('cd1')}><span className="brig_ic01_01"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd2' ? 'on' : ''} onClick={()=>imgTransControl('cd2')}><span className="brig_ic01_02"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd3' ? 'on' : ''} onClick={()=>imgTransControl('cd3')}><span className="brig_ic01_03"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd4' ? 'on' : ''} onClick={()=>imgTransControl('cd4')}><span className="brig_ic01_04"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd5' ? 'on' : ''} onClick={()=>imgTransControl('cd5')}><span className="brig_ic01_05"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd6' ? 'on' : ''} onClick={()=>imgTransControl('cd6')}><span className="brig_ic01_06"></span></a></li>
                                             </ul>
                                             <ul>
-                                                <li><a href="#"><span className="brig_ic02_01"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic02_02"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic02_03"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic02_04"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic02_05"></span></a></li>
-                                                <li><a href="#"><span className="brig_ic02_06"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd7' ? 'on' : ''} onClick={()=>imgTransControl('cd7')}><span className="brig_ic02_01"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd8' ? 'on' : ''} onClick={()=>imgTransControl('cd8')}><span className="brig_ic02_02"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd9' ? 'on' : ''} onClick={()=>imgTransControl('cd9')}><span className="brig_ic02_03"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd10' ? 'on' : ''} onClick={()=>imgTransControl('cd10')}><span className="brig_ic02_04"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd11' ? 'on' : ''} onClick={()=>imgTransControl('cd11')}><span className="brig_ic02_05"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd12' ? 'on' : ''} onClick={()=>imgTransControl('cd12')}><span className="brig_ic02_06"></span></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc03 */}
                                         <div className="learnbtc03">
                                             <ul>
-                                                <li><a href="#"><img src="../images/learning/glas_plus.png" alt=""/></a></li>
-                                                <li><a href="#"><img src="../images/learning/transform.png" alt=""/></a></li>
-                                                <li><a href="#"><img src="../images/learning/glas_minus.png" alt=""/></a></li>
-                                                <li><a href="#"><img src="../images/learning/restoration.png" alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('Y');targetZoomIn()}}><img src={glas_plus} alt="이미지 확대"/></a></li>
+                                                <li><a href="#" onClick={()=>{targetReplaceImg()}}><img src={transform} alt="이미지 반전"/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('Y');targetZoomOut()}}><img src={glas_minus} alt="이미지 축소"/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('Y');targetZoomReset()}}><img src={restoration} alt="이미지 reset"/></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc04 */}
                                         <div className="learnbtc04">
                                             <ul>
                                                 <li>
-                                                    <button className="lnbtc_btn lnbtc_btnon next" id="learn02_pass" type="button">
-                                                        <span><img src="../images/learning/pass.png" alt=""/></span>
+                                                    <button className="lnbtc_btn lnbtc_btnon next" id="learn01_pass" type="button">
+                                                        <span><img src={pass} alt=""/></span>
                                                         <p>Pass</p>
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <button className="lnbtc_btn lnbtc_btnon" id="learn02_open" type="button">
-                                                        <span><img src="../images/learning/open.png" alt=""/></span>
+                                                    <button className="lnbtc_btn lnbtc_btnon" id="learn01_open" type="button">
+                                                        <span><img src={open} alt=""/></span>
                                                         <p>Open</p>
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <button className="lnbtc_btn lnbtc_btnon" id="learn02_prohibited" type="button">
-                                                        <span><img src="../images/learning/prohibited.png" alt=""/></span>
+                                                    <button className="lnbtc_btn lnbtc_btnon" id="learn01_prohibited" type="button">
+                                                        <span><img src={prohibited} alt=""/></span>
                                                         <p>Prohibited</p>
                                                     </button>
                                                 </li>
@@ -1433,13 +1461,13 @@ export const Learning = () =>{
                                         {/* learnbtc05 */}
                                         <div className="learnbtc05">
                                             <button className="lnbtc_btn stop" id="learn02_stop" type="button">
-                                                <span><img src="../images/learning/stop.png" alt=""/></span>
+                                                <span><img src={stop} alt=""/></span>
                                                 <p>Stop</p>
                                             </button>
                                         </div>
-                                        {/* learnbtc06 */}
-                                        <div className="learnbtc06" style={{display:"none"}}>
-                                            <img src="../images/learning/learning_01_1.jpg" id="learn02_bimg" alt=""/>
+                                        {/* learnbtc06 측면이미지 */}
+                                        <div className="learnbtc06" >
+                                            <img src={thumImg} ref={inputRef4} id="learn01_bimg" style={{display:"none"}} alt=""/>
                                         </div>
                                     </div>
                                 </div>
