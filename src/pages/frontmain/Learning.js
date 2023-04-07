@@ -1,6 +1,6 @@
 /* eslint-disable*/
 import React, { useState, useEffect, Component ,useRef } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
@@ -331,13 +331,14 @@ import stop from 'assets/images/learning/stop.png';
 
 // ================================|| 학습 ||================================ //
 export const Learning = () =>{
+    const navigate = useNavigate();
     const [problremCnt, setProblremCnt] = useState(1);//문제출제수
     const [startLearning, setStartLearning] = useState(true);
     const [imgSlideDisplay, setImgSlideDisplay] = useState('block');//슬라이드이미지
     const [imgDisplay, setImgDisplay] = useState('none');//확대축소이미지 css
     const [targetImg, setTargetImg] = useState([]);//확대축소이미지
     const [currentImage, setCurrentImage] = useState();//현재이미지
-    const [currentTransImage, setCurrentTransImage] = useState();//현재변경이미지
+    //const [currentTransImage, setCurrentTransImage] = useState();//현재변경이미지
     const [tranTry, setTranTry] = useState(true);//현재이미지
     const [nowSelect, setNowSelect] = useState();//현재선택된 아이콘
     const [learningEnd, setLearningEnd] = useState(false);//학습완료 팝업
@@ -542,12 +543,22 @@ export const Learning = () =>{
 
     }
 
+
+
     useEffect(()=>{    
+        handleReset();//시간초기화
+        setImageList(learningImages);//이미지초기화
+        setThumImg(imageList[0].learningThumImages);//썸네일초기화                    
+
         let slide_speed = 5; //이동 거리(px)
         let slide_time = 10; //이동 시간(ms, 1/1000초)
         let cut_time = 3000; //컷 시간
 
-
+        let time_out;				//이미지가 움직임 예약
+        let animation;				//이미지가 움직이는 상태 저장
+        let position;				//이미지와 스크롤바 이동
+        let $currentImage;			//현재 움직이는 이미지
+        let is_learn01_play = false;
         
         /*
             버튼에 modal_btn 클래스 넣으면 작동
@@ -588,12 +599,6 @@ export const Learning = () =>{
         }  
 
 
-        let time_out;				//이미지가 움직임 예약
-        let animation;				//이미지가 움직이는 상태 저장
-        let position;				//이미지와 스크롤바 이동
-        let $currentImage;			//현재 움직이는 이미지
-        let is_learn01_play = false;
-    
         $("#close-first-modal").click(function(){
             if(is_learn01_play){
                 //alert("시험이 종료되었습니다.");
@@ -664,7 +669,7 @@ export const Learning = () =>{
             //마지막 이미지가 끝났을 경우 시험 종료
             function resetImage() {
                 setCurrentImage(current_image);//현재이미지순서를 기록
-                setCurrentTransImage(imageList[current_image].learningImages);
+                //setCurrentTransImage(imageList[current_image].learningImages);
                 setThumImg(imageList[current_image].learningThumImages);//썸네일이미지변경
 
                 $currentImage = $(images[current_image]); 
@@ -708,6 +713,7 @@ export const Learning = () =>{
             //이미지 이동 진행
             //이미지가 화면 밖으로 사라질 경우 resetImage() 호출
             function image_position(){
+                console.log("image_position:", current_image);
                 $currentImage = $(images[current_image]);
                 let imageWidth = $currentImage.width();
                 let image_left = $currentImage.position().left;
@@ -1000,6 +1006,8 @@ export const Learning = () =>{
                 $currentImage.attr("src",image_src);
             });
         });        
+
+        console.log("useEffect!!!!!");
     },[]);
 
 
@@ -1039,6 +1047,7 @@ export const Learning = () =>{
     //하단 이미지컨트롤 아이콘 통합
     const imgTransControl = (e) =>{
 
+        console.log('currentImage:', currentImage);
         setNowSelect(e);//현재선택된 아이콘
 
         if(e==='color1'){//컬러
@@ -1899,25 +1908,7 @@ export const Learning = () =>{
                         {/* 완료 */}
                         {learningEnd && (<div id="eig-modal" className="modal-wrapper modal_blind" style={{display: "block"}}>
                             <div className="modal learn_scwd">
-                                <div className="scwd_txt01">
-                                    <h1>
-                                        평가를 마쳤습니다.
-                                    </h1>
-                                </div>
-                                <div className="scwd_txt02">
-                                    <p>학습이 끝났습니다. 수고하셨습니다.</p>
-                                </div>
-                                <button id="open-six-modal" data-mact="open" data-minfo="six-modal" className="modal_btn conbtn01">확인</button>
-                                <button id="close-eig-modal" data-mact="close" data-minfo="eig-modal" className="modal_btn close_btn02"></button>
-                            </div>
-                        </div>
-                        )} 
-                        
-                        {/* 학습완료 */}                            
-                        {learningEnd && (
-                            <div id="nine-modal" className="modal-wrapper modal_blind" style={{display: "block"}}>
-                                <div className="modal learn_scwd">
-                                    <div className="scwd_txt01">
+                            <div className="scwd_txt01">
                                         <h1>
                                             학습을 마쳤습니다.
                                         </h1>
@@ -1925,10 +1916,10 @@ export const Learning = () =>{
                                     <div className="scwd_txt02">
                                         <p>학습이 끝났습니다. 수고하셨습니다.</p>
                                     </div>
-                                    <button id="open-nine-modal" onClick={()=>setLearningEnd(false)} data-mact="open" data-minfo="nine-modal" className="modal_btn conbtn01">확인</button>
-                                    <button id="close-nine-modal" onClick={()=>setLearningEnd(false)} data-mact="close" data-minfo="nine-modal" className="modal_btn close_btn02"></button>
-                                </div>
+                                <button id="open-six-modal" onClick={()=>{setLearningEnd(false);navigate("/main")}} data-mact="open" data-minfo="six-modal" className="modal_btn conbtn01">확인</button>
+                                <button id="close-eig-modal" onClick={()=>{setLearningEnd(false);navigate("/main")}} data-mact="close" data-minfo="eig-modal" className="modal_btn close_btn02"></button>
                             </div>
+                        </div>
                         )} 
 
 

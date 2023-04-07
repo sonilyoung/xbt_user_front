@@ -68,7 +68,7 @@ export const Login = () => {
     }
 
     //메인페이지 이동
-    const moveMainPage = () =>{
+    const onMovePage = () =>{
         navigate("/main");            
     }
 
@@ -163,7 +163,7 @@ export const Login = () => {
                                             <img src={success} alt=""/>
                                         </div>
                                         <p className="login_txt">로그인 성공!<b/></p>
-                                        <button id="open-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);moveMainPage();}}  data-mact="open" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>
+                                        <button id="open-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);onMovePage();}}  data-mact="open" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>
                                         <button id="close-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);}}  data-mact="close"  data-minfo="second-modal" className="modal_btn close_btn"></button>
                                     </div>
                                 </div>
