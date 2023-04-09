@@ -598,6 +598,16 @@ export const LearningCut = () =>{
             }
         }  
 
+        $("#second-modal").show();
+        // 첫번째 모달창 가운데 정렬
+        let firstModal = document.querySelector("#second-modal .modal");
+        let modalWidth = firstModal.offsetWidth;
+        //alert(modalWidth);
+        let modalHeight = firstModal.offsetHeight;
+        firstModal.style.left = `calc(50% - ${modalWidth / 2}px)`;
+        //firstModal.style.left = `calc(50% - ${modalWidth}px)`;
+        firstModal.style.top = `calc(50% - ${modalHeight / 2}px)`;
+        
 
         $("#close-first-modal").click(function(){
             if(is_learn01_play){
