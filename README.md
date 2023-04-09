@@ -136,4 +136,6 @@ Please generate a [GitHub issue](https://github.com/codedthemes/mantis-free-reac
 
 
 ## install
-npm install --save react-zoom-pan-pinch
+npm install react-zoom-pan-pinch
+
+npm install react-spinners 
