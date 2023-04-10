@@ -808,16 +808,16 @@ export const Practice = () => {
         }                                             
     ];       
 
-    const [imageList, setImageList] = useState(learningImages);
-    const [currentImage, setCurrentImage] = useState(0);//현재이미지
-    const learningImages = [
-        {
+    const learningImages = {
             "realImg" : t_learning_01,
             "frontImg" : t_learning_01,
             "sideImg" : t_learning_01_1,
             "threedImg" : t_learning_01_1
-        }
-    ];
+    };
+
+    const [imageList, setImageList] = useState(learningImages);
+    const [currentImage, setCurrentImage] = useState(0);//현재이미지
+
 
     //하단 이미지컨트롤 아이콘 통합
     const imgTransControl = (e) =>{
@@ -826,90 +826,92 @@ export const Practice = () => {
         setNowSelect(e);//현재선택된 아이콘
 
         if(e==='color1'){//컬러
-            learningImages[currentImage].frontImg = transimages[currentImage].color;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].color;
+            learningImages.frontImg = transimages.color;
+            learningImages.sideImg = sideTransimages.color;
             setImageList(learningImages);
         }else if(e==='color2'){//컬러유기물강조
-            learningImages[currentImage].frontImg = transimages[currentImage].colorUforce;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].colorUforce;
+            learningImages.frontImg = transimages.colorUforce;
+            learningImages.sideImg = sideTransimages.colorUforce;
             setImageList(learningImages);
         }else if(e==='color3'){//컬러무기물강조
-            learningImages[currentImage].frontImg = transimages[currentImage].colorMforce;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].colorMforce;
+            learningImages.frontImg = transimages.colorMforce;
+            learningImages.sideImg = sideTransimages.colorMforce;
             setImageList(learningImages);
         }else if(e==='color4'){//컬러반전
-            learningImages[currentImage].frontImg = transimages[currentImage].colorRevers;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].colorRevers;
+            learningImages.frontImg = transimages.colorRevers;
+            learningImages.sideImg = sideTransimages.colorRevers;
             setImageList(learningImages);
         }else if(e==='cd1'){//컬러채도1
-            learningImages[currentImage].frontImg = transimages[currentImage].colorSaturation1;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].colorSaturation1;
+            learningImages.frontImg = transimages.colorSaturation1;
+            learningImages.sideImg = sideTransimages.colorSaturation1;
             setImageList(learningImages);
         }else if(e==='cd2'){//컬러채도2
-            learningImages[currentImage].frontImg = transimages[currentImage].colorSaturation2;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].colorSaturation2;
+            learningImages.frontImg = transimages.colorSaturation2;
+            learningImages.sideImg = sideTransimages.colorSaturation2;
             setImageList(learningImages);
         }else if(e==='cd3'){//컬러채도3
-            learningImages[currentImage].frontImg = transimages[currentImage].colorSaturation3;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].colorSaturation3;
+            learningImages.frontImg = transimages.colorSaturation3;
+            learningImages.sideImg = sideTransimages.colorSaturation3;
             setImageList(learningImages);
         }else if(e==='cd4'){//컬러채도4
-            learningImages[currentImage].frontImg = transimages[currentImage].colorSaturation4;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].colorSaturation4;
+            learningImages.frontImg = transimages.colorSaturation4;
+            learningImages.sideImg = sideTransimages.colorSaturation4;
             setImageList(learningImages);
         }else if(e==='cd5'){//컬러채도5
-            learningImages[currentImage].frontImg = transimages[currentImage].colorSaturation5;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].colorSaturation5;
+            learningImages.frontImg = transimages.colorSaturation5;
+            learningImages.sideImg = sideTransimages.colorSaturation5;
             setImageList(learningImages);
         }else if(e==='cd6'){//컬러채도6
-            learningImages[currentImage].frontImg = transimages[currentImage].colorSaturation6;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].colorSaturation6;
+            learningImages.frontImg = transimages.colorSaturation6;
+            learningImages.sideImg = sideTransimages.colorSaturation6;
             setImageList(learningImages);            
         }else if(e==='blackWhite1'){//흑백
-            learningImages[currentImage].frontImg = transimages[currentImage].blackWhite;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].blackWhite;
+            learningImages.frontImg = transimages.blackWhite;
+            learningImages.sideImg = sideTransimages.blackWhite;
             setImageList(learningImages);
         }else if(e==='blackWhite2'){//흑백유기물강조
-            learningImages[currentImage].frontImg = transimages[currentImage].blackWhiteUforce;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].blackWhiteUforce;
+            learningImages.frontImg = transimages.blackWhiteUforce;
+            learningImages.sideImg = sideTransimages.blackWhiteUforce;
             setImageList(learningImages);
         }else if(e==='blackWhite3'){//흑백무기물강조
-            learningImages[currentImage].frontImg = transimages[currentImage].blackWhiteMforce;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].blackWhiteMforce;
+            learningImages.frontImg = transimages.blackWhiteMforce;
+            learningImages.sideImg = sideTransimages.blackWhiteMforce;
             setImageList(learningImages);
         }else if(e==='blackWhite4'){//흑백반전
-            learningImages[currentImage].frontImg = transimages[currentImage].blackWhiteRevers;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].blackWhiteRevers;
+            learningImages.frontImg = transimages.blackWhiteRevers;
+            learningImages.sideImg = sideTransimages.blackWhiteRevers;
             setImageList(learningImages);
         }else if(e==='cd7'){//흑백채도1
-            learningImages[currentImage].frontImg = transimages[currentImage].blackWhiteSaturation1;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].blackWhiteSaturation1;
+            learningImages.frontImg = transimages.blackWhiteSaturation1;
+            learningImages.sideImg = sideTransimages.blackWhiteSaturation1;
             setImageList(learningImages);
         }else if(e==='cd8'){//흑백채도2
-            learningImages[currentImage].frontImg = transimages[currentImage].blackWhiteSaturation2;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].blackWhiteSaturation2;
+            learningImages.frontImg = transimages.blackWhiteSaturation2;
+            learningImages.sideImg = sideTransimages.blackWhiteSaturation2;
             setImageList(learningImages);
         }else if(e==='cd9'){//흑백채도3
-            learningImages[currentImage].frontImg = transimages[currentImage].blackWhiteSaturation3;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].blackWhiteSaturation3;
+            learningImages.frontImg = transimages.blackWhiteSaturation3;
+            learningImages.sideImg = sideTransimages.blackWhiteSaturation3;
             setImageList(learningImages);
         }else if(e==='cd10'){//흑백채도4
-            learningImages[currentImage].frontImg = transimages[currentImage].blackWhiteSaturation4;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].blackWhiteSaturation4;
+            learningImages.frontImg = transimages.blackWhiteSaturation4;
+            learningImages.sideImg = sideTransimages.blackWhiteSaturation4;
             setImageList(learningImages);
         }else if(e==='cd11'){//흑백채도5
-            learningImages[currentImage].frontImg = transimages[currentImage].blackWhiteSaturation5;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].blackWhiteSaturation5;
+            learningImages.frontImg = transimages.blackWhiteSaturation5;
+            learningImages.sideImg = sideTransimages.blackWhiteSaturation5;
             setImageList(learningImages);
         }else if(e==='cd12'){//흑백채도6
-            learningImages[currentImage].frontImg = transimages[currentImage].blackWhiteSaturation6;
-            learningImages[currentImage].sideImg = sideTransimages[currentImage].blackWhiteSaturation6;
+            learningImages.frontImg = transimages.blackWhiteSaturation6;
+            learningImages.sideImg = sideTransimages.blackWhiteSaturation6;
             setImageList(learningImages);
         }
     }    
 
     useEffect(() =>{
         defaultData();
+
+        console.log("이미지:", imageList);
     },[])
 
     return (
