@@ -710,8 +710,8 @@ export const LearningSlide = () =>{
                         time_out = setTimeout(image_position, move_timer);
                     });
 
-                    let problrems = start_count+1;
                     //문제출제수
+                    let problrems = current_image+1;
                     setProblremCnt(problrems);
                 }
                 start_count++;

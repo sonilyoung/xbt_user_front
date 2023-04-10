@@ -773,6 +773,10 @@ export const LearningCut = () =>{
                         status=0;
                         $("#learn02_stop").removeClass("lnbtc_btnon");
                         timer = setTimeout(displayNextImage, learn_time);
+
+                        //문제출제수
+                        let problrems = currentImageIndex+1;
+                        setProblremCnt(problrems);                          
                     }
                 }
             }
