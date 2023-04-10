@@ -14,9 +14,10 @@ import 'assets/css/frontMain.css';
 import 'assets/css/main.css';
 import {Navi} from '../Navi';
 import {Copy} from '../Copy';
+import {Loading} from '../Loading';
 
 export const FrontMain = () => {
-
+    const [loading, setLoading] = useState(false);
     const [mContents, setMcontents] = useState(false);//메인팝업창
     const [selectMenu, setSelectMenu] = useState();//메뉴선택상태
     const [scoreContens, setScoreContens] = useState();//화면
@@ -555,6 +556,7 @@ export const FrontMain = () => {
                 </div>
                 <Copy/>
             </div>
+            {loading &&(<Loading/>)}
         </>
     );
 };

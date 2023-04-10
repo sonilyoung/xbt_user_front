@@ -41,22 +41,32 @@ import t_color_02_1 from 'assets/images/demo/X05231-102.jpg';
 import t_color_03_1 from 'assets/images/demo/X05231-103.jpg';
 import t_color_04_1 from 'assets/images/demo/X05231-104.jpg';
 
+//컬러채도
+import t_scolor_01_1 from 'assets/images/demo/X05231-105.jpg';
+import t_scolor_02_1 from 'assets/images/demo/X05231-106.jpg';
+import t_scolor_03_1 from 'assets/images/demo/X05231-107.jpg';
+import t_scolor_04_1 from 'assets/images/demo/X05231-108.jpg';
+import t_scolor_05_1 from 'assets/images/demo/X05231-109.jpg';
+import t_scolor_06_1 from 'assets/images/demo/X05231-110.jpg';
+
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bcolor_01_1 from 'assets/images/demo/X05231-111.jpg';
-import t_bcolor_02_1 from 'assets/images/demo/X05231-112.jpg';
-import t_bcolor_03_1 from 'assets/images/demo/X05231-113.jpg';
-import t_bcolor_04_1 from 'assets/images/demo/X05231-114.jpg';
+import t_bwcolor_01_1 from 'assets/images/demo/X05231-111.jpg';
+import t_bwcolor_02_1 from 'assets/images/demo/X05231-112.jpg';
+import t_bwcolor_03_1 from 'assets/images/demo/X05231-113.jpg';
+import t_bwcolor_04_1 from 'assets/images/demo/X05231-114.jpg';
 
-//채도
-import t_scolor_01_1 from 'assets/images/demo/X05231-115.jpg';
-import t_scolor_02_1 from 'assets/images/demo/X05231-116.jpg';
-import t_scolor_03_1 from 'assets/images/demo/X05231-117.jpg';
-import t_scolor_04_1 from 'assets/images/demo/X05231-118.jpg';
-import t_scolor_05_1 from 'assets/images/demo/X05231-119.jpg';
-import t_scolor_06_1 from 'assets/images/demo/X05231-120.jpg';
+//흑백채도
+import t_sbwcolor_01_1 from 'assets/images/demo/X05231-115.jpg';
+import t_sbwcolor_02_1 from 'assets/images/demo/X05231-116.jpg';
+import t_sbwcolor_03_1 from 'assets/images/demo/X05231-117.jpg';
+import t_sbwcolor_04_1 from 'assets/images/demo/X05231-118.jpg';
+import t_sbwcolor_05_1 from 'assets/images/demo/X05231-119.jpg';
+import t_sbwcolor_06_1 from 'assets/images/demo/X05231-120.jpg';
+
+
 
 //================================측면이미지
 //컬러
@@ -68,6 +78,14 @@ import t_side_color_02_1 from 'assets/images/demo/X05231-202.jpg';
 import t_side_color_03_1 from 'assets/images/demo/X05231-203.jpg';
 import t_side_color_04_1 from 'assets/images/demo/X05231-204.jpg';
 
+//컬러채도
+import t_side_scolor_01_1 from 'assets/images/demo/X05231-205.jpg';
+import t_side_scolor_02_1 from 'assets/images/demo/X05231-206.jpg';
+import t_side_scolor_03_1 from 'assets/images/demo/X05231-207.jpg';
+import t_side_scolor_04_1 from 'assets/images/demo/X05231-208.jpg';
+import t_side_scolor_05_1 from 'assets/images/demo/X05231-209.jpg';
+import t_side_scolor_06_1 from 'assets/images/demo/X05231-210.jpg';
+
 //흑백
 //흑백유기물강조
 //흑백무기물강조
@@ -77,14 +95,15 @@ import t_side_bwcolor_02_1 from 'assets/images/demo/X05231-212.jpg';
 import t_side_bwcolor_03_1 from 'assets/images/demo/X05231-213.jpg';
 import t_side_bwcolor_04_1 from 'assets/images/demo/X05231-214.jpg';
 
-//채도
-import t_side_scolor_01_1 from 'assets/images/demo/X05231-215.jpg';
-import t_side_scolor_02_1 from 'assets/images/demo/X05231-216.jpg';
-import t_side_scolor_03_1 from 'assets/images/demo/X05231-217.jpg';
-import t_side_scolor_04_1 from 'assets/images/demo/X05231-218.jpg';
-import t_side_scolor_05_1 from 'assets/images/demo/X05231-219.jpg';
-import t_side_scolor_06_1 from 'assets/images/demo/X05231-220.jpg';
+//흑백채도
+import t_side_sbwcolor_01_1 from 'assets/images/demo/X05231-215.jpg';
+import t_side_sbwcolor_02_1 from 'assets/images/demo/X05231-216.jpg';
+import t_side_sbwcolor_03_1 from 'assets/images/demo/X05231-217.jpg';
+import t_side_sbwcolor_04_1 from 'assets/images/demo/X05231-218.jpg';
+import t_side_sbwcolor_05_1 from 'assets/images/demo/X05231-219.jpg';
+import t_side_sbwcolor_06_1 from 'assets/images/demo/X05231-220.jpg';
 //================================이미지1
+
 
 //================================이미지2
 //컬러
@@ -96,22 +115,32 @@ import t_color_02_2 from 'assets/images/demo/X05228-102.jpg';
 import t_color_03_2 from 'assets/images/demo/X05228-103.jpg';
 import t_color_04_2 from 'assets/images/demo/X05228-104.jpg';
 
+//컬러채도
+import t_scolor_01_2 from 'assets/images/demo/X05228-105.jpg';
+import t_scolor_02_2 from 'assets/images/demo/X05228-106.jpg';
+import t_scolor_03_2 from 'assets/images/demo/X05228-107.jpg';
+import t_scolor_04_2 from 'assets/images/demo/X05228-108.jpg';
+import t_scolor_05_2 from 'assets/images/demo/X05228-109.jpg';
+import t_scolor_06_2 from 'assets/images/demo/X05228-110.jpg';
+
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bcolor_01_2 from 'assets/images/demo/X05228-111.jpg';
-import t_bcolor_02_2 from 'assets/images/demo/X05228-112.jpg';
-import t_bcolor_03_2 from 'assets/images/demo/X05228-113.jpg';
-import t_bcolor_04_2 from 'assets/images/demo/X05228-114.jpg';
+import t_bwcolor_01_2 from 'assets/images/demo/X05228-111.jpg';
+import t_bwcolor_02_2 from 'assets/images/demo/X05228-112.jpg';
+import t_bwcolor_03_2 from 'assets/images/demo/X05228-113.jpg';
+import t_bwcolor_04_2 from 'assets/images/demo/X05228-114.jpg';
 
-//채도
-import t_scolor_01_2 from 'assets/images/demo/X05228-115.jpg';
-import t_scolor_02_2 from 'assets/images/demo/X05228-116.jpg';
-import t_scolor_03_2 from 'assets/images/demo/X05228-117.jpg';
-import t_scolor_04_2 from 'assets/images/demo/X05228-118.jpg';
-import t_scolor_05_2 from 'assets/images/demo/X05228-119.jpg';
-import t_scolor_06_2 from 'assets/images/demo/X05228-120.jpg';
+//흑백채도
+import t_sbwcolor_01_2 from 'assets/images/demo/X05228-115.jpg';
+import t_sbwcolor_02_2 from 'assets/images/demo/X05228-116.jpg';
+import t_sbwcolor_03_2 from 'assets/images/demo/X05228-117.jpg';
+import t_sbwcolor_04_2 from 'assets/images/demo/X05228-118.jpg';
+import t_sbwcolor_05_2 from 'assets/images/demo/X05228-119.jpg';
+import t_sbwcolor_06_2 from 'assets/images/demo/X05228-120.jpg';
+
+
 
 //================================측면이미지
 //컬러
@@ -123,6 +152,14 @@ import t_side_color_02_2 from 'assets/images/demo/X05228-202.jpg';
 import t_side_color_03_2 from 'assets/images/demo/X05228-203.jpg';
 import t_side_color_04_2 from 'assets/images/demo/X05228-204.jpg';
 
+//컬러채도
+import t_side_scolor_01_2 from 'assets/images/demo/X05228-205.jpg';
+import t_side_scolor_02_2 from 'assets/images/demo/X05228-206.jpg';
+import t_side_scolor_03_2 from 'assets/images/demo/X05228-207.jpg';
+import t_side_scolor_04_2 from 'assets/images/demo/X05228-208.jpg';
+import t_side_scolor_05_2 from 'assets/images/demo/X05228-209.jpg';
+import t_side_scolor_06_2 from 'assets/images/demo/X05228-210.jpg';
+
 //흑백
 //흑백유기물강조
 //흑백무기물강조
@@ -132,13 +169,13 @@ import t_side_bwcolor_02_2 from 'assets/images/demo/X05228-212.jpg';
 import t_side_bwcolor_03_2 from 'assets/images/demo/X05228-213.jpg';
 import t_side_bwcolor_04_2 from 'assets/images/demo/X05228-214.jpg';
 
-//채도
-import t_side_scolor_01_2 from 'assets/images/demo/X05228-215.jpg';
-import t_side_scolor_02_2 from 'assets/images/demo/X05228-216.jpg';
-import t_side_scolor_03_2 from 'assets/images/demo/X05228-217.jpg';
-import t_side_scolor_04_2 from 'assets/images/demo/X05228-218.jpg';
-import t_side_scolor_05_2 from 'assets/images/demo/X05228-219.jpg';
-import t_side_scolor_06_2 from 'assets/images/demo/X05228-220.jpg';
+//흑백채도
+import t_side_sbwcolor_01_2 from 'assets/images/demo/X05228-215.jpg';
+import t_side_sbwcolor_02_2 from 'assets/images/demo/X05228-216.jpg';
+import t_side_sbwcolor_03_2 from 'assets/images/demo/X05228-217.jpg';
+import t_side_sbwcolor_04_2 from 'assets/images/demo/X05228-218.jpg';
+import t_side_sbwcolor_05_2 from 'assets/images/demo/X05228-219.jpg';
+import t_side_sbwcolor_06_2 from 'assets/images/demo/X05228-220.jpg';
 //================================이미지2
 
 
@@ -152,22 +189,31 @@ import t_color_02_3 from 'assets/images/demo/X05227-102.jpg';
 import t_color_03_3 from 'assets/images/demo/X05227-103.jpg';
 import t_color_04_3 from 'assets/images/demo/X05227-104.jpg';
 
+//컬러채도
+import t_scolor_01_3 from 'assets/images/demo/X05227-105.jpg';
+import t_scolor_02_3 from 'assets/images/demo/X05227-106.jpg';
+import t_scolor_03_3 from 'assets/images/demo/X05227-107.jpg';
+import t_scolor_04_3 from 'assets/images/demo/X05227-108.jpg';
+import t_scolor_05_3 from 'assets/images/demo/X05227-109.jpg';
+import t_scolor_06_3 from 'assets/images/demo/X05227-110.jpg';
+
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bcolor_01_3 from 'assets/images/demo/X05227-111.jpg';
-import t_bcolor_02_3 from 'assets/images/demo/X05227-112.jpg';
-import t_bcolor_03_3 from 'assets/images/demo/X05227-113.jpg';
-import t_bcolor_04_3 from 'assets/images/demo/X05227-114.jpg';
+import t_bwcolor_01_3 from 'assets/images/demo/X05227-111.jpg';
+import t_bwcolor_02_3 from 'assets/images/demo/X05227-112.jpg';
+import t_bwcolor_03_3 from 'assets/images/demo/X05227-113.jpg';
+import t_bwcolor_04_3 from 'assets/images/demo/X05227-114.jpg';
 
-//채도
-import t_scolor_01_3 from 'assets/images/demo/X05227-115.jpg';
-import t_scolor_02_3 from 'assets/images/demo/X05227-116.jpg';
-import t_scolor_03_3 from 'assets/images/demo/X05227-117.jpg';
-import t_scolor_04_3 from 'assets/images/demo/X05227-118.jpg';
-import t_scolor_05_3 from 'assets/images/demo/X05227-119.jpg';
-import t_scolor_06_3 from 'assets/images/demo/X05227-120.jpg';
+//흑백채도
+import t_sbwcolor_01_3 from 'assets/images/demo/X05227-115.jpg';
+import t_sbwcolor_02_3 from 'assets/images/demo/X05227-116.jpg';
+import t_sbwcolor_03_3 from 'assets/images/demo/X05227-117.jpg';
+import t_sbwcolor_04_3 from 'assets/images/demo/X05227-118.jpg';
+import t_sbwcolor_05_3 from 'assets/images/demo/X05227-119.jpg';
+import t_sbwcolor_06_3 from 'assets/images/demo/X05227-120.jpg';
+
 
 //================================측면이미지
 //컬러
@@ -179,6 +225,14 @@ import t_side_color_02_3 from 'assets/images/demo/X05227-202.jpg';
 import t_side_color_03_3 from 'assets/images/demo/X05227-203.jpg';
 import t_side_color_04_3 from 'assets/images/demo/X05227-204.jpg';
 
+//컬러채도
+import t_side_scolor_01_3 from 'assets/images/demo/X05227-205.jpg';
+import t_side_scolor_02_3 from 'assets/images/demo/X05227-206.jpg';
+import t_side_scolor_03_3 from 'assets/images/demo/X05227-207.jpg';
+import t_side_scolor_04_3 from 'assets/images/demo/X05227-208.jpg';
+import t_side_scolor_05_3 from 'assets/images/demo/X05227-209.jpg';
+import t_side_scolor_06_3 from 'assets/images/demo/X05227-210.jpg';
+
 //흑백
 //흑백유기물강조
 //흑백무기물강조
@@ -188,15 +242,14 @@ import t_side_bwcolor_02_3 from 'assets/images/demo/X05227-212.jpg';
 import t_side_bwcolor_03_3 from 'assets/images/demo/X05227-213.jpg';
 import t_side_bwcolor_04_3 from 'assets/images/demo/X05227-214.jpg';
 
-//채도
-import t_side_scolor_01_3 from 'assets/images/demo/X05227-215.jpg';
-import t_side_scolor_02_3 from 'assets/images/demo/X05227-216.jpg';
-import t_side_scolor_03_3 from 'assets/images/demo/X05227-217.jpg';
-import t_side_scolor_04_3 from 'assets/images/demo/X05227-218.jpg';
-import t_side_scolor_05_3 from 'assets/images/demo/X05227-219.jpg';
-import t_side_scolor_06_3 from 'assets/images/demo/X05227-220.jpg';
+//흑백채도
+import t_side_sbwcolor_01_3 from 'assets/images/demo/X05227-215.jpg';
+import t_side_sbwcolor_02_3 from 'assets/images/demo/X05227-216.jpg';
+import t_side_sbwcolor_03_3 from 'assets/images/demo/X05227-217.jpg';
+import t_side_sbwcolor_04_3 from 'assets/images/demo/X05227-218.jpg';
+import t_side_sbwcolor_05_3 from 'assets/images/demo/X05227-219.jpg';
+import t_side_sbwcolor_06_3 from 'assets/images/demo/X05227-220.jpg';
 //================================이미지3
-
 
 //================================이미지4
 //컬러
@@ -208,22 +261,32 @@ import t_color_02_4 from 'assets/images/demo/X05182-102.jpg';
 import t_color_03_4 from 'assets/images/demo/X05182-103.jpg';
 import t_color_04_4 from 'assets/images/demo/X05182-104.jpg';
 
+//컬러채도
+import t_scolor_01_4 from 'assets/images/demo/X05182-105.jpg';
+import t_scolor_02_4 from 'assets/images/demo/X05182-106.jpg';
+import t_scolor_03_4 from 'assets/images/demo/X05182-107.jpg';
+import t_scolor_04_4 from 'assets/images/demo/X05182-108.jpg';
+import t_scolor_05_4 from 'assets/images/demo/X05182-109.jpg';
+import t_scolor_06_4 from 'assets/images/demo/X05182-110.jpg';
+
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bcolor_01_4 from 'assets/images/demo/X05182-111.jpg';
-import t_bcolor_02_4 from 'assets/images/demo/X05182-112.jpg';
-import t_bcolor_03_4 from 'assets/images/demo/X05182-113.jpg';
-import t_bcolor_04_4 from 'assets/images/demo/X05182-114.jpg';
+import t_bwcolor_01_4 from 'assets/images/demo/X05182-111.jpg';
+import t_bwcolor_02_4 from 'assets/images/demo/X05182-112.jpg';
+import t_bwcolor_03_4 from 'assets/images/demo/X05182-113.jpg';
+import t_bwcolor_04_4 from 'assets/images/demo/X05182-114.jpg';
 
-//채도
-import t_scolor_01_4 from 'assets/images/demo/X05182-115.jpg';
-import t_scolor_02_4 from 'assets/images/demo/X05182-116.jpg';
-import t_scolor_03_4 from 'assets/images/demo/X05182-117.jpg';
-import t_scolor_04_4 from 'assets/images/demo/X05182-118.jpg';
-import t_scolor_05_4 from 'assets/images/demo/X05182-119.jpg';
-import t_scolor_06_4 from 'assets/images/demo/X05182-120.jpg';
+//흑백채도
+import t_sbwcolor_01_4 from 'assets/images/demo/X05182-115.jpg';
+import t_sbwcolor_02_4 from 'assets/images/demo/X05182-116.jpg';
+import t_sbwcolor_03_4 from 'assets/images/demo/X05182-117.jpg';
+import t_sbwcolor_04_4 from 'assets/images/demo/X05182-118.jpg';
+import t_sbwcolor_05_4 from 'assets/images/demo/X05182-119.jpg';
+import t_sbwcolor_06_4 from 'assets/images/demo/X05182-120.jpg';
+
+
 
 //================================측면이미지
 //컬러
@@ -235,6 +298,14 @@ import t_side_color_02_4 from 'assets/images/demo/X05182-202.jpg';
 import t_side_color_03_4 from 'assets/images/demo/X05182-203.jpg';
 import t_side_color_04_4 from 'assets/images/demo/X05182-204.jpg';
 
+//컬러채도
+import t_side_scolor_01_4 from 'assets/images/demo/X05182-205.jpg';
+import t_side_scolor_02_4 from 'assets/images/demo/X05182-206.jpg';
+import t_side_scolor_03_4 from 'assets/images/demo/X05182-207.jpg';
+import t_side_scolor_04_4 from 'assets/images/demo/X05182-208.jpg';
+import t_side_scolor_05_4 from 'assets/images/demo/X05182-209.jpg';
+import t_side_scolor_06_4 from 'assets/images/demo/X05182-210.jpg';
+
 //흑백
 //흑백유기물강조
 //흑백무기물강조
@@ -244,15 +315,14 @@ import t_side_bwcolor_02_4 from 'assets/images/demo/X05182-212.jpg';
 import t_side_bwcolor_03_4 from 'assets/images/demo/X05182-213.jpg';
 import t_side_bwcolor_04_4 from 'assets/images/demo/X05182-214.jpg';
 
-//채도
-import t_side_scolor_01_4 from 'assets/images/demo/X05182-215.jpg';
-import t_side_scolor_02_4 from 'assets/images/demo/X05182-216.jpg';
-import t_side_scolor_03_4 from 'assets/images/demo/X05182-217.jpg';
-import t_side_scolor_04_4 from 'assets/images/demo/X05182-218.jpg';
-import t_side_scolor_05_4 from 'assets/images/demo/X05182-219.jpg';
-import t_side_scolor_06_4 from 'assets/images/demo/X05182-220.jpg';
+//흑백채도
+import t_side_sbwcolor_01_4 from 'assets/images/demo/X05182-215.jpg';
+import t_side_sbwcolor_02_4 from 'assets/images/demo/X05182-216.jpg';
+import t_side_sbwcolor_03_4 from 'assets/images/demo/X05182-217.jpg';
+import t_side_sbwcolor_04_4 from 'assets/images/demo/X05182-218.jpg';
+import t_side_sbwcolor_05_4 from 'assets/images/demo/X05182-219.jpg';
+import t_side_sbwcolor_06_4 from 'assets/images/demo/X05182-220.jpg';
 //================================이미지4
-
 
 
 //================================이미지5
@@ -265,22 +335,32 @@ import t_color_02_5 from 'assets/images/demo/X05180-102.jpg';
 import t_color_03_5 from 'assets/images/demo/X05180-103.jpg';
 import t_color_04_5 from 'assets/images/demo/X05180-104.jpg';
 
+//컬러채도
+import t_scolor_01_5 from 'assets/images/demo/X05180-105.jpg';
+import t_scolor_02_5 from 'assets/images/demo/X05180-106.jpg';
+import t_scolor_03_5 from 'assets/images/demo/X05180-107.jpg';
+import t_scolor_04_5 from 'assets/images/demo/X05180-108.jpg';
+import t_scolor_05_5 from 'assets/images/demo/X05180-109.jpg';
+import t_scolor_06_5 from 'assets/images/demo/X05180-110.jpg';
+
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bcolor_01_5 from 'assets/images/demo/X05180-111.jpg';
-import t_bcolor_02_5 from 'assets/images/demo/X05180-112.jpg';
-import t_bcolor_03_5 from 'assets/images/demo/X05180-113.jpg';
-import t_bcolor_04_5 from 'assets/images/demo/X05180-114.jpg';
+import t_bwcolor_01_5 from 'assets/images/demo/X05180-111.jpg';
+import t_bwcolor_02_5 from 'assets/images/demo/X05180-112.jpg';
+import t_bwcolor_03_5 from 'assets/images/demo/X05180-113.jpg';
+import t_bwcolor_04_5 from 'assets/images/demo/X05180-114.jpg';
 
-//채도
-import t_scolor_01_5 from 'assets/images/demo/X05180-115.jpg';
-import t_scolor_02_5 from 'assets/images/demo/X05180-116.jpg';
-import t_scolor_03_5 from 'assets/images/demo/X05180-117.jpg';
-import t_scolor_04_5 from 'assets/images/demo/X05180-118.jpg';
-import t_scolor_05_5 from 'assets/images/demo/X05180-119.jpg';
-import t_scolor_06_5 from 'assets/images/demo/X05180-120.jpg';
+//흑백채도
+import t_sbwcolor_01_5 from 'assets/images/demo/X05180-115.jpg';
+import t_sbwcolor_02_5 from 'assets/images/demo/X05180-116.jpg';
+import t_sbwcolor_03_5 from 'assets/images/demo/X05180-117.jpg';
+import t_sbwcolor_04_5 from 'assets/images/demo/X05180-118.jpg';
+import t_sbwcolor_05_5 from 'assets/images/demo/X05180-119.jpg';
+import t_sbwcolor_06_5 from 'assets/images/demo/X05180-120.jpg';
+
+
 
 //================================측면이미지
 //컬러
@@ -292,6 +372,14 @@ import t_side_color_02_5 from 'assets/images/demo/X05180-202.jpg';
 import t_side_color_03_5 from 'assets/images/demo/X05180-203.jpg';
 import t_side_color_04_5 from 'assets/images/demo/X05180-204.jpg';
 
+//컬러채도
+import t_side_scolor_01_5 from 'assets/images/demo/X05180-205.jpg';
+import t_side_scolor_02_5 from 'assets/images/demo/X05180-206.jpg';
+import t_side_scolor_03_5 from 'assets/images/demo/X05180-207.jpg';
+import t_side_scolor_04_5 from 'assets/images/demo/X05180-208.jpg';
+import t_side_scolor_05_5 from 'assets/images/demo/X05180-209.jpg';
+import t_side_scolor_06_5 from 'assets/images/demo/X05180-210.jpg';
+
 //흑백
 //흑백유기물강조
 //흑백무기물강조
@@ -301,14 +389,15 @@ import t_side_bwcolor_02_5 from 'assets/images/demo/X05180-212.jpg';
 import t_side_bwcolor_03_5 from 'assets/images/demo/X05180-213.jpg';
 import t_side_bwcolor_04_5 from 'assets/images/demo/X05180-214.jpg';
 
-//채도
-import t_side_scolor_01_5 from 'assets/images/demo/X05180-215.jpg';
-import t_side_scolor_02_5 from 'assets/images/demo/X05180-216.jpg';
-import t_side_scolor_03_5 from 'assets/images/demo/X05180-217.jpg';
-import t_side_scolor_04_5 from 'assets/images/demo/X05180-218.jpg';
-import t_side_scolor_05_5 from 'assets/images/demo/X05180-219.jpg';
-import t_side_scolor_06_5 from 'assets/images/demo/X05180-220.jpg';
+//흑백채도
+import t_side_sbwcolor_01_5 from 'assets/images/demo/X05180-215.jpg';
+import t_side_sbwcolor_02_5 from 'assets/images/demo/X05180-216.jpg';
+import t_side_sbwcolor_03_5 from 'assets/images/demo/X05180-217.jpg';
+import t_side_sbwcolor_04_5 from 'assets/images/demo/X05180-218.jpg';
+import t_side_sbwcolor_05_5 from 'assets/images/demo/X05180-219.jpg';
+import t_side_sbwcolor_06_5 from 'assets/images/demo/X05180-220.jpg';
 //================================이미지5
+
 
 
 // ================================|| 아이콘 ||================================ //
@@ -368,7 +457,7 @@ export const LearningSlide = () =>{
         {
             "learningImages" : t_learning_05,
             "learningThumImages" : t_learning_05_1 
-        },  
+        }
     ]
 
     //슬라이드이미지
@@ -377,8 +466,12 @@ export const LearningSlide = () =>{
     //측면이미지(썸네일)
     const [thumImg, setThumImg] = useState(imageList[0].learningThumImages);
 
+    //true 정면이미지 false 측면이미지
+    const [imgChange, setImgChange] = useState(true);
 
-    //하단아이콘유틸에 따라 변경되는 이미지유형
+    
+
+    //정면 하단아이콘유틸에 따라 변경되는 이미지유형
     const transimages = [
         {
             "color": t_color_01_1,//컬러
@@ -391,16 +484,16 @@ export const LearningSlide = () =>{
             "colorSaturation4": t_scolor_04_1,//컬러채도
             "colorSaturation5": t_scolor_05_1,//컬러채도
             "colorSaturation6": t_scolor_06_1,//컬러채도
-            "blackWhite" : t_side_bwcolor_01_1,//흑백
-            "blackWhiteUforce" : t_side_bwcolor_02_1,//흑백유기물강조
-            "blackWhiteMforce" : t_side_bwcolor_03_1,//흑백무기물강조
-            "blackWhiteRevers" : t_side_bwcolor_04_1,//흑백반전
-            "blackWhiteSaturation1": t_side_scolor_01_1,//흑백채도	
-            "blackWhiteSaturation2": t_side_scolor_02_1,//흑백채도	
-            "blackWhiteSaturation3": t_side_scolor_03_1,//흑백채도	
-            "blackWhiteSaturation4": t_side_scolor_04_1,//흑백채도	
-            "blackWhiteSaturation5": t_side_scolor_05_1,//흑백채도	
-            "blackWhiteSaturation6": t_side_scolor_06_1//흑백채도	
+            "blackWhite" : t_bwcolor_01_1,//흑백
+            "blackWhiteUforce" : t_bwcolor_02_1,//흑백유기물강조
+            "blackWhiteMforce" : t_bwcolor_03_1,//흑백무기물강조
+            "blackWhiteRevers" : t_bwcolor_04_1,//흑백반전
+            "blackWhiteSaturation1": t_sbwcolor_01_1,//흑백채도	
+            "blackWhiteSaturation2": t_sbwcolor_02_1,//흑백채도	
+            "blackWhiteSaturation3": t_sbwcolor_03_1,//흑백채도	
+            "blackWhiteSaturation4": t_sbwcolor_04_1,//흑백채도	
+            "blackWhiteSaturation5": t_sbwcolor_05_1,//흑백채도	
+            "blackWhiteSaturation6": t_sbwcolor_06_1//흑백채도	
         },
         {
             "color": t_color_01_2,//컬러
@@ -413,16 +506,16 @@ export const LearningSlide = () =>{
             "colorSaturation4": t_scolor_04_2,//컬러채도
             "colorSaturation5": t_scolor_05_2,//컬러채도
             "colorSaturation6": t_scolor_06_2,//컬러채도
-            "blackWhite" : t_side_bwcolor_01_2,//흑백
-            "blackWhiteUforce" : t_side_bwcolor_02_2,//흑백유기물강조
-            "blackWhiteMforce" : t_side_bwcolor_03_2,//흑백무기물강조
-            "blackWhiteRevers" : t_side_bwcolor_04_2,//흑백반전
-            "blackWhiteSaturation1": t_side_scolor_01_2,//흑백채도	
-            "blackWhiteSaturation2": t_side_scolor_02_2,//흑백채도	
-            "blackWhiteSaturation3": t_side_scolor_03_2,//흑백채도	
-            "blackWhiteSaturation4": t_side_scolor_04_2,//흑백채도	
-            "blackWhiteSaturation5": t_side_scolor_05_2,//흑백채도	
-            "blackWhiteSaturation6": t_side_scolor_06_2//흑백채도	
+            "blackWhite" : t_bwcolor_01_2,//흑백
+            "blackWhiteUforce" : t_bwcolor_02_2,//흑백유기물강조
+            "blackWhiteMforce" : t_bwcolor_03_2,//흑백무기물강조
+            "blackWhiteRevers" : t_bwcolor_04_2,//흑백반전
+            "blackWhiteSaturation1": t_sbwcolor_01_2,//흑백채도	
+            "blackWhiteSaturation2": t_sbwcolor_02_2,//흑백채도	
+            "blackWhiteSaturation3": t_sbwcolor_03_2,//흑백채도	
+            "blackWhiteSaturation4": t_sbwcolor_04_2,//흑백채도	
+            "blackWhiteSaturation5": t_sbwcolor_05_2,//흑백채도	
+            "blackWhiteSaturation6": t_sbwcolor_06_2//흑백채도	
         },
         {
             "color": t_color_01_3,//컬러
@@ -435,16 +528,16 @@ export const LearningSlide = () =>{
             "colorSaturation4": t_scolor_04_3,//컬러채도
             "colorSaturation5": t_scolor_05_3,//컬러채도
             "colorSaturation6": t_scolor_06_3,//컬러채도
-            "blackWhite" : t_side_bwcolor_01_3,//흑백
-            "blackWhiteUforce" : t_side_bwcolor_02_3,//흑백유기물강조
-            "blackWhiteMforce" : t_side_bwcolor_03_3,//흑백무기물강조
-            "blackWhiteRevers" : t_side_bwcolor_04_3,//흑백반전
-            "blackWhiteSaturation1": t_side_scolor_01_3,//흑백채도	
-            "blackWhiteSaturation2": t_side_scolor_02_3,//흑백채도	
-            "blackWhiteSaturation3": t_side_scolor_03_3,//흑백채도	
-            "blackWhiteSaturation4": t_side_scolor_04_3,//흑백채도	
-            "blackWhiteSaturation5": t_side_scolor_05_3,//흑백채도	
-            "blackWhiteSaturation6": t_side_scolor_06_3//흑백채도	
+            "blackWhite" : t_bwcolor_01_3,//흑백
+            "blackWhiteUforce" : t_bwcolor_02_3,//흑백유기물강조
+            "blackWhiteMforce" : t_bwcolor_03_3,//흑백무기물강조
+            "blackWhiteRevers" : t_bwcolor_04_3,//흑백반전
+            "blackWhiteSaturation1": t_sbwcolor_01_3,//흑백채도	
+            "blackWhiteSaturation2": t_sbwcolor_02_3,//흑백채도	
+            "blackWhiteSaturation3": t_sbwcolor_03_3,//흑백채도	
+            "blackWhiteSaturation4": t_sbwcolor_04_3,//흑백채도	
+            "blackWhiteSaturation5": t_sbwcolor_05_3,//흑백채도	
+            "blackWhiteSaturation6": t_sbwcolor_06_3//흑백채도	
         },
         {
             "color": t_color_01_4,//컬러
@@ -457,16 +550,16 @@ export const LearningSlide = () =>{
             "colorSaturation4": t_scolor_04_4,//컬러채도
             "colorSaturation5": t_scolor_05_4,//컬러채도
             "colorSaturation6": t_scolor_06_4,//컬러채도
-            "blackWhite" : t_side_bwcolor_01_4,//흑백
-            "blackWhiteUforce" : t_side_bwcolor_02_4,//흑백유기물강조
-            "blackWhiteMforce" : t_side_bwcolor_03_4,//흑백무기물강조
-            "blackWhiteRevers" : t_side_bwcolor_04_4,//흑백반전
-            "blackWhiteSaturation1": t_side_scolor_01_4,//흑백채도	
-            "blackWhiteSaturation2": t_side_scolor_02_4,//흑백채도	
-            "blackWhiteSaturation3": t_side_scolor_03_4,//흑백채도	
-            "blackWhiteSaturation4": t_side_scolor_04_4,//흑백채도	
-            "blackWhiteSaturation5": t_side_scolor_05_4,//흑백채도	
-            "blackWhiteSaturation6": t_side_scolor_06_4//흑백채도	
+            "blackWhite" : t_bwcolor_01_4,//흑백
+            "blackWhiteUforce" : t_bwcolor_02_4,//흑백유기물강조
+            "blackWhiteMforce" : t_bwcolor_03_4,//흑백무기물강조
+            "blackWhiteRevers" : t_bwcolor_04_4,//흑백반전
+            "blackWhiteSaturation1": t_sbwcolor_01_4,//흑백채도	
+            "blackWhiteSaturation2": t_sbwcolor_02_4,//흑백채도	
+            "blackWhiteSaturation3": t_sbwcolor_03_4,//흑백채도	
+            "blackWhiteSaturation4": t_sbwcolor_04_4,//흑백채도	
+            "blackWhiteSaturation5": t_sbwcolor_05_4,//흑백채도	
+            "blackWhiteSaturation6": t_sbwcolor_06_4//흑백채도	
         },
         {
             "color": t_color_01_5,//컬러
@@ -479,18 +572,134 @@ export const LearningSlide = () =>{
             "colorSaturation4": t_scolor_04_5,//컬러채도
             "colorSaturation5": t_scolor_05_5,//컬러채도
             "colorSaturation6": t_scolor_06_5,//컬러채도
+            "blackWhite" : t_bwcolor_01_5,//흑백
+            "blackWhiteUforce" : t_bwcolor_02_5,//흑백유기물강조
+            "blackWhiteMforce" : t_bwcolor_03_5,//흑백무기물강조
+            "blackWhiteRevers" : t_bwcolor_04_5,//흑백반전
+            "blackWhiteSaturation1": t_sbwcolor_01_5,//흑백채도	
+            "blackWhiteSaturation2": t_sbwcolor_02_5,//흑백채도	
+            "blackWhiteSaturation3": t_sbwcolor_03_5,//흑백채도	
+            "blackWhiteSaturation4": t_sbwcolor_04_5,//흑백채도	
+            "blackWhiteSaturation5": t_sbwcolor_05_5,//흑백채도	
+            "blackWhiteSaturation6": t_sbwcolor_06_5//흑백채도	
+        }                                
+
+    ];    
+
+
+    //측면 하단아이콘유틸에 따라 변경되는 이미지유형
+    const sideTransimages = [
+        {
+            "color": t_side_color_01_1,//컬러
+            "colorUforce" : t_side_color_02_1,//컬러유기물강조
+            "colorMforce" : t_side_color_03_1,//컬러무기물강조
+            "colorRevers" : t_side_color_04_1,//컬러반전
+            "colorSaturation1": t_side_scolor_01_1,//컬러채도
+            "colorSaturation2": t_side_scolor_02_1,//컬러채도
+            "colorSaturation3": t_side_scolor_03_1,//컬러채도
+            "colorSaturation4": t_side_scolor_04_1,//컬러채도
+            "colorSaturation5": t_side_scolor_05_1,//컬러채도
+            "colorSaturation6": t_side_scolor_06_1,//컬러채도
+            "blackWhite" : t_side_bwcolor_01_1,//흑백
+            "blackWhiteUforce" : t_side_bwcolor_02_1,//흑백유기물강조
+            "blackWhiteMforce" : t_side_bwcolor_03_1,//흑백무기물강조
+            "blackWhiteRevers" : t_side_bwcolor_04_1,//흑백반전
+            "blackWhiteSaturation1": t_side_sbwcolor_01_1,//흑백채도	
+            "blackWhiteSaturation2": t_side_sbwcolor_02_1,//흑백채도	
+            "blackWhiteSaturation3": t_side_sbwcolor_03_1,//흑백채도	
+            "blackWhiteSaturation4": t_side_sbwcolor_04_1,//흑백채도	
+            "blackWhiteSaturation5": t_side_sbwcolor_05_1,//흑백채도	
+            "blackWhiteSaturation6": t_side_sbwcolor_06_1//흑백채도	
+        },         
+        {
+            "color": t_side_color_01_2,//컬러
+            "colorUforce" : t_side_color_02_2,//컬러유기물강조
+            "colorMforce" : t_side_color_03_2,//컬러무기물강조
+            "colorRevers" : t_side_color_04_2,//컬러반전
+            "colorSaturation1": t_side_scolor_01_2,//컬러채도
+            "colorSaturation2": t_side_scolor_02_2,//컬러채도
+            "colorSaturation3": t_side_scolor_03_2,//컬러채도
+            "colorSaturation4": t_side_scolor_04_2,//컬러채도
+            "colorSaturation5": t_side_scolor_05_2,//컬러채도
+            "colorSaturation6": t_side_scolor_06_2,//컬러채도
+            "blackWhite" : t_side_bwcolor_01_2,//흑백
+            "blackWhiteUforce" : t_side_bwcolor_02_2,//흑백유기물강조
+            "blackWhiteMforce" : t_side_bwcolor_03_2,//흑백무기물강조
+            "blackWhiteRevers" : t_side_bwcolor_04_2,//흑백반전
+            "blackWhiteSaturation1": t_side_sbwcolor_01_2,//흑백채도	
+            "blackWhiteSaturation2": t_side_sbwcolor_02_2,//흑백채도	
+            "blackWhiteSaturation3": t_side_sbwcolor_03_2,//흑백채도	
+            "blackWhiteSaturation4": t_side_sbwcolor_04_2,//흑백채도	
+            "blackWhiteSaturation5": t_side_sbwcolor_05_2,//흑백채도	
+            "blackWhiteSaturation6": t_side_sbwcolor_06_2//흑백채도	
+        },
+        {
+            "color": t_side_color_01_3,//컬러
+            "colorUforce" : t_side_color_02_3,//컬러유기물강조
+            "colorMforce" : t_side_color_03_3,//컬러무기물강조
+            "colorRevers" : t_side_color_04_3,//컬러반전
+            "colorSaturation1": t_side_scolor_01_3,//컬러채도
+            "colorSaturation2": t_side_scolor_02_3,//컬러채도
+            "colorSaturation3": t_side_scolor_03_3,//컬러채도
+            "colorSaturation4": t_side_scolor_04_3,//컬러채도
+            "colorSaturation5": t_side_scolor_05_3,//컬러채도
+            "colorSaturation6": t_side_scolor_06_3,//컬러채도
+            "blackWhite" : t_side_bwcolor_01_3,//흑백
+            "blackWhiteUforce" : t_side_bwcolor_02_3,//흑백유기물강조
+            "blackWhiteMforce" : t_side_bwcolor_03_3,//흑백무기물강조
+            "blackWhiteRevers" : t_side_bwcolor_04_3,//흑백반전
+            "blackWhiteSaturation1": t_side_sbwcolor_01_3,//흑백채도	
+            "blackWhiteSaturation2": t_side_sbwcolor_02_3,//흑백채도	
+            "blackWhiteSaturation3": t_side_sbwcolor_03_3,//흑백채도	
+            "blackWhiteSaturation4": t_side_sbwcolor_04_3,//흑백채도	
+            "blackWhiteSaturation5": t_side_sbwcolor_05_3,//흑백채도	
+            "blackWhiteSaturation6": t_side_sbwcolor_06_3//흑백채도	
+        },
+        {
+            "color": t_side_color_01_4,//컬러
+            "colorUforce" : t_side_color_02_4,//컬러유기물강조
+            "colorMforce" : t_side_color_03_4,//컬러무기물강조
+            "colorRevers" : t_side_color_04_4,//컬러반전
+            "colorSaturation1": t_side_scolor_01_4,//컬러채도
+            "colorSaturation2": t_side_scolor_02_4,//컬러채도
+            "colorSaturation3": t_side_scolor_03_4,//컬러채도
+            "colorSaturation4": t_side_scolor_04_4,//컬러채도
+            "colorSaturation5": t_side_scolor_05_4,//컬러채도
+            "colorSaturation6": t_side_scolor_06_4,//컬러채도
+            "blackWhite" : t_side_bwcolor_01_4,//흑백
+            "blackWhiteUforce" : t_side_bwcolor_02_4,//흑백유기물강조
+            "blackWhiteMforce" : t_side_bwcolor_03_4,//흑백무기물강조
+            "blackWhiteRevers" : t_side_bwcolor_04_4,//흑백반전
+            "blackWhiteSaturation1": t_side_sbwcolor_01_4,//흑백채도	
+            "blackWhiteSaturation2": t_side_sbwcolor_02_4,//흑백채도	
+            "blackWhiteSaturation3": t_side_sbwcolor_03_4,//흑백채도	
+            "blackWhiteSaturation4": t_side_sbwcolor_04_4,//흑백채도	
+            "blackWhiteSaturation5": t_side_sbwcolor_05_4,//흑백채도	
+            "blackWhiteSaturation6": t_side_sbwcolor_06_4//흑백채도	
+        },
+        {
+            "color": t_side_color_01_5,//컬러
+            "colorUforce" : t_side_color_02_5,//컬러유기물강조
+            "colorMforce" : t_side_color_03_5,//컬러무기물강조
+            "colorRevers" : t_side_color_04_5,//컬러반전
+            "colorSaturation1": t_side_scolor_01_5,//컬러채도
+            "colorSaturation2": t_side_scolor_02_5,//컬러채도
+            "colorSaturation3": t_side_scolor_03_5,//컬러채도
+            "colorSaturation4": t_side_scolor_04_5,//컬러채도
+            "colorSaturation5": t_side_scolor_05_5,//컬러채도
+            "colorSaturation6": t_side_scolor_06_5,//컬러채도
             "blackWhite" : t_side_bwcolor_01_5,//흑백
             "blackWhiteUforce" : t_side_bwcolor_02_5,//흑백유기물강조
             "blackWhiteMforce" : t_side_bwcolor_03_5,//흑백무기물강조
             "blackWhiteRevers" : t_side_bwcolor_04_5,//흑백반전
-            "blackWhiteSaturation1": t_side_scolor_01_5,//흑백채도	
-            "blackWhiteSaturation2": t_side_scolor_02_5,//흑백채도	
-            "blackWhiteSaturation3": t_side_scolor_03_5,//흑백채도	
-            "blackWhiteSaturation4": t_side_scolor_04_5,//흑백채도	
-            "blackWhiteSaturation5": t_side_scolor_05_5,//흑백채도	
-            "blackWhiteSaturation6": t_side_scolor_06_5//흑백채도	
-        },                                
-    ]    
+            "blackWhiteSaturation1": t_side_sbwcolor_01_5,//흑백채도	
+            "blackWhiteSaturation2": t_side_sbwcolor_02_5,//흑백채도	
+            "blackWhiteSaturation3": t_side_sbwcolor_03_5,//흑백채도	
+            "blackWhiteSaturation4": t_side_sbwcolor_04_5,//흑백채도	
+            "blackWhiteSaturation5": t_side_sbwcolor_05_5,//흑백채도	
+            "blackWhiteSaturation6": t_side_sbwcolor_06_5//흑백채도	
+        },                                                
+    ];       
 
     //팝업창 컨트롤
     const [paracticeShow, setParacticeShow] = useState(false);
@@ -1081,75 +1290,180 @@ export const LearningSlide = () =>{
         setNowSelect(e);//현재선택된 아이콘
 
         if(e==='color1'){//컬러
-            learningImages[currentImage].learningImages = transimages[currentImage].color;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].color;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].color;
+                setImageList(sideTransimages);
+            }
         }else if(e==='color2'){//컬러유기물강조
-            //console.log(imgRef.current);
-            //imgRef.current = transimages[currentImage].colorUforce;
-            //setTranTry(false);
-            //setCurrentTransImage(transimages[currentImage].colorUforce);
-            learningImages[currentImage].learningImages = transimages[currentImage].colorUforce;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].colorUforce;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorUforce;
+                setImageList(sideTransimages);
+            }
         }else if(e==='color3'){//컬러무기물강조
-            learningImages[currentImage].learningImages = transimages[currentImage].colorMforce;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].colorMforce;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorMforce;
+                setImageList(sideTransimages);
+            }            
         }else if(e==='color4'){//컬러반전
-            learningImages[currentImage].learningImages = transimages[currentImage].colorRevers;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].colorRevers;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorRevers;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd1'){//컬러채도1
-            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation1;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation1;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation1;
+                setImageList(sideTransimages);
+            }             
         }else if(e==='cd2'){//컬러채도2
-            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation2;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation2;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation2;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd3'){//컬러채도3
-            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation3;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation3;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation3;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd4'){//컬러채도4
-            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation4;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation4;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation4;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd5'){//컬러채도5
-            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation5;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation5;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation5;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd6'){//컬러채도6
-            learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation6;
-            setImageList(learningImages);            
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation6;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation6;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='blackWhite1'){//흑백
-            learningImages[currentImage].learningImages = transimages[currentImage].blackWhite;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].blackWhite;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhite;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='blackWhite2'){//흑백유기물강조
-            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteUforce;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteUforce;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteUforce;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='blackWhite3'){//흑백무기물강조
-            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteMforce;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteMforce;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteMforce;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='blackWhite4'){//흑백반전
-            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteRevers;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteRevers;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteRevers;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd7'){//흑백채도1
-            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation1;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation1;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation1;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd8'){//흑백채도2
-            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation2;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation2;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation2;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd9'){//흑백채도3
-            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation3;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation3;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation3;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd10'){//흑백채도4
-            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation4;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation4;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation4;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd11'){//흑백채도5
-            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation5;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation5;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation5;
+                setImageList(sideTransimages);
+            } 
         }else if(e==='cd12'){//흑백채도6
-            learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation6;
-            setImageList(learningImages);
+            if(imgChange){
+                learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation6;
+                setImageList(learningImages);
+            }else{
+                sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation6;
+                setImageList(sideTransimages);
+            } 
         }
     }
 
     //메인페이지 이동
     const onMovePage = () =>{
         navigate("/main");            
+    }
+
+    //이미지반전체크
+    const handleImgChange = () =>{
+        if(imgChange){
+            setImgChange(false);//측면이미지
+        }else{
+            setImgChange(true);//정면이미지
+        }
     }
 
 
@@ -1331,7 +1645,7 @@ export const LearningSlide = () =>{
                                         </div>
                                         {/* learnbtc06 측면이미지 */}
                                         <div className="learnbtc06" >
-                                            <img src={thumImg} ref={inputRef4} id="learn01_bimg" style={{display:"block"}} alt=""/>
+                                            <img onClick={()=>handleImgChange()} src={thumImg} ref={inputRef4} id="learn01_bimg" style={{display:"none"}} alt=""/>
                                         </div>
                                     </div>
                                 </div>

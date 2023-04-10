@@ -63,7 +63,7 @@ export const Login = () => {
                 setLoginOk(false);
             }
             setLoading(false);
-        }, 2000);
+        }, 3000);
 
     }
 

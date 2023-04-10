@@ -1108,13 +1108,14 @@ input[type=range]:disabled::-moz-range-thumb {
 	list-style-type: none;
 	border-radius: 15px;
 	border: solid 1px #155EB6;
-	overflow: hidden;
+	/*overflow: hidden;*/
+	overflow-y: scroll;
 	transition: .2s ease-in;
 	opacity: 0;
 }
 
 .practice_select.active .pra_optionList {
-	max-height: 500px;
+	max-height: 485px;
 	opacity: 1;
 }
 
