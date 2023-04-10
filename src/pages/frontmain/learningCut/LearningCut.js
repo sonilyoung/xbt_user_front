@@ -609,230 +609,7 @@ export const LearningCut = () =>{
         firstModal.style.top = `calc(50% - ${modalHeight / 2}px)`;
         
 
-        $("#close-first-modal").click(function(){
-            if(is_learn01_play){
-                //alert("시험이 종료되었습니다.");
-                setLearningEnd(true);
-                $currentImage.remove(); 
-                clearTimeout(animation);
-                clearTimeout(time_out);
-                clearInterval(position);
-                is_learn01_play = false;
-                $("#learn01_bimg").hide();
-                $("#myRange").css("visibility","hidden");
-                handleReset();
-            }
-
-            $("#learn01_start").show();
-            $("#learn01_start_on").hide();
-        });
-    
-        //학습시작-슬라이더 타입의 시작 버튼 누르면 실행
-        $("#learn01_start").click(function() {
-            handleStart();//타이머
-            setStartLearning(true);
-
-            let containerWidth = $("#learn01_img").width();	//이미지가 움직일 공간 크기
-            let isPaused = false;		//일시정지 상태 저장
-            let current_image = 0;		//현재 움직이는 이미지가 몇번째인가
-            let start_count = 0 ;
-            
-            let origin_img=[];
-            let thum_img=[];
-            $('#learn01_img img').each(function(i) {
-                
-                origin_img[i] = $(this);
-                thum_img[i] = $(this).data("thum") ;
-            });
-    
-            let images = origin_img; //이미지 목록(배열)
-            
-            let move_timer = 10;		//움직이는 시간(ms, 1/1000초)
-            let move_distance = 5; 		//움직일 거리
-    
-            is_learn01_play = true;
-    
-            //하단 바 초기화 작업
-            //$("#myRange").removeAttr("disabled");
-            $("#myRange").attr("max",$("#learn01_img").width());
-            $("#myRange").val($("#learn01_img").width());
-            $("#myRange").css("visibility","visible");
-    
-            $("#learn01_bimg").show();
-            
-    
-            //시작 버튼 비활성화
-            //브라우저에 따라 정상작동 되지 않는 경우가 있어
-            //시작 기능이 있는 버튼을 숨기고, 기능이 없는 버튼 노출
-            $("#learn01_start").hide();
-            $("#learn01_start_on").show();
-    
-            //이미지를 유지한 상태로 이동 시작
-            function moveImage() {
-                $currentImage = $(images[current_image]);
-                animation = $currentImage.animate({left: "-="+move_distance}, move_timer, function(){
-                    time_out = setTimeout(image_position, move_timer);
-                });
-            }
-    
-            //기존 이미지 제거하고 이동 시작
-            //마지막 이미지가 끝났을 경우 시험 종료
-            function resetImage() {
-                $currentImage = $(images[current_image]); 
-                setCurrentImage(current_image);//현재이미지순서를 기록
-                //setCurrentTransImage(imageList[current_image].learningImages);
-                setThumImg(imageList[current_image].learningThumImages);//썸네일이미지변경
-                setTargetImg($currentImage[0].src);//이미지확대축소 셋팅                
-
-                if(start_count > 0){
-                    $currentImage.remove(); 
-                    //$currentImage.hide();
-                    current_image++;
-                }
-                
-                //current_image++; 
-                if (current_image >= images.length) {
-                    //alert("시험이 종료되었습니다.");
-                    setLearningEnd(true);
-                    clearTimeout(animation);
-                    clearTimeout(time_out);
-                    clearInterval(position);
-                    $("#learn01_bimg").hide();
-                    $("#myRange").css("visibility","hidden");
-                    is_learn01_play = false;
-                    setStartLearning(false);
-                } else {
-                    let $nextImage = $(images[current_image]); 
-                    $nextImage.css("left", containerWidth); 
-                    $("#learn01_bimg").attr("src",$nextImage.data('thum'));
-                    animation = $nextImage.animate({left: "-="+move_distance}, move_timer, function(){
-                        time_out = setTimeout(image_position, move_timer);
-                    });
-
-                    let problrems = start_count+1;
-                    //문제출제수
-                    setProblremCnt(problrems);
-                }
-                start_count++;
-                
-            }
-
-    
-            //이미지 이동 진행
-            //이미지가 화면 밖으로 사라질 경우 resetImage() 호출
-            function image_position(){
-                console.log("image_position:", current_image);
-                $currentImage = $(images[current_image]);
-                let imageWidth = $currentImage.width();
-                let image_left = $currentImage.position().left;
-                if(image_left < -(imageWidth+50)){
-                    clearInterval(animation);
-                    //current_image++; 
-                    resetImage();
-                }else{
-                    if(is_learn01_play){
-                        animation = $currentImage.animate({left: "-="+move_distance}, move_timer, function(){
-                            time_out = setTimeout(image_position, move_timer);
-                        });
-                    }
-                }
-            }
-    
-            //하단 버튼과 이미지의 위치를 동기화
-            function set_position(){
-                $currentImage = $(images[current_image]); 
-                let imageWidth = $currentImage.width(); 
-                let currentPosition = $currentImage.position().left + (imageWidth / 2); 
-
-                $("#myRange").val(currentPosition);
-            }
-            resetImage();
-            //moveImage();
-            position = setInterval(set_position, 10);
-    
-            //하단 버튼을 드래그하여 이미지 위치 이동
-            $('#myRange').on('input',function () {
-                if(isPaused){
-                    position = $("#myRange").val();
-                    $currentImage = $(images[current_image]);
-                    let imageWidth = $currentImage.width();
-                    let image_left = Number(position) - (imageWidth / 2);
-                    $currentImage.attr("style","left:"+image_left+"px"); 
-                }
-            });
-    
-            //진행중일때 Stop 버튼을 누르면 일시정지
-            //일시정지일때 Stop 버튼을 누르면 다시재생
-            $("#learn01_stop").click(function() {
-                setImgDisplay('none');
-                setImgSlideDisplay('block');                
-                if(is_learn01_play){
-                    if (!isPaused) {
-                        isPaused = true;
-                        $(images[current_image]).stop();
-                        clearTimeout(animation);
-                        clearTimeout(time_out);
-                        clearInterval(position);
-                        $("#learn01_stop").addClass("lnbtc_btnon");
-                        $("#myRange").removeAttr("disabled");
-    
-                    } else {
-                    isPaused = false;
-                    moveImage();
-                    $("#learn01_stop").removeClass("lnbtc_btnon");
-                    position = setInterval(set_position, 10);
-                        $("#myRange").attr("disabled","");
-                    }
-                }
-            });
-    
-            //Pass, Open, Prohibited 눌렀을 때 다음 이미지 보이게
-            function learn01_btn(){
-                if(is_learn01_play){
-                    isPaused = false;
-                    
-                    $("#learn01_stop").removeClass("lnbtc_btnon");
-                    $(images[current_image]).stop();
-                    clearTimeout(animation);
-                    clearTimeout(time_out);
-                    clearInterval(position);
-                    position = setInterval(set_position, 10);
-                    
-                    resetImage();
-                }
-            }
-    
-            //<====================
-            //각각 버튼 눌렀을 때 처리할 부분
-            //다음 이미지로 넘어가는 기능만 구현
-            $("#learn01_pass").click(function(){
-                learn01_btn();
-            });
-    
-            $("#learn01_open").click(function(){
-                learn01_btn();
-            });
-    
-            $("#learn01_prohibited").click(function(){
-                learn01_btn();
-            });
-            //======================>
-    
-            $("#learn01_bimg").click(function(){
-                let image_src = $(this).attr("src");
-                $currentImage = $(images[current_image]);
-                $(this).attr("src",$currentImage.attr('src'));
-                $currentImage.attr("src",image_src);
-                showImgControl('N');
-            });
-
-            $("#transTarget").click(function(){
-                console.log('이미지변경');
-                console.log(transImg);
-                $currentImage.attr("src",transImg);
-            });            
-        });
-    
+ 
         let timer;							//이미지가 보여지는 타이머
         let timeout;						//시험종료를 위한 타이머
         let progressBar = $('#learn02_progress'); //남은시간 게이지
@@ -862,6 +639,9 @@ export const LearningCut = () =>{
             let learn_time = 5000; 				//이미지를 보여줄 시간(ms, 1/1000초)
             is_learn02_play = true;
     
+            handleStart();//타이머
+            setStartLearning(true);
+
             //남은시간 표시
             $("#learn02_progress").show();
             $("#learn02_bimg").show();
@@ -890,6 +670,8 @@ export const LearningCut = () =>{
                 $(images[currentImageIndex]).hide();
                 currentImageIndex++;
                 if (currentImageIndex === images.length) {
+                    setLearningEnd(true);
+                    handleReset();                    
                     clearTimeout(timer); 
                     clearTimeout(timeout); 
                     //alert("시험이 종료되었습니다.");
@@ -1242,35 +1024,36 @@ export const LearningCut = () =>{
                                     {/* learn_btcon */}
                                     <div className="learn_btcon">
                                         {/* learnbtc01 이미지컨트롤 아이콘 영역*/}
+                                        {/* learnbtc01 이미지컨트롤 아이콘 영역*/}
                                         <div className="learnbtc01">
                                             <ul>
-                                                <li><a href="#" onClick={()=>imgTransControl('color1')}><img src={learnc_ic01_01} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('color2')}><img src={learnc_ic01_02} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('color3')}><img src={learnc_ic01_03} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('color4')}><img src={learnc_ic01_04} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite1')}><img src={learnc_ic02_01} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite2')}><img src={learnc_ic02_02} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite3')}><img src={learnc_ic02_03} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite4')}><img src={learnc_ic02_04} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color1')}}><img src={learnc_ic01_01} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color2')}}><img src={learnc_ic01_02} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color3')}}><img src={learnc_ic01_03} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color4')}}><img src={learnc_ic01_04} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite1')}}><img src={learnc_ic02_01} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite2')}}><img src={learnc_ic02_02} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite3')}}><img src={learnc_ic02_03} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite4')}}><img src={learnc_ic02_04} alt=""/></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc02 이미지 채도 아이콘 영역*/}
                                         <div className="learnbtc02">
                                             <ul>
-                                                <li><a href="#" className={nowSelect==='cd1' ? 'on' : ''} onClick={()=>imgTransControl('cd1')}><span className="brig_ic01_01"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd2' ? 'on' : ''} onClick={()=>imgTransControl('cd2')}><span className="brig_ic01_02"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd3' ? 'on' : ''} onClick={()=>imgTransControl('cd3')}><span className="brig_ic01_03"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd4' ? 'on' : ''} onClick={()=>imgTransControl('cd4')}><span className="brig_ic01_04"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd5' ? 'on' : ''} onClick={()=>imgTransControl('cd5')}><span className="brig_ic01_05"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd6' ? 'on' : ''} onClick={()=>imgTransControl('cd6')}><span className="brig_ic01_06"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd1' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd1')}}><span className="brig_ic01_01"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd2' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd2')}}><span className="brig_ic01_02"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd3' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd3')}}><span className="brig_ic01_03"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd4' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd4')}}><span className="brig_ic01_04"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd5' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd5')}}><span className="brig_ic01_05"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd6' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd6')}}><span className="brig_ic01_06"></span></a></li>
                                             </ul>
                                             <ul>
-                                                <li><a href="#" className={nowSelect==='cd7' ? 'on' : ''} onClick={()=>imgTransControl('cd7')}><span className="brig_ic02_01"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd8' ? 'on' : ''} onClick={()=>imgTransControl('cd8')}><span className="brig_ic02_02"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd9' ? 'on' : ''} onClick={()=>imgTransControl('cd9')}><span className="brig_ic02_03"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd10' ? 'on' : ''} onClick={()=>imgTransControl('cd10')}><span className="brig_ic02_04"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd11' ? 'on' : ''} onClick={()=>imgTransControl('cd11')}><span className="brig_ic02_05"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd12' ? 'on' : ''} onClick={()=>imgTransControl('cd12')}><span className="brig_ic02_06"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd7' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd7')}}><span className="brig_ic02_01"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd8' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd8')}}><span className="brig_ic02_02"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd9' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd9')}}><span className="brig_ic02_03"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd10' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd10')}}><span className="brig_ic02_04"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd11' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd11')}}><span className="brig_ic02_05"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd12' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd12')}}><span className="brig_ic02_06"></span></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc03 */}
@@ -1286,19 +1069,19 @@ export const LearningCut = () =>{
                                         <div className="learnbtc04">
                                             <ul>
                                                 <li>
-                                                    <button className="lnbtc_btn lnbtc_btnon next" id="learn01_pass" type="button">
+                                                    <button className="lnbtc_btn lnbtc_btnon next" id="learn02_pass" type="button">
                                                         <span><img src={pass} alt=""/></span>
                                                         <p>Pass</p>
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <button className="lnbtc_btn lnbtc_btnon" id="learn01_open" type="button">
+                                                    <button className="lnbtc_btn lnbtc_btnon" id="learn02_open" type="button">
                                                         <span><img src={open} alt=""/></span>
                                                         <p>Open</p>
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <button className="lnbtc_btn lnbtc_btnon" id="learn01_prohibited" type="button">
+                                                    <button className="lnbtc_btn lnbtc_btnon" id="learn02_prohibited" type="button">
                                                         <span><img src={prohibited} alt=""/></span>
                                                         <p>Prohibited</p>
                                                     </button>
@@ -1314,7 +1097,7 @@ export const LearningCut = () =>{
                                         </div>
                                         {/* learnbtc06 측면이미지 */}
                                         <div className="learnbtc06" >
-                                            <img src={thumImg} ref={inputRef4} id="learn01_bimg" style={{display:"none"}} alt=""/>
+                                            <img src={thumImg} ref={inputRef4} id="learn02_bimg" style={{display:"none"}} alt=""/>
                                         </div>
                                     </div>
                                 </div>

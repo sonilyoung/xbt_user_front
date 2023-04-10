@@ -613,6 +613,8 @@ export const LearningSlide = () =>{
             if(is_learn01_play){
                 //alert("시험이 종료되었습니다.");
                 setLearningEnd(true);
+                handleReset();
+
                 $currentImage.remove(); 
                 clearTimeout(animation);
                 clearTimeout(time_out);
@@ -620,7 +622,6 @@ export const LearningSlide = () =>{
                 is_learn01_play = false;
                 $("#learn01_bimg").hide();
                 $("#myRange").css("visibility","hidden");
-                handleReset();
             }
 
             $("#learn01_start").show();
@@ -1243,33 +1244,33 @@ export const LearningSlide = () =>{
                                         {/* learnbtc01 이미지컨트롤 아이콘 영역*/}
                                         <div className="learnbtc01">
                                             <ul>
-                                                <li><a href="#" onClick={()=>imgTransControl('color1')}><img src={learnc_ic01_01} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('color2')}><img src={learnc_ic01_02} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('color3')}><img src={learnc_ic01_03} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('color4')}><img src={learnc_ic01_04} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite1')}><img src={learnc_ic02_01} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite2')}><img src={learnc_ic02_02} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite3')}><img src={learnc_ic02_03} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>imgTransControl('blackWhite4')}><img src={learnc_ic02_04} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color1')}}><img src={learnc_ic01_01} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color2')}}><img src={learnc_ic01_02} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color3')}}><img src={learnc_ic01_03} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color4')}}><img src={learnc_ic01_04} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite1')}}><img src={learnc_ic02_01} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite2')}}><img src={learnc_ic02_02} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite3')}}><img src={learnc_ic02_03} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite4')}}><img src={learnc_ic02_04} alt=""/></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc02 이미지 채도 아이콘 영역*/}
                                         <div className="learnbtc02">
                                             <ul>
-                                                <li><a href="#" className={nowSelect==='cd1' ? 'on' : ''} onClick={()=>imgTransControl('cd1')}><span className="brig_ic01_01"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd2' ? 'on' : ''} onClick={()=>imgTransControl('cd2')}><span className="brig_ic01_02"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd3' ? 'on' : ''} onClick={()=>imgTransControl('cd3')}><span className="brig_ic01_03"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd4' ? 'on' : ''} onClick={()=>imgTransControl('cd4')}><span className="brig_ic01_04"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd5' ? 'on' : ''} onClick={()=>imgTransControl('cd5')}><span className="brig_ic01_05"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd6' ? 'on' : ''} onClick={()=>imgTransControl('cd6')}><span className="brig_ic01_06"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd1' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd1')}}><span className="brig_ic01_01"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd2' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd2')}}><span className="brig_ic01_02"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd3' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd3')}}><span className="brig_ic01_03"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd4' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd4')}}><span className="brig_ic01_04"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd5' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd5')}}><span className="brig_ic01_05"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd6' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd6')}}><span className="brig_ic01_06"></span></a></li>
                                             </ul>
                                             <ul>
-                                                <li><a href="#" className={nowSelect==='cd7' ? 'on' : ''} onClick={()=>imgTransControl('cd7')}><span className="brig_ic02_01"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd8' ? 'on' : ''} onClick={()=>imgTransControl('cd8')}><span className="brig_ic02_02"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd9' ? 'on' : ''} onClick={()=>imgTransControl('cd9')}><span className="brig_ic02_03"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd10' ? 'on' : ''} onClick={()=>imgTransControl('cd10')}><span className="brig_ic02_04"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd11' ? 'on' : ''} onClick={()=>imgTransControl('cd11')}><span className="brig_ic02_05"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd12' ? 'on' : ''} onClick={()=>imgTransControl('cd12')}><span className="brig_ic02_06"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd7' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd7')}}><span className="brig_ic02_01"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd8' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd8')}}><span className="brig_ic02_02"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd9' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd9')}}><span className="brig_ic02_03"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd10' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd10')}}><span className="brig_ic02_04"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd11' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd11')}}><span className="brig_ic02_05"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd12' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd12')}}><span className="brig_ic02_06"></span></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc03 */}
@@ -1313,7 +1314,7 @@ export const LearningSlide = () =>{
                                         </div>
                                         {/* learnbtc06 측면이미지 */}
                                         <div className="learnbtc06" >
-                                            <img src={thumImg} ref={inputRef4} id="learn02_bimg" style={{display:"block"}} alt=""/>
+                                            <img src={thumImg} ref={inputRef4} id="learn01_bimg" style={{display:"block"}} alt=""/>
                                         </div>
                                     </div>
                                 </div>
