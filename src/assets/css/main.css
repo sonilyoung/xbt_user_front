@@ -8,7 +8,7 @@
 	left: 0;
 	right: 0;
 	top: 0;
-	z-index: 5;
+	/*z-index: 5; 주석처리 zindex가 맞지않아서 자꾸 모달보다 위에서 처리됨*/
 	width: 100%;
 	height: 80px;
 	padding: 0 52px;

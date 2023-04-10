@@ -10,6 +10,9 @@ import 'assets/css/login.css';
 import 'assets/css/reset.css';
 import 'assets/css/imgtrs.css';
 
+import {Navi} from '../Navi';
+import {Copy} from '../Copy';
+
 // ================================|| 데모이미지 ||================================ //
 //정면이미지
 import t_learning_01 from 'assets/images/demo/X05231-101.jpg';
@@ -327,10 +330,11 @@ import pass from 'assets/images/learning/pass.png';
 import open from 'assets/images/learning/open.png';
 import prohibited from 'assets/images/learning/prohibited.png';
 import stop from 'assets/images/learning/stop.png';
-
+import { PracticeList } from '../practice/PracticeList';
 
 // ================================|| 학습 ||================================ //
 export const LearningCut = () =>{
+    
     const navigate = useNavigate();
     const [problremCnt, setProblremCnt] = useState(1);//문제출제수
     const [startLearning, setStartLearning] = useState(true);
@@ -488,7 +492,12 @@ export const LearningCut = () =>{
         },                                
     ]    
 
-
+    //팝업창 컨트롤
+    const [paracticeShow, setParacticeShow] = useState(false);
+    //팝업창 컨트롤
+    const displayn = (e) =>{
+        setParacticeShow(e);
+    }
     
 
     //타이머셋팅
@@ -627,6 +636,8 @@ export const LearningCut = () =>{
                 progressBar.css({width: '0%'});
                 is_learn02_play = false;
                 $("#learn02_bimg").hide();
+            }else{
+                setLearningEnd(true);
             }
         });
     
@@ -922,6 +933,11 @@ export const LearningCut = () =>{
         }
     }
 
+    //메인페이지 이동
+    const onMovePage = () =>{
+        navigate("/main");            
+    }
+
     return(
         <>
 
@@ -931,6 +947,7 @@ export const LearningCut = () =>{
                 <div id="wlayer">
 
                     {/* 네비넣는곳 시작*/}
+                    <Navi/>
                     {/* 네비넣는곳 끝*/}
 
                     {/* mcontent */}
@@ -955,7 +972,7 @@ export const LearningCut = () =>{
                                                 </li>
                                                 <li>
                                                     <h2 className="conname pr30">홍길동</h2>
-                                                    <button type="button" className="conbtn01">반입금지물품</button>
+                                                    <button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01">반입금지물품</button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1125,9 +1142,10 @@ export const LearningCut = () =>{
                         </div>
                         )} 
 
-
+                        {paracticeShow && <PracticeList displayy = {paracticeShow} displayn = {displayn}/>}
                     </div>
                 </div>
+                <Copy/>
             </div>     
 
         </>

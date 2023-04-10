@@ -18,18 +18,17 @@ import {Copy} from '../Copy';
 export const FrontMain = () => {
 
     const [mContents, setMcontents] = useState(false);//메인팝업창
-    const [selectMenu, setSelectMenu] = useState('score01');//메뉴선택상태
+    const [selectMenu, setSelectMenu] = useState();//메뉴선택상태
     const [scoreContens, setScoreContens] = useState();//화면
     const navigate = useNavigate();
 
-    const handleContens =(e)=>{
-        console.log("컨텐츠 확인", e);
-    }
 
     //학습페이지 이동
     const movePage = (e) =>{
         if(e==='Learning'){//학습페이지
             navigate("/Learning");            
+        }else if(e==='practice'){
+            navigate("/practice");            
         }
     }    
 
@@ -71,7 +70,7 @@ export const FrontMain = () => {
                 document.getElementById(tar).style.display = "none";
             }
         }  
-    },[mContents])
+    },[])
 
 
     return (
@@ -95,7 +94,7 @@ export const FrontMain = () => {
                                         <p>X-ray 판독 초급 2023 - 1차</p>
                                         <h3>홍길동</h3>
                                     </div>
-                                    <button id="open-one-md" onClick={()=>setMcontents(true)} data-mact="open" data-minfo="one-md" className="edu_btn modal_btn">교육정보</button>
+                                    <button id="open-one-md" onClick={()=>{setMcontents(true);setSelectMenu('score01')}} data-mact="open" data-minfo="one-md" className="edu_btn modal_btn">교육정보</button>
                                 </div>
                                 {/* mnotice */}
                                 <div className="mnotice">
@@ -149,7 +148,7 @@ export const FrontMain = () => {
                                     <div className="mrcon_ic">
                                         <ul>
                                             <li>
-                                                <button id="open-two-md"   data-mact="open" data-minfo="two-md">
+                                                <button id="open-two-md" onClick={()=>movePage('practice')}  data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/xrayrd_ic01.png')} alt=""/>
                                                     </div>
@@ -315,9 +314,9 @@ export const FrontMain = () => {
                                                     {/*탭 메뉴 */}
                                                     <div id="layer_menu">
                                                         <ul>
-                                                            <li><button type="button" onClick={()=>{handleContens('score01');setSelectMenu('score01');}} data-filename="score01" className={selectMenu==='score01' ? 'on': ''}>학습점수조회</button></li>
-                                                            <li><button type="button" onClick={()=>{handleContens('score02');setSelectMenu('score02');}} data-filename="score02" className={selectMenu==='score02' ? 'on': ''}>교육평가조회</button></li>
-                                                            <li><button type="button" onClick={()=>{handleContens('score03');setSelectMenu('score03');}} data-filename="score03" className={selectMenu==='score03' ? 'on': ''}>오답조회</button></li>
+                                                            <li><button type="button" onClick={()=>setSelectMenu('score01')} data-filename="score01" className={selectMenu==='score01' ? 'on': ''}>학습점수조회</button></li>
+                                                            <li><button type="button" onClick={()=>setSelectMenu('score02')} data-filename="score02" className={selectMenu==='score02' ? 'on': ''}>교육평가조회</button></li>
+                                                            <li><button type="button" onClick={()=>setSelectMenu('score03')} data-filename="score03" className={selectMenu==='score03' ? 'on': ''}>오답조회</button></li>
                                                         </ul>
                                                     </div>
                                                 </li>

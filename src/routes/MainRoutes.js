@@ -5,11 +5,11 @@ import MainLayout from 'layout/MainLayout';
 // 메인 대시보드
 import { Login } from 'pages/frontmain/login/Login';
 import { FrontMain } from 'pages/frontmain/main/FrontMain';
+import { Practice } from 'pages/frontmain/practice/Practice';
+
 import { Learning } from 'pages/frontmain/learning/Learning';
 import { LearningCut } from 'pages/frontmain/learningCut/LearningCut';
 import { LearningSlide } from 'pages/frontmain/learningSlide/LearningSlide';
-import { StopWatch } from 'pages/frontmain/StopWatch';
-import { ImageSize } from 'pages/frontmain/ImageSize';
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -27,6 +27,11 @@ const MainRoutes = {
             element: <FrontMain />
         },
         {
+            // 연습
+            path: '/practice',
+            element: <Practice />
+        },
+        {
             // 학습
             path: '/learning',
             element: <Learning />
@@ -40,16 +45,6 @@ const MainRoutes = {
             // 학습컷
             path: '/learning/cut',
             element: <LearningCut />
-        },
-        {
-            // 테스트
-            path: '/test',
-            element: <StopWatch />
-        },
-        {
-            // 테스트
-            path: '/ImageSize',
-            element: <ImageSize />
         }
     ]
 };

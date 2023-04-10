@@ -10,6 +10,10 @@ import 'assets/css/login.css';
 import 'assets/css/reset.css';
 import 'assets/css/imgtrs.css';
 
+import {Navi} from '../Navi';
+import {Copy} from '../Copy';
+import { PracticeList } from '../practice/PracticeList';
+
 // ================================|| 데모이미지 ||================================ //
 //정면이미지
 import t_learning_01 from 'assets/images/demo/X05231-101.jpg';
@@ -488,8 +492,12 @@ export const LearningSlide = () =>{
         },                                
     ]    
 
-
-    
+    //팝업창 컨트롤
+    const [paracticeShow, setParacticeShow] = useState(false);
+    //팝업창 컨트롤
+    const displayn = (e) =>{
+        setParacticeShow(e);
+    }
 
     //타이머셋팅
     const [timer, setTimer] = useState(0);
@@ -622,10 +630,12 @@ export const LearningSlide = () =>{
                 is_learn01_play = false;
                 $("#learn01_bimg").hide();
                 $("#myRange").css("visibility","hidden");
+            }else{
+                setLearningEnd(true);     
             }
 
-            $("#learn01_start").show();
-            $("#learn01_start_on").hide();
+            //$("#learn01_start").show();
+            //$("#learn01_start_on").hide();
         });
     
         //학습시작-슬라이더 타입의 시작 버튼 누르면 실행
@@ -1137,6 +1147,12 @@ export const LearningSlide = () =>{
         }
     }
 
+    //메인페이지 이동
+    const onMovePage = () =>{
+        navigate("/main");            
+    }
+
+
     return(
         <>
 
@@ -1146,6 +1162,7 @@ export const LearningSlide = () =>{
                 <div id="wlayer">
 
                     {/* 네비넣는곳 시작*/}
+                    <Navi/>
                     {/* 네비넣는곳 끝*/}
 
                     {/* mcontent */}
@@ -1168,7 +1185,7 @@ export const LearningSlide = () =>{
                                                 </li>
                                                 <li>
                                                     <h2 className="conname pr30">홍길동</h2>
-                                                    <button type="button" className="conbtn01">반입금지물품</button>
+                                                    <button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01">반입금지물품</button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1341,9 +1358,10 @@ export const LearningSlide = () =>{
                         </div>
                         )} 
 
-
+                        {paracticeShow && <PracticeList displayy = {paracticeShow} displayn = {displayn}/>}                                
                     </div>
                 </div>
+                <Copy/>
             </div>     
 
         </>

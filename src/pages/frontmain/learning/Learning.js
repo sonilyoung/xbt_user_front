@@ -9,7 +9,8 @@ import 'assets/css/default.css';
 import 'assets/css/login.css';
 import 'assets/css/reset.css';
 import 'assets/css/imgtrs.css';
-
+import {Navi} from '../Navi';
+import {Copy} from '../Copy';
 
 // ================================|| 학습 ||================================ //
 export const Learning = () =>{
@@ -35,6 +36,7 @@ export const Learning = () =>{
                 <div id="wlayer">
 
                     {/* 네비넣는곳 시작*/}
+                    <Navi/>
                     {/* 네비넣는곳 끝*/}
 
                     {/* mcontent */}
@@ -45,6 +47,7 @@ export const Learning = () =>{
                         {/*<button id="open-fif-modal" data-mact="open" data-minfo="fif-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>학습시작 - 합격/불합격/완료</button>*/}
                     </div>
                 </div>
+                <Copy/>
             </div>     
 
         </>
