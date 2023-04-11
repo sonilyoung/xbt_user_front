@@ -49,7 +49,10 @@ export class Score01 extends React.Component {
               },
             },
             dataLabels: {
-              enabled: false,
+              enabled: true,
+              style: {
+                colors: ['#112A6E']
+              }              
             },
             stroke: {
               show: true,

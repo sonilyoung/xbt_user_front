@@ -22,7 +22,7 @@ export const Loading = () => {
             left: "50%",
             transform: "translate(-50%, -50%)",
         }}>
-        <PuffLoader color="#008cff" size="60"/>
+        <PuffLoader color="#4DA6F7" size="60"/>
         </div>
     </div> 
   </>

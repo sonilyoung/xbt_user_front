@@ -4,10 +4,15 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 export const Navi = () => {
     const [logoutProcess, setLogoutProcess] = useState(false);
     const navigate = useNavigate();
+
+    const onMovePage = () =>{
+        navigate("/main");
+    }
+
     return (
         <>
             <div className="tgnb">
-                <h1>X-ray Security <span>Training</span></h1>
+                <h1><a href="#" onClick={()=>onMovePage()}>X-ray Security <span>Training</span></a></h1>
                 <nav className="util">
                     <a href="#" onClick={()=>setLogoutProcess(true)}>로그아웃</a>
                 </nav>

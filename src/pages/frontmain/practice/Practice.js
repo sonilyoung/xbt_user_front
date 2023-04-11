@@ -1151,7 +1151,6 @@ export const Practice = () => {
                                                     <img src={imageList.threedImg} alt=""/>
                                                 </div>
                                                 <div className="front">
-                                                    <p>Front</p>
                                                     {/*<img src={require('assets/images/practice/sample03.png')} alt=""/>*/}
                                                     <TransformWrapper
                                                         initialScale={1}
@@ -1166,11 +1165,12 @@ export const Practice = () => {
                                                         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                                                             <React.Fragment>
 
-                                                            <div className="tools" style={{visibility:"hidden"}}>
+                                                            <div className="tools" style={{visibility:"hidden" ,padding:"33px"}}>
                                                                 <button ref={inputRef1} onClick={() => zoomIn()}>+</button>
                                                                 <button ref={inputRef2} onClick={() => zoomOut()}>-</button>
                                                                 <button ref={inputRef3} onClick={() => resetTransform()}>x</button>
                                                             </div>
+                                                            <p>Front</p>
                                                             <TransformComponent>
                                                                 <img src={imageList.frontImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
                                                             </TransformComponent>
@@ -1179,7 +1179,6 @@ export const Practice = () => {
                                                     </TransformWrapper>                                                      
                                                 </div>
                                                 <div className="side">
-                                                    <p>Side</p>
                                                     {/*<img src={require('assets/images/practice/sample04.png')} alt=""/>*/}
                                                     <TransformWrapper
                                                         initialScale={1}
@@ -1194,11 +1193,12 @@ export const Practice = () => {
                                                         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                                                             <React.Fragment>
 
-                                                            <div className="tools" style={{visibility:"hidden"}}>
+                                                            <div className="tools" style={{visibility:"hidden" ,padding:"33px"}}>
                                                                 <button ref={inputRef4} onClick={() => zoomIn()}>+</button>
                                                                 <button ref={inputRef5} onClick={() => zoomOut()}>-</button>
                                                                 <button ref={inputRef6} onClick={() => resetTransform()}>x</button>
                                                             </div>
+                                                            <p>Side</p>
                                                             <TransformComponent>
                                                                 <img src={imageList.sideImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
                                                             </TransformComponent>
