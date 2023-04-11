@@ -952,6 +952,8 @@ export const LearningCut = () =>{
         
             //일시정지버튼을 눌렀을 때 처리
             $('#learn02_stop').click(function() {
+                setImgDisplay('none');
+                setImgSlideDisplay('block');                   
                 if(is_learn02_play){
                     if (status === 0) {
                         pause();
