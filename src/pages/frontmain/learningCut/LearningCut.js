@@ -1331,8 +1331,8 @@ export const LearningCut = () =>{
                                             initialScale={1}
                                             minScale= {0.5}
                                             maxScale= {10}                                            
-                                            initialPositionX={200}
-                                            initialPositionY={100}
+                                            initialPositionX={0}
+                                            initialPositionY={0}
                                             alignmentAnimation={{ sizeX: 0, sizeY: 0 }}
                                             centerZoomedOut={true}
                                             //limitToBounds={true}

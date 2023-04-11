@@ -1530,7 +1530,7 @@ export const LearningSlide = () =>{
                                         </div>
                                     </div>
 
-                                    {/* learnc_img 슬라이드 이미지 출력*/}
+                                    {/* learnc_img 슬라이드 이미*지 출력*/}
                                     <div className="learnc_img" id="learn01_img" style={{height:"520px", display:imgSlideDisplay}}>
                                         {
                                             imageList.map((target, index) => ([
@@ -1544,8 +1544,8 @@ export const LearningSlide = () =>{
                                             initialScale={1}
                                             minScale= {0.5}
                                             maxScale= {10}                                            
-                                            initialPositionX={200}
-                                            initialPositionY={100}
+                                            initialPositionX={0}
+                                            initialPositionY={0}
                                             alignmentAnimation={{ sizeX: 0, sizeY: 0 }}
                                             centerZoomedOut={true}
                                             //limitToBounds={true}
