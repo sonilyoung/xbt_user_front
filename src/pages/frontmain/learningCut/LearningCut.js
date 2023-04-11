@@ -1281,14 +1281,18 @@ export const LearningCut = () =>{
                                         <div className="learnct01">
                                             <ul>
                                                 <li>
-                                                    <h1 className="contit">학습</h1>
+                                                    {/*<h1 className="contit">학습</h1>*/}
+                                                    <h1 className="contit">Learning</h1>
                                                 </li>
                                                 <li>
-                                                    <h3>X-ray 판독 초급 2023 - 1차</h3>
+                                                    {/*<h3>X-ray 판독 초급 2023 - 1차</h3>*/}
+                                                    <h3>X-ray Inspection Beginner 2023 - 1st</h3>
                                                 </li>
                                                 <li>
-                                                    <h2 className="conname pr30">홍길동</h2>
-                                                    <button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01">반입금지물품</button>
+                                                    {/*<h2 className="conname pr30">홍길동</h2>*/}
+                                                    <h2 className="conname pr30">David Fincher</h2>
+                                                    {/*<button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01">반입금지물품</button>*/}
+                                                    <button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01_eng">Prohibited item</button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1298,10 +1302,11 @@ export const LearningCut = () =>{
                                                 <li className="learntit_con">
                                                     <div className="learntit">OR Normal</div>
                                                     <div className="learntit">Front</div>
-                                                    <div className="learntit">레벨 : 1</div>
+                                                    <div className="learntit">Level : 1</div>
                                                 </li>
                                                 <li className="learnct02_center">
-                                                    <div className="question">문항 <span>{problremCnt}/5</span></div>
+                                                    {/*<div className="question">문항 <span>{problremCnt}/5</span></div>*/}
+                                                    <div className="question">Questions <span>{problremCnt}/5</span></div>
                                                     <div className="question_box">
                                                         <dl>
                                                             <dd className="qsbox">{formatMinuite()}</dd>
@@ -1311,9 +1316,15 @@ export const LearningCut = () =>{
                                                     </div>
                                                 </li>
                                                 <li>
+                                                    {/*
                                                     <button className="learnbtn btn_start" id="learn02_start" type="button">시작</button>
                                                     <button className="learnbtn btn_end" id="learn02_start_on" type="button">시작</button>
                                                     <button id="close-second-modal" data-mact="close" data-minfo="second-modal" className="modal_btn learnbtn btn_end">종료</button>
+                                                    */}
+
+                                                    <button className="learnbtn btn_start" id="learn02_start" type="button">Start</button>
+                                                    <button className="learnbtn btn_end" id="learn02_start_on" type="button">Start</button>
+                                                    <button id="close-second-modal" data-mact="close" data-minfo="second-modal" className="modal_btn learnbtn btn_end">End</button>                                                    
                                                 </li>
                                             </ul>
                                         </div>
@@ -1445,12 +1456,14 @@ export const LearningCut = () =>{
                         {learningEnd && (<div id="eig-modal" className="modal-wrapper modal_blind" style={{display: "block"}}>
                             <div className="modal learn_scwd">
                             <div className="scwd_txt01">
-                                        <h1>
-                                            학습을 마쳤습니다.
-                                        </h1>
+                                    <h1>
+                                        {/*학습을 마쳤습니다.*/}
+                                        You have finished learning.
+                                    </h1>
                                     </div>
                                     <div className="scwd_txt02">
-                                        <p>학습이 끝났습니다. 수고하셨습니다.</p>
+                                        {/*<p>학습이 끝났습니다. 수고하셨습니다.</p>*/}
+                                        <p>Learning is over. Thank you for your effort</p>
                                     </div>
                                 <button id="open-six-modal" onClick={()=>{setLearningEnd(false);navigate("/main")}} data-mact="open" data-minfo="six-modal" className="modal_btn conbtn01">확인</button>
                                 <button id="close-eig-modal" onClick={()=>{setLearningEnd(false);navigate("/main")}} data-mact="close" data-minfo="eig-modal" className="modal_btn close_btn02"></button>

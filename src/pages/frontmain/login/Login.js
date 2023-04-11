@@ -92,16 +92,25 @@ export const Login = () => {
                 <div id="wlayer" className="login_layer">
                     <div className="mcontent">
                         <div className="login_con">
-                            <h3>X-RAY 보안 훈련 시스템 교육생 전용</h3>
+                            {/*<h3>X-RAY 보안 훈련 시스템 교육생 전용</h3>*/}
+                            <h3>X-ray Security Training System for Trainee</h3>
                             <h1>X-ray Security<br/>Training<br/><span>System</span></h1>
+                            {/*
                             <p>
                                 X-ray 보안 시스템 훈련을 통해 보안 전문 역량을 강화할 수 있도록<br/>
                                 체계적인 교육훈련 프로그램을 제공합니다.
                             </p>
+                            */}
+
+                            <p>
+                                We provide systematic education and training programs<br/>
+                                to strengthen security expertise through X-ray security system training.
+                            </p>                            
                             {isOpened && (
                             <div id="first-modal" className="modal-wrapper modal_blur" style={{display:'block'}}>
                                 <div className="modal md_width1" style={{left: 'calc(50% - 280px)', top: 'calc(50% - 251px)'}}>
-                                    <h3 className="login_txt">X-ray 보안 훈련 시스템 교육생 전용</h3>
+                                    {/*<h3 className="login_txt">X-ray 보안 훈련 시스템 교육생 전용</h3>*/}
+                                    <h3 className="login_txt">X-ray Security Training System for Trainee</h3>
                                     <h1 className="login_tit">X-ray Security Training<span>System</span></h1>
                                     <div className= {lanSelect}>
                                         <button onClick={()=>handleLangSelect()} className= {
@@ -150,7 +159,8 @@ export const Login = () => {
                                             />
                                         </div>
                                     </div>
-                                    <button id="open-second-modal" onClick={()=>handleLogin()} data-mact="open" data-minfo="second-modal" className="modal_btn blue_btn wide_btn">로그인</button>
+                                    {/*<button id="open-second-modal" onClick={()=>handleLogin()} data-mact="open" data-minfo="second-modal" className="modal_btn blue_btn wide_btn">로그인 </button>*/}
+                                    <button id="open-second-modal" onClick={()=>handleLogin()} data-mact="open" data-minfo="second-modal" className="modal_btn blue_btn wide_btn">{/*로그인*/} Login</button>
                                     <button id="close-first-modal" onClick={()=>{setIsOpened(false);setParams(null)}}data-mact="close"  data-minfo="first-modal" className="modal_btn close_btn"></button>
                                 </div>
                             </div> 
@@ -162,8 +172,10 @@ export const Login = () => {
                                         <div className="img">
                                             <img src={success} alt=""/>
                                         </div>
-                                        <p className="login_txt">로그인 성공!<b/></p>
-                                        <button id="open-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);onMovePage();}}  data-mact="open" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>
+                                        {/*<p className="login_txt">로그인 성공!<b/></p>*/}
+                                        <p className="login_txt">Login Success!<b/></p>
+                                        {/*<button id="open-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);onMovePage();}}  data-mact="open" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>*/}
+                                        <button id="open-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);onMovePage();}}  data-mact="open" data-minfo="th-modal" className="modal_btn blue_btn small_btn">Confirm</button>
                                         <button id="close-second-modal" onClick={()=>{setLoginOk(false);setIsOpened(false);}}  data-mact="close"  data-minfo="second-modal" className="modal_btn close_btn"></button>
                                     </div>
                                 </div>
@@ -175,14 +187,17 @@ export const Login = () => {
                                         <div className="img">
                                             <img src={fail} alt=""/>
                                         </div>
-                                        <p className="login_txt">로그인에 실패하였습니다.</p>
-                                        <button id="close-second-modal" onClick={()=>{setLoginFail(false);setParams(null)}}  data-mact="close" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>
+                                        {/*<p className="login_txt">로그인에 실패하였습니다.</p>*/}
+                                        <p className="login_txt">Login Fail!</p>
+                                        {/*<button id="close-second-modal" onClick={()=>{setLoginFail(false);setParams(null)}}  data-mact="close" data-minfo="th-modal" className="modal_btn blue_btn small_btn">확인</button>*/}
+                                        <button id="close-second-modal" onClick={()=>{setLoginFail(false);setParams(null)}}  data-mact="close" data-minfo="th-modal" className="modal_btn blue_btn small_btn">Confirm</button>
                                         <button id="close-second-modal" onClick={()=>setLoginFail(false)}  data-mact="close"  data-minfo="th-modal" className="modal_btn close_btn"></button>
                                     </div>
                                 </div>                                    
                             )}
 
-                            <button id="open-first-modal" data-mact="open" data-minfo="first-modal"  onClick={()=>login()} className="login_btn modal_btn">로그인</button>
+                            {/*<button id="open-first-modal" data-mact="open" data-minfo="first-modal"  onClick={()=>login()} className="login_btn modal_btn">로그인</button>*/}
+                            <button id="open-first-modal" data-mact="open" data-minfo="first-modal"  onClick={()=>login()} className="login_btn modal_btn">Login</button>
                         </div>
                     </div>
                 </div>

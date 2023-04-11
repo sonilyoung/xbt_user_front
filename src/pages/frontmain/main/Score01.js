@@ -16,25 +16,33 @@ export class Score01 extends React.Component {
         this.state = {
           //colors: ['#C3E0FC','#A2C4E5','#C8D7E7','#7EA4CA','#9FBCD7','#DAE1E7','#6D9DCC']              
           series: [{
-            name: '초급',
+            name: 'level 1',
             data: [44, 55, 57],
             color:'#C3E0FC'
           }, {
-            name: '초급심화',
+            name: 'level 2',
             data: [76, 85, 60],
             color:'#A2C4E5'
           }, {
-            name: '중급',
+            name: 'level 3',
             data: [76, 85, 20],
             color:'#C8D7E7'
           }, {
-            name: '중급심화',
+            name: 'level 4',
             data: [35, 41, 10],
             color:'#7EA4CA'
           }, {
-            name: '고급',
-            data: [35, 41, 30],
+            name: 'level 5',
+            data: [35, 41, 80],
             color:'#9FBCD7'
+          }, {
+            name: 'level 6',
+            data: [35, 41, 90],
+            color:'#DAE1E7'
+          }, {            
+            name: 'level 7',
+            data: [35, 41, 30],
+            color:'#6D9DCC'
           }],
           options: {
             chart: {
@@ -50,9 +58,10 @@ export class Score01 extends React.Component {
             },
             dataLabels: {
               enabled: true,
+              offsetY: -20,
               style: {
-                colors: ['#112A6E']
-              }              
+                colors: ['#5A687B']
+              },            
             },
             stroke: {
               show: true,

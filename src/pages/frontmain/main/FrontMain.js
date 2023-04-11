@@ -92,10 +92,15 @@ export const FrontMain = () => {
                                 {/* main_info */}
                                 <div className="main_info">
                                     <div className="minfo_top">
-                                        <p>X-ray 판독 초급 2023 - 1차</p>
-                                        <h3>홍길동</h3>
+                                        {/*<p>X-ray 판독 초급 2023 - 1차</p>
+                                        <h3>홍길동</h3>*/}
+
+                                        <p>X-ray Inspection Beginner 2023 - 1st</p>
+                                        <h3>David Fincher</h3>
+                                        
                                     </div>
-                                    <button id="open-one-md" onClick={()=>{setMcontents(true);setSelectMenu('score01')}} data-mact="open" data-minfo="one-md" className="edu_btn modal_btn">교육정보</button>
+                                    {/*<button id="open-one-md" onClick={()=>{setMcontents(true);setSelectMenu('score01')}} data-mact="open" data-minfo="one-md" className="edu_btn modal_btn">교육정보</button>*/}
+                                    <button id="open-one-md" onClick={()=>{setMcontents(true);setSelectMenu('score01')}} data-mact="open" data-minfo="one-md" className="edu_btn modal_btn">Training Information</button>
                                 </div>
                                 {/* mnotice */}
                                 <div className="mnotice">
@@ -153,7 +158,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/xrayrd_ic01.png')} alt=""/>
                                                     </div>
-                                                    <p>물품연습</p>
+                                                    {/*<p>물품연습</p>*/}
+                                                    <p>Item practice</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -161,7 +167,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/xrayrd_ic02.png')} alt=""/>
                                                     </div>
-                                                    <p>학습</p>
+                                                    {/*<p>학습</p>*/}
+                                                    <p>Learning</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -169,7 +176,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/xrayrd_ic03.png')} alt=""/>
                                                     </div>
-                                                    <p>AI 강화학습</p>
+                                                    {/*<p>AI 강화학습</p>*/}
+                                                    <p>AI Reinforcement Learning</p>
                                                 </button>
                                             </li>
                                         </ul>
@@ -191,7 +199,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/learn_ic01.png')} alt=""/>
                                                     </div>
-                                                    <p>오답문제 풀이</p>
+                                                    {/* <p>오답문제 풀이</p>*/}
+                                                    <p>Solving for wrong answered problems</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -199,7 +208,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/learn_ic02.png')} alt=""/>
                                                     </div>
-                                                    <p>반입금지 물품연습</p>
+                                                    {/*<p>반입금지 물품연습</p>*/}
+                                                    <p>Prohibited item practice</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -207,7 +217,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/learn_ic03.png')} alt=""/>
                                                     </div>
-                                                    <p>평가</p>
+                                                    {/*<p>평가</p>*/}
+                                                    <p>Evaluation</p>
                                                 </button>
                                             </li>
                                         </ul>
@@ -229,7 +240,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/actual_ic01.png')} alt=""/>
                                                     </div>
-                                                    <p>실제 사례</p>
+                                                    {/*<p>실제 사례</p>*/}
+                                                    <p>Real case</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -237,7 +249,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/actual_ic02.png')} alt=""/>
                                                     </div>
-                                                    <p>물품분류변경</p>
+                                                    {/*<p>물품분류변경</p>*/}
+                                                    <p>Item classification change</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -245,7 +258,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/actual_ic03.png')} alt=""/>
                                                     </div>
-                                                    <p>물품분류연습</p>
+                                                    {/*<p>물품분류연습</p>*/}
+                                                    <p>Item classification practice</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -253,7 +267,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/actual_ic04.png')} alt=""/>
                                                     </div>
-                                                    <p>물품분류평가</p>
+                                                    {/*<p>물품분류평가</p>*/}
+                                                    <p>Item classification evaluation</p>
                                                 </button>
                                             </li>
                                         </ul>
@@ -275,7 +290,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/theory_ic01.png')} alt=""/>
                                                     </div>
-                                                    <p>이론 I</p>
+                                                    {/*<p>이론 I</p>*/}
+                                                    <p>Theory I</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -283,7 +299,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/xrayrd_ic01.png')} alt=""/>
                                                     </div>
-                                                    <p>이론 II</p>
+                                                    {/*<p>이론 II</p>*/}
+                                                    <p>Theory II</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -291,7 +308,8 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/xrayrd_ic01.png')} alt=""/>
                                                     </div>
-                                                    <p>설문조사</p>
+                                                    {/*<p>설문조사</p>*/}
+                                                    <p>Survey</p>
                                                 </button>
                                             </li>
                                         </ul>
@@ -309,15 +327,22 @@ export const FrontMain = () => {
                                         <div className="xbttop01">
                                             <ul>
                                                 <li>
-                                                    <h1 className="contit">교육정보</h1>
+                                                    {/*<h1 className="contit">교육정보</h1> */}
+                                                    <h1 className="contit">Training Information</h1>
                                                 </li>
                                                 <li>
                                                     {/*탭 메뉴 */}
                                                     <div id="layer_menu">
                                                         <ul>
+                                                            {/*
                                                             <li><button type="button" onClick={()=>setSelectMenu('score01')} data-filename="score01" className={selectMenu==='score01' ? 'on': ''}>학습점수조회</button></li>
                                                             <li><button type="button" onClick={()=>setSelectMenu('score02')} data-filename="score02" className={selectMenu==='score02' ? 'on': ''}>교육평가조회</button></li>
                                                             <li><button type="button" onClick={()=>setSelectMenu('score03')} data-filename="score03" className={selectMenu==='score03' ? 'on': ''}>오답조회</button></li>
+                                                            */}
+
+                                                            <li><button type="button" onClick={()=>setSelectMenu('score01')} data-filename="score01" className={selectMenu==='score01' ? 'on': ''}>Learning score inquiry</button></li>
+                                                            <li><button type="button" onClick={()=>setSelectMenu('score02')} data-filename="score02" className={selectMenu==='score02' ? 'on': ''}>Training evaluation inquiry</button></li>
+                                                            <li><button type="button" onClick={()=>setSelectMenu('score03')} data-filename="score03" className={selectMenu==='score03' ? 'on': ''}>Wrong answers inquiry</button></li>                                                            
                                                         </ul>
                                                     </div>
                                                 </li>

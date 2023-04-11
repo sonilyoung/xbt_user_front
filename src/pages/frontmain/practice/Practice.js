@@ -748,6 +748,12 @@ export const Practice = () => {
         setUnitName(nn);
         setOpenYn(oy);
         setPassYn(py);
+
+        learningImages.frontImg = t_color_01_1;
+        learningImages.sideImg = t_color_02_1;
+        learningImages.threedImg = t_color_04_1;
+        setImageList(learningImages);
+        console.log('learningImages:',learningImages);
     }    
 
     const handlePrev = () => {
@@ -763,6 +769,12 @@ export const Practice = () => {
         }        
     }
 
+    const learningImages = {
+        "realImg" : t_practice_01_real,
+        "frontImg" : t_practice_01_front,
+        "sideImg" : t_practice_01_side,
+        "threedImg" : t_practice_01_3d
+    };    
     
     //정면 하단아이콘유틸에 따라 변경되는 이미지유형
     const transimages = {
@@ -811,13 +823,6 @@ export const Practice = () => {
             "blackWhiteSaturation5": t_side_sbwcolor_05_1,//흑백채도	
             "blackWhiteSaturation6": t_side_sbwcolor_06_1//흑백채도	
     }                                             
-
-    const learningImages = {
-            "realImg" : t_practice_01_real,
-            "frontImg" : t_practice_01_front,
-            "sideImg" : t_practice_01_side,
-            "threedImg" : t_practice_01_3d
-    };
 
     const [imageList, setImageList] = useState(learningImages);
     const [currentImage, setCurrentImage] = useState(0);//현재이미지
@@ -979,12 +984,16 @@ export const Practice = () => {
                                         <div className="xbttop02">
                                             <ul>
                                                 <li>
-                                                    <h1 className="contit">물품연습</h1>
+                                                    {/*<h1 className="contit">물품연습</h1>*/}
+                                                    <h1 className="contit">Item practice</h1>
                                                 </li>
                                                 <li>
-                                                    <h2 className="conname tr">홍길동</h2>
-                                                    <button id="close-first-modal" onClick={()=>onMovePage()} data-mact="close" data-minfo="first-modal" className="modal_btn conbtn01 conbtn_pd01">종료</button>
-                                                    <button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01">반입금지물품</button>
+                                                    {/*<h2 className="conname tr">홍길동</h2>*/}
+                                                    <h2 className="conname tr">David Fincher</h2>
+                                                    {/*<button id="close-first-modal" onClick={()=>onMovePage()} data-mact="close" data-minfo="first-modal" className="modal_btn conbtn01 conbtn_pd01">종료</button>*/}
+                                                    {/*<button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01">반입금지물품</button>*/}
+                                                    <button id="close-first-modal" onClick={()=>onMovePage()} data-mact="close" data-minfo="first-modal" className="modal_btn conbtn01_eng conbtn_pd01">End</button>
+                                                    <button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01_eng">Prohibited item</button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1006,9 +1015,12 @@ export const Practice = () => {
                                                         <thead>
                                                             <tr>
                                                                 <th>No.</th>
-                                                                <th>물품</th>
-                                                                <th>개봉여부</th>
-                                                                <th>통과여부</th>
+                                                                {/*<th>물품</th>*/}
+                                                                {/*<th>개봉여부</th>*/}
+                                                                {/*<th>통과여부</th>*/}
+                                                                <th>Item</th>
+                                                                <th>Whether the item is opened</th>
+                                                                <th>Whether the item is passed</th>
                                                             </tr>
                                                         </thead>
                                                     </table>
@@ -1048,7 +1060,8 @@ export const Practice = () => {
                                                         <thead>
                                                             <tr>
                                                                 <th className="t_blue">No.</th>
-                                                                <th className="t_blue">물품명칭</th>
+                                                                {/*<th className="t_blue">물품명칭</th>*/}
+                                                                <th className="t_blue">Name of items</th>
                                                             </tr>
                                                         </thead>
                                                     </table>
@@ -1093,8 +1106,10 @@ export const Practice = () => {
                                                     </div>
                                                 </div>
                                                 <div className="cop_con_btn">
-                                                    <button className="back" onClick={()=>handlePrev()}>이전</button>
-                                                    <button className="next" onClick={()=>handleNext()}>다음</button>
+                                                    {/* <button className="back" onClick={()=>handlePrev()}>이전</button>*/}
+                                                    {/* <button className="next" onClick={()=>handleNext()}>다음</button>*/}
+                                                    <button className="back" onClick={()=>handlePrev()}>Prev</button>
+                                                    <button className="next" onClick={()=>handleNext()}>Next</button>                                                      
                                                 </div>
                                             </div>
                                         </div>
@@ -1102,7 +1117,8 @@ export const Practice = () => {
                                         <div className="practice_right">
                                             {/* 옵션*/}
                                             <div className="practice_select">
-                                                <button className="label">옵션선택</button>
+                                                {/*<button className="label">옵션선택</button>*/}
+                                                <button className="label">Select Option</button>
                                                 <ul className="pra_optionList">
                                                     <li className="pra_item">12°</li>
                                                     <li className="pra_item">24°</li>
