@@ -3,6 +3,7 @@ import React, { useState, useEffect, Component ,useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PracticeList } from './PracticeList';
 import $ from 'jquery';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import 'assets/css/content.css';
 import 'assets/css/default.css';
 import 'assets/css/login.css';
@@ -24,6 +25,13 @@ import t_learning_02_1 from 'assets/images/demo/X05228-201.jpg';
 import t_learning_03_1 from 'assets/images/demo/X05227-201.jpg';
 import t_learning_04_1 from 'assets/images/demo/X05182-201.jpg';
 import t_learning_05_1 from 'assets/images/demo/X05180-201.jpg';
+
+
+//총기류 
+import t_practice_01_real from 'assets/images/practice/sample01.png'; //real
+import t_practice_01_3d from 'assets//images/practice/sample02.png';//3d
+import t_practice_01_front from 'assets//images/practice/sample03.png';//front
+import t_practice_01_side from 'assets//images/practice/sample04.png';//side
 
 
 // ================================|| 하단 이미지 컨트롤 변경 적용 ||================================ //
@@ -756,9 +764,8 @@ export const Practice = () => {
     }
 
     
-   //정면 하단아이콘유틸에 따라 변경되는 이미지유형
-   const transimages = [
-        {
+    //정면 하단아이콘유틸에 따라 변경되는 이미지유형
+    const transimages = {
             "color": t_color_01_1,//컬러
             "colorUforce" : t_color_02_1,//컬러유기물강조
             "colorMforce" : t_color_03_1,//컬러무기물강조
@@ -779,12 +786,10 @@ export const Practice = () => {
             "blackWhiteSaturation4": t_sbwcolor_04_1,//흑백채도	
             "blackWhiteSaturation5": t_sbwcolor_05_1,//흑백채도	
             "blackWhiteSaturation6": t_sbwcolor_06_1//흑백채도	
-        }                               
-    ];    
+    }                               
 
     //측면 하단아이콘유틸에 따라 변경되는 이미지유형
-    const sideTransimages = [
-        {
+    const sideTransimages = {
             "color": t_side_color_01_1,//컬러
             "colorUforce" : t_side_color_02_1,//컬러유기물강조
             "colorMforce" : t_side_color_03_1,//컬러무기물강조
@@ -805,14 +810,13 @@ export const Practice = () => {
             "blackWhiteSaturation4": t_side_sbwcolor_04_1,//흑백채도	
             "blackWhiteSaturation5": t_side_sbwcolor_05_1,//흑백채도	
             "blackWhiteSaturation6": t_side_sbwcolor_06_1//흑백채도	
-        }                                             
-    ];       
+    }                                             
 
     const learningImages = {
-            "realImg" : t_learning_01,
-            "frontImg" : t_learning_01,
-            "sideImg" : t_learning_01_1,
-            "threedImg" : t_learning_01_1
+            "realImg" : t_practice_01_real,
+            "frontImg" : t_practice_01_front,
+            "sideImg" : t_practice_01_side,
+            "threedImg" : t_practice_01_3d
     };
 
     const [imageList, setImageList] = useState(learningImages);
@@ -908,6 +912,46 @@ export const Practice = () => {
         }
     }    
 
+    const inputRef1 = useRef();
+    const inputRef2 = useRef();
+    const inputRef3 = useRef();
+    const inputRef4 = useRef();
+    const inputRef5 = useRef();
+    const inputRef6 = useRef();
+
+    //확대
+    const targetZoomIn = () => {
+        if (inputRef1.current) {
+          inputRef1.current.dispatchEvent(new Event('click', { bubbles: true }));
+        }
+
+        if (inputRef4.current) {
+            inputRef4.current.dispatchEvent(new Event('click', { bubbles: true }));
+        }        
+    }
+
+    //축소
+    const targetZoomOut = () => {
+        if (inputRef2.current) {
+          inputRef2.current.dispatchEvent(new Event('click', { bubbles: true }));
+        }
+
+        if (inputRef5.current) {
+            inputRef5.current.dispatchEvent(new Event('click', { bubbles: true }));
+        }          
+    }
+
+    //리셋
+    const targetZoomReset = () => {
+        if (inputRef3.current) {
+          inputRef3.current.dispatchEvent(new Event('click', { bubbles: true }));
+        }
+
+        if (inputRef6.current) {
+            inputRef6.current.dispatchEvent(new Event('click', { bubbles: true }));
+        }          
+    }        
+    
     useEffect(() =>{
         defaultData();
 
@@ -1109,12 +1153,58 @@ export const Practice = () => {
                                                 <div className="front">
                                                     <p>Front</p>
                                                     {/*<img src={require('assets/images/practice/sample03.png')} alt=""/>*/}
-                                                    <img src={imageList.frontImg} alt=""/>
+                                                    <TransformWrapper
+                                                        initialScale={1}
+                                                        minScale= {0.5}
+                                                        maxScale= {10}                                            
+                                                        initialPositionX={0}
+                                                        initialPositionY={0}
+                                                        alignmentAnimation={{ sizeX: 0, sizeY: 0 }}
+                                                        centerZoomedOut={true}
+                                                        //limitToBounds={true}
+                                                        >
+                                                        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                                                            <React.Fragment>
+
+                                                            <div className="tools" style={{visibility:"hidden"}}>
+                                                                <button ref={inputRef1} onClick={() => zoomIn()}>+</button>
+                                                                <button ref={inputRef2} onClick={() => zoomOut()}>-</button>
+                                                                <button ref={inputRef3} onClick={() => resetTransform()}>x</button>
+                                                            </div>
+                                                            <TransformComponent>
+                                                                <img src={imageList.frontImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
+                                                            </TransformComponent>
+                                                            </React.Fragment>
+                                                        )}
+                                                    </TransformWrapper>                                                      
                                                 </div>
                                                 <div className="side">
                                                     <p>Side</p>
                                                     {/*<img src={require('assets/images/practice/sample04.png')} alt=""/>*/}
-                                                    <img src={imageList.sideImg} alt=""/>
+                                                    <TransformWrapper
+                                                        initialScale={1}
+                                                        minScale= {0.5}
+                                                        maxScale= {10}                                            
+                                                        initialPositionX={0}
+                                                        initialPositionY={0}
+                                                        alignmentAnimation={{ sizeX: 0, sizeY: 0 }}
+                                                        centerZoomedOut={true}
+                                                        //limitToBounds={true}
+                                                        >
+                                                        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                                                            <React.Fragment>
+
+                                                            <div className="tools" style={{visibility:"hidden"}}>
+                                                                <button ref={inputRef4} onClick={() => zoomIn()}>+</button>
+                                                                <button ref={inputRef5} onClick={() => zoomOut()}>-</button>
+                                                                <button ref={inputRef6} onClick={() => resetTransform()}>x</button>
+                                                            </div>
+                                                            <TransformComponent>
+                                                                <img src={imageList.sideImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
+                                                            </TransformComponent>
+                                                            </React.Fragment>
+                                                        )}
+                                                    </TransformWrapper>                                                     
                                                 </div>
                                             </div>
                                             {/* practice_bot */}
@@ -1155,10 +1245,15 @@ export const Practice = () => {
                                                     {/* copbtc03 */}
                                                     <div className="copbtc03">
                                                         <ul>
-                                                            <li><a href="#" className="on"><img src={require('assets/images/learning/glas_plus.png')} alt=""/></a></li>
+                                                            {/*<li><a href="#" className="on"><img src={require('assets/images/learning/glas_plus.png')} alt=""/></a></li>
                                                             <li><a href="#"><img src={require('assets/images/learning/transform.png')} alt=""/></a></li>
                                                             <li><a href="#"><img src={require('assets/images/learning/glas_minus.png')} alt=""/></a></li>
-                                                            <li><a href="#"><img src={require('assets/images/learning/restoration.png')} alt=""/></a></li>
+                                                            <li><a href="#"><img src={require('assets/images/learning/restoration.png')} alt=""/></a></li>*/}
+
+                                                            <li><a href="#" onClick={()=>{targetZoomIn()}}><img src={require('assets/images/learning/glas_plus.png')} alt="이미지 확대"/></a></li>
+                                                            <li><a href="#" onClick={()=>{targetReplaceImg()}}><img src={require('assets/images/learning/transform.png')} alt="이미지 반전"/></a></li>
+                                                            <li><a href="#" onClick={()=>{targetZoomOut()}}><img src={require('assets/images/learning/glas_minus.png')} alt="이미지 축소"/></a></li>
+                                                            <li><a href="#" onClick={()=>{targetZoomReset()}}><img src={require('assets/images/learning/restoration.png')} alt="이미지 reset"/></a></li>                                                            
                                                         </ul>
                                                     </div>
                                                 </div>
