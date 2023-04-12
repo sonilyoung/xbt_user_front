@@ -78,15 +78,18 @@ export const Score03 = () => {
 
     const [series, setSeries] = useState([
         {
-            name: '교육인원',
+            //name: '교육인원',
+            name: 'Number of trainee',
             data: [14, 20, 23, 25, 26, 15, 18]
         },
         {
-            name: '합격자',
+            //name: '합격자',
+            name: 'Qualified',
             data: [5, 9, 12, 18, 23, 10, 16]
         },
         {
-            name: '평균',
+            //name: '평균',
+            name: 'Average',
             data: [7, 9, 18, 20, 25, 20, 15]
         }
     ]);

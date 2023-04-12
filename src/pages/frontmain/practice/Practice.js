@@ -114,7 +114,8 @@ export const Practice = () => {
         {
             "unitGroupNo": 49,
             "unitGroupCd": "G000001",
-            "groupName": "총기류",
+            //"groupName": "총기류",
+            "groupName": "Firearms",
             "groupDesc": "Firearms",
             "actionDiv": null,
             "openYn": "CLOSE",
@@ -123,7 +124,8 @@ export const Practice = () => {
         {
             "unitGroupNo": 50,
             "unitGroupCd": "G000002",
-            "groupName": "폭발물류",
+            //"groupName": "폭발물류",
+            "groupName": "Explosives",
             "groupDesc": "Explosives",
             "actionDiv": null,
             "openYn": "CLOSE",
@@ -133,7 +135,8 @@ export const Practice = () => {
         {
             "unitGroupNo": 51,
             "unitGroupCd": "G000003",
-            "groupName": "실탄류",
+            //"groupName": "실탄류",
+            "groupName": "Ammunitions",
             "groupDesc": "Ammunitions",
             "actionDiv": null,
             "openYn": "OPEN",
@@ -142,7 +145,8 @@ export const Practice = () => {
         {
             "unitGroupNo": 52,
             "unitGroupCd": "G000004",
-            "groupName": "도검류",
+            //"groupName": "도검류",
+            "groupName": "Knifes and swords",
             "groupDesc": "Knife Sword",
             "actionDiv": null,
             "openYn": "OPEN",
@@ -151,7 +155,8 @@ export const Practice = () => {
         {
             "unitGroupNo": 53,
             "unitGroupCd": "G000005",
-            "groupName": "일반무기",
+            //"groupName": "일반무기",
+            "groupName": "General weapons",
             "groupDesc": "General Weapons",
             "actionDiv": null,
             "openYn": "OPEN",
@@ -160,8 +165,9 @@ export const Practice = () => {
         {
             "unitGroupNo": 54,
             "unitGroupCd": "G000006",
-            "groupName": "위장무기류",
-            "groupDesc": "Gastrointestinal Weapons",
+            //"groupName": "위장무기류",
+            "groupName": "Camouflage weapon",
+            "groupDesc": "Camouflage weapon",
             "actionDiv": null,
             "openYn": "OPEN",
             "passYn": "Restricted"
@@ -169,7 +175,8 @@ export const Practice = () => {
         {
             "unitGroupNo": 55,
             "unitGroupCd": "G000007",
-            "groupName": "공구/생활용품류",
+            //"groupName": "공구/생활용품류",
+            "groupName": "Tools / supplies",
             "groupDesc": "Tools / supplies category",
             "actionDiv": null,
             "openYn": "OPEN",
@@ -178,8 +185,9 @@ export const Practice = () => {
         {
             "unitGroupNo": 56,
             "unitGroupCd": "G000008",
-            "groupName": "인화성물질류",
-            "groupDesc": "Flammable substances",
+            //"groupName": "인화성물질류",
+            "groupName": "Inflammable substances",
+            "groupDesc": "Inflammable substances",
             "actionDiv": null,
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -187,8 +195,9 @@ export const Practice = () => {
         {
             "unitGroupNo": 57,
             "unitGroupCd": "G000009",
-            "groupName": "위험물질류",
-            "groupDesc": "Danger substance",
+            //"groupName": "위험물질류",
+            "groupName": "Hazardous materials",
+            "groupDesc": "Hazardous materials",
             "actionDiv": null,
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -196,8 +205,9 @@ export const Practice = () => {
         {
             "unitGroupNo": 58,
             "unitGroupCd": "G000010",
-            "groupName": "액체,겔 물품",
-            "groupDesc": "Liquid, gel goods",
+            //"groupName": "액체,겔 물품",
+            "groupName": "Liquids, gel-type",
+            "groupDesc": "Liquids, gel-type",
             "actionDiv": null,
             "openYn": "OPEN",
             "passYn": "PASS"
@@ -205,7 +215,8 @@ export const Practice = () => {
         {
             "unitGroupNo": 59,
             "unitGroupCd": "G000011",
-            "groupName": "주류",
+            //"groupName": "주류",
+            "groupName": "Alcohol",
             "groupDesc": "Alcohol",
             "actionDiv": null,
             "openYn": "OPEN",
@@ -214,7 +225,8 @@ export const Practice = () => {
         {
             "unitGroupNo": 60,
             "unitGroupCd": "G000012",
-            "groupName": "전기/전자제품",
+            //"groupName": "전기/전자제품",
+            "groupName": "Electrical / electronic products",
             "groupDesc": "Electrical / electronic products",
             "actionDiv": null,
             "openYn": "OPEN",
@@ -223,7 +235,8 @@ export const Practice = () => {
         {
             "unitGroupNo": 61,
             "unitGroupCd": "G000013",
-            "groupName": "통과",
+            //"groupName": "통과",
+            "groupName": "pass",
             "groupDesc": "pass",
             "actionDiv": null,
             "openYn": "OPEN",
@@ -235,7 +248,8 @@ export const Practice = () => {
             {
                 "unitScanId" : "UX230324025350",
                 "unitGroupCd": "G000001",
-                "unitGroupName": "총기류",
+                //"unitGroupName": "총기류",
+                "unitGroupName": "Firearms",
                 "unitName": "소총1",
                 "openYn": "CLOSE",
                 "passYn": "Prohibited"         
@@ -243,7 +257,8 @@ export const Practice = () => {
             {
                 "unitScanId" : "UX230324025351",
                 "unitGroupCd": "G000001",
-                "unitGroupName": "총기류",
+                //"unitGroupName": "총기류",
+                "unitGroupName": "Firearms",
                 "unitName": "소총2",
                 "openYn": "CLOSE",
                 "passYn": "Prohibited"            
@@ -251,7 +266,8 @@ export const Practice = () => {
             {
                 "unitScanId" : "UX230324025352",
                 "unitGroupCd": "G000001",
-                "unitGroupName": "총기류",
+                //"unitGroupName": "총기류",
+                "unitGroupName": "Firearms",
                 "unitName": "소총3",
                 "openYn": "CLOSE",
                 "passYn": "Prohibited"               
@@ -262,7 +278,8 @@ export const Practice = () => {
             {
                 "unitScanId" : "UX230324025350",
                 "unitGroupCd": "G000002",
-                "unitGroupName": "폭발류",
+                //"unitGroupName": "폭발류",
+                "unitGroupName": "Explosives",
                 "unitName": "폭발1",
                 "openYn": "CLOSE",
                 "passYn": "Prohibited"
@@ -270,7 +287,8 @@ export const Practice = () => {
             {
                 "unitScanId" : "UX230324025351",
                 "unitGroupCd": "G000002",
-                "unitGroupName": "폭발류",
+                //"unitGroupName": "폭발류",
+                "unitGroupName": "Explosives",
                 "unitName": "폭발2",
                 "openYn": "CLOSE",
                 "passYn": "Prohibited"
@@ -278,7 +296,8 @@ export const Practice = () => {
             {
                 "unitScanId" : "UX230324025352",
                 "unitGroupCd": "G000002",
-                "unitGroupName": "폭발류",
+                //"unitGroupName": "폭발류",
+                "unitGroupName": "Explosives",
                 "unitName": "폭발3",
                 "openYn": "CLOSE",
                 "passYn": "Prohibited"
@@ -289,7 +308,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000003",
-            "unitGroupName": "실탄류",
+            //"unitGroupName": "실탄류",
+            "unitGroupName": "Ammunitions",
             "unitName": "실탄1",
             "openYn": "OPEN",
             "passYn": "Restricted"
@@ -297,7 +317,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000003",
-            "unitGroupName": "실탄류",
+            //"unitGroupName": "실탄류",
+            "unitGroupName": "Ammunitions",
             "unitName": "실탄2",
             "openYn": "OPEN",
             "passYn": "Restricted"
@@ -305,7 +326,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000003",
-            "unitGroupName": "실탄류",
+            //"unitGroupName": "실탄류",
+            "unitGroupName": "Ammunitions",
             "unitName": "실탄3",
             "openYn": "OPEN",
             "passYn": "Restricted"
@@ -317,7 +339,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000005",
-            "unitGroupName": "도검류",
+            //"unitGroupName": "도검류",
+            "unitGroupName": "Knifes and swords",
             "unitName": "도검1",
             "openYn": "OPEN",
             "passYn": "Restricted"   
@@ -325,7 +348,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000005",
-            "unitGroupName": "도검류",
+            //"unitGroupName": "도검류",
+            "unitGroupName": "Knifes and swords",
             "unitName": "도검2",
             "openYn": "OPEN",
             "passYn": "Restricted"   
@@ -333,7 +357,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000005",
-            "unitGroupName": "도검류",
+            //"unitGroupName": "도검류",
+            "unitGroupName": "Knifes and swords",
             "unitName": "도검3",
             "openYn": "OPEN",
             "passYn": "Restricted"   
@@ -345,7 +370,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000005",
-            "unitGroupName": "일반무기",
+            //"unitGroupName": "일반무기",
+            "unitGroupName": "General weapon",
             "unitName": "무기1",
             "openYn": "OPEN",
             "passYn": "Restricted"
@@ -353,7 +379,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000005",
-            "unitGroupName": "일반무기",
+            //"unitGroupName": "일반무기",
+            "unitGroupName": "General weapon",
             "unitName": "무기2",
             "openYn": "OPEN",
             "passYn": "Restricted"
@@ -361,7 +388,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000005",
-            "unitGroupName": "일반무기",
+            //"unitGroupName": "일반무기",
+            "unitGroupName": "General weapon",
             "unitName": "무기3",
             "openYn": "OPEN",
             "passYn": "Restricted"
@@ -373,7 +401,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000006",
-            "unitGroupName": "위장무기류",
+            //"unitGroupName": "위장무기류",
+            "unitGroupName": "Camouflage weapon",
             "unitName": "위장1",
             "openYn": "OPEN",
             "passYn": "Restricted"
@@ -381,7 +410,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000006",
-            "unitGroupName": "위장무기류",
+            //"unitGroupName": "위장무기류",
+            "unitGroupName": "Camouflage weapon",
             "unitName": "위장2",
             "openYn": "OPEN",
             "passYn": "Restricted"
@@ -389,7 +419,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000006",
-            "unitGroupName": "위장무기류",
+            //"unitGroupName": "위장무기류",
+            "unitGroupName": "Camouflage weapon",
             "unitName": "위장3",
             "openYn": "OPEN",
             "passYn": "Restricted"
@@ -401,7 +432,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000007",
-            "unitGroupName": "공구/생활용품류",
+            //"unitGroupName": "공구/생활용품류",
+            "unitGroupName": "Tools / supplies",
             "unitName": "공구1",
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -409,7 +441,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000007",
-            "unitGroupName": "공구/생활용품류",
+            //"unitGroupName": "공구/생활용품류",
+            "unitGroupName": "Tools / supplies",
             "unitName": "생활용품2",
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -417,7 +450,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000002",
-            "unitGroupName": "공구/생활용품류",
+            //"unitGroupName": "공구/생활용품류",
+            "unitGroupName": "Tools / supplies",
             "unitName": "공구3",
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -429,7 +463,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000008",
-            "unitGroupName": "인화성물질류",
+            //"unitGroupName": "인화성물질류",
+            "unitGroupName": "Inflammable substances",
             "unitName": "인화물질1",
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -437,7 +472,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000008",
-            "unitGroupName": "인화성물질류",
+            //"unitGroupName": "인화성물질류",
+            "unitGroupName": "Inflammable substances",
             "unitName": "인화물질2",
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -445,7 +481,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000008",
-            "unitGroupName": "인화성물질류",
+            //"unitGroupName": "인화성물질류",
+            "unitGroupName": "Inflammable substances",
             "unitName": "인화물질3",
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -457,7 +494,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000009",
-            "unitGroupName": "위험물질류",
+            //"unitGroupName": "위험물질류",
+            "unitGroupName": "Hazardous materials",
             "unitName": "위험1",
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -465,7 +503,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000009",
-            "unitGroupName": "위험물질류",
+            //"unitGroupName": "위험물질류",
+            "unitGroupName": "Hazardous materials",
             "unitName": "위험2",
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -473,7 +512,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000009",
-            "unitGroupName": "위험물질류",
+            //"unitGroupName": "위험물질류",
+            "unitGroupName": "Hazardous materials",
             "unitName": "위험3",
             "openYn": "OPEN",
             "passYn": "Prohibited"
@@ -485,7 +525,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000010",
-            "unitGroupName": "액체,겔 물품",
+            //"unitGroupName": "액체,겔 물품",
+            "unitGroupName": "Liquids, gel-type",
             "unitName": "액체1",
             "openYn": "OPEN",
             "passYn": "PASS"
@@ -493,7 +534,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000010",
-            "unitGroupName": "액체,겔 물품",
+            //"unitGroupName": "액체,겔 물품",
+            "unitGroupName": "Liquids, gel-type",
             "unitName": "겔2",
             "openYn": "OPEN",
             "passYn": "PASS"
@@ -501,7 +543,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000010",
-            "unitGroupName": "액체,겔 물품",
+            //"unitGroupName": "액체,겔 물품",
+            "unitGroupName": "Liquids, gel-type",
             "unitName": "액체3",
             "openYn": "OPEN",
             "passYn": "PASS"
@@ -514,7 +557,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000011",
-            "unitGroupName": "주류",
+            //"unitGroupName": "주류",
+            "unitGroupName": "Alcohol",
             "unitName": "주류1",
             "openYn": "OPEN",
             "passYn": "PASS"
@@ -522,7 +566,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000011",
-            "unitGroupName": "주류",
+            //"unitGroupName": "주류",
+            "unitGroupName": "Alcohol",
             "unitName": "주류2",
             "openYn": "OPEN",
             "passYn": "PASS"
@@ -530,7 +575,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000011",
-            "unitGroupName": "주류",
+            //"unitGroupName": "주류",
+            "unitGroupName": "Alcohol",
             "unitName": "주류3",
             "openYn": "OPEN",
             "passYn": "PASS"
@@ -543,7 +589,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000012",
-            "unitGroupName": "전기/전자제품",
+            //"unitGroupName": "전기/전자제품",
+            "unitGroupName": "Electrical / electronic products",
             "unitName": "전기1",
             "openYn": "OPEN",
             "passYn": "PASS"    
@@ -551,7 +598,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000012",
-            "unitGroupName": "전기/전자제품",
+            //"unitGroupName": "전기/전자제품",
+            "unitGroupName": "Electrical / electronic products",
             "unitName": "전자제품2",
             "openYn": "OPEN",
             "passYn": "PASS"    
@@ -559,7 +607,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000012",
-            "unitGroupName": "전기/전자제품",
+            //"unitGroupName": "전기/전자제품",
+            "unitGroupName": "Electrical / electronic products",
             "unitName": "전자제품3",
             "openYn": "OPEN",
             "passYn": "PASS"    
@@ -572,7 +621,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000013",
-            "unitGroupName": "통과",
+            //"unitGroupName": "통과",
+            "unitGroupName": "pass",
             "unitName": "통과제품1",
             "openYn": "OPEN",
             "passYn": "PASS"
@@ -580,7 +630,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025351",
             "unitGroupCd": "G000013",
-            "unitGroupName": "통과",
+            //"unitGroupName": "통과",
+            "unitGroupName": "pass",
             "unitName": "통과제품2",
             "openYn": "OPEN",
             "passYn": "PASS"
@@ -588,7 +639,8 @@ export const Practice = () => {
         {
             "unitScanId" : "UX230324025352",
             "unitGroupCd": "G000013",
-            "unitGroupName": "통과",
+            //"unitGroupName": "통과",
+            "unitGroupName": "pass",
             "unitName": "통과제품3",
             "openYn": "OPEN",
             "passYn": "PASS"

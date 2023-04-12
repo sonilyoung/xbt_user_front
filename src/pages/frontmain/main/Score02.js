@@ -20,7 +20,7 @@ const rows = [
     createData(
         1,
         '2023',
-        <span>1차</span>,
+        <span>1Batch</span>,
         1,
         60,
         80,
@@ -30,7 +30,7 @@ const rows = [
     createData(
         1,
         '2023',
-        <span>1차</span>,
+        <span>2Batch</span>,
         1,
         60,
         80,
@@ -40,7 +40,7 @@ const rows = [
     createData(
         1,
         '2023',
-        <span>1차</span>,
+        <span>3Batch</span>,
         1,
         60,
         80,
@@ -89,19 +89,22 @@ const headCells = [
         id: 'year',
         align: 'center',
         disablePadding: false,
-        label: '교육 년도'
+        //label: '교육 년도'
+        label: 'Training year'
     },
     {
         id: 'baseline',
         align: 'center',
         disablePadding: true,
-        label: '차수'
+        //label: '차수'
+        label: 'Batch'
     },
     {
         id: 'baselineLearning',
         align: 'center',
         disablePadding: false,
-        label: '학습 차수'
+        //label: '학습 차수'
+        label: 'Training course'
         // },
         // {
         //     id: 'aper',
@@ -113,25 +116,29 @@ const headCells = [
         id: 'cutScore',
         align: 'center',
         disablePadding: false,
-        label: '과락 점수'
+        //label: '과락 점수'
+        label: 'Failure score'
     },
     {
         id: 'resultScore',
         align: 'center',
         disablePadding: false,
-        label: '취득 점수'
+        //label: '취득 점수'
+        label: 'Obtained score'
     },
     {
         id: 'resultData',
         align: 'center',
         disablePadding: false,
-        label: '결과'
+        //label: '결과'
+        label: 'Results'
     },    
     {
         id: 'diary',
         align: 'center',
         disablePadding: false,
-        label: '학습 일지'
+        //label: '학습 일지'
+        label: 'Learning diary'
     },    
 ];
 

@@ -29,19 +29,19 @@ export class Score01 extends React.Component {
             color:'#C8D7E7'
           }, {
             name: 'level 4',
-            data: [35, 41, 10],
+            data: [20, 31, 10],
             color:'#7EA4CA'
           }, {
             name: 'level 5',
-            data: [35, 41, 80],
+            data: [40, 51, 80],
             color:'#9FBCD7'
           }, {
             name: 'level 6',
-            data: [35, 41, 90],
+            data: [60, 61, 90],
             color:'#DAE1E7'
           }, {            
             name: 'level 7',
-            data: [35, 41, 30],
+            data: [80, 81, 30],
             color:'#6D9DCC'
           }],
           options: {
@@ -69,7 +69,8 @@ export class Score01 extends React.Component {
               colors: ['transparent']
             },
             xaxis: {
-              categories: ['2023년 1차', '2023년 2차', '2023년 3차']
+              //categories: ['2023년 1차', '2023년 2차', '2023년 3차']
+              categories: ['2023year 1Batch', '2023year 2Batch', '2023year 3Batch']
             },
             yaxis: {
               title: {

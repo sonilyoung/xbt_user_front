@@ -115,25 +115,29 @@ export const FrontMain = () => {
                                     <ul className="notice_list">
                                         <li>
                                             <button id="open-two-md" data-mact="open" data-minfo="two-md" className="modal_btn">
-                                                <p className="tit">데이터 점검으로 인한 접속제한</p>
+                                                {/*<p className="tit">데이터 점검으로 인한 접속제한</p>*/}
+                                                <p className="tit">System access is temporarily restricted due to data check</p>
                                                 <p className="date">2022-09-18</p>
                                             </button>
                                         </li>
                                         <li>
                                             <button id="open-two-md" data-mact="open" data-minfo="two-md" className="modal_btn">
-                                                <p className="tit">개인정보 보호를 위해 PC 로그</p>
+                                                {/*<p className="tit">개인정보 보호를 위해 PC 로그</p>*/}
+                                                <p className="tit">In order for privacy, PC login</p>
                                                 <p className="date">2022-09-18</p>
                                             </button>
                                         </li>
                                         <li>
                                             <button id="open-two-md" data-mact="open" data-minfo="two-md" className="modal_btn">
-                                                <p className="tit">교육생 데스트 일정 공지</p>
+                                                {/*<p className="tit">교육생 데스트 일정 공지</p>*/}
+                                                <p className="tit">Notice of trainee test schedule</p>
                                                 <p className="date">2022-09-10</p>
                                             </button>
                                         </li>
                                         <li>
                                             <button id="open-two-md" data-mact="open" data-minfo="two-md" className="modal_btn">
-                                                <p className="tit">9월 교육 일정 안내</p>
+                                                {/*<p className="tit">9월 교육 일정 안내</p>*/}
+                                                <p className="tit">Notice of training schedule for Sep</p>
                                                 <p className="date">2022-08-23</p>
                                             </button>
                                         </li>
@@ -387,8 +391,8 @@ export const FrontMain = () => {
                                             <thead>
                                                 <tr>
                                                     <th scope="col">No.</th>
-                                                    <th scope="col">제목</th>
-                                                    <th scope="col">일자</th>
+                                                    <th scope="col">Title</th>
+                                                    <th scope="col">Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -398,7 +402,8 @@ export const FrontMain = () => {
                                                     </td>
                                                     <td className="al-Left">
                                                         <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                            데이터 점검으로 인한 접속제한
+                                                            {/*데이터 점검으로 인한 접속제한*/}
+                                                            System access is temporarily restricted due to data check
                                                         </button>
                                                     </td>
                                                     <td className="Date">
@@ -411,7 +416,8 @@ export const FrontMain = () => {
                                                     </td>
                                                     <td className="al-Left">
                                                         <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                            개인정보 보호를 위해 PC 로그
+                                                            {/*개인정보 보호를 위해 PC 로그*/}
+                                                            In order for privacy, PC login
                                                         </button>
                                                     </td>
                                                     <td className="Date">
@@ -424,7 +430,8 @@ export const FrontMain = () => {
                                                     </td>
                                                     <td className="al-Left">
                                                         <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                            교육생 데스트 일정 공지
+                                                            {/*교육생 데스트 일정 공지*/}
+                                                            Notice of trainee test schedule
                                                         </button>
                                                     </td>
                                                     <td className="Date">
@@ -437,7 +444,8 @@ export const FrontMain = () => {
                                                     </td>
                                                     <td className="al-Left">
                                                         <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                            9월 교육 일정 안내
+                                                            {/*9월 교육 일정 안내*/}
+                                                            Notice of training schedule for Sep.
                                                         </button>
                                                     </td>
                                                     <td className="Date">
@@ -450,7 +458,8 @@ export const FrontMain = () => {
                                                     </td>
                                                     <td className="al-Left">
                                                         <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                            공지사항 테스트 입력
+                                                            {/*공지사항 테스트 입력*/}
+                                                            Input test of notice.
                                                         </button>
                                                     </td>
                                                     <td className="Date">
@@ -463,7 +472,8 @@ export const FrontMain = () => {
                                                     </td>
                                                     <td className="al-Left">
                                                         <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                            AI 판독평가 관련 자료
+                                                            {/*AI 판독평가 관련 자료*/}
+                                                            AI reading evaluation data.
                                                         </button>
                                                     </td>
                                                     <td className="Date">
@@ -476,7 +486,8 @@ export const FrontMain = () => {
                                                     </td>
                                                     <td className="al-Left">
                                                         <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                            2023년 교육생 교육일정 안내 정보
+                                                            {/*2023년 교육생 교육일정 안내 정보*/}
+                                                            Information on 2023 training schedule.
                                                         </button>
                                                     </td>
                                                     <td className="Date">
@@ -489,7 +500,8 @@ export const FrontMain = () => {
                                                     </td>
                                                     <td className="al-Left">
                                                         <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                            테스트 공지사항 입니다.
+                                                            {/*테스트 공지사항 입니다.*/}
+                                                            Test notice.
                                                         </button>
                                                     </td>
                                                     <td className="Date">
@@ -502,7 +514,8 @@ export const FrontMain = () => {
                                                     </td>
                                                     <td className="al-Left">
                                                         <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                            사이트 점검으로 인해 접속이 제한됨을 알려드립니다.
+                                                            {/*사이트 점검으로 인해 접속이 제한됨을 알려드립니다.*/}
+                                                            System access is temporarily restricted due to site check.
                                                         </button>
                                                     </td>
                                                     <td className="Date">
@@ -515,7 +528,8 @@ export const FrontMain = () => {
                                                     </td>
                                                     <td className="al-Left">
                                                         <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                            교육 테스트 입니다.
+                                                            {/*교육 테스트 입니다.*/}
+                                                            This is training test.
                                                         </button>
                                                     </td>
                                                     <td className="Date">
@@ -557,13 +571,14 @@ export const FrontMain = () => {
                                 <div className="con_table noticerw_sr scrollbar height360">
                                     {/* noticerw_top */}
                                     <div className="noticerw_top">
-                                        <h1>9월 교육일정 안내</h1>
+                                        {/*<h1>9월 교육일정 안내</h1>*/}
+                                        <h1>Training schedule for September</h1>
                                         <span>2023-03-14</span>
                                     </div>
                                     {/* noticerw_con */}
                                     <div className="noticerw_con">
                                         <p>
-                                            안녕하세요! 00000 본부입니다.<br/>
+                                            {/*안녕하세요! 00000 본부입니다.<br/>
                                             9월 교육 일정 아래와 같이 안내해드리니 참조 부탁드립니다.<br/><br/>
                                             9월 교육일정<br/><br/>
                                             1. 신입교육일정<br/>
@@ -571,7 +586,18 @@ export const FrontMain = () => {
                                             장소 : 00회관 00본부<br/>
                                             교육내용 : 000에 따른 0000 와 0000에 대한 신입교육<br/>
                                             문의 :  000-0000-0000 (담당자: 홍길동)<br/><br/>
-                                            내용 더 들어 갈꺼임
+                                                내용 더 들어 갈꺼임*/}
+
+                                            Greetings, this is OOOOO Division.<br/>
+                                            Please refer to following training schedule for September<br/><br/>
+                                            Training schedule for September<br/><br/>
+                                            Training schedule for new trainee<br/>
+                                            Date: Sep. 00, 2023~Sep, 00, 2023(30 days, ~9;00am)<br/>
+                                            Location: 00 building, 00 division<br/>
+                                            Training contens: Training for new trainee in accordance with a and B<br/>
+                                            Contact: 000-0000-0000 (pic: Hong gil-dong)
+
+
                                         </p>
                                     </div>
                                 </div>
