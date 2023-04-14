@@ -45,7 +45,7 @@ export const Learning = () =>{
                         <button id="open-second-modal" onClick={()=>onMovePage('cut')} data-mact="open" data-minfo="second-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>학습시작-컷 타입</button>*/}
 
                         <button id="open-first-modal" onClick={()=>onMovePage('slide')} data-mact="open" data-minfo="first-modal" className="login_btn modal_btn">Learning Start - Slide Type</button>
-                        <button id="open-second-modal" onClick={()=>onMovePage('cut')} data-mact="open" data-minfo="second-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>Learning Start - Cut Type</button>
+                        <button id="open- second-modal" onClick={()=>onMovePage('cut')} data-mact="open" data-minfo="second-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>Learning Start - Cut Type</button>
 
                         {/*<button id="open-th-modal" data-mact="open" data-minfo="th-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>학습시작-완료</button>*/}
                         {/*<button id="open-fif-modal" data-mact="open" data-minfo="fif-modal" className="login_btn modal_btn" style={{marginLeft:"20px"}}>학습시작 - 합격/불합격/완료</button>*/}
