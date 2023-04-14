@@ -95,7 +95,7 @@ export const FrontMain = () => {
                                         {/*<p>X-ray 판독 초급 2023 - 1차</p>
                                         <h3>홍길동</h3>*/}
 
-                                        <p>X-ray Inspection Beginner 2023 - 1st</p>
+                                        <p>X-ray Screening Beginner 2023 - 1st</p>
                                         <h3>David Fincher</h3>
                                         
                                     </div>

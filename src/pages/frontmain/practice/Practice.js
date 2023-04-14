@@ -649,7 +649,6 @@ export const Practice = () => {
     
 
 
-
     const [unitList, setUnitList] = useState(targetUnitList); //단품그룹목록
     const [unitSubList, setUnitSubList] = useState(targetUnitSubList1);//단품목록
     const inputRef = useRef([]);
@@ -660,7 +659,7 @@ export const Practice = () => {
     const [unitName, setUnitName] = useState();//단품명
     const [openYn, setOpenYn] = useState();//오픈
     const [passYn, setPassYn] = useState();//통과
-    const [nowSelect, setNowSelect] = useState();//현재선택된 아이콘
+    const [nowSelect, setNowSelect] = useState('');//현재선택된 아이콘
      
     const defaultData = () =>{
         setUnitGroupCd(unitSubList[0].unitGroupCd);
@@ -879,12 +878,14 @@ export const Practice = () => {
     const [imageList, setImageList] = useState(learningImages);
     const [currentImage, setCurrentImage] = useState(0);//현재이미지
 
+    const nowSelectControl = (e) =>{
+        setNowSelect(e);//현재선택된 아이콘
+    }    
 
     //하단 이미지컨트롤 아이콘 통합
     const imgTransControl = (e) =>{
 
         console.log('currentImage:', currentImage);
-        setNowSelect(e);//현재선택된 아이콘
 
         if(e==='color1'){//컬러
             learningImages.frontImg = transimages.color;
@@ -1281,33 +1282,33 @@ export const Practice = () => {
                                                     {/* copbtc01 */}
                                                     <div className="copbtc01">
                                                         <ul>
-                                                            <li><a href="#" onClick={()=>imgTransControl('color1')} className="on"><img src={require('assets/images/learning/learnc_ic01_01.png')} alt=""/></a></li>
-                                                            <li><a href="#" onClick={()=>imgTransControl('color2')}><img src={require('assets/images/learning/learnc_ic01_02.png')} alt=""/></a></li>
-                                                            <li><a href="#" onClick={()=>imgTransControl('color3')}><img src={require('assets/images/learning/learnc_ic01_03.png')} alt=""/></a></li>
-                                                            <li><a href="#" onClick={()=>imgTransControl('color4')}><img src={require('assets/images/learning/learnc_ic01_04.png')} alt=""/></a></li>
-                                                            <li><a href="#" onClick={()=>imgTransControl('blackWhite1')}><img src={require('assets/images/learning/learnc_ic02_01.png')} alt=""/></a></li>
-                                                            <li><a href="#" onClick={()=>imgTransControl('blackWhite2')}><img src={require('assets/images/learning/learnc_ic02_02.png')} alt=""/></a></li>
-                                                            <li><a href="#" onClick={()=>imgTransControl('blackWhite3')}><img src={require('assets/images/learning/learnc_ic02_03.png')} alt=""/></a></li>
-                                                            <li><a href="#" onClick={()=>imgTransControl('blackWhite4')}><img src={require('assets/images/learning/learnc_ic02_04.png')} alt=""/></a></li>
+                                                            <li><a href="#" onClick={()=>{nowSelectControl('color1');imgTransControl('color1')}} className={nowSelect === 'color1' ? 'on' : '' }><img src={require('assets/images/learning/learnc_ic01_01.png')} alt=""/></a></li>
+                                                            <li><a href="#" onClick={()=>{nowSelectControl('color2');imgTransControl('color2')}} className={nowSelect === 'color2' ? 'on' : '' }><img src={require('assets/images/learning/learnc_ic01_02.png')} alt=""/></a></li>
+                                                            <li><a href="#" onClick={()=>{nowSelectControl('color3');imgTransControl('color3')}} className={nowSelect === 'color3' ? 'on' : '' }><img src={require('assets/images/learning/learnc_ic01_03.png')} alt=""/></a></li>
+                                                            <li><a href="#" onClick={()=>{nowSelectControl('color4');imgTransControl('color4')}} className={nowSelect === 'color4' ? 'on' : '' }><img src={require('assets/images/learning/learnc_ic01_04.png')} alt=""/></a></li>
+                                                            <li><a href="#" onClick={()=>{nowSelectControl('blackWhite1');imgTransControl('blackWhite1')}} className={nowSelect === 'blackWhite1' ? 'on' : '' }><img src={require('assets/images/learning/learnc_ic02_01.png')} alt=""/></a></li>
+                                                            <li><a href="#" onClick={()=>{nowSelectControl('blackWhite2');imgTransControl('blackWhite2')}} className={nowSelect === 'blackWhite2' ? 'on' : '' }><img src={require('assets/images/learning/learnc_ic02_02.png')} alt=""/></a></li>
+                                                            <li><a href="#" onClick={()=>{nowSelectControl('blackWhite3');imgTransControl('blackWhite3')}} className={nowSelect === 'blackWhite3' ? 'on' : '' }><img src={require('assets/images/learning/learnc_ic02_03.png')} alt=""/></a></li>
+                                                            <li><a href="#" onClick={()=>{nowSelectControl('blackWhite4');imgTransControl('blackWhite4')}} className={nowSelect === 'blackWhite4' ? 'on' : '' }><img src={require('assets/images/learning/learnc_ic02_04.png')} alt=""/></a></li>
                                                         </ul>
                                                     </div>
                                                     {/* copbtc02 */}
                                                     <div className="copbtc02">
                                                         <ul>
-                                                            <li><a href="#" className={nowSelect==='cd1' ? 'on' : ''} onClick={()=>imgTransControl('cd1')}><span className="brig_ic01_01"></span></a></li>
-                                                            <li><a href="#" className={nowSelect==='cd2' ? 'on' : ''} onClick={()=>imgTransControl('cd2')}><span className="brig_ic01_02"></span></a></li>
-                                                            <li><a href="#" className={nowSelect==='cd3' ? 'on' : ''} onClick={()=>imgTransControl('cd3')}><span className="brig_ic01_03"></span></a></li>
-                                                            <li><a href="#" className={nowSelect==='cd4' ? 'on' : ''} onClick={()=>imgTransControl('cd4')}><span className="brig_ic01_04"></span></a></li>
-                                                            <li><a href="#" className={nowSelect==='cd5' ? 'on' : ''} onClick={()=>imgTransControl('cd5')}><span className="brig_ic01_05"></span></a></li>
-                                                            <li><a href="#" className={nowSelect==='cd6' ? 'on' : ''} onClick={()=>imgTransControl('cd6')}><span className="brig_ic01_06"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd1' ? 'on' : ''} onClick={()=>{nowSelectControl('cd1');imgTransControl('cd1')}}><span className="brig_ic01_01"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd2' ? 'on' : ''} onClick={()=>{nowSelectControl('cd2');imgTransControl('cd2')}}><span className="brig_ic01_02"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd3' ? 'on' : ''} onClick={()=>{nowSelectControl('cd3');imgTransControl('cd3')}}><span className="brig_ic01_03"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd4' ? 'on' : ''} onClick={()=>{nowSelectControl('cd4');imgTransControl('cd4')}}><span className="brig_ic01_04"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd5' ? 'on' : ''} onClick={()=>{nowSelectControl('cd5');imgTransControl('cd5')}}><span className="brig_ic01_05"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd6' ? 'on' : ''} onClick={()=>{nowSelectControl('cd6');imgTransControl('cd6')}}><span className="brig_ic01_06"></span></a></li>
                                                         </ul>
                                                         <ul>
-                                                            <li><a href="#" className={nowSelect==='cd7' ? 'on' : ''} onClick={()=>imgTransControl('cd7')}><span className="brig_ic02_01"></span></a></li>
-                                                            <li><a href="#" className={nowSelect==='cd8' ? 'on' : ''} onClick={()=>imgTransControl('cd8')}><span className="brig_ic02_02"></span></a></li>
-                                                            <li><a href="#" className={nowSelect==='cd9' ? 'on' : ''} onClick={()=>imgTransControl('cd9')}><span className="brig_ic02_03"></span></a></li>
-                                                            <li><a href="#" className={nowSelect==='cd10' ? 'on' : ''} onClick={()=>imgTransControl('cd10')}><span className="brig_ic02_04"></span></a></li>
-                                                            <li><a href="#" className={nowSelect==='cd11' ? 'on' : ''} onClick={()=>imgTransControl('cd11')}><span className="brig_ic02_05"></span></a></li>
-                                                            <li><a href="#" className={nowSelect==='cd12' ? 'on' : ''} onClick={()=>imgTransControl('cd12')}><span className="brig_ic02_06"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd7' ? 'on' : ''} onClick={()=>{nowSelectControl('cd7');imgTransControl('cd7')}}><span className="brig_ic02_01"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd8' ? 'on' : ''} onClick={()=>{nowSelectControl('cd8');imgTransControl('cd8')}}><span className="brig_ic02_02"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd9' ? 'on' : ''} onClick={()=>{nowSelectControl('cd9');imgTransControl('cd9')}}><span className="brig_ic02_03"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd10' ? 'on' : ''} onClick={()=>{nowSelectControl('cd10');imgTransControl('cd10')}}><span className="brig_ic02_04"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd11' ? 'on' : ''} onClick={()=>{nowSelectControl('cd11');imgTransControl('cd11')}}><span className="brig_ic02_05"></span></a></li>
+                                                            <li><a href="#" className={nowSelect==='cd12' ? 'on' : ''} onClick={()=>{nowSelectControl('cd12');imgTransControl('cd12')}}><span className="brig_ic02_06"></span></a></li>
                                                         </ul>
                                                     </div>
                                                     {/* copbtc03 */}
@@ -1319,7 +1320,7 @@ export const Practice = () => {
                                                             <li><a href="#"><img src={require('assets/images/learning/restoration.png')} alt=""/></a></li>*/}
 
                                                             <li><a href="#" onClick={()=>{targetZoomIn()}}><img src={require('assets/images/learning/glas_plus.png')} alt="이미지 확대"/></a></li>
-                                                            <li><a href="#" onClick={()=>{targetReplaceImg()}}><img src={require('assets/images/learning/transform.png')} alt="이미지 반전"/></a></li>
+                                                            <li>{/*<a href="#" onClick={()=>{targetReplaceImg()}}><img src={require('assets/images/learning/transform.png')} alt="이미지 반전"/></a>*/}</li>
                                                             <li><a href="#" onClick={()=>{targetZoomOut()}}><img src={require('assets/images/learning/glas_minus.png')} alt="이미지 축소"/></a></li>
                                                             <li><a href="#" onClick={()=>{targetZoomReset()}}><img src={require('assets/images/learning/restoration.png')} alt="이미지 reset"/></a></li>                                                            
                                                         </ul>

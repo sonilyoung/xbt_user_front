@@ -93,8 +93,8 @@ export const Login = () => {
                     <div className="mcontent">
                         <div className="login_con">
                             {/*<h3>X-RAY 보안 훈련 시스템 교육생 전용</h3>*/}
-                            <h3>X-ray Security Training System for Trainee</h3>
-                            <h1>X-ray Security<br/>Training<br/><span>System</span></h1>
+                            <h3>X-ray Screening Training System for Trainee</h3>
+                            <h1>X-ray Screening<br/>Training<br/><span>System</span></h1>
                             {/*
                             <p>
                                 X-ray 보안 시스템 훈련을 통해 보안 전문 역량을 강화할 수 있도록<br/>
@@ -104,14 +104,14 @@ export const Login = () => {
 
                             <p>
                                 We provide systematic education and training programs<br/>
-                                to strengthen security expertise through X-ray security system training.
+                                to strengthen screening expertise through X-ray screening system training.
                             </p>                            
                             {isOpened && (
                             <div id="first-modal" className="modal-wrapper modal_blur" style={{display:'block'}}>
                                 <div className="modal md_width1" style={{left: 'calc(50% - 280px)', top: 'calc(50% - 251px)'}}>
                                     {/*<h3 className="login_txt">X-ray 보안 훈련 시스템 교육생 전용</h3>*/}
-                                    <h3 className="login_txt">X-ray Security Training System for Trainee</h3>
-                                    <h1 className="login_tit">X-ray Security Training<span>System</span></h1>
+                                    <h3 className="login_txt">X-ray Screening Training System for Trainee</h3>
+                                    <h1 className="login_tit">X-ray Screening Training<span>System</span></h1>
                                     <div className= {lanSelect}>
                                         <button onClick={()=>handleLangSelect()} className= {
                                             isLanguage === "kor" ? "label kor" 

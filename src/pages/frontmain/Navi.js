@@ -12,7 +12,7 @@ export const Navi = () => {
     return (
         <>
             <div className="tgnb">
-                <h1><a href="#" onClick={()=>onMovePage()}>X-ray Security <span>Training</span></a></h1>
+                <h1><a href="#" onClick={()=>onMovePage()}>X-ray Screening <span>Training</span></a></h1>
                 <nav className="util">
                     <a href="#" onClick={()=>setLogoutProcess(true)}>{/*로그아웃*/}Log out</a>
                 </nav>

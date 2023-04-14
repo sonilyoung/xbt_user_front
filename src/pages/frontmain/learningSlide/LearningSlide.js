@@ -764,8 +764,8 @@ export const LearningSlide = () =>{
 
     useEffect(()=>{    
         handleReset();//시간초기화
-        setImageList(learningImages);//이미지초기화
-        setThumImg(imageList[0].learningThumImages);//썸네일초기화                    
+        //setImageList(learningImages);//이미지초기화
+        //setThumImg(imageList[0].learningThumImages);//썸네일초기화                    
 
         let slide_speed = 5; //이동 거리(px)
         let slide_time = 10; //이동 시간(ms, 1/1000초)
@@ -899,7 +899,6 @@ export const LearningSlide = () =>{
             //마지막 이미지가 끝났을 경우 시험 종료
             function resetImage() {
                 $currentImage = $(images[current_image]); 
-                setCurrentImage(current_image);//현재이미지순서를 기록
                 //setCurrentTransImage(imageList[current_image].learningImages);
                 setThumImg(imageList[current_image].learningThumImages);//썸네일이미지변경
                 setTargetImg($currentImage[0].src);//이미지확대축소 셋팅                
@@ -934,14 +933,13 @@ export const LearningSlide = () =>{
                     setProblremCnt(problrems);
                 }
                 start_count++;
-                
+                setCurrentImage(current_image);//현재이미지순서를 기록
             }
 
     
             //이미지 이동 진행
             //이미지가 화면 밖으로 사라질 경우 resetImage() 호출
             function image_position(){
-                console.log("image_position:", current_image);
                 $currentImage = $(images[current_image]);
                 let imageWidth = $currentImage.width();
                 let image_left = $currentImage.position().left;
@@ -1043,6 +1041,9 @@ export const LearningSlide = () =>{
                 $currentImage = $(images[current_image]);
                 $(this).attr("src",$currentImage.attr('src'));
                 $currentImage.attr("src",image_src);
+
+                setTargetImg(image_src);
+                
                 showImgControl('N');
             });
 
@@ -1101,7 +1102,6 @@ export const LearningSlide = () =>{
             //이미지를 지정된 시간만 노출 후 다음 이미지로 변경
             function displayNextImage() {
 
-                setCurrentImage(currentImageIndex);//현재이미지순서를 기록
                 //setCurrentTransImage(imageList[current_image].learningImages);
                 setThumImg(imageList[currentImageIndex].learningThumImages);//썸네일이미지변경
                 setTargetImg(images[currentImageIndex].src);//이미지확대축소 셋팅    
@@ -1109,6 +1109,7 @@ export const LearningSlide = () =>{
                 start_time = Date.now();paused_time = 0;
                 $(images[currentImageIndex]).hide();
                 currentImageIndex++;
+                setCurrentImage(currentImageIndex);//현재이미지순서를 기록
                 if (currentImageIndex === images.length) {
                     clearTimeout(timer); 
                     clearTimeout(timeout); 
@@ -1247,7 +1248,7 @@ export const LearningSlide = () =>{
         });        
 
         console.log("useEffect!!!!!");
-    },[]);
+    },[currentImage]);
 
 
     const inputRef1 = useRef();
@@ -1283,171 +1284,214 @@ export const LearningSlide = () =>{
         }
     }    
 
+    const nowSelectControl = (e) =>{
+        setNowSelect(e);//현재선택된 아이콘
+    }
+
     //하단 이미지컨트롤 아이콘 통합
     const imgTransControl = (e) =>{
 
         console.log('currentImage:', currentImage);
-        setNowSelect(e);//현재선택된 아이콘
 
         if(e==='color1'){//컬러
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].color;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].color);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].color;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].color);
             }
         }else if(e==='color2'){//컬러유기물강조
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].colorUforce;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].colorUforce);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorUforce;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].colorUforce);
             }
         }else if(e==='color3'){//컬러무기물강조
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].colorMforce;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].colorMforce);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorMforce;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].colorMforce);
             }            
         }else if(e==='color4'){//컬러반전
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].colorRevers;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].colorRevers);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorRevers;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].colorRevers);
             } 
         }else if(e==='cd1'){//컬러채도1
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation1;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].colorSaturation1);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation1;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].colorSaturation1);
             }             
         }else if(e==='cd2'){//컬러채도2
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation2;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].colorSaturation2);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation2;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].colorSaturation2);
             } 
         }else if(e==='cd3'){//컬러채도3
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation3;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].colorSaturation3);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation3;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].colorSaturation3);
             } 
         }else if(e==='cd4'){//컬러채도4
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation4;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].colorSaturation4);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation4;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].colorSaturation4);
             } 
         }else if(e==='cd5'){//컬러채도5
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation5;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].colorSaturation5);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation5;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].colorSaturation5);
             } 
         }else if(e==='cd6'){//컬러채도6
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].colorSaturation6;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].colorSaturation6);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].colorSaturation6;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].colorSaturation6);
             } 
         }else if(e==='blackWhite1'){//흑백
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].blackWhite;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].blackWhite);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhite;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].blackWhite);
             } 
         }else if(e==='blackWhite2'){//흑백유기물강조
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteUforce;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].blackWhiteUforce);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteUforce;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].blackWhiteUforce);
             } 
         }else if(e==='blackWhite3'){//흑백무기물강조
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteMforce;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].blackWhiteMforce);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteMforce;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].blackWhiteMforce);
             } 
         }else if(e==='blackWhite4'){//흑백반전
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteRevers;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].blackWhiteRevers);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteRevers;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].blackWhiteRevers);
             } 
         }else if(e==='cd7'){//흑백채도1
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation1;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].blackWhiteSaturation1);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation1;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].blackWhiteSaturation1);
             } 
         }else if(e==='cd8'){//흑백채도2
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation2;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].blackWhiteSaturation2);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation2;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].blackWhiteSaturation2);
             } 
         }else if(e==='cd9'){//흑백채도3
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation3;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].blackWhiteSaturation3);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation3;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].coblackWhiteSaturation3lor);
             } 
         }else if(e==='cd10'){//흑백채도4
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation4;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].blackWhiteSaturation4);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation4;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].blackWhiteSaturation4);
             } 
         }else if(e==='cd11'){//흑백채도5
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation5;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].blackWhiteSaturation5);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation5;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].blackWhiteSaturation5);
             } 
         }else if(e==='cd12'){//흑백채도6
             if(imgChange){
                 learningImages[currentImage].learningImages = transimages[currentImage].blackWhiteSaturation6;
                 setImageList(learningImages);
+                setTargetImg(transimages[currentImage].blackWhiteSaturation6);
             }else{
                 sideTransimages[currentImage].learningImages = sideTransimages[currentImage].blackWhiteSaturation6;
                 setImageList(sideTransimages);
+                setTargetImg(sideTransimages[currentImage].blackWhiteSaturation6);
             } 
         }
     }
@@ -1497,7 +1541,7 @@ export const LearningSlide = () =>{
                                                 </li>
                                                 <li>
                                                     {/*<h3>X-ray 판독 초급 2023 - 1차</h3>*/}
-                                                    <h3>X-ray Inspection Beginner 2023 - 1st</h3>
+                                                    <h3>X-ray Screening Beginner 2023 - 1st</h3>
                                                 </li>
                                                 <li>
                                                     {/*<h2 className="conname pr30">홍길동</h2>*/}
@@ -1584,34 +1628,34 @@ export const LearningSlide = () =>{
                                     <div className="learn_btcon">
                                         {/* learnbtc01 이미지컨트롤 아이콘 영역*/}
                                         <div className="learnbtc01">
-                                            <ul>
-                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color1')}}><img src={learnc_ic01_01} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color2')}}><img src={learnc_ic01_02} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color3')}}><img src={learnc_ic01_03} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('color4')}}><img src={learnc_ic01_04} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite1')}}><img src={learnc_ic02_01} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite2')}}><img src={learnc_ic02_02} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite3')}}><img src={learnc_ic02_03} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{showImgControl('N');imgTransControl('blackWhite4')}}><img src={learnc_ic02_04} alt=""/></a></li>
+                                        <ul>
+                                                <li><a href="#" onClick={()=>{nowSelectControl('color1');showImgControl('N');imgTransControl('color1')}} className={nowSelect === 'color1' ? 'on' : '' }><img src={learnc_ic01_01} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{nowSelectControl('color2');showImgControl('N');imgTransControl('color2')}} className={nowSelect === 'color2' ? 'on' : '' }><img src={learnc_ic01_02} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{nowSelectControl('color3');showImgControl('N');imgTransControl('color3')}} className={nowSelect === 'color3' ? 'on' : '' }><img src={learnc_ic01_03} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{nowSelectControl('color4');showImgControl('N');imgTransControl('color4')}} className={nowSelect === 'color4' ? 'on' : '' }><img src={learnc_ic01_04} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{nowSelectControl('blackWhite1');showImgControl('N');imgTransControl('blackWhite1')}} className={nowSelect === 'blackWhite1' ? 'on' : '' }><img src={learnc_ic02_01} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{nowSelectControl('blackWhite2');showImgControl('N');imgTransControl('blackWhite2')}} className={nowSelect === 'blackWhite2' ? 'on' : '' }><img src={learnc_ic02_02} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{nowSelectControl('blackWhite3');showImgControl('N');imgTransControl('blackWhite3')}} className={nowSelect === 'blackWhite3' ? 'on' : '' }><img src={learnc_ic02_03} alt=""/></a></li>
+                                                <li><a href="#" onClick={()=>{nowSelectControl('blackWhite4');showImgControl('N');imgTransControl('blackWhite4')}} className={nowSelect === 'blackWhite4' ? 'on' : '' }><img src={learnc_ic02_04} alt=""/></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc02 이미지 채도 아이콘 영역*/}
                                         <div className="learnbtc02">
                                             <ul>
-                                                <li><a href="#" className={nowSelect==='cd1' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd1')}}><span className="brig_ic01_01"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd2' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd2')}}><span className="brig_ic01_02"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd3' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd3')}}><span className="brig_ic01_03"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd4' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd4')}}><span className="brig_ic01_04"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd5' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd5')}}><span className="brig_ic01_05"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd6' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd6')}}><span className="brig_ic01_06"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd1' ? 'on' : ''} onClick={()=>{nowSelectControl('cd1');showImgControl('N');imgTransControl('cd1')}}><span className="brig_ic01_01"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd2' ? 'on' : ''} onClick={()=>{nowSelectControl('cd2');showImgControl('N');imgTransControl('cd2')}}><span className="brig_ic01_02"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd3' ? 'on' : ''} onClick={()=>{nowSelectControl('cd3');showImgControl('N');imgTransControl('cd3')}}><span className="brig_ic01_03"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd4' ? 'on' : ''} onClick={()=>{nowSelectControl('cd4');showImgControl('N');imgTransControl('cd4')}}><span className="brig_ic01_04"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd5' ? 'on' : ''} onClick={()=>{nowSelectControl('cd5');showImgControl('N');imgTransControl('cd5')}}><span className="brig_ic01_05"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd6' ? 'on' : ''} onClick={()=>{nowSelectControl('cd6');showImgControl('N');imgTransControl('cd6')}}><span className="brig_ic01_06"></span></a></li>
                                             </ul>
                                             <ul>
-                                                <li><a href="#" className={nowSelect==='cd7' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd7')}}><span className="brig_ic02_01"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd8' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd8')}}><span className="brig_ic02_02"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd9' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd9')}}><span className="brig_ic02_03"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd10' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd10')}}><span className="brig_ic02_04"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd11' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd11')}}><span className="brig_ic02_05"></span></a></li>
-                                                <li><a href="#" className={nowSelect==='cd12' ? 'on' : ''} onClick={()=>{showImgControl('N');imgTransControl('cd12')}}><span className="brig_ic02_06"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd7' ? 'on' : ''} onClick={()=>{nowSelectControl('cd7');showImgControl('N');imgTransControl('cd7')}}><span className="brig_ic02_01"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd8' ? 'on' : ''} onClick={()=>{nowSelectControl('cd8');showImgControl('N');imgTransControl('cd8')}}><span className="brig_ic02_02"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd9' ? 'on' : ''} onClick={()=>{nowSelectControl('cd9');showImgControl('N');imgTransControl('cd9')}}><span className="brig_ic02_03"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd10' ? 'on' : ''} onClick={()=>{nowSelectControl('cd10');showImgControl('N');imgTransControl('cd10')}}><span className="brig_ic02_04"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd11' ? 'on' : ''} onClick={()=>{nowSelectControl('cd11');showImgControl('N');imgTransControl('cd11')}}><span className="brig_ic02_05"></span></a></li>
+                                                <li><a href="#" className={nowSelect==='cd12' ? 'on' : ''} onClick={()=>{nowSelectControl('cd12');showImgControl('N');imgTransControl('cd12')}}><span className="brig_ic02_06"></span></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc03 */}
