@@ -419,6 +419,7 @@ import open from 'assets/images/learning/open.png';
 import prohibited from 'assets/images/learning/prohibited.png';
 import stop from 'assets/images/learning/stop.png';
 import { PracticeList } from '../practice/PracticeList';
+import {ZoominOut} from '../ZoominOut';
 
 // ================================|| 학습 ||================================ //
 export const LearningCut = () =>{
@@ -706,7 +707,6 @@ export const LearningCut = () =>{
     const displayn = (e) =>{
         setParacticeShow(e);
     }
-    
 
     //타이머셋팅
     const [timer, setTimer] = useState(0);
@@ -1308,6 +1308,14 @@ export const LearningCut = () =>{
     }
 
 
+    //줌인아웃팝업창 컨트롤
+    const [zoominOutShow, setZoominOutShow] = useState(false);
+    //줌인아웃팝업창 컨트롤
+    const handelZoominOut = (e) =>{
+        setZoominOutShow(e);
+    }        
+
+
     return(
         <>
 
@@ -1393,7 +1401,7 @@ export const LearningCut = () =>{
                                         }                                                                     
                                     </div>
 
-                                    <div className="learnc_img_sub" id="learn02_img_sub" style={{ textAlign:"center !important", width: "100%", height: "520px", display:imgDisplay}}>
+                                    <div className="learnc_img_sub" id="learn02_img_sub" onClick={()=>handelZoominOut(true)} style={{ textAlign:"center !important", width: "100%", height: "520px", display:imgDisplay}}>
                                         <TransformWrapper
                                             initialScale={1}
                                             minScale= {0.5}
@@ -1526,6 +1534,8 @@ export const LearningCut = () =>{
                         </div>
                         )} 
 
+               
+                        {zoominOutShow && <ZoominOut imgStr = {targetImg} displayn = {handelZoominOut}/>}
                         {paracticeShow && <PracticeList displayy = {paracticeShow} displayn = {displayn}/>}
                     </div>
                 </div>
