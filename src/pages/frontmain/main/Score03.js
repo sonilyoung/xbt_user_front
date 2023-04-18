@@ -17,13 +17,16 @@ const areaChartOptions = {
             blur: 5,
             opacity: 0.1
         },
+        zoom:{
+            enabled: false
+        },
         toolbar: {
             show: false
         }
     },
     colors: ['#52c41a', '#6D9DCC', '#faad14'],
     dataLabels: {
-        enabled: true
+        enabled: false
     },
     stroke: {
         width: [3, 3, 3],
@@ -85,7 +88,7 @@ export const Score03 = () => {
             },
             yaxis: {
                 title: {
-                    text: undefined
+                    text: 'count'
                 }
             }
         }));
@@ -108,7 +111,7 @@ export const Score03 = () => {
 
     return (
         <div id="chart">
-            <ReactApexChart options={options} series={series} type="line" height={400} />
+            <ReactApexChart options={options} series={series} type="line" width={'100%'} height={400} />
         </div>
     );
 };

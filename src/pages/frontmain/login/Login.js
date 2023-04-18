@@ -19,11 +19,11 @@ import {Loading} from '../Loading';
 export const Login = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const [id] = useState("user");
+    const [id] = useState("admin");
     const [password] = useState("test");
     const[params, setParams] = useState({
-        "id" : "",
-        "password" : "",
+        "id" : "admin",
+        "password" : "test",
     });
     
     const [isLanguage, setIsLanguage] = useState("eng");//언어선택
