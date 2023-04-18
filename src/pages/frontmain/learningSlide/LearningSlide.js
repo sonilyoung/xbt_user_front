@@ -1555,7 +1555,7 @@ export const LearningSlide = () =>{
                                                     {/*<h2 className="conname pr30">홍길동</h2>*/}
                                                     <h2 className="conname pr30">David Fincher</h2>
                                                     {/*<button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01">반입금지물품</button>*/}
-                                                    <button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01_eng">Prohibited item</button>                                                    
+                                                    <button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01_eng">Prohibited item</button>
                                                 </li>
                                             </ul>
                                         </div>

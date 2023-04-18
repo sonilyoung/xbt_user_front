@@ -32,9 +32,9 @@ export const PracticeList = ({displayy, displayn}) => {
     }
 
     useEffect(()=>{  
-            $("#practice-modal").show();
+            $("#practiceList-modal").show();
             // 첫번째 모달창 가운데 정렬
-            let firstModal = document.querySelector("#practice-modal .modal");
+            let firstModal = document.querySelector("#practiceList-modal .modal");
             let modalWidth = firstModal.offsetWidth;
             //alert(modalWidth);
             let modalHeight = firstModal.offsetHeight;
@@ -45,7 +45,7 @@ export const PracticeList = ({displayy, displayn}) => {
             /*
                 버튼에 modal_btn 클래스 넣으면 작동
                 data-mact="open"  open, close 
-                data-minfo="practice-modal" 오픈시킬 창아이디 			
+                data-minfo="practiceList-modal" 오픈시킬 창아이디 			
             */
             const modals = document.querySelectorAll('.modal_btn');
     
@@ -82,7 +82,7 @@ export const PracticeList = ({displayy, displayn}) => {
 
     return (
         <>
-            <div id="practice-modal" className="modal-wrapper modal_blur">
+            <div id="practiceList-modal" className="modal-wrapper modal_blur">
                 <div className="modal xbt_md">
                     {/* xbt_content */}
                     <div className="xbt_content banItems_content">
@@ -206,7 +206,7 @@ export const PracticeList = ({displayy, displayn}) => {
                             </div>
                             {/* //물품 내용 표 */}								
                         </div>
-                        <button id="close-practice-modal" onClick={()=>handleClose()} data-mact="close" data-minfo="practice-modal" className="modal_btn close_btn"></button>
+                        <button id="close-practiceList-modal" onClick={()=>handleClose()} data-mact="close" data-minfo="practiceList-modal" className="modal_btn close_btn"></button>
                     </div>
                 </div>
             </div>     

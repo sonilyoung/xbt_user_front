@@ -8,6 +8,7 @@ import 'assets/css/content.css';
 import 'assets/css/default.css';
 import 'assets/css/login.css';
 import 'assets/css/reset.css';
+import 'assets/css/imgtrs.css';
 import {Navi} from '../Navi';
 import {Copy} from '../Copy';
 
@@ -715,9 +716,9 @@ export const Practice = () => {
     }
 
     useEffect(()=>{  
-        $("#first-modal").show();
+        $("#practice-modal").show();
         // 첫번째 모달창 가운데 정렬
-        let firstModal = document.querySelector("#first-modal .modal");
+        let firstModal = document.querySelector("#practice-modal .modal");
         let modalWidth = firstModal.offsetWidth;
         //alert(modalWidth);
         let modalHeight = firstModal.offsetHeight;
@@ -728,7 +729,7 @@ export const Practice = () => {
         /*
             버튼에 modal_btn 클래스 넣으면 작동
             data-mact="open"  open, close 
-            data-minfo="first-modal" 오픈시킬 창아이디 			
+            data-minfo="practice-modal" 오픈시킬 창아이디 			
         */
         const modals = document.querySelectorAll('.modal_btn');
 
@@ -755,7 +756,7 @@ export const Practice = () => {
                 let modalHeight = firstModal.offsetHeight;
                 firstModal.style.left = `calc(50% - ${modalWidth / 2}px)`;
                 //firstModal.style.left = `calc(50% - ${modalWidth}px)`;
-                firstModal.style.top = `calc(50% - ${modalHeight / 2}px)`;
+                firstModal.style.top = `calc(50 % - ${modalHeight / 2}px)`;
                 //alert(modalWidth);
             }
             if (tar_act == "close") {
@@ -1047,7 +1048,6 @@ export const Practice = () => {
 
     useEffect(() =>{
         defaultData();
-
         console.log("이미지:", imageList);
     },[])
 
@@ -1062,7 +1062,7 @@ export const Practice = () => {
 
                     {/* mcontent */}
                     <div className="mcontent">
-                        <div id="first-modal" className="modal-wrapper modal_blur">
+                        <div id="practice-modal" className="modal-wrapper modal_blur">
                             <div className="modal xbt_md">
                                 {/* xbt_content */}
                                 <div className="xbt_content">
@@ -1078,9 +1078,9 @@ export const Practice = () => {
                                                 <li>
                                                     {/*<h2 className="conname tr">홍길동</h2>*/}
                                                     <h2 className="conname tr">David Fincher</h2>
-                                                    {/*<button id="close-first-modal" onClick={()=>onMovePage()} data-mact="close" data-minfo="first-modal" className="modal_btn conbtn01 conbtn_pd01">종료</button>*/}
+                                                    {/*<button id="close-practice-modal" onClick={()=>onMovePage()} data-mact="close" data-minfo="practice-modal" className="modal_btn conbtn01 conbtn_pd01">종료</button>*/}
                                                     {/*<button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01">반입금지물품</button>*/}
-                                                    <button id="close-first-modal" onClick={()=>onMovePage()} data-mact="close" data-minfo="first-modal" className="modal_btn conbtn01_eng conbtn_pd01">End</button>
+                                                    <button id="close-practice-modal" onClick={()=>onMovePage()} data-mact="close" data-minfo="practice-modal" className="modal_btn conbtn01_eng conbtn_pd01">End</button>
                                                     <button type="button" onClick={()=>setParacticeShow(true)} className="conbtn01_eng">Prohibited item</button>
                                                 </li>
                                             </ul>
@@ -1269,7 +1269,7 @@ export const Practice = () => {
                                                         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                                                             <React.Fragment>
 
-                                                            <div className="tools" style={{visibility:"hidden" ,padding:"33px"}}>
+                                                            <div className="tools" style={{visibility:"hidden"}}>
                                                                 <button ref={inputRef1} onClick={() => zoomIn()}>+</button>
                                                                 <button ref={inputRef2} onClick={() => zoomOut()}>-</button>
                                                                 <button ref={inputRef3} onClick={() => resetTransform()}>x</button>
@@ -1297,7 +1297,7 @@ export const Practice = () => {
                                                         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                                                             <React.Fragment>
 
-                                                            <div className="tools" style={{visibility:"hidden" ,padding:"33px"}}>
+                                                            <div className="tools" style={{visibility:"hidden"}}>
                                                                 <button ref={inputRef4} onClick={() => zoomIn()}>+</button>
                                                                 <button ref={inputRef5} onClick={() => zoomOut()}>-</button>
                                                                 <button ref={inputRef6} onClick={() => resetTransform()}>x</button>

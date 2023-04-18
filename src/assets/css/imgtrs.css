@@ -8,3 +8,15 @@
 .transform-component-module_wrapper__SPB86{
 	margin: 0 auto;
 }
+
+p {
+    margin-top: unset !important;
+    margin-bottom: unset !important;
+}
+
+/* ==================================================
+.react-transform-component {
+    width: unset !important;
+    height: unset !important;
+}
+================================================== */
