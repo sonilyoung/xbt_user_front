@@ -420,7 +420,7 @@ import pass from 'assets/images/learning/pass.png';
 import open from 'assets/images/learning/open.png';
 import prohibited from 'assets/images/learning/prohibited.png';
 import stop from 'assets/images/learning/stop.png';
-
+import {ZoominOut} from '../ZoominOut';
 
 // ================================|| 학습 ||================================ //
 export const LearningSlide = () =>{
@@ -1510,6 +1510,14 @@ export const LearningSlide = () =>{
         }
     }
 
+     //줌인아웃팝업창 컨트롤
+     const [zoominOutShow, setZoominOutShow] = useState(false);
+     //줌인아웃팝업창 컨트롤
+     const handelZoominOut = (e) =>{
+         event.stopPropagation();
+         setZoominOutShow(e);
+     }        
+    
 
     return(
         <>
@@ -1585,15 +1593,15 @@ export const LearningSlide = () =>{
                                     </div>
 
                                     {/* learnc_img 슬라이드 이미*지 출력*/}
-                                    <div className="learnc_img" id="learn01_img" style={{height:"520px", display:imgSlideDisplay}}>
+                                    <div className="learnc_img" id="learn01_img" style={{cursor:'zoom-in',height:"520px", display:imgSlideDisplay}}>
                                         {
                                             imageList.map((target, index) => ([
-                                                <img src={target.learningImages} data-thum={target.learningThumImages} className="image" alt="image" />
+                                                <img onClick={()=>handelZoominOut(true)} src={target.learningImages} data-thum={target.learningThumImages} className="image" alt="image" />
                                             ]))
                                         }                                                                     
                                     </div>
 
-                                    <div className="learnc_img_sub" id="learn01_img_sub" style={{ textAlign:"center !important", width: "100%", height: "520px", display:imgDisplay}}>
+                                    <div className="learnc_img_sub" id="learn01_img_sub" style={{cursor:'zoom-in', textAlign:"center !important", width: "100%", height: "520px", display:imgDisplay}}>
                                         <TransformWrapper
                                             initialScale={1}
                                             minScale= {0.5}
@@ -1613,7 +1621,9 @@ export const LearningSlide = () =>{
                                                     <button ref={inputRef3} onClick={() => resetTransform()}>x</button>
                                                 </div>
                                                 <TransformComponent>
-                                                    <img src={targetImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
+                                                    <div style={{width: "100%"}} onClick={()=>handelZoominOut(true)}>                                                    
+                                                        <img src={targetImg} className="image" alt="image" style={{ width: "100%", height: "100%" }}/>
+                                                    </div>
                                                 </TransformComponent>
                                                 </React.Fragment>
                                             )}
@@ -1629,14 +1639,14 @@ export const LearningSlide = () =>{
                                         {/* learnbtc01 이미지컨트롤 아이콘 영역*/}
                                         <div className="learnbtc01">
                                         <ul>
-                                                <li><a href="#" onClick={()=>{nowSelectControl('color1');showImgControl('N');imgTransControl('color1')}} className={nowSelect === 'color1' ? 'on' : '' }><img src={learnc_ic01_01} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{nowSelectControl('color2');showImgControl('N');imgTransControl('color2')}} className={nowSelect === 'color2' ? 'on' : '' }><img src={learnc_ic01_02} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{nowSelectControl('color3');showImgControl('N');imgTransControl('color3')}} className={nowSelect === 'color3' ? 'on' : '' }><img src={learnc_ic01_03} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{nowSelectControl('color4');showImgControl('N');imgTransControl('color4')}} className={nowSelect === 'color4' ? 'on' : '' }><img src={learnc_ic01_04} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{nowSelectControl('blackWhite1');showImgControl('N');imgTransControl('blackWhite1')}} className={nowSelect === 'blackWhite1' ? 'on' : '' }><img src={learnc_ic02_01} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{nowSelectControl('blackWhite2');showImgControl('N');imgTransControl('blackWhite2')}} className={nowSelect === 'blackWhite2' ? 'on' : '' }><img src={learnc_ic02_02} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{nowSelectControl('blackWhite3');showImgControl('N');imgTransControl('blackWhite3')}} className={nowSelect === 'blackWhite3' ? 'on' : '' }><img src={learnc_ic02_03} alt=""/></a></li>
-                                                <li><a href="#" onClick={()=>{nowSelectControl('blackWhite4');showImgControl('N');imgTransControl('blackWhite4')}} className={nowSelect === 'blackWhite4' ? 'on' : '' }><img src={learnc_ic02_04} alt=""/></a></li>
+                                        <li><a href="#" title="color normal" onClick={()=>{nowSelectControl('color1');showImgControl('N');imgTransControl('color1')}} className={nowSelect === 'color1' ? 'on' : '' }><img src={learnc_ic01_01} alt=""/></a></li>
+                                                <li><a href="#" title="color inorganic emphasis" onClick={()=>{nowSelectControl('color2');showImgControl('N');imgTransControl('color2')}} className={nowSelect === 'color2' ? 'on' : '' }><img src={learnc_ic01_02} alt=""/></a></li>
+                                                <li><a href="#" title="color organic matter emphasis" onClick={()=>{nowSelectControl('color3');showImgControl('N');imgTransControl('color3')}} className={nowSelect === 'color3' ? 'on' : '' }><img src={learnc_ic01_03} alt=""/></a></li>
+                                                <li><a href="#" title="color neg" onClick={()=>{nowSelectControl('color4');showImgControl('N');imgTransControl('color4')}} className={nowSelect === 'color4' ? 'on' : '' }><img src={learnc_ic01_04} alt=""/></a></li>
+                                                <li><a href="#" title="blackandwhite normal" onClick={()=>{nowSelectControl('blackWhite1');showImgControl('N');imgTransControl('blackWhite1')}} className={nowSelect === 'blackWhite1' ? 'on' : '' }><img src={learnc_ic02_01} alt=""/></a></li>
+                                                <li><a href="#" title="blackandwhite inorganic emphasis" onClick={()=>{nowSelectControl('blackWhite2');showImgControl('N');imgTransControl('blackWhite2')}} className={nowSelect === 'blackWhite2' ? 'on' : '' }><img src={learnc_ic02_02} alt=""/></a></li>
+                                                <li><a href="#" title="blackandwhite organic matter emphasis" onClick={()=>{nowSelectControl('blackWhite3');showImgControl('N');imgTransControl('blackWhite3')}} className={nowSelect === 'blackWhite3' ? 'on' : '' }><img src={learnc_ic02_03} alt=""/></a></li>
+                                                <li><a href="#" title="blackandwhite neg" onClick={()=>{nowSelectControl('blackWhite4');showImgControl('N');imgTransControl('blackWhite4')}} className={nowSelect === 'blackWhite4' ? 'on' : '' }><img src={learnc_ic02_04} alt=""/></a></li>
                                             </ul>
                                         </div>
                                         {/* learnbtc02 이미지 채도 아이콘 영역*/}
@@ -1728,6 +1738,7 @@ export const LearningSlide = () =>{
                         </div>
                         )} 
 
+                        {zoominOutShow && <ZoominOut targetImg = {targetImg} displayn = {handelZoominOut}/>}
                         {paracticeShow && <PracticeList displayy = {paracticeShow} displayn = {displayn}/>}                                
                     </div>
                 </div>

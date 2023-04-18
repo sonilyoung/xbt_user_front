@@ -19,23 +19,23 @@ function createData(no,year,baseline,baselineLearning,cutScore,resultScore,resul
 const rows = [
     createData(
         1,
-        '2023',
+        '2021',
         <span>1Batch</span>,
         1,
         60,
-        80,
-        <span>합격</span>,
-        <span>2023-03-10</span>
+        16,
+        <span>불합격</span>,
+        <span>2021-03-10</span>
     ),
     createData(
         1,
-        '2023',
+        '2022',
         <span>2Batch</span>,
         1,
         60,
-        80,
-        <span>합격</span>,
-        <span>2023-03-10</span>
+        48,
+        <span>불합격</span>,
+        <span>2023-04-08</span>
     ),
     createData(
         1,
@@ -43,9 +43,9 @@ const rows = [
         <span>3Batch</span>,
         1,
         60,
-        80,
+        81,
         <span>합격</span>,
-        <span>2023-03-10</span>
+        <span>2023-04-19</span>
     )
 ];
 
@@ -285,7 +285,8 @@ export const Score02 = () => {
                                             {/* {row.bcnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} */}
                                         </TableCell>
                                         <TableCell align="center" style={{ width: '12%', fontSize: '14px' }}>
-                                            <font color="#52c41a">{row.resultData}</font>
+                                            {row.resultScore > 60 ? <font color="#52c41a">{row.resultData}</font> : <font color="#faad14">{row.resultData}</font>}
+                                            
                                         </TableCell>
                                         <TableCell align="center" style={{ width: '12%', fontSize: '14px' }}>
                                             {row.diary}

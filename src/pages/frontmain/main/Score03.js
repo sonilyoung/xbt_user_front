@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable */
 // import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
@@ -16,16 +16,19 @@ const areaChartOptions = {
             left: 5,
             blur: 5,
             opacity: 0.1
+        },
+        toolbar: {
+            show: false
         }
     },
-    colors: ['#faad14', '#52c41a', '#FF0000'],
+    colors: ['#52c41a', '#6D9DCC', '#faad14'],
     dataLabels: {
         enabled: true
     },
     stroke: {
-        width: [3, 3],
+        width: [3, 3, 3],
         curve: 'straight',
-        dashArray: [0, 5],
+        dashArray: [0, 5, 0],
         curve: 'smooth'
     },
     yaxis: {
@@ -66,7 +69,19 @@ export const Score03 = () => {
             ...prevState,
             // colors: [theme.palette.primary.main, theme.palette.primary[400]],
             xaxis: {
-                categories: ['2016', '2017', '2018', '2019', '2020', '2021', '2022']
+                categories: [
+                    'Firearms'
+                    , 'Explosives'
+                    , 'ammunitions'
+                    , 'Knifes and swords'
+                    , 'General weapons'
+                    , 'Camouflage weapon'
+                    , 'Tools or supplies category'
+                    , 'Inflammable substances'
+                    , 'Hazardous materials'
+                    , 'Liquids or gel-type item'
+                ]
+                //categories: ['average', 'Total Count', 'Error Count']
             },
             yaxis: {
                 title: {
@@ -78,20 +93,17 @@ export const Score03 = () => {
 
     const [series, setSeries] = useState([
         {
-            //name: '교육인원',
-            name: 'Number of trainee',
-            data: [14, 20, 23, 25, 26, 15, 18]
-        },
-        {
-            //name: '합격자',
-            name: 'Qualified',
-            data: [5, 9, 12, 18, 23, 10, 16]
-        },
-        {
-            //name: '평균',
             name: 'Average',
-            data: [7, 9, 18, 20, 25, 20, 15]
-        }
+            data: [3, 17, 7, 9, 7, 15, 12, 18, 5, 30]
+        },        
+        {
+            name: 'Total Count',
+            data: [20, 30, 10, 10, 17, 15, 30, 20, 15, 30]
+        },
+        {
+            name: 'Error Count',
+            data: [3, 10, 4, 8, 4, 9, 7, 10, 1, 9]
+        },
     ]);
 
     return (

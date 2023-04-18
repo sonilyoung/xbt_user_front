@@ -12,6 +12,17 @@ import {Navi} from '../Navi';
 import {Copy} from '../Copy';
 
 // ================================|| 데모이미지 ||================================ //
+//================================start 캔이미지
+//캔이미지 
+import t_practice_10_real from 'assets/images/demo/can/real.gif'; //real
+import t_practice_10_3d from 'assets/images/demo/can/3d/101.gif';//3d
+import t_practice_10_front from 'assets/images/practice/sample03.png';//front
+import t_practice_10_side from 'assets/images/practice/sample04.png';//side
+
+//이미지각도
+
+//================================end 캔이미지
+
 //정면이미지
 import t_learning_01 from 'assets/images/demo/X05231-101.jpg';
 import t_learning_02 from 'assets/images/demo/X05228-101.jpg';
@@ -27,15 +38,15 @@ import t_learning_04_1 from 'assets/images/demo/X05182-201.jpg';
 import t_learning_05_1 from 'assets/images/demo/X05180-201.jpg';
 
 
-//총기류 
-import t_practice_01_real from 'assets/images/practice/sample01.png'; //real
-import t_practice_01_3d from 'assets//images/practice/sample02.png';//3d
-import t_practice_01_front from 'assets//images/practice/sample03.png';//front
-import t_practice_01_side from 'assets//images/practice/sample04.png';//side
+
+
+
+
+
 
 
 // ================================|| 하단 이미지 컨트롤 변경 적용 ||================================ //
-//================================이미지1
+//================================이미지1 
 //컬러
 //컬러유기물강조
 //컬러무기물강조
@@ -69,6 +80,15 @@ import t_sbwcolor_03_1 from 'assets/images/demo/X05231-117.jpg';
 import t_sbwcolor_04_1 from 'assets/images/demo/X05231-118.jpg';
 import t_sbwcolor_05_1 from 'assets/images/demo/X05231-119.jpg';
 import t_sbwcolor_06_1 from 'assets/images/demo/X05231-120.jpg';
+
+
+
+
+
+
+
+
+
 
 
 
@@ -109,7 +129,19 @@ import t_side_sbwcolor_06_1 from 'assets/images/demo/X05231-220.jpg';
 //================================이미지1
 
 
+export const IMAGES_DATA = (function () { 
+    let arr = [];
+    for(let i = 0 ; i <= 179 ; i++ ){
+        let tmpImg = require(`assets/images/demo/can/angle/${i}_256x256_Color.png`);
+        arr.push(tmpImg);
+    }
+    return arr;
+})();
+
 export const Practice = () => {
+
+
+    
     const targetUnitList = [
         {
             "unitGroupNo": 49,
@@ -821,10 +853,10 @@ export const Practice = () => {
     }
 
     const learningImages = {
-        "realImg" : t_practice_01_real,
-        "frontImg" : t_practice_01_front,
-        "sideImg" : t_practice_01_side,
-        "threedImg" : t_practice_01_3d
+        "realImg" : t_practice_10_real,
+        "frontImg" : t_practice_10_front,
+        "sideImg" : t_practice_10_side,
+        "threedImg" : t_practice_10_3d
     };    
     
     //정면 하단아이콘유틸에 따라 변경되는 이미지유형
@@ -876,7 +908,6 @@ export const Practice = () => {
     }                                             
 
     const [imageList, setImageList] = useState(learningImages);
-    const [currentImage, setCurrentImage] = useState(0);//현재이미지
 
     const nowSelectControl = (e) =>{
         setNowSelect(e);//현재선택된 아이콘
@@ -884,8 +915,6 @@ export const Practice = () => {
 
     //하단 이미지컨트롤 아이콘 통합
     const imgTransControl = (e) =>{
-
-        console.log('currentImage:', currentImage);
 
         if(e==='color1'){//컬러
             learningImages.frontImg = transimages.color;
@@ -1010,6 +1039,12 @@ export const Practice = () => {
         }          
     }        
     
+    //3d이미지 각도변경
+    const handleThreed = (e) =>{
+        learningImages.threedImg = IMAGES_DATA[e];
+        setImageList(learningImages);
+    }
+
     useEffect(() =>{
         defaultData();
 
@@ -1173,36 +1208,36 @@ export const Practice = () => {
                                                 {/*<button className="label">옵션선택</button>*/}
                                                 <button className="label">Select Option</button>
                                                 <ul className="pra_optionList">
-                                                    <li className="pra_item">12°</li>
-                                                    <li className="pra_item">24°</li>
-                                                    <li className="pra_item">36°</li>
-                                                    <li className="pra_item">48°</li>
-                                                    <li className="pra_item">60°</li>
-                                                    <li className="pra_item">72°</li>
-                                                    <li className="pra_item">84°</li>
-                                                    <li className="pra_item">96°</li>
-                                                    <li className="pra_item">108°</li>
-                                                    <li className="pra_item">120°</li>
-                                                    <li className="pra_item">132°</li>
-                                                    <li className="pra_item">144°</li>
-                                                    <li className="pra_item">156°</li>
-                                                    <li className="pra_item">168°</li>
-                                                    <li className="pra_item">180°</li>
-                                                    <li className="pra_item">192°</li>
-                                                    <li className="pra_item">204°</li>
-                                                    <li className="pra_item">216°</li>
-                                                    <li className="pra_item">228°</li>
-                                                    <li className="pra_item">240</li>
-                                                    <li className="pra_item">252°</li>
-                                                    <li className="pra_item">264°</li>
-                                                    <li className="pra_item">276°</li>
-                                                    <li className="pra_item">288°</li>
-                                                    <li className="pra_item">300°</li>
-                                                    <li className="pra_item">312°</li>
-                                                    <li className="pra_item">324°</li>
-                                                    <li className="pra_item">336°</li>
-                                                    <li className="pra_item">348°</li>
-                                                    <li className="pra_item">360°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("6")}>12°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("12")}>24°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("18")}>36°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("24")}>48°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("30")}>60°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("36")}>72°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("42")}>84°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("48")}>96°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("54")}>108°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("60")}>120°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("66")}>132°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("72")}>144°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("78")}>156°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("84")}>168°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("90")}>180°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("96")}>192°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("102")}>204°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("108")}>216°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("114")}>228°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("120")}>240</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("126")}>252°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("132")}>264°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("138")}>276°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("144")}>288°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("150")}>300°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("156")}>312°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("162")}>324°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("168")}>336°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("174")}>348°</li>
+                                                    <li className="pra_item" onClick={()=>handleThreed("179")}>360°</li>
                                                 </ul>
                                             </div>
                                             {/* //옵션 */}

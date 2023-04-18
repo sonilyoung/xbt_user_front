@@ -363,7 +363,7 @@ export const FrontMain = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button id="close-one-md" onClick={()=>setMcontents(false)} data-mact="close" data-minfo="one-md" class="modal_btn close_btn"></button>
+                                        <button id="close-one-md" onClick={()=>setMcontents(false)} data-mact="close" data-minfo="one-md" className="modal_btn close_btn"></button>
                                     </div>
                                 </div>
                             </div>

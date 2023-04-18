@@ -17,38 +17,41 @@ export class Score01 extends React.Component {
           //colors: ['#C3E0FC','#A2C4E5','#C8D7E7','#7EA4CA','#9FBCD7','#DAE1E7','#6D9DCC']              
           series: [{
             name: 'level 1',
-            data: [44, 55, 57],
+            data: [22, 60, 90],
             color:'#C3E0FC'
           }, {
             name: 'level 2',
-            data: [76, 85, 60],
+            data: [20, 57, 87],
             color:'#A2C4E5'
           }, {
             name: 'level 3',
-            data: [76, 85, 20],
+            data: [18, 52, 83],
             color:'#C8D7E7'
           }, {
             name: 'level 4',
-            data: [20, 31, 10],
+            data: [16, 49, 80],
             color:'#7EA4CA'
           }, {
             name: 'level 5',
-            data: [40, 51, 80],
+            data: [14, 46, 79],
             color:'#9FBCD7'
           }, {
             name: 'level 6',
-            data: [60, 61, 90],
+            data: [12, 40, 77],
             color:'#DAE1E7'
           }, {            
             name: 'level 7',
-            data: [80, 81, 30],
+            data: [10, 38, 75],
             color:'#6D9DCC'
           }],
           options: {
             chart: {
               type: 'bar',
-              height: 350
-            },
+              height: 350,
+              toolbar: {
+                show: false
+              },
+            },                        
             plotOptions: {
               bar: {
                 horizontal: false,
@@ -70,7 +73,7 @@ export class Score01 extends React.Component {
             },
             xaxis: {
               //categories: ['2023년 1차', '2023년 2차', '2023년 3차']
-              categories: ['2023year 1Batch', '2023year 2Batch', '2023year 3Batch']
+              categories: ['2021year 1Batch', '2022year 2Batch', '2023year 3Batch']
             },
             yaxis: {
               title: {
