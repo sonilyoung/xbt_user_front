@@ -15,18 +15,18 @@ import {Copy} from '../Copy';
 
 // ================================|| 데모이미지 ||================================ //
 //정면이미지
-import t_learning_01 from 'assets/images/demo/X05231-101.jpg';
-import t_learning_02 from 'assets/images/demo/X05228-101.jpg';
-import t_learning_03 from 'assets/images/demo/X05227-101.jpg';
-import t_learning_04 from 'assets/images/demo/X05182-101.jpg';
-import t_learning_05 from 'assets/images/demo/X05180-101.jpg';
+import t_learning_01 from 'assets/images/demo/learning/X05231-101.jpg';
+import t_learning_02 from 'assets/images/demo/learning/X05228-101.jpg';
+import t_learning_03 from 'assets/images/demo/learning/X05227-101.jpg';
+import t_learning_04 from 'assets/images/demo/learning/X05182-101.jpg';
+import t_learning_05 from 'assets/images/demo/learning/X05180-101.jpg';
 
 //측면이미지
-import t_learning_01_1 from 'assets/images/demo/X05231-201.jpg';
-import t_learning_02_1 from 'assets/images/demo/X05228-201.jpg';
-import t_learning_03_1 from 'assets/images/demo/X05227-201.jpg';
-import t_learning_04_1 from 'assets/images/demo/X05182-201.jpg';
-import t_learning_05_1 from 'assets/images/demo/X05180-201.jpg';
+import t_learning_01_1 from 'assets/images/demo/learning/X05231-201.jpg';
+import t_learning_02_1 from 'assets/images/demo/learning/X05228-201.jpg';
+import t_learning_03_1 from 'assets/images/demo/learning/X05227-201.jpg';
+import t_learning_04_1 from 'assets/images/demo/learning/X05182-201.jpg';
+import t_learning_05_1 from 'assets/images/demo/learning/X05180-201.jpg';
 
 
 // ================================|| 하단 이미지 컨트롤 변경 적용 ||================================ //
@@ -35,35 +35,35 @@ import t_learning_05_1 from 'assets/images/demo/X05180-201.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_color_01_1 from 'assets/images/demo/X05231-101.jpg';
-import t_color_02_1 from 'assets/images/demo/X05231-102.jpg';
-import t_color_03_1 from 'assets/images/demo/X05231-103.jpg';
-import t_color_04_1 from 'assets/images/demo/X05231-104.jpg';
+import t_color_01_1 from 'assets/images/demo/learning/X05231-101.jpg';
+import t_color_02_1 from 'assets/images/demo/learning/X05231-102.jpg';
+import t_color_03_1 from 'assets/images/demo/learning/X05231-103.jpg';
+import t_color_04_1 from 'assets/images/demo/learning/X05231-104.jpg';
 
 //컬러채도
-import t_scolor_01_1 from 'assets/images/demo/X05231-105.jpg';
-import t_scolor_02_1 from 'assets/images/demo/X05231-106.jpg';
-import t_scolor_03_1 from 'assets/images/demo/X05231-107.jpg';
-import t_scolor_04_1 from 'assets/images/demo/X05231-108.jpg';
-import t_scolor_05_1 from 'assets/images/demo/X05231-109.jpg';
-import t_scolor_06_1 from 'assets/images/demo/X05231-110.jpg';
+import t_scolor_01_1 from 'assets/images/demo/learning/X05231-105.jpg';
+import t_scolor_02_1 from 'assets/images/demo/learning/X05231-106.jpg';
+import t_scolor_03_1 from 'assets/images/demo/learning/X05231-107.jpg';
+import t_scolor_04_1 from 'assets/images/demo/learning/X05231-108.jpg';
+import t_scolor_05_1 from 'assets/images/demo/learning/X05231-109.jpg';
+import t_scolor_06_1 from 'assets/images/demo/learning/X05231-110.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bwcolor_01_1 from 'assets/images/demo/X05231-111.jpg';
-import t_bwcolor_02_1 from 'assets/images/demo/X05231-112.jpg';
-import t_bwcolor_03_1 from 'assets/images/demo/X05231-113.jpg';
-import t_bwcolor_04_1 from 'assets/images/demo/X05231-114.jpg';
+import t_bwcolor_01_1 from 'assets/images/demo/learning/X05231-111.jpg';
+import t_bwcolor_02_1 from 'assets/images/demo/learning/X05231-112.jpg';
+import t_bwcolor_03_1 from 'assets/images/demo/learning/X05231-113.jpg';
+import t_bwcolor_04_1 from 'assets/images/demo/learning/X05231-114.jpg';
 
 //흑백채도
-import t_sbwcolor_01_1 from 'assets/images/demo/X05231-115.jpg';
-import t_sbwcolor_02_1 from 'assets/images/demo/X05231-116.jpg';
-import t_sbwcolor_03_1 from 'assets/images/demo/X05231-117.jpg';
-import t_sbwcolor_04_1 from 'assets/images/demo/X05231-118.jpg';
-import t_sbwcolor_05_1 from 'assets/images/demo/X05231-119.jpg';
-import t_sbwcolor_06_1 from 'assets/images/demo/X05231-120.jpg';
+import t_sbwcolor_01_1 from 'assets/images/demo/learning/X05231-115.jpg';
+import t_sbwcolor_02_1 from 'assets/images/demo/learning/X05231-116.jpg';
+import t_sbwcolor_03_1 from 'assets/images/demo/learning/X05231-117.jpg';
+import t_sbwcolor_04_1 from 'assets/images/demo/learning/X05231-118.jpg';
+import t_sbwcolor_05_1 from 'assets/images/demo/learning/X05231-119.jpg';
+import t_sbwcolor_06_1 from 'assets/images/demo/learning/X05231-120.jpg';
 
 
 
@@ -72,35 +72,35 @@ import t_sbwcolor_06_1 from 'assets/images/demo/X05231-120.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_side_color_01_1 from 'assets/images/demo/X05231-201.jpg';
-import t_side_color_02_1 from 'assets/images/demo/X05231-202.jpg';
-import t_side_color_03_1 from 'assets/images/demo/X05231-203.jpg';
-import t_side_color_04_1 from 'assets/images/demo/X05231-204.jpg';
+import t_side_color_01_1 from 'assets/images/demo/learning/X05231-201.jpg';
+import t_side_color_02_1 from 'assets/images/demo/learning/X05231-202.jpg';
+import t_side_color_03_1 from 'assets/images/demo/learning/X05231-203.jpg';
+import t_side_color_04_1 from 'assets/images/demo/learning/X05231-204.jpg';
 
 //컬러채도
-import t_side_scolor_01_1 from 'assets/images/demo/X05231-205.jpg';
-import t_side_scolor_02_1 from 'assets/images/demo/X05231-206.jpg';
-import t_side_scolor_03_1 from 'assets/images/demo/X05231-207.jpg';
-import t_side_scolor_04_1 from 'assets/images/demo/X05231-208.jpg';
-import t_side_scolor_05_1 from 'assets/images/demo/X05231-209.jpg';
-import t_side_scolor_06_1 from 'assets/images/demo/X05231-210.jpg';
+import t_side_scolor_01_1 from 'assets/images/demo/learning/X05231-205.jpg';
+import t_side_scolor_02_1 from 'assets/images/demo/learning/X05231-206.jpg';
+import t_side_scolor_03_1 from 'assets/images/demo/learning/X05231-207.jpg';
+import t_side_scolor_04_1 from 'assets/images/demo/learning/X05231-208.jpg';
+import t_side_scolor_05_1 from 'assets/images/demo/learning/X05231-209.jpg';
+import t_side_scolor_06_1 from 'assets/images/demo/learning/X05231-210.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_side_bwcolor_01_1 from 'assets/images/demo/X05231-211.jpg';
-import t_side_bwcolor_02_1 from 'assets/images/demo/X05231-212.jpg';
-import t_side_bwcolor_03_1 from 'assets/images/demo/X05231-213.jpg';
-import t_side_bwcolor_04_1 from 'assets/images/demo/X05231-214.jpg';
+import t_side_bwcolor_01_1 from 'assets/images/demo/learning/X05231-211.jpg';
+import t_side_bwcolor_02_1 from 'assets/images/demo/learning/X05231-212.jpg';
+import t_side_bwcolor_03_1 from 'assets/images/demo/learning/X05231-213.jpg';
+import t_side_bwcolor_04_1 from 'assets/images/demo/learning/X05231-214.jpg';
 
 //흑백채도
-import t_side_sbwcolor_01_1 from 'assets/images/demo/X05231-215.jpg';
-import t_side_sbwcolor_02_1 from 'assets/images/demo/X05231-216.jpg';
-import t_side_sbwcolor_03_1 from 'assets/images/demo/X05231-217.jpg';
-import t_side_sbwcolor_04_1 from 'assets/images/demo/X05231-218.jpg';
-import t_side_sbwcolor_05_1 from 'assets/images/demo/X05231-219.jpg';
-import t_side_sbwcolor_06_1 from 'assets/images/demo/X05231-220.jpg';
+import t_side_sbwcolor_01_1 from 'assets/images/demo/learning/X05231-215.jpg';
+import t_side_sbwcolor_02_1 from 'assets/images/demo/learning/X05231-216.jpg';
+import t_side_sbwcolor_03_1 from 'assets/images/demo/learning/X05231-217.jpg';
+import t_side_sbwcolor_04_1 from 'assets/images/demo/learning/X05231-218.jpg';
+import t_side_sbwcolor_05_1 from 'assets/images/demo/learning/X05231-219.jpg';
+import t_side_sbwcolor_06_1 from 'assets/images/demo/learning/X05231-220.jpg';
 //================================이미지1
 
 
@@ -109,35 +109,35 @@ import t_side_sbwcolor_06_1 from 'assets/images/demo/X05231-220.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_color_01_2 from 'assets/images/demo/X05228-101.jpg';
-import t_color_02_2 from 'assets/images/demo/X05228-102.jpg';
-import t_color_03_2 from 'assets/images/demo/X05228-103.jpg';
-import t_color_04_2 from 'assets/images/demo/X05228-104.jpg';
+import t_color_01_2 from 'assets/images/demo/learning/X05228-101.jpg';
+import t_color_02_2 from 'assets/images/demo/learning/X05228-102.jpg';
+import t_color_03_2 from 'assets/images/demo/learning/X05228-103.jpg';
+import t_color_04_2 from 'assets/images/demo/learning/X05228-104.jpg';
 
 //컬러채도
-import t_scolor_01_2 from 'assets/images/demo/X05228-105.jpg';
-import t_scolor_02_2 from 'assets/images/demo/X05228-106.jpg';
-import t_scolor_03_2 from 'assets/images/demo/X05228-107.jpg';
-import t_scolor_04_2 from 'assets/images/demo/X05228-108.jpg';
-import t_scolor_05_2 from 'assets/images/demo/X05228-109.jpg';
-import t_scolor_06_2 from 'assets/images/demo/X05228-110.jpg';
+import t_scolor_01_2 from 'assets/images/demo/learning/X05228-105.jpg';
+import t_scolor_02_2 from 'assets/images/demo/learning/X05228-106.jpg';
+import t_scolor_03_2 from 'assets/images/demo/learning/X05228-107.jpg';
+import t_scolor_04_2 from 'assets/images/demo/learning/X05228-108.jpg';
+import t_scolor_05_2 from 'assets/images/demo/learning/X05228-109.jpg';
+import t_scolor_06_2 from 'assets/images/demo/learning/X05228-110.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bwcolor_01_2 from 'assets/images/demo/X05228-111.jpg';
-import t_bwcolor_02_2 from 'assets/images/demo/X05228-112.jpg';
-import t_bwcolor_03_2 from 'assets/images/demo/X05228-113.jpg';
-import t_bwcolor_04_2 from 'assets/images/demo/X05228-114.jpg';
+import t_bwcolor_01_2 from 'assets/images/demo/learning/X05228-111.jpg';
+import t_bwcolor_02_2 from 'assets/images/demo/learning/X05228-112.jpg';
+import t_bwcolor_03_2 from 'assets/images/demo/learning/X05228-113.jpg';
+import t_bwcolor_04_2 from 'assets/images/demo/learning/X05228-114.jpg';
 
 //흑백채도
-import t_sbwcolor_01_2 from 'assets/images/demo/X05228-115.jpg';
-import t_sbwcolor_02_2 from 'assets/images/demo/X05228-116.jpg';
-import t_sbwcolor_03_2 from 'assets/images/demo/X05228-117.jpg';
-import t_sbwcolor_04_2 from 'assets/images/demo/X05228-118.jpg';
-import t_sbwcolor_05_2 from 'assets/images/demo/X05228-119.jpg';
-import t_sbwcolor_06_2 from 'assets/images/demo/X05228-120.jpg';
+import t_sbwcolor_01_2 from 'assets/images/demo/learning/X05228-115.jpg';
+import t_sbwcolor_02_2 from 'assets/images/demo/learning/X05228-116.jpg';
+import t_sbwcolor_03_2 from 'assets/images/demo/learning/X05228-117.jpg';
+import t_sbwcolor_04_2 from 'assets/images/demo/learning/X05228-118.jpg';
+import t_sbwcolor_05_2 from 'assets/images/demo/learning/X05228-119.jpg';
+import t_sbwcolor_06_2 from 'assets/images/demo/learning/X05228-120.jpg';
 
 
 
@@ -146,35 +146,35 @@ import t_sbwcolor_06_2 from 'assets/images/demo/X05228-120.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_side_color_01_2 from 'assets/images/demo/X05228-201.jpg';
-import t_side_color_02_2 from 'assets/images/demo/X05228-202.jpg';
-import t_side_color_03_2 from 'assets/images/demo/X05228-203.jpg';
-import t_side_color_04_2 from 'assets/images/demo/X05228-204.jpg';
+import t_side_color_01_2 from 'assets/images/demo/learning/X05228-201.jpg';
+import t_side_color_02_2 from 'assets/images/demo/learning/X05228-202.jpg';
+import t_side_color_03_2 from 'assets/images/demo/learning/X05228-203.jpg';
+import t_side_color_04_2 from 'assets/images/demo/learning/X05228-204.jpg';
 
 //컬러채도
-import t_side_scolor_01_2 from 'assets/images/demo/X05228-205.jpg';
-import t_side_scolor_02_2 from 'assets/images/demo/X05228-206.jpg';
-import t_side_scolor_03_2 from 'assets/images/demo/X05228-207.jpg';
-import t_side_scolor_04_2 from 'assets/images/demo/X05228-208.jpg';
-import t_side_scolor_05_2 from 'assets/images/demo/X05228-209.jpg';
-import t_side_scolor_06_2 from 'assets/images/demo/X05228-210.jpg';
+import t_side_scolor_01_2 from 'assets/images/demo/learning/X05228-205.jpg';
+import t_side_scolor_02_2 from 'assets/images/demo/learning/X05228-206.jpg';
+import t_side_scolor_03_2 from 'assets/images/demo/learning/X05228-207.jpg';
+import t_side_scolor_04_2 from 'assets/images/demo/learning/X05228-208.jpg';
+import t_side_scolor_05_2 from 'assets/images/demo/learning/X05228-209.jpg';
+import t_side_scolor_06_2 from 'assets/images/demo/learning/X05228-210.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_side_bwcolor_01_2 from 'assets/images/demo/X05228-211.jpg';
-import t_side_bwcolor_02_2 from 'assets/images/demo/X05228-212.jpg';
-import t_side_bwcolor_03_2 from 'assets/images/demo/X05228-213.jpg';
-import t_side_bwcolor_04_2 from 'assets/images/demo/X05228-214.jpg';
+import t_side_bwcolor_01_2 from 'assets/images/demo/learning/X05228-211.jpg';
+import t_side_bwcolor_02_2 from 'assets/images/demo/learning/X05228-212.jpg';
+import t_side_bwcolor_03_2 from 'assets/images/demo/learning/X05228-213.jpg';
+import t_side_bwcolor_04_2 from 'assets/images/demo/learning/X05228-214.jpg';
 
 //흑백채도
-import t_side_sbwcolor_01_2 from 'assets/images/demo/X05228-215.jpg';
-import t_side_sbwcolor_02_2 from 'assets/images/demo/X05228-216.jpg';
-import t_side_sbwcolor_03_2 from 'assets/images/demo/X05228-217.jpg';
-import t_side_sbwcolor_04_2 from 'assets/images/demo/X05228-218.jpg';
-import t_side_sbwcolor_05_2 from 'assets/images/demo/X05228-219.jpg';
-import t_side_sbwcolor_06_2 from 'assets/images/demo/X05228-220.jpg';
+import t_side_sbwcolor_01_2 from 'assets/images/demo/learning/X05228-215.jpg';
+import t_side_sbwcolor_02_2 from 'assets/images/demo/learning/X05228-216.jpg';
+import t_side_sbwcolor_03_2 from 'assets/images/demo/learning/X05228-217.jpg';
+import t_side_sbwcolor_04_2 from 'assets/images/demo/learning/X05228-218.jpg';
+import t_side_sbwcolor_05_2 from 'assets/images/demo/learning/X05228-219.jpg';
+import t_side_sbwcolor_06_2 from 'assets/images/demo/learning/X05228-220.jpg';
 //================================이미지2
 
 
@@ -183,35 +183,35 @@ import t_side_sbwcolor_06_2 from 'assets/images/demo/X05228-220.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_color_01_3 from 'assets/images/demo/X05227-101.jpg';
-import t_color_02_3 from 'assets/images/demo/X05227-102.jpg';
-import t_color_03_3 from 'assets/images/demo/X05227-103.jpg';
-import t_color_04_3 from 'assets/images/demo/X05227-104.jpg';
+import t_color_01_3 from 'assets/images/demo/learning/X05227-101.jpg';
+import t_color_02_3 from 'assets/images/demo/learning/X05227-102.jpg';
+import t_color_03_3 from 'assets/images/demo/learning/X05227-103.jpg';
+import t_color_04_3 from 'assets/images/demo/learning/X05227-104.jpg';
 
 //컬러채도
-import t_scolor_01_3 from 'assets/images/demo/X05227-105.jpg';
-import t_scolor_02_3 from 'assets/images/demo/X05227-106.jpg';
-import t_scolor_03_3 from 'assets/images/demo/X05227-107.jpg';
-import t_scolor_04_3 from 'assets/images/demo/X05227-108.jpg';
-import t_scolor_05_3 from 'assets/images/demo/X05227-109.jpg';
-import t_scolor_06_3 from 'assets/images/demo/X05227-110.jpg';
+import t_scolor_01_3 from 'assets/images/demo/learning/X05227-105.jpg';
+import t_scolor_02_3 from 'assets/images/demo/learning/X05227-106.jpg';
+import t_scolor_03_3 from 'assets/images/demo/learning/X05227-107.jpg';
+import t_scolor_04_3 from 'assets/images/demo/learning/X05227-108.jpg';
+import t_scolor_05_3 from 'assets/images/demo/learning/X05227-109.jpg';
+import t_scolor_06_3 from 'assets/images/demo/learning/X05227-110.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bwcolor_01_3 from 'assets/images/demo/X05227-111.jpg';
-import t_bwcolor_02_3 from 'assets/images/demo/X05227-112.jpg';
-import t_bwcolor_03_3 from 'assets/images/demo/X05227-113.jpg';
-import t_bwcolor_04_3 from 'assets/images/demo/X05227-114.jpg';
+import t_bwcolor_01_3 from 'assets/images/demo/learning/X05227-111.jpg';
+import t_bwcolor_02_3 from 'assets/images/demo/learning/X05227-112.jpg';
+import t_bwcolor_03_3 from 'assets/images/demo/learning/X05227-113.jpg';
+import t_bwcolor_04_3 from 'assets/images/demo/learning/X05227-114.jpg';
 
 //흑백채도
-import t_sbwcolor_01_3 from 'assets/images/demo/X05227-115.jpg';
-import t_sbwcolor_02_3 from 'assets/images/demo/X05227-116.jpg';
-import t_sbwcolor_03_3 from 'assets/images/demo/X05227-117.jpg';
-import t_sbwcolor_04_3 from 'assets/images/demo/X05227-118.jpg';
-import t_sbwcolor_05_3 from 'assets/images/demo/X05227-119.jpg';
-import t_sbwcolor_06_3 from 'assets/images/demo/X05227-120.jpg';
+import t_sbwcolor_01_3 from 'assets/images/demo/learning/X05227-115.jpg';
+import t_sbwcolor_02_3 from 'assets/images/demo/learning/X05227-116.jpg';
+import t_sbwcolor_03_3 from 'assets/images/demo/learning/X05227-117.jpg';
+import t_sbwcolor_04_3 from 'assets/images/demo/learning/X05227-118.jpg';
+import t_sbwcolor_05_3 from 'assets/images/demo/learning/X05227-119.jpg';
+import t_sbwcolor_06_3 from 'assets/images/demo/learning/X05227-120.jpg';
 
 
 //================================측면이미지
@@ -219,35 +219,35 @@ import t_sbwcolor_06_3 from 'assets/images/demo/X05227-120.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_side_color_01_3 from 'assets/images/demo/X05227-201.jpg';
-import t_side_color_02_3 from 'assets/images/demo/X05227-202.jpg';
-import t_side_color_03_3 from 'assets/images/demo/X05227-203.jpg';
-import t_side_color_04_3 from 'assets/images/demo/X05227-204.jpg';
+import t_side_color_01_3 from 'assets/images/demo/learning/X05227-201.jpg';
+import t_side_color_02_3 from 'assets/images/demo/learning/X05227-202.jpg';
+import t_side_color_03_3 from 'assets/images/demo/learning/X05227-203.jpg';
+import t_side_color_04_3 from 'assets/images/demo/learning/X05227-204.jpg';
 
 //컬러채도
-import t_side_scolor_01_3 from 'assets/images/demo/X05227-205.jpg';
-import t_side_scolor_02_3 from 'assets/images/demo/X05227-206.jpg';
-import t_side_scolor_03_3 from 'assets/images/demo/X05227-207.jpg';
-import t_side_scolor_04_3 from 'assets/images/demo/X05227-208.jpg';
-import t_side_scolor_05_3 from 'assets/images/demo/X05227-209.jpg';
-import t_side_scolor_06_3 from 'assets/images/demo/X05227-210.jpg';
+import t_side_scolor_01_3 from 'assets/images/demo/learning/X05227-205.jpg';
+import t_side_scolor_02_3 from 'assets/images/demo/learning/X05227-206.jpg';
+import t_side_scolor_03_3 from 'assets/images/demo/learning/X05227-207.jpg';
+import t_side_scolor_04_3 from 'assets/images/demo/learning/X05227-208.jpg';
+import t_side_scolor_05_3 from 'assets/images/demo/learning/X05227-209.jpg';
+import t_side_scolor_06_3 from 'assets/images/demo/learning/X05227-210.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_side_bwcolor_01_3 from 'assets/images/demo/X05227-211.jpg';
-import t_side_bwcolor_02_3 from 'assets/images/demo/X05227-212.jpg';
-import t_side_bwcolor_03_3 from 'assets/images/demo/X05227-213.jpg';
-import t_side_bwcolor_04_3 from 'assets/images/demo/X05227-214.jpg';
+import t_side_bwcolor_01_3 from 'assets/images/demo/learning/X05227-211.jpg';
+import t_side_bwcolor_02_3 from 'assets/images/demo/learning/X05227-212.jpg';
+import t_side_bwcolor_03_3 from 'assets/images/demo/learning/X05227-213.jpg';
+import t_side_bwcolor_04_3 from 'assets/images/demo/learning/X05227-214.jpg';
 
 //흑백채도
-import t_side_sbwcolor_01_3 from 'assets/images/demo/X05227-215.jpg';
-import t_side_sbwcolor_02_3 from 'assets/images/demo/X05227-216.jpg';
-import t_side_sbwcolor_03_3 from 'assets/images/demo/X05227-217.jpg';
-import t_side_sbwcolor_04_3 from 'assets/images/demo/X05227-218.jpg';
-import t_side_sbwcolor_05_3 from 'assets/images/demo/X05227-219.jpg';
-import t_side_sbwcolor_06_3 from 'assets/images/demo/X05227-220.jpg';
+import t_side_sbwcolor_01_3 from 'assets/images/demo/learning/X05227-215.jpg';
+import t_side_sbwcolor_02_3 from 'assets/images/demo/learning/X05227-216.jpg';
+import t_side_sbwcolor_03_3 from 'assets/images/demo/learning/X05227-217.jpg';
+import t_side_sbwcolor_04_3 from 'assets/images/demo/learning/X05227-218.jpg';
+import t_side_sbwcolor_05_3 from 'assets/images/demo/learning/X05227-219.jpg';
+import t_side_sbwcolor_06_3 from 'assets/images/demo/learning/X05227-220.jpg';
 //================================이미지3
 
 //================================이미지4
@@ -255,35 +255,35 @@ import t_side_sbwcolor_06_3 from 'assets/images/demo/X05227-220.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_color_01_4 from 'assets/images/demo/X05182-101.jpg';
-import t_color_02_4 from 'assets/images/demo/X05182-102.jpg';
-import t_color_03_4 from 'assets/images/demo/X05182-103.jpg';
-import t_color_04_4 from 'assets/images/demo/X05182-104.jpg';
+import t_color_01_4 from 'assets/images/demo/learning/X05182-101.jpg';
+import t_color_02_4 from 'assets/images/demo/learning/X05182-102.jpg';
+import t_color_03_4 from 'assets/images/demo/learning/X05182-103.jpg';
+import t_color_04_4 from 'assets/images/demo/learning/X05182-104.jpg';
 
 //컬러채도
-import t_scolor_01_4 from 'assets/images/demo/X05182-105.jpg';
-import t_scolor_02_4 from 'assets/images/demo/X05182-106.jpg';
-import t_scolor_03_4 from 'assets/images/demo/X05182-107.jpg';
-import t_scolor_04_4 from 'assets/images/demo/X05182-108.jpg';
-import t_scolor_05_4 from 'assets/images/demo/X05182-109.jpg';
-import t_scolor_06_4 from 'assets/images/demo/X05182-110.jpg';
+import t_scolor_01_4 from 'assets/images/demo/learning/X05182-105.jpg';
+import t_scolor_02_4 from 'assets/images/demo/learning/X05182-106.jpg';
+import t_scolor_03_4 from 'assets/images/demo/learning/X05182-107.jpg';
+import t_scolor_04_4 from 'assets/images/demo/learning/X05182-108.jpg';
+import t_scolor_05_4 from 'assets/images/demo/learning/X05182-109.jpg';
+import t_scolor_06_4 from 'assets/images/demo/learning/X05182-110.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bwcolor_01_4 from 'assets/images/demo/X05182-111.jpg';
-import t_bwcolor_02_4 from 'assets/images/demo/X05182-112.jpg';
-import t_bwcolor_03_4 from 'assets/images/demo/X05182-113.jpg';
-import t_bwcolor_04_4 from 'assets/images/demo/X05182-114.jpg';
+import t_bwcolor_01_4 from 'assets/images/demo/learning/X05182-111.jpg';
+import t_bwcolor_02_4 from 'assets/images/demo/learning/X05182-112.jpg';
+import t_bwcolor_03_4 from 'assets/images/demo/learning/X05182-113.jpg';
+import t_bwcolor_04_4 from 'assets/images/demo/learning/X05182-114.jpg';
 
 //흑백채도
-import t_sbwcolor_01_4 from 'assets/images/demo/X05182-115.jpg';
-import t_sbwcolor_02_4 from 'assets/images/demo/X05182-116.jpg';
-import t_sbwcolor_03_4 from 'assets/images/demo/X05182-117.jpg';
-import t_sbwcolor_04_4 from 'assets/images/demo/X05182-118.jpg';
-import t_sbwcolor_05_4 from 'assets/images/demo/X05182-119.jpg';
-import t_sbwcolor_06_4 from 'assets/images/demo/X05182-120.jpg';
+import t_sbwcolor_01_4 from 'assets/images/demo/learning/X05182-115.jpg';
+import t_sbwcolor_02_4 from 'assets/images/demo/learning/X05182-116.jpg';
+import t_sbwcolor_03_4 from 'assets/images/demo/learning/X05182-117.jpg';
+import t_sbwcolor_04_4 from 'assets/images/demo/learning/X05182-118.jpg';
+import t_sbwcolor_05_4 from 'assets/images/demo/learning/X05182-119.jpg';
+import t_sbwcolor_06_4 from 'assets/images/demo/learning/X05182-120.jpg';
 
 
 
@@ -292,35 +292,35 @@ import t_sbwcolor_06_4 from 'assets/images/demo/X05182-120.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_side_color_01_4 from 'assets/images/demo/X05182-201.jpg';
-import t_side_color_02_4 from 'assets/images/demo/X05182-202.jpg';
-import t_side_color_03_4 from 'assets/images/demo/X05182-203.jpg';
-import t_side_color_04_4 from 'assets/images/demo/X05182-204.jpg';
+import t_side_color_01_4 from 'assets/images/demo/learning/X05182-201.jpg';
+import t_side_color_02_4 from 'assets/images/demo/learning/X05182-202.jpg';
+import t_side_color_03_4 from 'assets/images/demo/learning/X05182-203.jpg';
+import t_side_color_04_4 from 'assets/images/demo/learning/X05182-204.jpg';
 
 //컬러채도
-import t_side_scolor_01_4 from 'assets/images/demo/X05182-205.jpg';
-import t_side_scolor_02_4 from 'assets/images/demo/X05182-206.jpg';
-import t_side_scolor_03_4 from 'assets/images/demo/X05182-207.jpg';
-import t_side_scolor_04_4 from 'assets/images/demo/X05182-208.jpg';
-import t_side_scolor_05_4 from 'assets/images/demo/X05182-209.jpg';
-import t_side_scolor_06_4 from 'assets/images/demo/X05182-210.jpg';
+import t_side_scolor_01_4 from 'assets/images/demo/learning/X05182-205.jpg';
+import t_side_scolor_02_4 from 'assets/images/demo/learning/X05182-206.jpg';
+import t_side_scolor_03_4 from 'assets/images/demo/learning/X05182-207.jpg';
+import t_side_scolor_04_4 from 'assets/images/demo/learning/X05182-208.jpg';
+import t_side_scolor_05_4 from 'assets/images/demo/learning/X05182-209.jpg';
+import t_side_scolor_06_4 from 'assets/images/demo/learning/X05182-210.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_side_bwcolor_01_4 from 'assets/images/demo/X05182-211.jpg';
-import t_side_bwcolor_02_4 from 'assets/images/demo/X05182-212.jpg';
-import t_side_bwcolor_03_4 from 'assets/images/demo/X05182-213.jpg';
-import t_side_bwcolor_04_4 from 'assets/images/demo/X05182-214.jpg';
+import t_side_bwcolor_01_4 from 'assets/images/demo/learning/X05182-211.jpg';
+import t_side_bwcolor_02_4 from 'assets/images/demo/learning/X05182-212.jpg';
+import t_side_bwcolor_03_4 from 'assets/images/demo/learning/X05182-213.jpg';
+import t_side_bwcolor_04_4 from 'assets/images/demo/learning/X05182-214.jpg';
 
 //흑백채도
-import t_side_sbwcolor_01_4 from 'assets/images/demo/X05182-215.jpg';
-import t_side_sbwcolor_02_4 from 'assets/images/demo/X05182-216.jpg';
-import t_side_sbwcolor_03_4 from 'assets/images/demo/X05182-217.jpg';
-import t_side_sbwcolor_04_4 from 'assets/images/demo/X05182-218.jpg';
-import t_side_sbwcolor_05_4 from 'assets/images/demo/X05182-219.jpg';
-import t_side_sbwcolor_06_4 from 'assets/images/demo/X05182-220.jpg';
+import t_side_sbwcolor_01_4 from 'assets/images/demo/learning/X05182-215.jpg';
+import t_side_sbwcolor_02_4 from 'assets/images/demo/learning/X05182-216.jpg';
+import t_side_sbwcolor_03_4 from 'assets/images/demo/learning/X05182-217.jpg';
+import t_side_sbwcolor_04_4 from 'assets/images/demo/learning/X05182-218.jpg';
+import t_side_sbwcolor_05_4 from 'assets/images/demo/learning/X05182-219.jpg';
+import t_side_sbwcolor_06_4 from 'assets/images/demo/learning/X05182-220.jpg';
 //================================이미지4
 
 
@@ -329,35 +329,35 @@ import t_side_sbwcolor_06_4 from 'assets/images/demo/X05182-220.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_color_01_5 from 'assets/images/demo/X05180-101.jpg';
-import t_color_02_5 from 'assets/images/demo/X05180-102.jpg';
-import t_color_03_5 from 'assets/images/demo/X05180-103.jpg';
-import t_color_04_5 from 'assets/images/demo/X05180-104.jpg';
+import t_color_01_5 from 'assets/images/demo/learning/X05180-101.jpg';
+import t_color_02_5 from 'assets/images/demo/learning/X05180-102.jpg';
+import t_color_03_5 from 'assets/images/demo/learning/X05180-103.jpg';
+import t_color_04_5 from 'assets/images/demo/learning/X05180-104.jpg';
 
 //컬러채도
-import t_scolor_01_5 from 'assets/images/demo/X05180-105.jpg';
-import t_scolor_02_5 from 'assets/images/demo/X05180-106.jpg';
-import t_scolor_03_5 from 'assets/images/demo/X05180-107.jpg';
-import t_scolor_04_5 from 'assets/images/demo/X05180-108.jpg';
-import t_scolor_05_5 from 'assets/images/demo/X05180-109.jpg';
-import t_scolor_06_5 from 'assets/images/demo/X05180-110.jpg';
+import t_scolor_01_5 from 'assets/images/demo/learning/X05180-105.jpg';
+import t_scolor_02_5 from 'assets/images/demo/learning/X05180-106.jpg';
+import t_scolor_03_5 from 'assets/images/demo/learning/X05180-107.jpg';
+import t_scolor_04_5 from 'assets/images/demo/learning/X05180-108.jpg';
+import t_scolor_05_5 from 'assets/images/demo/learning/X05180-109.jpg';
+import t_scolor_06_5 from 'assets/images/demo/learning/X05180-110.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bwcolor_01_5 from 'assets/images/demo/X05180-111.jpg';
-import t_bwcolor_02_5 from 'assets/images/demo/X05180-112.jpg';
-import t_bwcolor_03_5 from 'assets/images/demo/X05180-113.jpg';
-import t_bwcolor_04_5 from 'assets/images/demo/X05180-114.jpg';
+import t_bwcolor_01_5 from 'assets/images/demo/learning/X05180-111.jpg';
+import t_bwcolor_02_5 from 'assets/images/demo/learning/X05180-112.jpg';
+import t_bwcolor_03_5 from 'assets/images/demo/learning/X05180-113.jpg';
+import t_bwcolor_04_5 from 'assets/images/demo/learning/X05180-114.jpg';
 
 //흑백채도
-import t_sbwcolor_01_5 from 'assets/images/demo/X05180-115.jpg';
-import t_sbwcolor_02_5 from 'assets/images/demo/X05180-116.jpg';
-import t_sbwcolor_03_5 from 'assets/images/demo/X05180-117.jpg';
-import t_sbwcolor_04_5 from 'assets/images/demo/X05180-118.jpg';
-import t_sbwcolor_05_5 from 'assets/images/demo/X05180-119.jpg';
-import t_sbwcolor_06_5 from 'assets/images/demo/X05180-120.jpg';
+import t_sbwcolor_01_5 from 'assets/images/demo/learning/X05180-115.jpg';
+import t_sbwcolor_02_5 from 'assets/images/demo/learning/X05180-116.jpg';
+import t_sbwcolor_03_5 from 'assets/images/demo/learning/X05180-117.jpg';
+import t_sbwcolor_04_5 from 'assets/images/demo/learning/X05180-118.jpg';
+import t_sbwcolor_05_5 from 'assets/images/demo/learning/X05180-119.jpg';
+import t_sbwcolor_06_5 from 'assets/images/demo/learning/X05180-120.jpg';
 
 
 
@@ -366,35 +366,35 @@ import t_sbwcolor_06_5 from 'assets/images/demo/X05180-120.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_side_color_01_5 from 'assets/images/demo/X05180-201.jpg';
-import t_side_color_02_5 from 'assets/images/demo/X05180-202.jpg';
-import t_side_color_03_5 from 'assets/images/demo/X05180-203.jpg';
-import t_side_color_04_5 from 'assets/images/demo/X05180-204.jpg';
+import t_side_color_01_5 from 'assets/images/demo/learning/X05180-201.jpg';
+import t_side_color_02_5 from 'assets/images/demo/learning/X05180-202.jpg';
+import t_side_color_03_5 from 'assets/images/demo/learning/X05180-203.jpg';
+import t_side_color_04_5 from 'assets/images/demo/learning/X05180-204.jpg';
 
 //컬러채도
-import t_side_scolor_01_5 from 'assets/images/demo/X05180-205.jpg';
-import t_side_scolor_02_5 from 'assets/images/demo/X05180-206.jpg';
-import t_side_scolor_03_5 from 'assets/images/demo/X05180-207.jpg';
-import t_side_scolor_04_5 from 'assets/images/demo/X05180-208.jpg';
-import t_side_scolor_05_5 from 'assets/images/demo/X05180-209.jpg';
-import t_side_scolor_06_5 from 'assets/images/demo/X05180-210.jpg';
+import t_side_scolor_01_5 from 'assets/images/demo/learning/X05180-205.jpg';
+import t_side_scolor_02_5 from 'assets/images/demo/learning/X05180-206.jpg';
+import t_side_scolor_03_5 from 'assets/images/demo/learning/X05180-207.jpg';
+import t_side_scolor_04_5 from 'assets/images/demo/learning/X05180-208.jpg';
+import t_side_scolor_05_5 from 'assets/images/demo/learning/X05180-209.jpg';
+import t_side_scolor_06_5 from 'assets/images/demo/learning/X05180-210.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_side_bwcolor_01_5 from 'assets/images/demo/X05180-211.jpg';
-import t_side_bwcolor_02_5 from 'assets/images/demo/X05180-212.jpg';
-import t_side_bwcolor_03_5 from 'assets/images/demo/X05180-213.jpg';
-import t_side_bwcolor_04_5 from 'assets/images/demo/X05180-214.jpg';
+import t_side_bwcolor_01_5 from 'assets/images/demo/learning/X05180-211.jpg';
+import t_side_bwcolor_02_5 from 'assets/images/demo/learning/X05180-212.jpg';
+import t_side_bwcolor_03_5 from 'assets/images/demo/learning/X05180-213.jpg';
+import t_side_bwcolor_04_5 from 'assets/images/demo/learning/X05180-214.jpg';
 
 //흑백채도
-import t_side_sbwcolor_01_5 from 'assets/images/demo/X05180-215.jpg';
-import t_side_sbwcolor_02_5 from 'assets/images/demo/X05180-216.jpg';
-import t_side_sbwcolor_03_5 from 'assets/images/demo/X05180-217.jpg';
-import t_side_sbwcolor_04_5 from 'assets/images/demo/X05180-218.jpg';
-import t_side_sbwcolor_05_5 from 'assets/images/demo/X05180-219.jpg';
-import t_side_sbwcolor_06_5 from 'assets/images/demo/X05180-220.jpg';
+import t_side_sbwcolor_01_5 from 'assets/images/demo/learning/X05180-215.jpg';
+import t_side_sbwcolor_02_5 from 'assets/images/demo/learning/X05180-216.jpg';
+import t_side_sbwcolor_03_5 from 'assets/images/demo/learning/X05180-217.jpg';
+import t_side_sbwcolor_04_5 from 'assets/images/demo/learning/X05180-218.jpg';
+import t_side_sbwcolor_05_5 from 'assets/images/demo/learning/X05180-219.jpg';
+import t_side_sbwcolor_06_5 from 'assets/images/demo/learning/X05180-220.jpg';
 //================================이미지5
 
 

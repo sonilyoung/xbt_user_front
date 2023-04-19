@@ -15,8 +15,8 @@ import {Copy} from '../Copy';
 // ================================|| 데모이미지 ||================================ //
 //================================start 캔이미지
 //캔이미지 
-import t_practice_10_real from 'assets/images/demo/can/real.gif'; //real
-import t_practice_10_3d from 'assets/images/demo/can/3d/101.gif';//3d
+import t_practice_10_real from 'assets/images/demo/practice/can/real.gif'; //real
+import t_practice_10_3d from 'assets/images/demo/practice/can/3d/101.gif';//3d
 import t_practice_10_front from 'assets/images/practice/sample03.png';//front
 import t_practice_10_side from 'assets/images/practice/sample04.png';//side
 
@@ -25,18 +25,18 @@ import t_practice_10_side from 'assets/images/practice/sample04.png';//side
 //================================end 캔이미지
 
 //정면이미지
-import t_learning_01 from 'assets/images/demo/X05231-101.jpg';
-import t_learning_02 from 'assets/images/demo/X05228-101.jpg';
-import t_learning_03 from 'assets/images/demo/X05227-101.jpg';
-import t_learning_04 from 'assets/images/demo/X05182-101.jpg';
-import t_learning_05 from 'assets/images/demo/X05180-101.jpg';
+import t_learning_01 from 'assets/images/demo/learning/X05231-101.jpg';
+import t_learning_02 from 'assets/images/demo/learning/X05228-101.jpg';
+import t_learning_03 from 'assets/images/demo/learning/X05227-101.jpg';
+import t_learning_04 from 'assets/images/demo/learning/X05182-101.jpg';
+import t_learning_05 from 'assets/images/demo/learning/X05180-101.jpg';
 
 //측면이미지
-import t_learning_01_1 from 'assets/images/demo/X05231-201.jpg';
-import t_learning_02_1 from 'assets/images/demo/X05228-201.jpg';
-import t_learning_03_1 from 'assets/images/demo/X05227-201.jpg';
-import t_learning_04_1 from 'assets/images/demo/X05182-201.jpg';
-import t_learning_05_1 from 'assets/images/demo/X05180-201.jpg';
+import t_learning_01_1 from 'assets/images/demo/learning/X05231-201.jpg';
+import t_learning_02_1 from 'assets/images/demo/learning/X05228-201.jpg';
+import t_learning_03_1 from 'assets/images/demo/learning/X05227-201.jpg';
+import t_learning_04_1 from 'assets/images/demo/learning/X05182-201.jpg';
+import t_learning_05_1 from 'assets/images/demo/learning/X05180-201.jpg';
 
 
 
@@ -52,35 +52,35 @@ import t_learning_05_1 from 'assets/images/demo/X05180-201.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_color_01_1 from 'assets/images/demo/X05231-101.jpg';
-import t_color_02_1 from 'assets/images/demo/X05231-102.jpg';
-import t_color_03_1 from 'assets/images/demo/X05231-103.jpg';
-import t_color_04_1 from 'assets/images/demo/X05231-104.jpg';
+import t_color_01_1 from 'assets/images/demo/learning/X05231-101.jpg';
+import t_color_02_1 from 'assets/images/demo/learning/X05231-102.jpg';
+import t_color_03_1 from 'assets/images/demo/learning/X05231-103.jpg';
+import t_color_04_1 from 'assets/images/demo/learning/X05231-104.jpg';
 
 //컬러채도
-import t_scolor_01_1 from 'assets/images/demo/X05231-105.jpg';
-import t_scolor_02_1 from 'assets/images/demo/X05231-106.jpg';
-import t_scolor_03_1 from 'assets/images/demo/X05231-107.jpg';
-import t_scolor_04_1 from 'assets/images/demo/X05231-108.jpg';
-import t_scolor_05_1 from 'assets/images/demo/X05231-109.jpg';
-import t_scolor_06_1 from 'assets/images/demo/X05231-110.jpg';
+import t_scolor_01_1 from 'assets/images/demo/learning/X05231-105.jpg';
+import t_scolor_02_1 from 'assets/images/demo/learning/X05231-106.jpg';
+import t_scolor_03_1 from 'assets/images/demo/learning/X05231-107.jpg';
+import t_scolor_04_1 from 'assets/images/demo/learning/X05231-108.jpg';
+import t_scolor_05_1 from 'assets/images/demo/learning/X05231-109.jpg';
+import t_scolor_06_1 from 'assets/images/demo/learning/X05231-110.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_bwcolor_01_1 from 'assets/images/demo/X05231-111.jpg';
-import t_bwcolor_02_1 from 'assets/images/demo/X05231-112.jpg';
-import t_bwcolor_03_1 from 'assets/images/demo/X05231-113.jpg';
-import t_bwcolor_04_1 from 'assets/images/demo/X05231-114.jpg';
+import t_bwcolor_01_1 from 'assets/images/demo/learning/X05231-111.jpg';
+import t_bwcolor_02_1 from 'assets/images/demo/learning/X05231-112.jpg';
+import t_bwcolor_03_1 from 'assets/images/demo/learning/X05231-113.jpg';
+import t_bwcolor_04_1 from 'assets/images/demo/learning/X05231-114.jpg';
 
 //흑백채도
-import t_sbwcolor_01_1 from 'assets/images/demo/X05231-115.jpg';
-import t_sbwcolor_02_1 from 'assets/images/demo/X05231-116.jpg';
-import t_sbwcolor_03_1 from 'assets/images/demo/X05231-117.jpg';
-import t_sbwcolor_04_1 from 'assets/images/demo/X05231-118.jpg';
-import t_sbwcolor_05_1 from 'assets/images/demo/X05231-119.jpg';
-import t_sbwcolor_06_1 from 'assets/images/demo/X05231-120.jpg';
+import t_sbwcolor_01_1 from 'assets/images/demo/learning/X05231-115.jpg';
+import t_sbwcolor_02_1 from 'assets/images/demo/learning/X05231-116.jpg';
+import t_sbwcolor_03_1 from 'assets/images/demo/learning/X05231-117.jpg';
+import t_sbwcolor_04_1 from 'assets/images/demo/learning/X05231-118.jpg';
+import t_sbwcolor_05_1 from 'assets/images/demo/learning/X05231-119.jpg';
+import t_sbwcolor_06_1 from 'assets/images/demo/learning/X05231-120.jpg';
 
 
 
@@ -98,42 +98,42 @@ import t_sbwcolor_06_1 from 'assets/images/demo/X05231-120.jpg';
 //컬러유기물강조
 //컬러무기물강조
 //컬러반전
-import t_side_color_01_1 from 'assets/images/demo/X05231-201.jpg';
-import t_side_color_02_1 from 'assets/images/demo/X05231-202.jpg';
-import t_side_color_03_1 from 'assets/images/demo/X05231-203.jpg';
-import t_side_color_04_1 from 'assets/images/demo/X05231-204.jpg';
+import t_side_color_01_1 from 'assets/images/demo/learning/X05231-201.jpg';
+import t_side_color_02_1 from 'assets/images/demo/learning/X05231-202.jpg';
+import t_side_color_03_1 from 'assets/images/demo/learning/X05231-203.jpg';
+import t_side_color_04_1 from 'assets/images/demo/learning/X05231-204.jpg';
 
 //컬러채도
-import t_side_scolor_01_1 from 'assets/images/demo/X05231-205.jpg';
-import t_side_scolor_02_1 from 'assets/images/demo/X05231-206.jpg';
-import t_side_scolor_03_1 from 'assets/images/demo/X05231-207.jpg';
-import t_side_scolor_04_1 from 'assets/images/demo/X05231-208.jpg';
-import t_side_scolor_05_1 from 'assets/images/demo/X05231-209.jpg';
-import t_side_scolor_06_1 from 'assets/images/demo/X05231-210.jpg';
+import t_side_scolor_01_1 from 'assets/images/demo/learning/X05231-205.jpg';
+import t_side_scolor_02_1 from 'assets/images/demo/learning/X05231-206.jpg';
+import t_side_scolor_03_1 from 'assets/images/demo/learning/X05231-207.jpg';
+import t_side_scolor_04_1 from 'assets/images/demo/learning/X05231-208.jpg';
+import t_side_scolor_05_1 from 'assets/images/demo/learning/X05231-209.jpg';
+import t_side_scolor_06_1 from 'assets/images/demo/learning/X05231-210.jpg';
 
 //흑백
 //흑백유기물강조
 //흑백무기물강조
 //흑백반전
-import t_side_bwcolor_01_1 from 'assets/images/demo/X05231-211.jpg';
-import t_side_bwcolor_02_1 from 'assets/images/demo/X05231-212.jpg';
-import t_side_bwcolor_03_1 from 'assets/images/demo/X05231-213.jpg';
-import t_side_bwcolor_04_1 from 'assets/images/demo/X05231-214.jpg';
+import t_side_bwcolor_01_1 from 'assets/images/demo/learning/X05231-211.jpg';
+import t_side_bwcolor_02_1 from 'assets/images/demo/learning/X05231-212.jpg';
+import t_side_bwcolor_03_1 from 'assets/images/demo/learning/X05231-213.jpg';
+import t_side_bwcolor_04_1 from 'assets/images/demo/learning/X05231-214.jpg';
 
 //흑백채도
-import t_side_sbwcolor_01_1 from 'assets/images/demo/X05231-215.jpg';
-import t_side_sbwcolor_02_1 from 'assets/images/demo/X05231-216.jpg';
-import t_side_sbwcolor_03_1 from 'assets/images/demo/X05231-217.jpg';
-import t_side_sbwcolor_04_1 from 'assets/images/demo/X05231-218.jpg';
-import t_side_sbwcolor_05_1 from 'assets/images/demo/X05231-219.jpg';
-import t_side_sbwcolor_06_1 from 'assets/images/demo/X05231-220.jpg';
+import t_side_sbwcolor_01_1 from 'assets/images/demo/learning/X05231-215.jpg';
+import t_side_sbwcolor_02_1 from 'assets/images/demo/learning/X05231-216.jpg';
+import t_side_sbwcolor_03_1 from 'assets/images/demo/learning/X05231-217.jpg';
+import t_side_sbwcolor_04_1 from 'assets/images/demo/learning/X05231-218.jpg';
+import t_side_sbwcolor_05_1 from 'assets/images/demo/learning/X05231-219.jpg';
+import t_side_sbwcolor_06_1 from 'assets/images/demo/learning/X05231-220.jpg';
 //================================이미지1
 
 
-export const IMAGES_DATA = (function () { 
+export const THRESSD_IMAGES_DATA = (function () { 
     let arr = [];
     for(let i = 0 ; i <= 179 ; i++ ){
-        let tmpImg = require(`assets/images/demo/can/angle/${i}_256x256_Color.png`);
+        let tmpImg = require(`assets/images/demo/practice/can/angle/${i}_256x256_Color.png`);
         arr.push(tmpImg);
     }
     return arr;
@@ -283,9 +283,13 @@ export const Practice = () => {
                 "unitGroupCd": "G000001",
                 //"unitGroupName": "총기류",
                 "unitGroupName": "Firearms",
-                "unitName": "소총1",
+                "unitName": "소총",
                 "openYn": "CLOSE",
-                "passYn": "Prohibited"         
+                "passYn": "Prohibited",  
+                "realImg" : require(`assets/images/demo/practice/gun/real.png`),
+                "frontImg" : require(`assets/images/demo/practice/gun/front.png`),
+                "sideImg" : require(`assets/images/demo/practice/gun/side.png`),
+                "threedImg" : require(`assets/images/demo/practice/gun/threed.png`)                       
             },
             {
                 "unitScanId" : "UX230324025351",
@@ -313,27 +317,13 @@ export const Practice = () => {
                 "unitGroupCd": "G000002",
                 //"unitGroupName": "폭발류",
                 "unitGroupName": "Explosives",
-                "unitName": "폭발1",
+                "unitName": "butane gas",
                 "openYn": "CLOSE",
-                "passYn": "Prohibited"
-            },
-            {
-                "unitScanId" : "UX230324025351",
-                "unitGroupCd": "G000002",
-                //"unitGroupName": "폭발류",
-                "unitGroupName": "Explosives",
-                "unitName": "폭발2",
-                "openYn": "CLOSE",
-                "passYn": "Prohibited"
-            },
-            {
-                "unitScanId" : "UX230324025352",
-                "unitGroupCd": "G000002",
-                //"unitGroupName": "폭발류",
-                "unitGroupName": "Explosives",
-                "unitName": "폭발3",
-                "openYn": "CLOSE",
-                "passYn": "Prohibited"
+                "passYn": "Prohibited",
+                "realImg" : require(`assets/images/demo/practice/can/real.png`),
+                "frontImg" : THRESSD_IMAGES_DATA[0],
+                "sideImg" : THRESSD_IMAGES_DATA[5],
+                "threedImg" : require(`assets/images/demo/practice/can/threed.gif`)                     
             },
     ]
 
@@ -498,27 +488,9 @@ export const Practice = () => {
             "unitGroupCd": "G000008",
             //"unitGroupName": "인화성물질류",
             "unitGroupName": "Inflammable substances",
-            "unitName": "인화물질1",
+            "unitName": "인화성물질",
             "openYn": "OPEN",
-            "passYn": "Prohibited"
-        },
-        {
-            "unitScanId" : "UX230324025351",
-            "unitGroupCd": "G000008",
-            //"unitGroupName": "인화성물질류",
-            "unitGroupName": "Inflammable substances",
-            "unitName": "인화물질2",
-            "openYn": "OPEN",
-            "passYn": "Prohibited"
-        },
-        {
-            "unitScanId" : "UX230324025352",
-            "unitGroupCd": "G000008",
-            //"unitGroupName": "인화성물질류",
-            "unitGroupName": "Inflammable substances",
-            "unitName": "인화물질3",
-            "openYn": "OPEN",
-            "passYn": "Prohibited"
+            "passYn": "Prohibited",
         },
     ]
     
@@ -649,35 +621,18 @@ export const Practice = () => {
     ]
     
 
-    
+    //정면은 0번 , 측면은 45번
     const targetUnitSubList13 = [
         {
             "unitScanId" : "UX230324025350",
             "unitGroupCd": "G000013",
             //"unitGroupName": "통과",
             "unitGroupName": "pass",
-            "unitName": "통과제품1",
+            "unitName": "캔",
             "openYn": "OPEN",
-            "passYn": "PASS"
+            "passYn": "PASS",
         },
-        {
-            "unitScanId" : "UX230324025351",
-            "unitGroupCd": "G000013",
-            //"unitGroupName": "통과",
-            "unitGroupName": "pass",
-            "unitName": "통과제품2",
-            "openYn": "OPEN",
-            "passYn": "PASS"
-        },
-        {
-            "unitScanId" : "UX230324025352",
-            "unitGroupCd": "G000013",
-            //"unitGroupName": "통과",
-            "unitGroupName": "pass",
-            "unitName": "통과제품3",
-            "openYn": "OPEN",
-            "passYn": "PASS"
-        },
+        
     ]
     
 
@@ -824,8 +779,9 @@ export const Practice = () => {
     }
 
     //단품선택
-    const handleSubTrSelect = (e, gc, gn, nn, oy, py) =>{
-        console.log(e);
+    const handleSubTrSelect = (e, uid, gc, gn, nn, oy, py) =>{
+        console.log(uid);
+
         setSelectSubTr(e);
         setUnitGroupCd(gc);
         setUnitGroupName(gn);
@@ -833,11 +789,26 @@ export const Practice = () => {
         setOpenYn(oy);
         setPassYn(py);
 
-        learningImages.frontImg = t_color_01_1;
-        learningImages.sideImg = t_color_02_1;
-        learningImages.threedImg = t_color_04_1;
-        setImageList(learningImages);
-        console.log('learningImages:',learningImages);
+
+        if(gc==='G000001'){ //총기
+            setImageList(targetUnitSubList1[0]);         
+        }else if(gc==='G000002'){//폭발물류
+            setImageList(targetUnitSubList2[0]);
+        }else if(gc==='G000003'){//실탄류
+        }else if(gc==='G000004'){//도검류
+        }else if(gc==='G000005'){//일반무기
+        }else if(gc==='G000006'){//위장무기류
+        }else if(gc==='G000007'){//공구/생활용품류
+        }else if(gc==='G000008'){//인화성물질류
+        }else if(gc==='G000009'){//위험물질류
+        }else if(gc==='G000010'){//액체,겔 물품
+        }else if(gc==='G000011'){//주류
+        }else if(gc==='G000012'){//전기/전자제품
+        }else{//통과 - 캔
+            setImageList(targetUnitSubList13[0]);
+        }
+
+        console.log('imageList:',imageList);
     }    
 
     const handlePrev = () => {
@@ -854,10 +825,10 @@ export const Practice = () => {
     }
 
     const learningImages = {
-        "realImg" : t_practice_10_real,
-        "frontImg" : t_practice_10_front,
-        "sideImg" : t_practice_10_side,
-        "threedImg" : t_practice_10_3d
+        "realImg" : "",
+        "frontImg" : "",
+        "sideImg" : "",
+        "threedImg" : ""
     };    
     
     //정면 하단아이콘유틸에 따라 변경되는 이미지유형
@@ -908,7 +879,7 @@ export const Practice = () => {
             "blackWhiteSaturation6": t_side_sbwcolor_06_1//흑백채도	
     }                                             
 
-    const [imageList, setImageList] = useState(learningImages);
+    const [imageList, setImageList] = useState(targetUnitSubList1[0]);
 
     const nowSelectControl = (e) =>{
         setNowSelect(e);//현재선택된 아이콘
@@ -1042,7 +1013,10 @@ export const Practice = () => {
     
     //3d이미지 각도변경
     const handleThreed = (e) =>{
-        learningImages.threedImg = IMAGES_DATA[e];
+        learningImages.frontImg = imageList.frontImg;
+        learningImages.realImg = imageList.realImg;
+        learningImages.sideImg = imageList.sideImg;
+        learningImages.threedImg = THRESSD_IMAGES_DATA[e];
         setImageList(learningImages);
     }
 
@@ -1063,7 +1037,7 @@ export const Practice = () => {
                     {/* mcontent */}
                     <div className="mcontent">
                         <div id="practice-modal" className="modal-wrapper modal_blur">
-                            <div className="modal xbt_md">
+                            <div className="modal xbt_md2">
                                 {/* xbt_content */}
                                 <div className="xbt_content">
                                     {/* xbt_top */}
@@ -1165,7 +1139,7 @@ export const Practice = () => {
                                                             {/* 단품 목록 */}
                                                             {
                                                                 unitSubList?.map((result, index) => ([
-                                                                    <tr ref={el => inputRef.current[index] = el} onClick={()=>handleSubTrSelect(index+1, result.unitGroupCd, result.unitGroupName, result.unitName, result.openYn, result.passYn)} className={selectSubTr===index+1 ? 'on' : ''}>
+                                                                    <tr ref={el => inputRef.current[index] = el} onClick={()=>handleSubTrSelect(index+1, result.unitScanId ,result.unitGroupCd, result.unitGroupName, result.unitName, result.openYn, result.passYn)} className={selectSubTr===index+1 ? 'on' : ''}>
                                                                         <td>{index+1}</td>
                                                                         <td>{result.unitName}</td>
                                                                     </tr>

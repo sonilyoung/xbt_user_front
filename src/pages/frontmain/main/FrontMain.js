@@ -30,6 +30,8 @@ export const FrontMain = () => {
             navigate("/Learning");            
         }else if(e==='practice'){
             navigate("/practice");            
+        }else if(e==='itemPractice'){
+            navigate("/itemPractice");
         }
     }    
 
@@ -208,7 +210,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button id="open-two-md" data-mact="open" data-minfo="two-md">
+                                                <button id="open-two-md" onClick={()=>movePage('itemPractice')} data-mact="open" data-minfo="two-md">
                                                     <div className="circle">
                                                         <img src={require('assets/images/main/learn_ic02.png')} alt=""/>
                                                     </div>

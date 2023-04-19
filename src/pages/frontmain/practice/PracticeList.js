@@ -198,8 +198,8 @@ export const PracticeList = ({displayy, displayn}) => {
                                             <td>Liquids, gel-type item</td>
                                             {/*<td>개별용기당 100ml를 초과하는 액체,겔 물품(화장품, 샴푸, 고추장, 된장 등)</td>*/}
                                             <td>Liquids such as cosmetics, shampoo, gochujang, dwenjang etc. which exceeds 100ml per each container</td>
-                                            {/* <td>개봉 / 제한</td>*/}
-                                            <td>opened / restricted</td>
+                                            {/* <td>개봉 / 통과</td>*/}
+                                            <td>opened / pass</td>
                                         </tr>
                                     </tbody>
                                 </table>

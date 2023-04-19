@@ -26,7 +26,7 @@ const areaChartOptions = {
     },
     colors: ['#52c41a', '#6D9DCC', '#faad14'],
     dataLabels: {
-        enabled: false
+        enabled: true
     },
     stroke: {
         width: [3, 3, 3],

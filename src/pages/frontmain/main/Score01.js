@@ -35,14 +35,6 @@ export class Score01 extends React.Component {
             name: 'level 5',
             data: [14, 46, 79],
             color:'#9FBCD7'
-          }, {
-            name: 'level 6',
-            data: [12, 40, 77],
-            color:'#DAE1E7'
-          }, {            
-            name: 'level 7',
-            data: [10, 38, 75],
-            color:'#6D9DCC'
           }],
           options: {
             chart: {

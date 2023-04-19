@@ -6,6 +6,7 @@ import MainLayout from 'layout/MainLayout';
 import { Login } from 'pages/frontmain/login/Login';
 import { FrontMain } from 'pages/frontmain/main/FrontMain';
 import { Practice } from 'pages/frontmain/practice/Practice';
+import { ItemPractice } from 'pages/frontmain/itemPractice/ItemPractice';
 
 import { Learning } from 'pages/frontmain/learning/Learning';
 import { LearningCut } from 'pages/frontmain/learningCut/LearningCut';
@@ -45,6 +46,11 @@ const MainRoutes = {
             // 학습컷
             path: '/learning/cut',
             element: <LearningCut />
+        },
+        {
+            // 반입금지물품연습
+            path: '/itemPractice',
+            element: <ItemPractice />
         }
     ]
 };
