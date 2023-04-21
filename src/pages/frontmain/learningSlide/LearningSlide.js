@@ -763,7 +763,7 @@ export const LearningSlide = () =>{
 
 
     useEffect(()=>{    
-        handleReset();//시간초기화
+        //handleReset();//시간초기화
         //setImageList(learningImages);//이미지초기화
         //setThumImg(imageList[0].learningThumImages);//썸네일초기화                    
 
@@ -1248,7 +1248,7 @@ export const LearningSlide = () =>{
         });        
 
         console.log("useEffect!!!!!");
-    },[currentImage]);
+    },[]);
 
 
     const inputRef1 = useRef();

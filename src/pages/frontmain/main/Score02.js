@@ -12,8 +12,8 @@ import { Badge} from 'antd';
 // project import
 import Dot from 'components/@extended/Dot';
 
-function createData(no,year,baseline,baselineLearning,cutScore,resultScore,resultData,diary) {
-    return { no,year,baseline,baselineLearning,cutScore,resultScore,resultData,diary};
+function createData(no,year,baseline,baselineLearning,cutScore,resultScore,resultData,date) {
+    return { no,year,baseline,baselineLearning,cutScore,resultScore,resultData,date};
 }
 
 const rows = [
@@ -134,11 +134,11 @@ const headCells = [
         label: 'Results'
     },    
     {
-        id: 'diary',
+        id: 'date',
         align: 'center',
         disablePadding: false,
         //label: '학습 일지'
-        label: 'Learning diary'
+        label: 'Learning date'
     },    
 ];
 
@@ -289,7 +289,7 @@ export const Score02 = () => {
                                             
                                         </TableCell>
                                         <TableCell align="center" style={{ width: '12%', fontSize: '14px' }}>
-                                            {row.diary}
+                                            {row.date}
                                         </TableCell>                                      
                                     </TableRow>
                                 );

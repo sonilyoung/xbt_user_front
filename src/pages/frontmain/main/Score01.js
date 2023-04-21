@@ -65,7 +65,7 @@ export class Score01 extends React.Component {
             },
             xaxis: {
               //categories: ['2023년 1차', '2023년 2차', '2023년 3차']
-              categories: ['2021year 1Batch', '2022year 2Batch', '2023year 3Batch']
+              categories: ['2021 Batch1', '2022 Batch2', '2023 Batch3']
             },
             yaxis: {
               title: {
