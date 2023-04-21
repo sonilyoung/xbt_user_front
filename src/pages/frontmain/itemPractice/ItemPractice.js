@@ -247,7 +247,7 @@ export const ItemPractice = () => {
                                                         <td>
                                                             {/*옵션*/}
                                                             <div className="practice_test_select">
-                                                                <button className="label">Select Option</button>
+                                                                <button className="label">Option</button>
                                                                 <ul className="pra_optionList">
                                                                     <li className="pra_item" onClick={()=>handleCondition(1,1)} >unopened/prohibited</li>
                                                                     <li className="pra_item" onClick={()=>handleCondition(1,2)} >unopened/pass</li>
@@ -275,7 +275,7 @@ export const ItemPractice = () => {
                                                         <td>
                                                             {/*옵션*/}
                                                             <div className="practice_test_select">
-                                                                <button className="label">Select Option</button>
+                                                                <button className="label">Option</button>
                                                                 <ul className="pra_optionList">
                                                                     <li className="pra_item" onClick={()=>handleCondition(2,1)} >unopened/prohibited</li>
                                                                     <li className="pra_item" onClick={()=>handleCondition(2,2)} >unopened/pass</li>
@@ -303,7 +303,7 @@ export const ItemPractice = () => {
                                                         <td>
                                                             {/*옵션*/}
                                                             <div className="practice_test_select">
-                                                                <button className="label">Select Option</button>
+                                                                <button className="label">Option</button>
                                                                 <ul className="pra_optionList">
                                                                     <li className="pra_item" onClick={()=>handleCondition(3,1)} >unopened/prohibited</li>
                                                                     <li className="pra_item" onClick={()=>handleCondition(3,2)} >unopened/pass</li>
@@ -331,7 +331,7 @@ export const ItemPractice = () => {
                                                         <td>
                                                             {/*옵션*/}
                                                             <div className="practice_test_select">
-                                                                <button className="label">Select Option</button>
+                                                                <button className="label">Option</button>
                                                                 <ul className="pra_optionList">
                                                                     <li className="pra_item" onClick={()=>handleCondition(4,1)} >unopened/prohibited</li>
                                                                     <li className="pra_item" onClick={()=>handleCondition(4,2)} >unopened/pass</li>
@@ -359,7 +359,7 @@ export const ItemPractice = () => {
                                                         <td>
                                                             {/*옵션*/}
                                                             <div className="practice_test_select">
-                                                                <button className="label">Select Option</button>
+                                                                <button className="label">Option</button>
                                                                 <ul className="pra_optionList">
                                                                     <li className="pra_item" onClick={()=>handleCondition(5,1)} >unopened/prohibited</li>
                                                                     <li className="pra_item" onClick={()=>handleCondition(5,2)} >unopened/pass</li>
@@ -387,7 +387,7 @@ export const ItemPractice = () => {
                                                         <td>
                                                             {/*옵션*/}
                                                             <div className="practice_test_select">
-                                                                <button className="label">Select Option</button>
+                                                                <button className="label">Option</button>
                                                                 <ul className="pra_optionList">
                                                                     <li className="pra_item" onClick={()=>handleCondition(6,1)} >unopened/prohibited</li>
                                                                     <li className="pra_item" onClick={()=>handleCondition(6,2)} >unopened/pass</li>
@@ -415,7 +415,7 @@ export const ItemPractice = () => {
                                                         <td>
                                                             {/*옵션*/}
                                                             <div className="practice_test_select">
-                                                                <button className="label">Select Option</button>
+                                                                <button className="label">Option</button>
                                                                 <ul className="pra_optionList">
                                                                     <li className="pra_item" onClick={()=>handleCondition(7,1)} >unopened/prohibited</li>
                                                                     <li className="pra_item" onClick={()=>handleCondition(7,2)} >unopened/pass</li>
@@ -443,7 +443,7 @@ export const ItemPractice = () => {
                                                         <td>
                                                             {/*옵션*/}
                                                             <div className="practice_test_select">
-                                                                <button className="label">Select Option</button>
+                                                                <button className="label">Option</button>
                                                                 <ul className="pra_optionList">
                                                                     <li className="pra_item" onClick={()=>handleCondition(8,1)} >unopened/prohibited</li>
                                                                     <li className="pra_item" onClick={()=>handleCondition(8,2)} >unopened/pass</li>
@@ -471,7 +471,7 @@ export const ItemPractice = () => {
                                                         <td data-chk="2">
                                                             {/*옵션*/}
                                                             <div className="practice_test_select">
-                                                                <button className="label">Select Option</button>
+                                                                <button className="label">Option</button>
                                                                 <ul className="pra_optionList">
                                                                     <li className="pra_item" onClick={()=>handleCondition(9,1)} >unopened/prohibited</li>
                                                                     <li className="pra_item" onClick={()=>handleCondition(9,2)} >unopened/pass</li>
@@ -499,7 +499,7 @@ export const ItemPractice = () => {
                                                         <td data-chk="2">
                                                             {/*옵션*/}
                                                             <div className="practice_test_select">
-                                                                <button className="label">Select Option</button>
+                                                                <button className="label">Option</button>
                                                                 <ul className="pra_optionList">
                                                                     <li className="pra_item" onClick={()=>handleCondition(10,1)} >unopened/prohibited</li>
                                                                     <li className="pra_item" onClick={()=>handleCondition(10,2)} >unopened/pass</li>

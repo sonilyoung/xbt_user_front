@@ -20,31 +20,31 @@ const rows = [
     createData(
         1,
         '2021',
-        <span>1Batch</span>,
+        <span>Batch 1</span>,
         1,
         60,
         16,
-        <span>불합격</span>,
+        <span>Fail</span>,
         <span>2021-03-10</span>
     ),
     createData(
         1,
         '2022',
-        <span>2Batch</span>,
+        <span>Batch 2</span>,
         1,
         60,
         48,
-        <span>불합격</span>,
+        <span>Fail</span>,
         <span>2023-04-08</span>
     ),
     createData(
         1,
         '2023',
-        <span>3Batch</span>,
+        <span>Batch 3</span>,
         1,
         60,
         81,
-        <span>합격</span>,
+        <span>Sucess</span>,
         <span>2023-04-19</span>
     )
 ];
@@ -83,7 +83,7 @@ const headCells = [
         id: 'no',
         align: 'center',
         disablePadding: false,
-        label: 'no'
+        label: 'No'
     },    
     {
         id: 'year',

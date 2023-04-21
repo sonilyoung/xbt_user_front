@@ -346,9 +346,9 @@ export const FrontMain = () => {
                                                             <li><button type="button" onClick={()=>setSelectMenu('score03')} data-filename="score03" className={selectMenu==='score03' ? 'on': ''}>오답조회</button></li>
                                                             */}
 
-                                                            <li><button type="button" onClick={()=>setSelectMenu('score01')} data-filename="score01" className={selectMenu==='score01' ? 'on': ''}>Learning score imformation</button></li>
-                                                            <li><button type="button" onClick={()=>setSelectMenu('score02')} data-filename="score02" className={selectMenu==='score02' ? 'on': ''}>Training evaluation imformation</button></li>
-                                                            <li><button type="button" onClick={()=>setSelectMenu('score03')} data-filename="score03" className={selectMenu==='score03' ? 'on': ''}>Wrong answers imformation</button></li>                                                            
+                                                            <li><button type="button" onClick={()=>setSelectMenu('score01')} data-filename="score01" className={selectMenu==='score01' ? 'on': ''}>Learning score information</button></li>
+                                                            <li><button type="button" onClick={()=>setSelectMenu('score02')} data-filename="score02" className={selectMenu==='score02' ? 'on': ''}>Training evaluation information</button></li>
+                                                            <li><button type="button" onClick={()=>setSelectMenu('score03')} data-filename="score03" className={selectMenu==='score03' ? 'on': ''}>Wrong answers information</button></li>                                                            
                                                         </ul>
                                                     </div>
                                                 </li>

@@ -24,28 +24,6 @@ import t_practice_10_side from 'assets/images/practice/sample04.png';//side
 
 //================================end 캔이미지
 
-//정면이미지
-import t_learning_01 from 'assets/images/demo/learning/X05231-101.jpg';
-import t_learning_02 from 'assets/images/demo/learning/X05228-101.jpg';
-import t_learning_03 from 'assets/images/demo/learning/X05227-101.jpg';
-import t_learning_04 from 'assets/images/demo/learning/X05182-101.jpg';
-import t_learning_05 from 'assets/images/demo/learning/X05180-101.jpg';
-
-//측면이미지
-import t_learning_01_1 from 'assets/images/demo/learning/X05231-201.jpg';
-import t_learning_02_1 from 'assets/images/demo/learning/X05228-201.jpg';
-import t_learning_03_1 from 'assets/images/demo/learning/X05227-201.jpg';
-import t_learning_04_1 from 'assets/images/demo/learning/X05182-201.jpg';
-import t_learning_05_1 from 'assets/images/demo/learning/X05180-201.jpg';
-
-
-
-
-
-
-
-
-
 // ================================|| 하단 이미지 컨트롤 변경 적용 ||================================ //
 //================================이미지1 
 //컬러
@@ -139,10 +117,16 @@ export const THRESSD_IMAGES_DATA = (function () {
     return arr;
 })();
 
+export const TOYGUN_THRESSD_IMAGES_DATA = (function () { 
+    let arr = [];
+    for(let i = 0 ; i <= 179 ; i++ ){
+        let tmpImg = require(`assets/images/demo/practice/toygun/angle/${i}_256x256_Color.png`);
+        arr.push(tmpImg);
+    }
+    return arr;
+})();
+
 export const Practice = () => {
-
-
-    
     const targetUnitList = [
         {
             "unitGroupNo": 49,
@@ -283,32 +267,84 @@ export const Practice = () => {
                 "unitGroupCd": "G000001",
                 //"unitGroupName": "총기류",
                 "unitGroupName": "Firearms",
-                "unitName": "소총",
+                "unitName": "Gun",
                 "openYn": "CLOSE",
                 "passYn": "Prohibited",  
-                "realImg" : require(`assets/images/demo/practice/gun/real.png`),
-                "frontImg" : require(`assets/images/demo/practice/gun/front.png`),
-                "sideImg" : require(`assets/images/demo/practice/gun/side.png`),
-                "threedImg" : require(`assets/images/demo/practice/gun/threed.png`)                       
+                "realImg" : require(`assets/images/demo/practice/gun/real.jpg`),
+                "frontImg" : require(`assets/images/demo/practice/gun/front.jpg`),
+                "sideImg" : require(`assets/images/demo/practice/gun/side.jpg`),
+                "threedImg" : require(`assets/images/demo/practice/gun/threed.gif`)                       
             },
-            {
+            {//장난감총 (측면 : 0번 , 정면 : 45번)
                 "unitScanId" : "UX230324025351",
                 "unitGroupCd": "G000001",
                 //"unitGroupName": "총기류",
                 "unitGroupName": "Firearms",
-                "unitName": "소총2",
+                "unitName": "Toy Gun",
                 "openYn": "CLOSE",
-                "passYn": "Prohibited"            
+                "passYn": "Prohibited",         
+                "realImg" : require(`assets/images/demo/practice/toygun/real.png`),
+                "frontImg" : TOYGUN_THRESSD_IMAGES_DATA[45],//정면
+                "sideImg" : TOYGUN_THRESSD_IMAGES_DATA[0],//측면
+                "threedImg" : require(`assets/images/demo/practice/toygun/threed.gif`),
+
+                //정면 45번
+                "front_color": require(`assets/images/demo/practice/toygun/101/45_256x256_Color.png`),//컬러
+                "front_colorUforce" : require(`assets/images/demo/practice/toygun/102/45_256x256_Color.png`),//컬러유기물강조
+                "front_colorMforce" : require(`assets/images/demo/practice/toygun/103/45_256x256_Color.png`),//컬러무기물강조
+                "front_colorRevers" : require(`assets/images/demo/practice/toygun/104/45_256x256_Color.png`),//컬러반전
+                "front_colorSaturation1": require(`assets/images/demo/practice/toygun/105/45_256x256_Color.png`),//컬러채도
+                "front_colorSaturation2": require(`assets/images/demo/practice/toygun/106/45_256x256_Color.png`),//컬러채도
+                "front_colorSaturation3": require(`assets/images/demo/practice/toygun/107/45_256x256_Color.png`),//컬러채도
+                "front_colorSaturation4": require(`assets/images/demo/practice/toygun/108/45_256x256_Color.png`),//컬러채도
+                "front_colorSaturation5": require(`assets/images/demo/practice/toygun/109/45_256x256_Color.png`),//컬러채도
+                "front_colorSaturation6": require(`assets/images/demo/practice/toygun/110/45_256x256_Color.png`),//컬러채도
+                "front_blackWhite" : require(`assets/images/demo/practice/toygun/111/45_256x256_Color.png`),//흑백
+                "front_blackWhiteUforce" : require(`assets/images/demo/practice/toygun/112/45_256x256_Color.png`),//흑백유기물강조
+                "front_blackWhiteMforce" : require(`assets/images/demo/practice/toygun/113/45_256x256_Color.png`),//흑백무기물강조
+                "front_blackWhiteRevers" : require(`assets/images/demo/practice/toygun/114/45_256x256_Color.png`),//흑백반전
+                "front_blackWhiteSaturation1": require(`assets/images/demo/practice/toygun/115/45_256x256_Color.png`),//흑백채도	
+                "front_blackWhiteSaturation2": require(`assets/images/demo/practice/toygun/116/45_256x256_Color.png`),//흑백채도	
+                "front_blackWhiteSaturation3": require(`assets/images/demo/practice/toygun/117/45_256x256_Color.png`),//흑백채도	
+                "front_blackWhiteSaturation4": require(`assets/images/demo/practice/toygun/118/45_256x256_Color.png`),//흑백채도	
+                "front_blackWhiteSaturation5": require(`assets/images/demo/practice/toygun/119/45_256x256_Color.png`),//흑백채도	
+                "front_blackWhiteSaturation6": require(`assets/images/demo/practice/toygun/120/45_256x256_Color.png`),//흑백채도      
+
+                //측면 0번
+                "side_color": require(`assets/images/demo/practice/toygun/101/0_256x256_Color.png`),//컬러
+                "side_colorUforce" : require(`assets/images/demo/practice/toygun/102/0_256x256_Color.png`),//컬러유기물강조
+                "side_colorMforce" : require(`assets/images/demo/practice/toygun/103/0_256x256_Color.png`),//컬러무기물강조
+                "side_colorRevers" : require(`assets/images/demo/practice/toygun/104/0_256x256_Color.png`),//컬러반전
+                "side_colorSaturation1": require(`assets/images/demo/practice/toygun/105/0_256x256_Color.png`),//컬러채도
+                "side_colorSaturation2": require(`assets/images/demo/practice/toygun/106/0_256x256_Color.png`),//컬러채도
+                "side_colorSaturation3": require(`assets/images/demo/practice/toygun/107/0_256x256_Color.png`),//컬러채도
+                "side_colorSaturation4": require(`assets/images/demo/practice/toygun/108/0_256x256_Color.png`),//컬러채도
+                "side_colorSaturation5": require(`assets/images/demo/practice/toygun/109/0_256x256_Color.png`),//컬러채도
+                "side_colorSaturation6": require(`assets/images/demo/practice/toygun/110/0_256x256_Color.png`),//컬러채도
+                "side_blackWhite" : require(`assets/images/demo/practice/toygun/111/0_256x256_Color.png`),//흑백
+                "side_blackWhiteUforce" : require(`assets/images/demo/practice/toygun/112/0_256x256_Color.png`),//흑백유기물강조
+                "side_blackWhiteMforce" : require(`assets/images/demo/practice/toygun/113/0_256x256_Color.png`),//흑백무기물강조
+                "side_blackWhiteRevers" : require(`assets/images/demo/practice/toygun/114/0_256x256_Color.png`),//흑백반전
+                "side_blackWhiteSaturation1": require(`assets/images/demo/practice/toygun/115/0_256x256_Color.png`),//흑백채도	
+                "side_blackWhiteSaturation2": require(`assets/images/demo/practice/toygun/116/0_256x256_Color.png`),//흑백채도	
+                "side_blackWhiteSaturation3": require(`assets/images/demo/practice/toygun/117/0_256x256_Color.png`),//흑백채도	
+                "side_blackWhiteSaturation4": require(`assets/images/demo/practice/toygun/118/0_256x256_Color.png`),//흑백채도	
+                "side_blackWhiteSaturation5": require(`assets/images/demo/practice/toygun/119/0_256x256_Color.png`),//흑백채도	
+                "side_blackWhiteSaturation6": require(`assets/images/demo/practice/toygun/120/0_256x256_Color.png`),//흑백채도	                                             
             },
             {
                 "unitScanId" : "UX230324025352",
                 "unitGroupCd": "G000001",
                 //"unitGroupName": "총기류",
                 "unitGroupName": "Firearms",
-                "unitName": "소총3",
+                "unitName": "Pistol",
                 "openYn": "CLOSE",
-                "passYn": "Prohibited"               
-            },
+                "passYn": "Prohibited",  
+                "realImg" : require(`assets/images/demo/practice/new_gun/real.jpg`),
+                "frontImg" : require(`assets/images/demo/practice/new_gun/front.jpg`),
+                "sideImg" : require(`assets/images/demo/practice/new_gun/side.jpg`),
+                "threedImg" : require(`assets/images/demo/practice/new_gun/threed.gif`)                       
+            },            
     ]
 
     const targetUnitSubList2 = [
@@ -354,38 +390,24 @@ export const Practice = () => {
             "unitName": "실탄3",
             "openYn": "OPEN",
             "passYn": "Restricted"
-        },
+        }
     ]
 
 
     const targetUnitSubList4 = [
         {
-            "unitScanId" : "UX230324025350",
-            "unitGroupCd": "G000005",
+            "unitScanId" : "UX230324025354",
+            "unitGroupCd": "G000004",
             //"unitGroupName": "도검류",
             "unitGroupName": "Knifes and swords",
-            "unitName": "도검1",
+            "unitName": "Knifes",
             "openYn": "OPEN",
-            "passYn": "Restricted"   
-        },
-        {
-            "unitScanId" : "UX230324025351",
-            "unitGroupCd": "G000005",
-            //"unitGroupName": "도검류",
-            "unitGroupName": "Knifes and swords",
-            "unitName": "도검2",
-            "openYn": "OPEN",
-            "passYn": "Restricted"   
-        },
-        {
-            "unitScanId" : "UX230324025352",
-            "unitGroupCd": "G000005",
-            //"unitGroupName": "도검류",
-            "unitGroupName": "Knifes and swords",
-            "unitName": "도검3",
-            "openYn": "OPEN",
-            "passYn": "Restricted"   
-        },
+            "passYn": "Restricted",   
+            "realImg" : require(`assets/images/demo/practice/knife/real.jpg`),
+            "frontImg" : require(`assets/images/demo/practice/knife/front.jpg`),
+            "sideImg" : require(`assets/images/demo/practice/knife/side.jpg`),
+            "threedImg" : require(`assets/images/demo/practice/knife/threed.gif`),            
+        }
     ]
     
 
@@ -648,7 +670,8 @@ export const Practice = () => {
     const [openYn, setOpenYn] = useState();//오픈
     const [passYn, setPassYn] = useState();//통과
     const [nowSelect, setNowSelect] = useState('');//현재선택된 아이콘
-     
+    const [tranformUnitId, setTranformUnitId] = useState('');//이미지변경unitId
+
     const defaultData = () =>{
         setUnitGroupCd(unitSubList[0].unitGroupCd);
         setUnitGroupName(unitSubList[0].unitGroupName);
@@ -781,9 +804,9 @@ export const Practice = () => {
     //단품선택
     const handleSubTrSelect = (e, uid, gc, gn, nn, oy, py) =>{
         console.log(uid);
-
         setSelectSubTr(e);
-        setUnitGroupCd(gc);
+        setUnitGroupCd(gc);//그룹cd
+        setTranformUnitId(uid);//단품id
         setUnitGroupName(gn);
         setUnitName(nn);
         setOpenYn(oy);
@@ -791,11 +814,21 @@ export const Practice = () => {
 
 
         if(gc==='G000001'){ //총기
-            setImageList(targetUnitSubList1[0]);         
+            if(uid==='UX230324025350'){//일반총
+                setImageList(targetUnitSubList1[0]);
+            }else if(uid==='UX230324025352'){//일반총
+                setImageList(targetUnitSubList1[2]);
+            }else{//장난감총
+                setImageList(targetUnitSubList1[1]);
+            }
+            
         }else if(gc==='G000002'){//폭발물류
             setImageList(targetUnitSubList2[0]);
         }else if(gc==='G000003'){//실탄류
         }else if(gc==='G000004'){//도검류
+            if(uid==='UX230324025354'){//검
+                setImageList(targetUnitSubList4[0]);
+            }            
         }else if(gc==='G000005'){//일반무기
         }else if(gc==='G000006'){//위장무기류
         }else if(gc==='G000007'){//공구/생활용품류
@@ -831,53 +864,7 @@ export const Practice = () => {
         "threedImg" : ""
     };    
     
-    //정면 하단아이콘유틸에 따라 변경되는 이미지유형
-    const transimages = {
-            "color": t_color_01_1,//컬러
-            "colorUforce" : t_color_02_1,//컬러유기물강조
-            "colorMforce" : t_color_03_1,//컬러무기물강조
-            "colorRevers" : t_color_04_1,//컬러반전
-            "colorSaturation1": t_scolor_01_1,//컬러채도
-            "colorSaturation2": t_scolor_02_1,//컬러채도
-            "colorSaturation3": t_scolor_03_1,//컬러채도
-            "colorSaturation4": t_scolor_04_1,//컬러채도
-            "colorSaturation5": t_scolor_05_1,//컬러채도
-            "colorSaturation6": t_scolor_06_1,//컬러채도
-            "blackWhite" : t_bwcolor_01_1,//흑백
-            "blackWhiteUforce" : t_bwcolor_02_1,//흑백유기물강조
-            "blackWhiteMforce" : t_bwcolor_03_1,//흑백무기물강조
-            "blackWhiteRevers" : t_bwcolor_04_1,//흑백반전
-            "blackWhiteSaturation1": t_sbwcolor_01_1,//흑백채도	
-            "blackWhiteSaturation2": t_sbwcolor_02_1,//흑백채도	
-            "blackWhiteSaturation3": t_sbwcolor_03_1,//흑백채도	
-            "blackWhiteSaturation4": t_sbwcolor_04_1,//흑백채도	
-            "blackWhiteSaturation5": t_sbwcolor_05_1,//흑백채도	
-            "blackWhiteSaturation6": t_sbwcolor_06_1//흑백채도	
-    }                               
-
-    //측면 하단아이콘유틸에 따라 변경되는 이미지유형
-    const sideTransimages = {
-            "color": t_side_color_01_1,//컬러
-            "colorUforce" : t_side_color_02_1,//컬러유기물강조
-            "colorMforce" : t_side_color_03_1,//컬러무기물강조
-            "colorRevers" : t_side_color_04_1,//컬러반전
-            "colorSaturation1": t_side_scolor_01_1,//컬러채도
-            "colorSaturation2": t_side_scolor_02_1,//컬러채도
-            "colorSaturation3": t_side_scolor_03_1,//컬러채도
-            "colorSaturation4": t_side_scolor_04_1,//컬러채도
-            "colorSaturation5": t_side_scolor_05_1,//컬러채도
-            "colorSaturation6": t_side_scolor_06_1,//컬러채도
-            "blackWhite" : t_side_bwcolor_01_1,//흑백
-            "blackWhiteUforce" : t_side_bwcolor_02_1,//흑백유기물강조
-            "blackWhiteMforce" : t_side_bwcolor_03_1,//흑백무기물강조
-            "blackWhiteRevers" : t_side_bwcolor_04_1,//흑백반전
-            "blackWhiteSaturation1": t_side_sbwcolor_01_1,//흑백채도	
-            "blackWhiteSaturation2": t_side_sbwcolor_02_1,//흑백채도	
-            "blackWhiteSaturation3": t_side_sbwcolor_03_1,//흑백채도	
-            "blackWhiteSaturation4": t_side_sbwcolor_04_1,//흑백채도	
-            "blackWhiteSaturation5": t_side_sbwcolor_05_1,//흑백채도	
-            "blackWhiteSaturation6": t_side_sbwcolor_06_1//흑백채도	
-    }                                             
+                                      
 
     const [imageList, setImageList] = useState(targetUnitSubList1[0]);
 
@@ -888,87 +875,8 @@ export const Practice = () => {
     //하단 이미지컨트롤 아이콘 통합
     const imgTransControl = (e) =>{
 
-        if(e==='color1'){//컬러
-            learningImages.frontImg = transimages.color;
-            learningImages.sideImg = sideTransimages.color;
-            setImageList(learningImages);
-        }else if(e==='color2'){//컬러유기물강조
-            learningImages.frontImg = transimages.colorUforce;
-            learningImages.sideImg = sideTransimages.colorUforce;
-            setImageList(learningImages);
-        }else if(e==='color3'){//컬러무기물강조
-            learningImages.frontImg = transimages.colorMforce;
-            learningImages.sideImg = sideTransimages.colorMforce;
-            setImageList(learningImages);
-        }else if(e==='color4'){//컬러반전
-            learningImages.frontImg = transimages.colorRevers;
-            learningImages.sideImg = sideTransimages.colorRevers;
-            setImageList(learningImages);
-        }else if(e==='cd1'){//컬러채도1
-            learningImages.frontImg = transimages.colorSaturation1;
-            learningImages.sideImg = sideTransimages.colorSaturation1;
-            setImageList(learningImages);
-        }else if(e==='cd2'){//컬러채도2
-            learningImages.frontImg = transimages.colorSaturation2;
-            learningImages.sideImg = sideTransimages.colorSaturation2;
-            setImageList(learningImages);
-        }else if(e==='cd3'){//컬러채도3
-            learningImages.frontImg = transimages.colorSaturation3;
-            learningImages.sideImg = sideTransimages.colorSaturation3;
-            setImageList(learningImages);
-        }else if(e==='cd4'){//컬러채도4
-            learningImages.frontImg = transimages.colorSaturation4;
-            learningImages.sideImg = sideTransimages.colorSaturation4;
-            setImageList(learningImages);
-        }else if(e==='cd5'){//컬러채도5
-            learningImages.frontImg = transimages.colorSaturation5;
-            learningImages.sideImg = sideTransimages.colorSaturation5;
-            setImageList(learningImages);
-        }else if(e==='cd6'){//컬러채도6
-            learningImages.frontImg = transimages.colorSaturation6;
-            learningImages.sideImg = sideTransimages.colorSaturation6;
-            setImageList(learningImages);            
-        }else if(e==='blackWhite1'){//흑백
-            learningImages.frontImg = transimages.blackWhite;
-            learningImages.sideImg = sideTransimages.blackWhite;
-            setImageList(learningImages);
-        }else if(e==='blackWhite2'){//흑백유기물강조
-            learningImages.frontImg = transimages.blackWhiteUforce;
-            learningImages.sideImg = sideTransimages.blackWhiteUforce;
-            setImageList(learningImages);
-        }else if(e==='blackWhite3'){//흑백무기물강조
-            learningImages.frontImg = transimages.blackWhiteMforce;
-            learningImages.sideImg = sideTransimages.blackWhiteMforce;
-            setImageList(learningImages);
-        }else if(e==='blackWhite4'){//흑백반전
-            learningImages.frontImg = transimages.blackWhiteRevers;
-            learningImages.sideImg = sideTransimages.blackWhiteRevers;
-            setImageList(learningImages);
-        }else if(e==='cd7'){//흑백채도1
-            learningImages.frontImg = transimages.blackWhiteSaturation1;
-            learningImages.sideImg = sideTransimages.blackWhiteSaturation1;
-            setImageList(learningImages);
-        }else if(e==='cd8'){//흑백채도2
-            learningImages.frontImg = transimages.blackWhiteSaturation2;
-            learningImages.sideImg = sideTransimages.blackWhiteSaturation2;
-            setImageList(learningImages);
-        }else if(e==='cd9'){//흑백채도3
-            learningImages.frontImg = transimages.blackWhiteSaturation3;
-            learningImages.sideImg = sideTransimages.blackWhiteSaturation3;
-            setImageList(learningImages);
-        }else if(e==='cd10'){//흑백채도4
-            learningImages.frontImg = transimages.blackWhiteSaturation4;
-            learningImages.sideImg = sideTransimages.blackWhiteSaturation4;
-            setImageList(learningImages);
-        }else if(e==='cd11'){//흑백채도5
-            learningImages.frontImg = transimages.blackWhiteSaturation5;
-            learningImages.sideImg = sideTransimages.blackWhiteSaturation5;
-            setImageList(learningImages);
-        }else if(e==='cd12'){//흑백채도6
-            learningImages.frontImg = transimages.blackWhiteSaturation6;
-            learningImages.sideImg = sideTransimages.blackWhiteSaturation6;
-            setImageList(learningImages);
-        }
+        //unitGroupC//그룹cd
+        //tranformUnitId//단품id
     }    
 
     const inputRef1 = useRef();
@@ -1081,8 +989,8 @@ export const Practice = () => {
                                                                 {/*<th>개봉여부</th>*/}
                                                                 {/*<th>통과여부</th>*/}
                                                                 <th>Item</th>
-                                                                <th>Whether the item is opened</th>
-                                                                <th>Whether the item is passed</th>
+                                                                <th>Open or not</th>
+                                                                <th>Pass or not</th>
                                                             </tr>
                                                         </thead>
                                                     </table>
@@ -1103,7 +1011,13 @@ export const Practice = () => {
                                                                 unitList.map((result, index) => ([
                                                                     <tr onClick={()=>handleTrSelect(index+1, result.unitGroupCd)} className={selectTr===index+1 ? 'on' : ''}>
                                                                         <td>{index+1}</td>
-                                                                        <td>{result.groupName}</td>
+                                                                        {
+                                                                            result.unitGroupCd === 'G000001' || result.unitGroupCd === 'G000004' ? 
+                                                                                <td><p style={{fontWeight: 'bold'}}>{result.groupName}</p></td> 
+                                                                            :
+                                                                                <td><p style={{color : '#999999'}}>{result.groupName}</p></td> 
+                                                                        }
+                                                                        
                                                                         <td>{result.openYn}</td>
                                                                         <td>{result.passYn}</td>
                                                                     </tr>
@@ -1180,7 +1094,7 @@ export const Practice = () => {
                                             {/* 옵션*/}
                                             <div className="practice_select">
                                                 {/*<button className="label">옵션선택</button>*/}
-                                                <button className="label">Select Option</button>
+                                                <button className="label">Option</button>
                                                 <ul className="pra_optionList">
                                                     <li className="pra_item" onClick={()=>handleThreed("6")}>12°</li>
                                                     <li className="pra_item" onClick={()=>handleThreed("12")}>24°</li>
