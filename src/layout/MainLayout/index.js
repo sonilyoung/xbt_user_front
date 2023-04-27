@@ -40,11 +40,11 @@ const MainLayout = () => {
 
     // set media wise responsive drawer
     useEffect(() => {
-        // if (isLoggedIn === false) {
-        //     navigate('/login');
-        // }
-        // setOpen(!matchDownLG);
-        // dispatch(openDrawer({ drawerOpen: !matchDownLG }));
+        if (isLoggedIn === false) {
+            navigate('/login');
+        }
+        setOpen(!matchDownLG);
+        dispatch(openDrawer({ drawerOpen: !matchDownLG }));
     }, []);
 
     useEffect(() => {
