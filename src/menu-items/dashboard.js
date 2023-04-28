@@ -22,10 +22,10 @@ const dashboard = {
             breadcrumbs: true
         },
         {
-            id: 'dashboard',
+            id: 'frontmain',
             title: '',
             type: 'item',
-            url: '/dashboard',
+            url: '/frontmain',
             icon: icons.DashboardOutlined,
             breadcrumbs: true
         }

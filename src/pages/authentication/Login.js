@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 // material-ui
 import { Typography } from '@mui/material';
-import { DownOutlined, UserOutlined } from '@ant-design/icons';
-import { Col, Row, Button, Form, Input, Dropdown, Space, Modal } from 'antd';
+import { Col, Row, Form, Input, Dropdown, Space, Modal } from 'antd';
 import koricon from '../../images/login/kor_icon.svg';
 import engicon from '../../images/login/eng_icon.svg';
 import jpicon from '../../images/login/jp_icon.svg';
@@ -19,9 +18,9 @@ import '../../css/login.css';
 const Login = () => {
     const { confirm } = Modal;
     const [form] = Form.useForm();
+    const navigate = useNavigate();
+
     const [isModalOpen, setIsModalOpen] = useState(false); // 로그인창 Modal창
-    const [isModalOpen_success, setIsModalOpen_success] = useState(false); // 로그인 성공 Modal창
-    const [isModalOpen_failure, setIsModalOpen_failure] = useState(false); // 로그인 실패 Modal창
 
     const [loading, setLoading] = useState(false);
     const [languageLabel, setLanguageLabel] = useState('한국어');
@@ -94,7 +93,9 @@ const Login = () => {
                 </div>
             ),
             okText: '확인',
-            onOk() {}
+            onOk() {
+                navigate('/frontmain');
+            }
         });
     };
 

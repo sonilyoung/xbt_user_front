@@ -40,9 +40,9 @@ const MainLayout = () => {
 
     // set media wise responsive drawer
     useEffect(() => {
-        if (isLoggedIn === false) {
-            navigate('/login');
-        }
+        // if (isLoggedIn === false) {
+        //     navigate('/login');
+        // }
         setOpen(!matchDownLG);
         dispatch(openDrawer({ drawerOpen: !matchDownLG }));
     }, []);
@@ -55,7 +55,7 @@ const MainLayout = () => {
         <>
             <Box sx={{ display: 'flex', width: '100%' }}>
                 <Box component="main" sx={{ width: '100%', flexGrow: 1, p: { xs: 0, sm: 0 } }}>
-                    <Breadcrumbs navigation={navigation} title divider={false} />
+                    {/* <Breadcrumbs navigation={navigation} title divider={false} /> */}
                     <Outlet />
                 </Box>
             </Box>
