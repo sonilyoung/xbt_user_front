@@ -29,29 +29,94 @@ import theory_03 from '../../images/main/theory_ic03.png';
 
 // 교육정보
 import { EduInfo } from 'pages/eduinfo';
+
+// Notice
+import { NoticeList } from 'pages/notice';
 import '../../css/main.css';
 
 export const FrontMain = () => {
     const { confirm } = Modal;
     const [form] = Form.useForm();
+    const [ModalOpen, setModalOpen] = useState(false); // 메뉴 Modal창
     const [eiModalOpen, setEiModalOpen] = useState(false); // 교육정보 Modal창
     const [nlModalOpen, setNlModalOpen] = useState(false); // Notice List Modal창
-    const [ndModalOpen, setNdModalOpen] = useState(false); // Notice Detail Modal창
 
+    const [loading, setLoading] = useState(false);
     const [eiloading, setEiLoading] = useState(false);
+    const [nlLoading, setNlLoading] = useState(false);
 
+    const [menutitle, setMenutitle] = useState('');
+    // 메뉴 Modal 이벤트처리 Start
+    const Menus_Modal = (MenuNumber) => {
+        if (MenuNumber === '0') {
+            setMenutitle('물품연습');
+        } else if (MenuNumber === '1') {
+            setMenutitle('학습');
+        } else if (MenuNumber === '2') {
+            setMenutitle('IA강화학습');
+        } else if (MenuNumber === '3') {
+            setMenutitle('오답문제 풀이');
+        } else if (MenuNumber === '4') {
+            setMenutitle('반입금지 물품연습');
+        } else if (MenuNumber === '5') {
+            setMenutitle('평가');
+        } else if (MenuNumber === '6') {
+            setMenutitle('실제 사례');
+        } else if (MenuNumber === '7') {
+            setMenutitle('물품분류변경');
+        } else if (MenuNumber === '8') {
+            setMenutitle('물품분류연습');
+        } else if (MenuNumber === '9') {
+            setMenutitle('물품분류평가');
+        } else if (MenuNumber === '10') {
+            setMenutitle('이론I');
+        } else if (MenuNumber === '11') {
+            setMenutitle('이론II');
+        } else if (MenuNumber === '12') {
+            setMenutitle('설문조사');
+        }
+        setModalOpen(true);
+        setLoading(true);
+    };
+
+    const handleOk = () => {
+        setModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setModalOpen(false);
+    };
+    // 메뉴 Modal 이벤트처리 End
+
+    // 교육정보 Modal 이벤트처리 Start
     const Eduinfo_Modal = () => {
         setEiModalOpen(true);
         setEiLoading(true);
     };
 
-    const eduinfohandleOk = () => {
+    const eihandleOk = () => {
         setEiModalOpen(false);
     };
 
-    const eduinfohandleCancel = () => {
+    const eihandleCancel = () => {
         setEiModalOpen(false);
     };
+    // 교육정보 Modal 이벤트처리 End
+
+    // Notice List Modal 이벤트처리 Start
+    const NoticeList_Modal = () => {
+        setNlModalOpen(true);
+        setNlLoading(true);
+    };
+
+    const nlhandleOk = () => {
+        setNlModalOpen(false);
+    };
+
+    const nlhandleCancel = () => {
+        setNlModalOpen(false);
+    };
+    // Notice List Modal 이벤트처리 End
 
     return (
         <>
@@ -80,7 +145,7 @@ export const FrontMain = () => {
                                 <div className="mnotice">
                                     <div className="nnc_top">
                                         <h1>Notice</h1>
-                                        <button className="nnct_plus modal_btn">
+                                        <button className="nnct_plus modal_btn" onClick={() => NoticeList_Modal()}>
                                             <img src={main_plus} alt="" />
                                         </button>
                                     </div>
@@ -122,7 +187,7 @@ export const FrontMain = () => {
                                     <div className="mrcon_ic">
                                         <ul>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('0')}>
                                                     <div className="circle">
                                                         <img src={xrayrd_01} alt="" />
                                                     </div>
@@ -130,7 +195,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('1')}>
                                                     <div className="circle">
                                                         <img src={xrayrd_02} alt="" />
                                                     </div>
@@ -138,7 +203,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('2')}>
                                                     <div className="circle">
                                                         <img src={xrayrd_03} alt="" />
                                                     </div>
@@ -155,7 +220,7 @@ export const FrontMain = () => {
                                     <div className="mrcon_ic">
                                         <ul>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('3')}>
                                                     <div className="circle">
                                                         <img src={learn_01} alt="" />
                                                     </div>
@@ -163,7 +228,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('4')}>
                                                     <div className="circle">
                                                         <img src={learn_02} alt="" />
                                                     </div>
@@ -171,7 +236,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('5')}>
                                                     <div className="circle">
                                                         <img src={learn_03} alt="" />
                                                     </div>
@@ -190,7 +255,7 @@ export const FrontMain = () => {
                                     <div className="mrcon_ic">
                                         <ul>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('6')}>
                                                     <div className="circle">
                                                         <img src={actual_01} alt="" />
                                                     </div>
@@ -198,7 +263,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('7')}>
                                                     <div className="circle">
                                                         <img src={actual_02} alt="" />
                                                     </div>
@@ -206,7 +271,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('8')}>
                                                     <div className="circle">
                                                         <img src={actual_03} alt="" />
                                                     </div>
@@ -214,7 +279,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('9')}>
                                                     <div className="circle">
                                                         <img src={actual_04} alt="" />
                                                     </div>
@@ -231,7 +296,7 @@ export const FrontMain = () => {
                                     <div className="mrcon_ic">
                                         <ul>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('10')}>
                                                     <div className="circle">
                                                         <img src={theory_01} alt="" />
                                                     </div>
@@ -239,7 +304,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('11')}>
                                                     <div className="circle">
                                                         <img src={theory_02} alt="" />
                                                     </div>
@@ -247,7 +312,7 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button>
+                                                <button onClick={() => Menus_Modal('12')}>
                                                     <div className="circle">
                                                         <img src={theory_03} alt="" />
                                                     </div>
@@ -263,19 +328,35 @@ export const FrontMain = () => {
                 </div>
             </div>
 
-            {/* 교육정보 모달 창 Start */}
+            {/* 메뉴 모달 창 Start */}
             <Modal
                 maskClosable={false}
-                open={eiModalOpen}
-                onOk={eduinfohandleOk}
-                onCancel={eduinfohandleCancel}
-                width={600}
+                open={ModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                width={'97%'}
                 style={{
                     zIndex: 999
                 }}
                 footer={[]}
             >
-                <div>jhgjhgjhg</div>
+                {menutitle}
+            </Modal>
+            {/* 메뉴 모달 창 End */}
+
+            {/* 교육정보 모달 창 Start */}
+            <Modal
+                maskClosable={false}
+                open={eiModalOpen}
+                onOk={eihandleOk}
+                onCancel={eihandleCancel}
+                width={'82%'}
+                style={{
+                    zIndex: 999
+                }}
+                footer={[]}
+            >
+                <EduInfo />
             </Modal>
             {/* 교육정보 모달 창 End */}
 
@@ -283,237 +364,17 @@ export const FrontMain = () => {
             <Modal
                 maskClosable={false}
                 open={nlModalOpen}
-                onOk={eduinfohandleOk}
-                onCancel={eduinfohandleCancel}
-                width={600}
+                onOk={nlhandleOk}
+                onCancel={nlhandleCancel}
+                width={800}
                 style={{
                     zIndex: 999
                 }}
                 footer={[]}
             >
-                <div id="two-md" className="modal-wrapper modal_blur">
-                    <div className="modal notice_md">
-                        {/* <!-- xbt_content --> */}
-                        <div className="xbt_content">
-                            {/* <!-- xbt_top --> */}
-                            <div className="xbt_top">
-                                <div className="md_notice">
-                                    {/* <!-- mdnc_top --> */}
-                                    <div className="mdnc_top">
-                                        <h1>Notice</h1>
-                                    </div>
-                                    {/* <!-- bbslist --> */}
-                                    <Table className="bbslist">
-                                        <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">제목</th>
-                                            <th scope="col">일자</th>
-                                        </tr>
-                                        <tr>
-                                            <td className="num">1</td>
-                                            <td className="al-Left">
-                                                <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                    데이터 점검으로 인한 접속제한
-                                                </button>
-                                            </td>
-                                            <td className="Date">2023-03-18</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="num">2</td>
-                                            <td className="al-Left">
-                                                <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                    개인정보 보호를 위해 PC 로그
-                                                </button>
-                                            </td>
-                                            <td className="Date">2023-03-15</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="num">3</td>
-                                            <td className="al-Left">
-                                                <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                    교육생 데스트 일정 공지
-                                                </button>
-                                            </td>
-                                            <td className="Date">2023-03-14</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="num">4</td>
-                                            <td className="al-Left">
-                                                <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                    9월 교육 일정 안내
-                                                </button>
-                                            </td>
-                                            <td className="Date">2023-03-14</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="num">5</td>
-                                            <td className="al-Left">
-                                                <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                    공지사항 테스트 입력
-                                                </button>
-                                            </td>
-                                            <td className="Date">2023-03-14</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="num">6</td>
-                                            <td className="al-Left">
-                                                <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                    AI 판독평가 관련 자료
-                                                </button>
-                                            </td>
-                                            <td className="Date">2023-03-11</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="num">7</td>
-                                            <td className="al-Left">
-                                                <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                    2023년 교육생 교육일정 안내 정보
-                                                </button>
-                                            </td>
-                                            <td className="Date">2023-03-10</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="num">8</td>
-                                            <td className="al-Left">
-                                                <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                    테스트 공지사항 입니다.
-                                                </button>
-                                            </td>
-                                            <td className="Date">2023-03-06</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="num">9</td>
-                                            <td className="al-Left">
-                                                <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                    사이트 점검으로 인해 접속이 제한됨을 알려드립니다.
-                                                </button>
-                                            </td>
-                                            <td className="Date">2023-03-03</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="num">10</td>
-                                            <td className="al-Left">
-                                                <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                                    교육 테스트 입니다.
-                                                </button>
-                                            </td>
-                                            <td className="Date">2023-03-01</td>
-                                        </tr>
-                                    </Table>
-                                    {/* <!-- bbs_pagi --> */}
-                                    <div className="bbs_pagi">
-                                        <ul>
-                                            <li>
-                                                <a href="#" className="page_prev">
-                                                    <span>
-                                                        <img src="../images/main/larrow.svg" alt="" />
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li className="active">
-                                                <a href="#" className="page_current">
-                                                    <span>1</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <span>2</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <span>3</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <span>4</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <span>5</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" className="page_next">
-                                                    <span>
-                                                        <img src="../images/main/rarrow.svg" alt="" />
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <button id="close-two-md" data-mact="close" data-minfo="two-md" className="modal_btn close_btn"></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <NoticeList />
             </Modal>
             {/* Notice List 모달 창 End */}
-
-            {/* Notice 상세정보 모달 창 Start */}
-            <Modal
-                maskClosable={false}
-                open={ndModalOpen}
-                onOk={eduinfohandleOk}
-                onCancel={eduinfohandleCancel}
-                width={600}
-                style={{
-                    zIndex: 999
-                }}
-                footer={[]}
-            >
-                <div id="thr-md" className="modal-wrapper modal_blur">
-                    <div className="modal noticerw_md">
-                        {/* <!-- xbt_content --> */}
-                        <div className="xbt_content">
-                            {/* <!-- xbt_top --> */}
-                            <div className="xbt_top">
-                                {/* <!-- mdnc_top --> */}
-                                <div className="mdnc_top">
-                                    <h1>Notice</h1>
-                                </div>
-                                <button id="close-thr-md" data-mact="close" data-minfo="thr-md" className="modal_btn close_btn"></button>
-                            </div>
-                            <div className="con_table noticerw_sr scrollbar height360">
-                                {/* <!-- noticerw_top --> */}
-                                <div className="noticerw_top">
-                                    <h1>9월 교육일정 안내</h1>
-                                    <span>2023-03-14</span>
-                                </div>
-                                {/* <!-- noticerw_con --> */}
-                                <div className="noticerw_con">
-                                    <p>
-                                        안녕하세요! 00000 본부입니다.
-                                        <br />
-                                        9월 교육 일정 아래와 같이 안내해드리니 참조 부탁드립니다.
-                                        <br />
-                                        <br />
-                                        9월 교육일정
-                                        <br />
-                                        <br />
-                                        1. 신입교육일정
-                                        <br />
-                                        일시 : 2023년 9월 00일 ~ 9월 00일(30일간, 매일 오전 9시)
-                                        <br />
-                                        장소 : 00회관 00본부
-                                        <br />
-                                        교육내용 : 000에 따른 0000 와 0000에 대한 신입교육
-                                        <br />
-                                        문의 : 000-0000-0000 (담당자: 홍길동)
-                                        <br />
-                                        <br />
-                                        내용 더 들어 갈꺼임
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Modal>
-            {/* Notice 상세정보 모달 창 End */}
         </>
     );
 };

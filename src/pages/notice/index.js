@@ -1,1 +1,2 @@
-export { Notice } from './Notice';
+export { NoticeList } from './NoticeList';
+export { NoticeView } from './NoticeView';

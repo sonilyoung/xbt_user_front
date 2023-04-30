@@ -4,6 +4,7 @@ import MainLayout from 'layout/MainLayout';
 
 // 메인 대시보드
 import { FrontMain } from 'pages/frontmain';
+import { EduInfo } from 'pages/eduinfo';
 import { Learning } from 'pages/learning';
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -20,6 +21,11 @@ const MainRoutes = {
             // 메인
             path: 'frontmain',
             element: <FrontMain />
+        },
+        {
+            // 메인
+            path: 'eduinfo',
+            element: <EduInfo />
         },
         {
             // 학습
