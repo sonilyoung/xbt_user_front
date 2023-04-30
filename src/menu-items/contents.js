@@ -28,12 +28,38 @@ export const frontmain = {
             url: '/frontmain',
             icon: icons.ProjectOutlined,
             breadcrumbs: true
+        },
+        {
+            id: '/eduinfo',
+            title: '',
+            subtitle: '',
+            type: 'item',
+            url: '/eduinfo',
+            icon: icons.ProjectOutlined,
+            breadcrumbs: true
+        }
+    ]
+};
+
+export const eduinfo = {
+    id: '1',
+    title: 'Navigation',
+    type: 'group',
+    children: [
+        {
+            id: '/eduinfo',
+            title: '교육정보',
+            subtitle: 'eduinfo',
+            type: 'item',
+            url: '/eduinfo',
+            icon: icons.ProjectOutlined,
+            breadcrumbs: true
         }
     ]
 };
 
 export const learning = {
-    id: '1',
+    id: '2',
     title: 'Navigation',
     type: 'group',
     children: [
