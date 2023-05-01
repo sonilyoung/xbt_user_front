@@ -29,9 +29,11 @@ import theory_03 from '../../images/main/theory_ic03.png';
 
 // 교육정보
 import { EduInfo } from 'pages/eduinfo';
-
 // Notice
 import { NoticeList } from 'pages/notice';
+// 물품연습
+import { Practice } from 'pages/practice';
+
 import '../../css/main.css';
 
 export const FrontMain = () => {
@@ -40,12 +42,11 @@ export const FrontMain = () => {
     const [ModalOpen, setModalOpen] = useState(false); // 메뉴 Modal창
     const [eiModalOpen, setEiModalOpen] = useState(false); // 교육정보 Modal창
     const [nlModalOpen, setNlModalOpen] = useState(false); // Notice List Modal창
-
     const [loading, setLoading] = useState(false);
     const [eiloading, setEiLoading] = useState(false);
     const [nlLoading, setNlLoading] = useState(false);
-
     const [menutitle, setMenutitle] = useState('');
+    const [menuValue, setMenuValue] = useState('');
     // 메뉴 Modal 이벤트처리 Start
     const Menus_Modal = (MenuNumber) => {
         if (MenuNumber === '0') {
@@ -75,6 +76,7 @@ export const FrontMain = () => {
         } else if (MenuNumber === '12') {
             setMenutitle('설문조사');
         }
+        setMenuValue(MenuNumber);
         setModalOpen(true);
         setLoading(true);
     };
@@ -340,7 +342,35 @@ export const FrontMain = () => {
                 }}
                 footer={[]}
             >
-                {menutitle}
+                {menuValue === '0' ? (
+                    <Practice />
+                ) : menuValue === '1' ? (
+                    menutitle
+                ) : menuValue === '2' ? (
+                    menutitle
+                ) : menuValue === '3' ? (
+                    menutitle
+                ) : menuValue === '4' ? (
+                    menutitle
+                ) : menuValue === '5' ? (
+                    menutitle
+                ) : menuValue === '6' ? (
+                    menutitle
+                ) : menuValue === '7' ? (
+                    menutitle
+                ) : menuValue === '8' ? (
+                    menutitle
+                ) : menuValue === '9' ? (
+                    menutitle
+                ) : menuValue === '10' ? (
+                    menutitle
+                ) : menuValue === '11' ? (
+                    menutitle
+                ) : menuValue === '12' ? (
+                    menutitle
+                ) : (
+                    ''
+                )}
             </Modal>
             {/* 메뉴 모달 창 End */}
 

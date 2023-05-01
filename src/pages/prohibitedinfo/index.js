@@ -1,0 +1,1 @@
+export { ProhibitedInfo } from './ProhibitedInfo';
