@@ -1,1 +1,0 @@
-export { ProhibitedInfo } from './ProhibitedInfo';

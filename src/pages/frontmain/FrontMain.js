@@ -335,15 +335,18 @@ export const FrontMain = () => {
                 maskClosable={false}
                 open={ModalOpen}
                 onOk={handleOk}
-                onCancel={handleCancel}
+                // onCancel={handleCancel}
+                closable={false}
                 width={'97%'}
                 style={{
+                    top: 0,
+                    marginTop: 15,
                     zIndex: 999
                 }}
                 footer={[]}
             >
                 {menuValue === '0' ? (
-                    <Practice />
+                    <Practice ModalClose={handleCancel} />
                 ) : menuValue === '1' ? (
                     menutitle
                 ) : menuValue === '2' ? (

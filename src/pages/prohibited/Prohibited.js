@@ -14,7 +14,7 @@ import liquid from '../../images/practice/liquid.svg';
 
 import '../../css/main.css';
 
-export const ProhibitedInfo = () => {
+export const Prohibited = () => {
     return (
         <>
             <div className="xbt_content banItems_content">

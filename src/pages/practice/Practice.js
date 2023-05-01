@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Col, Row, Button, Space, Modal } from 'antd';
+import { Col, Row, Button, Select, Space, Modal } from 'antd';
 
 import sample01 from '../../images/practice/sample01.png';
 import sample02 from '../../images/practice/sample02.png';
@@ -22,18 +22,26 @@ import transform from '../../images/learning/transform.png';
 import glas_minus from '../../images/learning/glas_minus.png';
 import restoration from '../../images/learning/restoration.png';
 
-import { Prohibitedinfo } from 'pages/prohibitedinfo';
+// 반입금지물품
+import { Prohibited } from 'pages/prohibited';
 import '../../css/main.css';
 
-export const Practice = () => {
+export const Practice = (props) => {
     const { confirm } = Modal;
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
-
+    const [selectOption, setSelectOption] = useState('0'); // 옵션 셀렉트
     const [btabcho, setBtabcho] = useState('0');
     const [stabcho, setStabcho] = useState('0');
     const [copbtc01, setCopbtc01] = useState();
     const [copbtc02, setCopbtc02] = useState();
     const [copbtc03, setCopbtc03] = useState();
+
+    const [optionVal, setOptionVal] = useState('0');
+
+    const handleChange = (value) => {
+        setOptionVal(value);
+        console.log(`selected ${value}`);
+    };
 
     // 반입금지물품 Modal 이벤트처리 Start
     const Prohibitedinfo_Modal = () => {
@@ -70,6 +78,9 @@ export const Practice = () => {
         setCopbtc03(cop03flag);
     };
 
+    const ModalClose = () => {
+        props.ModalClose();
+    };
     return (
         <>
             <div className="xbt_content">
@@ -88,6 +99,7 @@ export const Practice = () => {
                                     data-mact="close"
                                     data-minfo="first-modal"
                                     className="modal_btn conbtn01 conbtn_pd01"
+                                    onClick={ModalClose}
                                 >
                                     종료
                                 </button>
@@ -245,13 +257,144 @@ export const Practice = () => {
                     <div className="practice_right">
                         {/* <!-- 옵션--> */}
                         <div className="practice_select">
-                            <button className="label">옵션선택</button>
+                            <Select
+                                defaultValue={`${optionVal}˚`}
+                                style={{
+                                    marginTop: '-3px',
+                                    width: '142px'
+                                }}
+                                bordered={false}
+                                onChange={handleChange}
+                                options={[
+                                    {
+                                        label: '0˚',
+                                        value: '0'
+                                    },
+                                    {
+                                        label: '12˚',
+                                        value: '12'
+                                    },
+                                    {
+                                        label: '24˚',
+                                        value: '24'
+                                    },
+                                    {
+                                        label: '36˚',
+                                        value: '36'
+                                    },
+                                    {
+                                        label: '48˚',
+                                        value: '48'
+                                    },
+                                    {
+                                        label: '60˚',
+                                        value: '60'
+                                    },
+                                    {
+                                        label: '72˚',
+                                        value: '72'
+                                    },
+                                    {
+                                        label: '84˚',
+                                        value: '84'
+                                    },
+                                    {
+                                        label: '96˚',
+                                        value: '96'
+                                    },
+                                    {
+                                        label: '108˚',
+                                        value: '108'
+                                    },
+                                    {
+                                        label: '120˚',
+                                        value: '120'
+                                    },
+                                    {
+                                        label: '132˚',
+                                        value: '132'
+                                    },
+                                    {
+                                        label: '144˚',
+                                        value: '144'
+                                    },
+                                    {
+                                        label: '156˚',
+                                        value: '156'
+                                    },
+                                    {
+                                        label: '168˚',
+                                        value: '168'
+                                    },
+                                    {
+                                        label: '180˚',
+                                        value: '180'
+                                    },
+                                    {
+                                        label: '192˚',
+                                        value: '192'
+                                    },
+                                    {
+                                        label: '204˚',
+                                        value: '204'
+                                    },
+                                    {
+                                        label: '216˚',
+                                        value: '216'
+                                    },
+                                    {
+                                        label: '228˚',
+                                        value: '228'
+                                    },
+                                    {
+                                        label: '240˚',
+                                        value: '240'
+                                    },
+                                    {
+                                        label: '252˚',
+                                        value: '252'
+                                    },
+                                    {
+                                        label: '264˚',
+                                        value: '264'
+                                    },
+                                    {
+                                        label: '276˚',
+                                        value: '276'
+                                    },
+                                    {
+                                        label: '288˚',
+                                        value: '288'
+                                    },
+                                    {
+                                        label: '300˚',
+                                        value: '300'
+                                    },
+                                    {
+                                        label: '312˚',
+                                        value: '312'
+                                    },
+                                    {
+                                        label: '324˚',
+                                        value: '324'
+                                    },
+                                    {
+                                        label: '336˚',
+                                        value: '336'
+                                    },
+                                    {
+                                        label: '348˚',
+                                        value: '348'
+                                    }
+                                ]}
+                            />
+                            {/* <button className="label">옵션선택</button>
                             <ul className="pra_optionList">
                                 <li className="pra_item">#옵션선택 A</li>
                                 <li className="pra_item">#옵션선택 B</li>
                                 <li className="pra_item">#옵션선택 C</li>
                                 <li className="pra_item">#옵션선택 D</li>
-                            </ul>
+                            </ul> */}
                         </div>
                         {/* <!-- //옵션 --> */}
 
@@ -424,13 +567,13 @@ export const Practice = () => {
                 open={ModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                width={680}
+                width={950}
                 style={{
                     zIndex: 999
                 }}
                 footer={[]}
             >
-                <Prohibitedinfo />
+                <Prohibited />
             </Modal>
             {/* 반입금지물품 모달 창 End */}
         </>
