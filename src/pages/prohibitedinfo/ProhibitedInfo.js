@@ -136,9 +136,9 @@ export const ProhibitedInfo = () => {
                             </tr>
                         </table>
                     </div>
-                    {/* <!-- //물품 내용 표 -->								 */}
+                    {/* <!-- //물품 내용 표 --> */}
                 </div>
-                <button id="close-first-modal" data-mact="close" data-minfo="first-modal" className="modal_btn close_btn"></button>
+                {/* <button id="close-first-modal" data-mact="close" data-minfo="first-modal" className="modal_btn close_btn"></button> */}
             </div>
         </>
     );

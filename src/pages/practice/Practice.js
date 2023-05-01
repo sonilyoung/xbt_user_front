@@ -22,7 +22,7 @@ import transform from '../../images/learning/transform.png';
 import glas_minus from '../../images/learning/glas_minus.png';
 import restoration from '../../images/learning/restoration.png';
 
-import ProhibitedInfo from '../prohibitedinfo';
+import { Prohibitedinfo } from 'pages/prohibitedinfo';
 import '../../css/main.css';
 
 export const Practice = () => {
@@ -36,6 +36,9 @@ export const Practice = () => {
     const [copbtc03, setCopbtc03] = useState();
 
     // 반입금지물품 Modal 이벤트처리 Start
+    const Prohibitedinfo_Modal = () => {
+        setModalOpen(true);
+    };
     const handleOk = () => {
         setModalOpen(false);
     };
@@ -88,7 +91,7 @@ export const Practice = () => {
                                 >
                                     종료
                                 </button>
-                                <button type="button" className="conbtn01">
+                                <button type="button" className="conbtn01" onClick={() => Prohibitedinfo_Modal()}>
                                     반입금지물품
                                 </button>
                             </li>
@@ -427,7 +430,7 @@ export const Practice = () => {
                 }}
                 footer={[]}
             >
-                <ProhibitedInfo />
+                <Prohibitedinfo />
             </Modal>
             {/* 반입금지물품 모달 창 End */}
         </>
