@@ -10,11 +10,15 @@ import tab_01 from '../../images/score/tab_img01.png';
 import tab_02 from '../../images/score/tab_img02.png';
 import tab_03 from '../../images/score/tab_img03.png';
 
-import '../../css/main.css';
 import './eduinfo.css';
 
-export const EduInfo = () => {
+export const EduInfo = (props) => {
     const [scoreTabs, setScoreTabs] = useState('score01');
+
+    const ModalClose = () => {
+        props.ModalClose();
+    };
+
     return (
         <>
             {/* <!-- xbttop02 --> */}
@@ -72,8 +76,15 @@ export const EduInfo = () => {
                         )}
                     </div>
                 </div>
+                <button
+                    id="close-one-md"
+                    data-mact="close"
+                    data-minfo="one-md"
+                    className="modal_btn close_btn"
+                    style={{ marginTop: '20px', marginRight: '20px' }}
+                    onClick={ModalClose}
+                ></button>
             </div>
-            {/* <button id="close-one-md" data-mact="close" data-minfo="one-md" className="modal_btn close_btn"></button> */}
         </>
     );
 };

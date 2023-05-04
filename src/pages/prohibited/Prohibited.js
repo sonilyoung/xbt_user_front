@@ -12,9 +12,11 @@ import flammable_sub from '../../images/practice/flammable_sub.svg';
 import danger_substances from '../../images/practice/danger_substances.svg';
 import liquid from '../../images/practice/liquid.svg';
 
-import '../../css/main.css';
+export const Prohibited = (props) => {
+    const ModalClose = () => {
+        props.ModalClose();
+    };
 
-export const Prohibited = () => {
     return (
         <>
             <div className="xbt_content banItems_content">
@@ -138,7 +140,13 @@ export const Prohibited = () => {
                     </div>
                     {/* <!-- //물품 내용 표 --> */}
                 </div>
-                {/* <button id="close-first-modal" data-mact="close" data-minfo="first-modal" className="modal_btn close_btn"></button> */}
+                <button
+                    id="close-first-modal"
+                    data-mact="close"
+                    data-minfo="first-modal"
+                    className="modal_btn close_btn"
+                    onClick={ModalClose}
+                ></button>
             </div>
         </>
     );

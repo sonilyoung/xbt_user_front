@@ -24,7 +24,6 @@ import restoration from '../../images/learning/restoration.png';
 
 // 반입금지물품
 import { Prohibited } from 'pages/prohibited';
-import '../../css/main.css';
 
 export const Practice = (props) => {
     const { confirm } = Modal;
@@ -81,6 +80,7 @@ export const Practice = (props) => {
     const ModalClose = () => {
         props.ModalClose();
     };
+
     return (
         <>
             <div className="xbt_content">
@@ -566,14 +566,15 @@ export const Practice = (props) => {
                 maskClosable={false}
                 open={ModalOpen}
                 onOk={handleOk}
-                onCancel={handleCancel}
+                closable={false}
+                // onCancel={handleCancel}
                 width={950}
                 style={{
                     zIndex: 999
                 }}
                 footer={[]}
             >
-                <Prohibited />
+                <Prohibited ModalClose={handleCancel} />
             </Modal>
             {/* 반입금지물품 모달 창 End */}
         </>

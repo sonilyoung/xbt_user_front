@@ -33,8 +33,9 @@ import { EduInfo } from 'pages/eduinfo';
 import { NoticeList } from 'pages/notice';
 // 물품연습
 import { Practice } from 'pages/practice';
-
-import '../../css/main.css';
+// 학습
+import { LearningS } from 'pages/learning/LearningS'; // 슬라이드 방식
+import { LearningC } from 'pages/learning/LearningC'; // 컷 방식
 
 export const FrontMain = () => {
     const { confirm } = Modal;
@@ -51,8 +52,10 @@ export const FrontMain = () => {
     const Menus_Modal = (MenuNumber) => {
         if (MenuNumber === '0') {
             setMenutitle('물품연습');
-        } else if (MenuNumber === '1') {
-            setMenutitle('학습');
+        } else if (MenuNumber === '11') {
+            setMenutitle('학습-슬라이드');
+        } else if (MenuNumber === '12') {
+            setMenutitle('학습-컷');
         } else if (MenuNumber === '2') {
             setMenutitle('IA강화학습');
         } else if (MenuNumber === '3') {
@@ -197,11 +200,19 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button onClick={() => Menus_Modal('1')}>
+                                                <button onClick={() => Menus_Modal('11')}>
                                                     <div className="circle">
                                                         <img src={xrayrd_02} alt="" />
                                                     </div>
-                                                    <p>학습</p>
+                                                    <p>학습(슬라이드)</p>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button onClick={() => Menus_Modal('12')}>
+                                                    <div className="circle">
+                                                        <img src={xrayrd_02} alt="" />
+                                                    </div>
+                                                    <p>학습(컷)</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -347,8 +358,10 @@ export const FrontMain = () => {
             >
                 {menuValue === '0' ? (
                     <Practice ModalClose={handleCancel} />
-                ) : menuValue === '1' ? (
-                    menutitle
+                ) : menuValue === '11' ? (
+                    <LearningS ModalClose={handleCancel} />
+                ) : menuValue === '12' ? (
+                    <LearningC ModalClose={handleCancel} />
                 ) : menuValue === '2' ? (
                     menutitle
                 ) : menuValue === '3' ? (
@@ -382,14 +395,15 @@ export const FrontMain = () => {
                 maskClosable={false}
                 open={eiModalOpen}
                 onOk={eihandleOk}
-                onCancel={eihandleCancel}
+                // onCancel={eihandleCancel}
+                closable={false}
                 width={'82%'}
                 style={{
                     zIndex: 999
                 }}
                 footer={[]}
             >
-                <EduInfo />
+                <EduInfo ModalClose={eihandleCancel} />
             </Modal>
             {/* 교육정보 모달 창 End */}
 
@@ -398,14 +412,15 @@ export const FrontMain = () => {
                 maskClosable={false}
                 open={nlModalOpen}
                 onOk={nlhandleOk}
-                onCancel={nlhandleCancel}
+                // onCancel={nlhandleCancel}
+                closable={false}
                 width={800}
                 style={{
                     zIndex: 999
                 }}
                 footer={[]}
             >
-                <NoticeList />
+                <NoticeList ModalClose={nlhandleCancel} />
             </Modal>
             {/* Notice List 모달 창 End */}
         </>
