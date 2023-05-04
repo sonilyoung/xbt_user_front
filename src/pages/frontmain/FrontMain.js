@@ -351,6 +351,7 @@ export const FrontMain = () => {
                 width={'97%'}
                 style={{
                     top: 0,
+                    bottom: 0,
                     marginTop: 15,
                     zIndex: 999
                 }}

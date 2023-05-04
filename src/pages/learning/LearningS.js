@@ -49,6 +49,7 @@ export const LearningS = (props) => {
     const [PrintModalOpen, setPrintModalOpen] = useState(false); // 학습 결과 정보 Modal창
     const [PassModalOpen, setPassModalOpen] = useState(false); // 합격 Modal창
     const [FailModalOpen, setFailModalOpen] = useState(false); // 불합격 Modal창
+    const [CompleteModalOpen, setCompleteModalOpen] = useState(false); // 완료 Modal창
 
     const [copbtc01, setCopbtc01] = useState();
     const [copbtc02, setCopbtc02] = useState();
@@ -240,6 +241,7 @@ export const LearningS = (props) => {
                 clearInterval(position);
                 position = setInterval(set_position, 10);
 
+                $('#myRange').attr('disabled', '');
                 resetImage();
             }
         }
@@ -277,6 +279,11 @@ export const LearningS = (props) => {
         setModalOpen(false);
     };
 
+    const handleCancel = () => {
+        setModalOpen(false);
+    };
+    // 반입금지물품 Modal 이벤트처리 End
+
     const PrinthandleOk = () => {
         setPrintModalOpen(false);
     };
@@ -284,7 +291,7 @@ export const LearningS = (props) => {
     // 합격 Modal 이벤트 처리
     const PasshandleOk = () => {
         setPassModalOpen(false);
-        setPrintModalOpen(true);
+        setCompleteModalOpen(true);
     };
 
     // 불합격 Modal 이벤트 처리
@@ -292,10 +299,12 @@ export const LearningS = (props) => {
         setFailModalOpen(false);
     };
 
-    const handleCancel = () => {
-        setModalOpen(false);
+    // 완료 Modal 이벤트 처리
+    const CompletehandleOk = () => {
+        setPrintModalOpen(true); // 정답확인 modal 창 닫기
+        setCompleteModalOpen(false); // 완료 modal 창 닫기
+        ModalClose(); // 학습 modal 창 닫기
     };
-    // 반입금지물품 Modal 이벤트처리 End
 
     const copbtc01_Cho = (cop01flag) => {
         setCopbtc01(cop01flag);
@@ -329,10 +338,6 @@ export const LearningS = (props) => {
     const ModalClose = () => {
         props.ModalClose();
     };
-
-    const scriptJquery = document.createElement('script');
-    scriptJquery.src = './js/learning.js';
-    scriptJquery.async = true;
 
     return (
         <>
@@ -404,7 +409,7 @@ export const LearningS = (props) => {
                     </div>
                 </div>
                 {/* <!-- learnc_img --> */}
-                <div className="learnc_img" id="learn01_img" style={{ height: '520px' }}>
+                <div className="learnc_img" id="learn01_img" style={{ height: '450px' }}>
                     <img src={learning_01} data-thum={learning_0101} className="image" alt="" />
                     <img src={learning_02} data-thum={learning_0201} className="image" alt="" />
                     <img src={learning_03} data-thum={learning_0301} className="image" alt="" />
@@ -630,20 +635,57 @@ export const LearningS = (props) => {
             </Modal>
             {/* 반입금지물품 모달 창 End */}
 
+            {/* 정답 확인 Start */}
             <Modal
                 maskClosable={false}
                 open={PrintModalOpen}
                 onOk={PrinthandleOk}
                 closable={false}
                 // onCancel={handleCancel}
-                width={950}
+                width={'97%'}
+                style={{
+                    top: 15,
+                    zIndex: 999
+                }}
+                footer={[]}
+            >
+                <LearningP ModalClose={PrinthandleOk} />
+            </Modal>
+            {/* 정답 확인 End */}
+
+            {/* 완료 모달 창 Start */}
+            <Modal
+                maskClosable={false}
+                open={CompleteModalOpen}
+                onOk={CompletehandleOk}
+                closable={false}
+                // onCancel={handleCancel}
+                width={590}
                 style={{
                     zIndex: 999
                 }}
                 footer={[]}
             >
-                <LearningP ModalClose={handleCancel} />
+                <div style={{ width: '542px', textAlign: 'center', padding: '50px 0px' }}>
+                    <div className="scwd_txt01">
+                        <h1>평가를 마쳤습니다.</h1>
+                    </div>
+                    <div className="scwd_txt02">
+                        <p>학습이 끝났습니다. 수고하셨습니다.</p>
+                    </div>
+                    <button
+                        id="open-six-modal"
+                        data-mact="open"
+                        data-minfo="six-modal"
+                        className="modal_btn conbtn01"
+                        onClick={CompletehandleOk}
+                    >
+                        확인
+                    </button>
+                    {/* <button id="close-eig-modal" data-mact="close" data-minfo="eig-modal" className="modal_btn close_btn02"></button> */}
+                </div>
             </Modal>
+            {/* 완료 모달 창 End */}
 
             {/* 합격 모달 창 Start */}
             <Modal

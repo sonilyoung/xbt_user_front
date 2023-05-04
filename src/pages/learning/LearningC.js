@@ -34,14 +34,23 @@ import prohibited from '../../images/learning/prohibited.png';
 import stope from '../../images/learning/stop.png';
 import learning_01_1 from '../../images/learning/learning_01_1.jpg';
 
+import pass_color from '../../images/learning/pass_color.png';
+import fail_color from '../../images/learning/fail_color.png';
+
 // 반입금지물품
 import { Prohibited } from 'pages/prohibited';
+import { LearningP } from 'pages/learning/LearningP';
 
 import $ from 'jquery';
 
 export const LearningC = (props) => {
     const { confirm } = Modal;
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
+
+    const [PrintModalOpen, setPrintModalOpen] = useState(false); // 학습 결과 정보 Modal창
+    const [PassModalOpen, setPassModalOpen] = useState(false); // 합격 Modal창
+    const [FailModalOpen, setFailModalOpen] = useState(false); // 불합격 Modal창
+    const [CompleteModalOpen, setCompleteModalOpen] = useState(false); // 완료 Modal창
 
     const [copbtc01, setCopbtc01] = useState();
     const [copbtc02, setCopbtc02] = useState();
@@ -88,13 +97,17 @@ export const LearningC = (props) => {
             if (currentImageIndex === images.length) {
                 clearTimeout(timer);
                 clearTimeout(timeout);
-                alert('시험이 종료되었습니다.11');
+                alert('시험이 종료되었습니다.');
                 progressBar.stop();
                 progressBar.css({ width: '0%' });
                 $('#learn02_bimg').hide();
                 $('#close_second_modal').show();
                 $('#close_second_modal_on').hide();
                 is_learn02_play = false;
+                // 합격, 불합격 모달창 띄움 Strart
+                setPassModalOpen(true);
+                setFailModalOpen(true);
+                // 합격, 불합격 모달창 띄움 End
             } else {
                 $(images[currentImageIndex]).show();
                 $('#learn02_bimg').attr('src', $(images[currentImageIndex]).data('thum'));
@@ -106,13 +119,17 @@ export const LearningC = (props) => {
                     currentImageIndex++;
                     if (currentImageIndex === images.length) {
                         clearTimeout(timer);
-                        alert('시험이 종료되었습니다.22');
+                        alert('시험이 종료되었습니다.');
                         progressBar.stop();
                         progressBar.css({ width: '0%' });
                         $('#learn02_bimg').hide();
                         $('#close_second_modal').show();
                         $('#close_second_modal_on').hide();
                         is_learn02_play = false;
+                        // 합격, 불합격 모달창 띄움 Strart
+                        setPassModalOpen(true);
+                        setFailModalOpen(true);
+                        // 합격, 불합격 모달창 띄움 End
                     } else {
                         $(images[currentImageIndex]).show();
                         updateProgressBar(learn_time);
@@ -175,13 +192,17 @@ export const LearningC = (props) => {
                 if (currentImageIndex === images.length) {
                     clearTimeout(timer);
                     clearTimeout(timeout);
-                    alert('시험이 종료되었습니다.33');
+                    alert('시험이 종료되었습니다.');
                     progressBar.stop();
                     $('#learn02_bimg').hide();
                     $('#close_second_modal').show();
                     $('#close_second_modal_on').hide();
                     progressBar.css({ width: '0%' });
                     is_learn02_play = false;
+                    // 합격, 불합격 모달창 띄움 Strart
+                    setPassModalOpen(true);
+                    setFailModalOpen(true);
+                    // 합격, 불합격 모달창 띄움 End
                 } else {
                     // Show the next image and restart the timer
                     $(images[currentImageIndex]).show();
@@ -239,6 +260,28 @@ export const LearningC = (props) => {
     };
     // 반입금지물품 Modal 이벤트처리 End
 
+    const PrinthandleOk = () => {
+        setPrintModalOpen(false);
+    };
+
+    // 합격 Modal 이벤트 처리
+    const PasshandleOk = () => {
+        setPassModalOpen(false);
+        setCompleteModalOpen(true);
+    };
+
+    // 불합격 Modal 이벤트 처리
+    const FailhandleOk = () => {
+        setFailModalOpen(false);
+    };
+
+    // 완료 Modal 이벤트 처리
+    const CompletehandleOk = () => {
+        setPrintModalOpen(true); // 정답확인 modal 창 닫기
+        setCompleteModalOpen(false); // 완료 modal 창 닫기
+        ModalClose(); // 학습 modal 창 닫기
+    };
+
     const copbtc01_Cho = (cop01flag) => {
         setCopbtc01(cop01flag);
     };
@@ -269,16 +312,16 @@ export const LearningC = (props) => {
 
     // 종료 처리
     const ModalClose = () => {
-        if (is_learn02_play) {
-            $(images).hide();
-            clearTimeout(timer);
-            clearTimeout(timeout);
-            alert('시험이 종료되었습니다.');
-            progressBar.stop();
-            progressBar.css({ width: '0%' });
-            is_learn02_play = false;
-            $('#learn02_bimg').hide();
-        }
+        // if (is_learn02_play) {
+        //     $(images).hide();
+        //     clearTimeout(timer);
+        //     clearTimeout(timeout);
+        //     alert('시험이 종료되었습니다.');
+        //     progressBar.stop();
+        //     progressBar.css({ width: '0%' });
+        //     is_learn02_play = false;
+        //     $('#learn02_bimg').hide();
+        // }
         props.ModalClose();
     };
 
@@ -298,7 +341,7 @@ export const LearningC = (props) => {
                             </li>
                             <li>
                                 <h2 className="conname pr30">홍길동</h2>
-                                <button type="button" className="conbtn01">
+                                <button type="button" className="conbtn01" onClick={() => Prohibitedinfo_Modal()}>
                                     반입금지물품
                                 </button>
                             </li>
@@ -336,7 +379,7 @@ export const LearningC = (props) => {
                                     data-mact="close"
                                     data-minfo="second-modal"
                                     style={{ marginLeft: '23px' }}
-                                    className="modal_btn learnbtn btn_end"
+                                    className="modal_btn learnbtn btn_start"
                                     onClick={ModalClose}
                                 >
                                     종료
@@ -356,7 +399,7 @@ export const LearningC = (props) => {
                     </div>
                 </div>
                 {/* <!-- learnc_img --> */}
-                <div className="learnc_img" id="learn02_img" style={{ height: '520px' }}>
+                <div className="learnc_img" id="learn02_img">
                     <div id="learn02_progress"></div>
                     <img src={learning_01} data-thum={learning_0101} className="image" alt="" />
                     <img src={learning_02} data-thum={learning_0201} className="image" alt="" />
@@ -581,6 +624,140 @@ export const LearningC = (props) => {
                 <Prohibited ModalClose={handleCancel} />
             </Modal>
             {/* 반입금지물품 모달 창 End */}
+
+            {/* 정답 확인 Start */}
+            <Modal
+                maskClosable={false}
+                open={PrintModalOpen}
+                onOk={PrinthandleOk}
+                closable={false}
+                // onCancel={handleCancel}
+                width={'97%'}
+                style={{
+                    top: 15,
+                    zIndex: 999
+                }}
+                footer={[]}
+            >
+                <LearningP ModalClose={PrinthandleOk} />
+            </Modal>
+            {/* 정답 확인 End */}
+
+            {/* 완료 모달 창 Start */}
+            <Modal
+                maskClosable={false}
+                open={CompleteModalOpen}
+                onOk={CompletehandleOk}
+                closable={false}
+                // onCancel={handleCancel}
+                width={590}
+                style={{
+                    zIndex: 999
+                }}
+                footer={[]}
+            >
+                <div style={{ width: '542px', textAlign: 'center', padding: '50px 0px' }}>
+                    <div className="scwd_txt01">
+                        <h1>평가를 마쳤습니다.</h1>
+                    </div>
+                    <div className="scwd_txt02">
+                        <p>학습이 끝났습니다. 수고하셨습니다.</p>
+                    </div>
+                    <button
+                        id="open-six-modal"
+                        data-mact="open"
+                        data-minfo="six-modal"
+                        className="modal_btn conbtn01"
+                        onClick={CompletehandleOk}
+                    >
+                        확인
+                    </button>
+                    {/* <button id="close-eig-modal" data-mact="close" data-minfo="eig-modal" className="modal_btn close_btn02"></button> */}
+                </div>
+            </Modal>
+            {/* 완료 모달 창 End */}
+
+            {/* 합격 모달 창 Start */}
+            <Modal
+                maskClosable={false}
+                open={PassModalOpen}
+                onOk={PasshandleOk}
+                closable={false}
+                // onCancel={handleCancel}
+                width={590}
+                style={{
+                    zIndex: 999
+                }}
+                footer={[]}
+            >
+                <div style={{ width: '542px', textAlign: 'center', padding: '50px 0px' }}>
+                    <div className="img">
+                        <img src={pass_color} alt="" />
+                    </div>
+                    <div className="scwd_txt01">
+                        <h3>
+                            X-ray 판독 초급 2023 - 1차 <span>평균 : 81</span>
+                        </h3>
+                    </div>
+                    <div className="scwd_txt02">
+                        <h1>
+                            금지물품 통과로 <span className="scwd_pass">합격입니다.</span>
+                        </h1>
+                    </div>
+                    <button
+                        id="open-sev-modal"
+                        data-mact="open"
+                        data-minfo="sev-modal"
+                        className="modal_btn conbtn01"
+                        onClick={PasshandleOk}
+                    >
+                        확인
+                    </button>
+                    {/* <button id="close-six-modal" data-mact="close" data-minfo="six-modal" className="modal_btn close_btn02"></button> */}
+                </div>
+            </Modal>
+            {/* 합격 모달 창 End */}
+
+            {/* 불합격 모달 창 Start */}
+            <Modal
+                maskClosable={false}
+                open={FailModalOpen}
+                onOk={FailhandleOk}
+                closable={false}
+                // onCancel={handleCancel}
+                width={590}
+                style={{
+                    zIndex: 999
+                }}
+                footer={[]}
+            >
+                <div style={{ width: '542px', textAlign: 'center', padding: '50px 0px' }}>
+                    <div>
+                        <img src={fail_color} alt="" />
+                    </div>
+                    <div className="scwd_txt01">
+                        <h3>
+                            X-ray 판독 초급 2023 - 1차 <span>평균 : 50</span>
+                        </h3>
+                    </div>
+                    <div className="scwd_txt02">
+                        <h1>
+                            금지물품 통과로 <span className="scwd_fail">불합격입니다.</span>
+                        </h1>
+                    </div>
+                    <button
+                        id="open-eig-modal"
+                        data-mact="open"
+                        data-minfo="eig-modal"
+                        className="modal_btn conbtn01"
+                        onClick={FailhandleOk}
+                    >
+                        확인
+                    </button>
+                    {/* <button id="close-sev-modal" data-mact="close" data-minfo="sev-modal" className="modal_btn close_btn02"></button> */}
+                </div>
+            </Modal>
+            {/* 불합격 모달 창 End */}
         </>
     );
 };
