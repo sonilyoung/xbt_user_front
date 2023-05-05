@@ -33,16 +33,17 @@ import learning_01_1 from '../../images/learning/learning_01_1.jpg';
 import pass_color from '../../images/learning/pass_color.png';
 import fail_color from '../../images/learning/fail_color.png';
 
-// 반입금지물품 페이지
+// 반입금지물품
 import { Prohibited } from 'pages/prohibited';
 import { LearningP } from 'pages/learning/LearningP';
 
 import $ from 'jquery';
 
-export const LearningS = (props) => {
+export const AiLearningC = (props) => {
     const { confirm } = Modal;
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
-    const [PrintModalOpen, setPrintModalOpen] = useState(false); // 학습 결과 정보 Modal창
+
+    const [PrintModalOpen, setPrintModalOpen] = useState(false); // AI강화학습 결과 정보 Modal창
     const [PassModalOpen, setPassModalOpen] = useState(false); // 합격 Modal창
     const [FailModalOpen, setFailModalOpen] = useState(false); // 불합격 Modal창
     const [CompleteModalOpen, setCompleteModalOpen] = useState(false); // 완료 Modal창
@@ -51,40 +52,29 @@ export const LearningS = (props) => {
     const [copbtc02, setCopbtc02] = useState();
     const [copbtc03, setCopbtc03] = useState();
     const [answerSubmit, setAnswerSubmit] = useState();
-    const [learnStart, setLearnStart] = useState('N');
     const [moveStop, setMoveStop] = useState('move');
-
-    const [slide_speed, setSlide_speed] = useState(5);
-    const [slide_time, setSlide_time] = useState(10);
+    const [cut_time, setCut_time] = useState(5000);
 
     const [ImageCount, setImageCount] = useState('0'); // 출제 문항 카운트
     const [ImageTotal, setImageTotal] = useState('0'); // 출제 문항의 총수량
 
     const [state, setState] = useState({ seconds: 0, minutes: 0 });
 
-    let time_out; //이미지가 움직임 예약
-    let animation; //이미지가 움직이는 상태 저장
-    let position; //이미지와 스크롤바 이동
-    let $currentImage; //현재 움직이는 이미지
-    let is_learn01_play = false;
+    let is_learn02_play = false;
+    //AI강화학습시작-컷 타입의 시작 버튼 누르면 실행
+    const learn02_start = () => {
+        let timer; //이미지가 보여지는 타이머
+        let timeout; //시험종료를 위한 타이머
+        let progressBar = $('#learn02_progress'); //남은시간 게이지
+        let images = $('#learn02_img img'); //이미지 목록
+        let $currentImage; //현재 움직이는 이미지
 
-    //학습시작-슬라이더 타입의 시작 버튼 누르면 실행
-    const learn01_start = () => {
-        var containerWidth = $('#learn01_img').width(); //이미지가 움직일 공간 크기
-        var isPaused = false; //일시정지 상태 저장
-        var current_image = 0; //현재 움직이는 이미지가 몇번째인가
-        var start_count = 0;
-
-        var origin_img = [];
-        var thum_img = [];
-        $('#learn01_img img').each(function (i) {
-            origin_img[i] = $(this);
-            thum_img[i] = $(this).data('thum');
-        });
-        var images = origin_img; //이미지 목록(배열)
-        var move_timer = slide_time; //움직이는 시간(ms, 1/1000초)
-        var move_distance = slide_speed; //움직일 거리
-        is_learn01_play = true;
+        let currentImageIndex = 0; //현재 보여지는 이미지 순서
+        let start_time; //이미지가 보여지기 시작한 시간
+        let stop_time; //일시정지 버튼을 누른 시간
+        let status = 0; //일시정지 버튼 상태
+        let learn_time = cut_time; //이미지를 보여줄 시간(ms, 1/1000초)
+        let is_learn02_play = true;
 
         const intervalId = setInterval(() => {
             setState((prevState) => {
@@ -96,195 +86,180 @@ export const LearningS = (props) => {
 
         // 출제 문항 총수량
         setImageTotal(images.length);
+        setImageCount(currentImageIndex + 1);
 
-        //하단 바 초기화 작업
-        //$("#myRange").removeAttr("disabled");
-        $('#myRange').attr('max', $('#learn01_img').width());
-        $('#myRange').val($('#learn01_img').width());
-        $('#myRange').css('visibility', 'visible');
-
-        $('#learn01_bimg').show();
+        //남은시간 표시
+        $('#learn02_progress').show();
+        $('#learn02_bimg').show();
 
         //시작 버튼 비활성화
         //브라우저에 따라 정상작동 되지 않는 경우가 있어
         //시작 기능이 있는 버튼을 숨기고, 기능이 없는 버튼 노출
-        $('#learn01_start').hide();
-        $('#learn01_start_on').show();
-        $('#close-first-modal').hide();
-        $('#close-first-modal_on').show();
+        $('#learn02_start').hide();
+        $('#learn02_start_on').show();
+        $('#close_second_modal').hide();
+        $('#close_second_modal_on').show();
 
-        //이미지를 유지한 상태로 이동 시작
-        function moveImage() {
-            $currentImage = $(images[current_image]);
-            animation = $currentImage.animate({ left: '-=' + move_distance }, move_timer, function () {
-                time_out = setTimeout(image_position, move_timer);
-            });
-        }
-
-        //기존 이미지 제거하고 이동 시작
-        //마지막 이미지가 끝났을 경우 시험 종료
-        function resetImage() {
-            $currentImage = $(images[current_image]);
-            if (start_count > 0) {
-                $currentImage.remove();
-                //$currentImage.hide();
-                current_image++;
-            }
-
-            // 현재 문항 수량
-            if (start_count === images.length) {
-                setImageCount(start_count);
-            } else {
-                setImageCount(start_count + 1);
-            }
-
-            //current_image++;
-            if (current_image >= images.length) {
-                alert('시험이 종료되었습니다.');
-                clearTimeout(animation);
-                clearTimeout(time_out);
-                clearInterval(position);
+        //이미지를 지정된 시간만 노출 후 다음 이미지로 변경
+        function displayNextImage() {
+            start_time = Date.now();
+            paused_time = 0;
+            $(images[currentImageIndex]).hide();
+            currentImageIndex++;
+            setImageCount(currentImageIndex + 1);
+            if (currentImageIndex === images.length) {
+                clearTimeout(timer);
+                clearTimeout(timeout);
                 clearInterval(intervalId);
-                $('#learn01_bimg').hide();
-                $('#myRange').css('visibility', 'hidden');
-                $('#close-first-modal').show();
-                $('#close-first-modal_on').hide();
-                is_learn01_play = false;
+                alert('시험이 종료되었습니다.');
+                progressBar.stop();
+                progressBar.css({ width: '0%' });
+                $('#learn02_bimg').hide();
+                $('#close_second_modal').show();
+                $('#close_second_modal_on').hide();
+                is_learn02_play = false;
                 // 합격, 불합격 모달창 띄움 Strart
                 setPassModalOpen(true);
                 setFailModalOpen(true);
                 // 합격, 불합격 모달창 띄움 End
             } else {
-                var $nextImage = $(images[current_image]);
-                $nextImage.css('right', containerWidth);
-                $('#learn01_bimg').attr('src', $nextImage.data('thum'));
-                animation = $nextImage.animate({ left: '-=' + move_distance }, move_timer, function () {
-                    time_out = setTimeout(image_position, move_timer);
-                });
+                $(images[currentImageIndex]).show();
+                $('#learn02_bimg').attr('src', $(images[currentImageIndex]).data('thum'));
+                updateProgressBar(learn_time);
+                timer = setTimeout(displayNextImage, learn_time);
+                clearTimeout(timeout);
+                timeout = setTimeout(function () {
+                    $(images[currentImageIndex]).hide();
+                    currentImageIndex++;
+                    setImageCount(currentImageIndex + 1);
+                    if (currentImageIndex === images.length) {
+                        clearTimeout(timer);
+                        clearInterval(intervalId);
+                        alert('시험이 종료되었습니다.');
+                        progressBar.stop();
+                        progressBar.css({ width: '0%' });
+                        $('#learn02_bimg').hide();
+                        $('#close_second_modal').show();
+                        $('#close_second_modal_on').hide();
+                        is_learn02_play = false;
+                        // 합격, 불합격 모달창 띄움 Strart
+                        setPassModalOpen(true);
+                        setFailModalOpen(true);
+                        // 합격, 불합격 모달창 띄움 End
+                    } else {
+                        $(images[currentImageIndex]).show();
+                        updateProgressBar(learn_time);
+                        timer = setTimeout(displayNextImage, learn_time);
+                    }
+                }, learn_time);
             }
-            start_count++;
         }
 
-        //이미지 이동 진행
-        //이미지가 화면 밖으로 사라질 경우 resetImage() 호출
-        //왼쪽에서 오른쪽으로 이동
-        function image_position() {
-            $currentImage = $(images[current_image]);
-            var imageWidth = $currentImage.width();
-            var image_left = $currentImage.position().left;
-
-            if (image_left > containerWidth + 50) {
-                clearInterval(animation);
-                resetImage();
-            } else {
-                if (is_learn01_play) {
-                    animation = $currentImage.animate({ left: '+=' + move_distance }, move_timer, function () {
-                        time_out = setTimeout(image_position, move_timer);
-                    });
-                }
-            }
+        //일시정지
+        function pause() {
+            clearTimeout(timer);
+            clearTimeout(timeout);
+            var progressBar = $('#learn02_progress');
+            progressBar.stop();
+            stop_time = Date.now();
         }
-        //오른쪽에서 왼쪽으로 이동
-        // function image_position() {
-        //     $currentImage = $(images[current_image]);
-        //     var imageWidth = $currentImage.width();
-        //     var image_left = $currentImage.position().left;
 
-        //     console.log(containerWidth);
-        //     if (image_left > containerWidth + 50) {
-        //         // if (image_left < -(imageWidth + 50)) {
-        //         clearInterval(animation);
-        //         //current_image++;
-        //         resetImage();
-        //     } else {
-        //         if (is_learn01_play) {
-        //             animation = $currentImage.animate({ left: '+=' + move_distance }, move_timer, function () {
-        //                 time_out = setTimeout(image_position, move_timer);
-        //             });
-        //         }
-        //     }
-        // }
-
-        //하단 버튼과 이미지의 위치를 동기화
-        function set_position() {
-            $currentImage = $(images[current_image]);
-            var imageWidth = $currentImage.width();
-            var currentPosition = $currentImage.position().left + imageWidth / 2;
-            $('#myRange').val(currentPosition);
+        //다시시작
+        var paused_time = 0;
+        function resume() {
+            var remaining_time = learn_time - (stop_time - start_time) + paused_time;
+            timer = setTimeout(displayNextImage, remaining_time);
+            clearTimeout(timeout);
+            updateProgressBar(remaining_time, true);
+            paused_time += Date.now() - stop_time;
         }
-        resetImage();
-        //moveImage();
-        position = setInterval(set_position, 10);
 
-        //하단 버튼을 드래그하여 이미지 위치 이동
-        $('#myRange').on('input', function () {
-            if (isPaused) {
-                position = $('#myRange').val();
-                $currentImage = $(images[current_image]);
-                var imageWidth = $currentImage.width();
-                var image_left = Number(position) - imageWidth / 2;
-                $currentImage.attr('style', 'left:' + image_left + 'px');
-            }
-        });
+        //남은시간 게이지
+        function updateProgressBar(duration, resume = false) {
+            progressBar.stop();
+            if (!resume) progressBar.css({ width: '100%' });
+            progressBar.animate({ width: '0%' }, duration, 'linear');
+        }
 
-        //진행중일때 Stop 버튼을 누르면 일시정지
-        //일시정지일때 Stop 버튼을 누르면 다시재생
-        $('#learn01_stop').click(function () {
-            if (is_learn01_play) {
-                if (!isPaused) {
-                    isPaused = true;
-                    $(images[current_image]).stop();
-                    clearTimeout(animation);
-                    clearTimeout(time_out);
-                    clearInterval(position);
-                    $('#learn01_stop').addClass('lnbtc_btnon');
-                    $('#myRange').removeAttr('disabled');
+        //일시정지버튼을 눌렀을 때 처리
+        $('#learn02_stop').click(function () {
+            if (is_learn02_play) {
+                if (status === 0) {
+                    pause();
+                    status = 1;
+                    $('#learn02_stop').addClass('lnbtc_btnon');
                 } else {
-                    isPaused = false;
-                    moveImage();
-                    $('#learn01_stop').removeClass('lnbtc_btnon');
-                    position = setInterval(set_position, 10);
-                    $('#myRange').attr('disabled', '');
+                    resume();
+                    status = 0;
+                    $('#learn02_stop').removeClass('lnbtc_btnon');
                 }
             }
         });
 
         //Pass, Open, Prohibited 눌렀을 때 다음 이미지 보이게
-        function learn01_btn() {
-            if (is_learn01_play) {
-                isPaused = false;
+        function learn02_btn() {
+            if (is_learn02_play) {
+                $(images[currentImageIndex]).hide();
+                currentImageIndex++;
 
-                $('#learn01_stop').removeClass('lnbtc_btnon');
-                $(images[current_image]).stop();
-                clearTimeout(animation);
-                clearTimeout(time_out);
-                clearInterval(position);
-                position = setInterval(set_position, 10);
+                start_time = Date.now();
+                paused_time = 0;
+                $('#learn02_bimg').attr('src', $(images[currentImageIndex]).data('thum'));
 
-                $('#myRange').attr('disabled', '');
-                resetImage();
+                if (currentImageIndex === images.length) {
+                    clearTimeout(timer);
+                    clearTimeout(timeout);
+                    clearInterval(intervalId);
+                    alert('시험이 종료되었습니다.');
+                    progressBar.stop();
+                    $('#learn02_bimg').hide();
+                    $('#close_second_modal').show();
+                    $('#close_second_modal_on').hide();
+                    progressBar.css({ width: '0%' });
+                    is_learn02_play = false;
+                    // 합격, 불합격 모달창 띄움 Strart
+                    setPassModalOpen(true);
+                    setFailModalOpen(true);
+                    // 합격, 불합격 모달창 띄움 End
+                } else {
+                    setImageCount(currentImageIndex + 1);
+                    // Show the next image and restart the timer
+                    $(images[currentImageIndex]).show();
+                    updateProgressBar(learn_time);
+                    clearTimeout(timer);
+                    clearTimeout(timeout);
+                    status = 0;
+                    $('#learn02_stop').removeClass('lnbtc_btnon');
+                    timer = setTimeout(displayNextImage, learn_time);
+                }
             }
         }
 
         //<====================
         //각각 버튼 눌렀을 때 처리할 부분
         //다음 이미지로 넘어가는 기능만 구현
-        $('#learn01_pass').click(function () {
-            learn01_btn();
+        $('#learn02_pass').click(function () {
+            learn02_btn();
         });
 
-        $('#learn01_open').click(function () {
-            learn01_btn();
+        $('#learn02_open').click(function () {
+            learn02_btn();
         });
 
-        $('#learn01_prohibited').click(function () {
-            learn01_btn();
+        $('#learn02_prohibited').click(function () {
+            learn02_btn();
         });
-        //======================>
+        //====================>
 
-        $('#learn01_bimg').click(function () {
+        $(images).hide();
+        $(images[currentImageIndex]).show();
+        updateProgressBar(learn_time);
+        timer = setTimeout(displayNextImage, learn_time);
+        start_time = Date.now();
+        paused_time = 0;
+        $('#learn02_bimg').click(function () {
             var image_src = $(this).attr('src');
-            $currentImage = $(images[current_image]);
+            $currentImage = $(images[currentImageIndex]);
             $(this).attr('src', $currentImage.attr('src'));
             $currentImage.attr('src', image_src);
         });
@@ -323,7 +298,7 @@ export const LearningS = (props) => {
     const CompletehandleOk = () => {
         setPrintModalOpen(true); // 정답확인 modal 창 닫기
         setCompleteModalOpen(false); // 완료 modal 창 닫기
-        ModalClose(); // 학습 modal 창 닫기
+        ModalClose(); // AI강화학습 modal 창 닫기
     };
 
     const copbtc01_Cho = (cop01flag) => {
@@ -362,11 +337,13 @@ export const LearningS = (props) => {
     return (
         <>
             <div className="learn_con">
+                {/* <!-- xbt_top --> */}
                 <div className="xbt_top">
+                    {/* <!-- learnct01 --> */}
                     <div className="learnct01">
                         <ul>
                             <li>
-                                <h1 className="contit">학습</h1>
+                                <h1 className="contit">AI강화학습</h1>
                             </li>
                             <li>
                                 <h3>X-ray 판독 초급 2023 - 1차</h3>
@@ -379,6 +356,7 @@ export const LearningS = (props) => {
                             </li>
                         </ul>
                     </div>
+                    {/* <!-- learnct02 --> */}
                     <div className="learnct02">
                         <ul>
                             <li className="learntit_con">
@@ -402,16 +380,16 @@ export const LearningS = (props) => {
                                 </div>
                             </li>
                             <li>
-                                <button className="learnbtn btn_start" id="learn01_start" type="button" onClick={learn01_start}>
+                                <button className="learnbtn btn_start" id="learn02_start" type="button" onClick={learn02_start}>
                                     시작
                                 </button>
-                                <button className="learnbtn btn_end" id="learn01_start_on" type="button">
+                                <button className="learnbtn btn_end" id="learn02_start_on" type="button">
                                     시작
                                 </button>
                                 <button
-                                    id="close-first-modal"
+                                    id="close_second_modal"
                                     data-mact="close"
-                                    data-minfo="first-modal"
+                                    data-minfo="second-modal"
                                     style={{ marginLeft: '23px' }}
                                     className="modal_btn learnbtn btn_start"
                                     onClick={ModalClose}
@@ -419,11 +397,12 @@ export const LearningS = (props) => {
                                     종료
                                 </button>
                                 <button
-                                    id="close-first-modal_on"
+                                    id="close_second_modal_on"
                                     data-mact="close"
-                                    data-minfo="first-modal"
+                                    data-minfo="second-modal"
                                     style={{ display: 'none' }}
                                     className="modal_btn learnbtn btn_end"
+                                    onClick={ModalClose}
                                 >
                                     종료
                                 </button>
@@ -432,14 +411,14 @@ export const LearningS = (props) => {
                     </div>
                 </div>
                 {/* <!-- learnc_img --> */}
-                <div className="learnc_img" id="learn01_img" style={{ height: '450px' }}>
+                <div className="learnc_img" id="learn02_img">
+                    <div id="learn02_progress"></div>
                     <img src={learning_01} data-thum={learning_0101} className="image" alt="" />
                     <img src={learning_02} data-thum={learning_0201} className="image" alt="" />
                     <img src={learning_03} data-thum={learning_0301} className="image" alt="" />
                     <img src={learning_04} data-thum={learning_0401} className="image" alt="" />
                     <img src={learning_05} data-thum={learning_0501} className="image" alt="" />
                 </div>
-                <input type="range" name="" id="myRange" max="1000" disabled style={{ width: '100%', visibility: 'hidden' }} />
             </div>
             {/* <!-- learn_bottom --> */}
             <div className="learn_bottom">
@@ -588,7 +567,7 @@ export const LearningS = (props) => {
                             <li>
                                 <button
                                     className="lnbtc_btn lnbtc_btnon next"
-                                    id="learn01_pass"
+                                    id="learn02_pass"
                                     type="button"
                                     onClick={() => answerEvent('Pass')}
                                 >
@@ -601,7 +580,7 @@ export const LearningS = (props) => {
                             <li>
                                 <button
                                     className="lnbtc_btn lnbtc_btnon"
-                                    id="learn01_open"
+                                    id="learn02_open"
                                     type="button"
                                     onClick={() => answerEvent('Open')}
                                 >
@@ -614,7 +593,7 @@ export const LearningS = (props) => {
                             <li>
                                 <button
                                     className="lnbtc_btn lnbtc_btnon"
-                                    id="learn01_prohibited"
+                                    id="learn02_prohibited"
                                     type="button"
                                     onClick={() => answerEvent('Prohibited')}
                                 >
@@ -628,7 +607,7 @@ export const LearningS = (props) => {
                     </div>
                     {/* <!-- learnbtc05 --> */}
                     <div className="learnbtc05">
-                        <button className="lnbtc_btn stop" id="learn01_stop" type="button" onClick={MoveStopEvent}>
+                        <button className="lnbtc_btn stop" id="learn02_stop" type="button">
                             <span>
                                 <img src={stope} alt="" />
                             </span>
@@ -637,7 +616,7 @@ export const LearningS = (props) => {
                     </div>
                     {/* <!-- learnbtc06 --> */}
                     <div className="learnbtc06">
-                        <img src={learning_01_1} id="learn01_bimg" style={{ display: 'none' }} alt="" />
+                        <img src={learning_01_1} id="learn02_bimg" style={{ display: 'none' }} alt="" />
                     </div>
                 </div>
             </div>
@@ -694,7 +673,7 @@ export const LearningS = (props) => {
                         <h1>평가를 마쳤습니다.</h1>
                     </div>
                     <div className="scwd_txt02">
-                        <p>학습이 끝났습니다. 수고하셨습니다.</p>
+                        <p>AI강화학습이 끝났습니다. 수고하셨습니다.</p>
                     </div>
                     <button
                         id="open-six-modal"

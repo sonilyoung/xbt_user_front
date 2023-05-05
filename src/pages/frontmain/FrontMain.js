@@ -29,13 +29,31 @@ import theory_03 from '../../images/main/theory_ic03.png';
 
 // 교육정보
 import { EduInfo } from 'pages/eduinfo';
+
 // Notice
 import { NoticeList } from 'pages/notice';
+
 // 물품연습
 import { Practice } from 'pages/practice';
+
 // 학습
 import { LearningS } from 'pages/learning/LearningS'; // 슬라이드 방식
 import { LearningC } from 'pages/learning/LearningC'; // 컷 방식
+
+// Ai강화학습
+import { AiLearningS } from 'pages/ailearning/AiLearningS'; // 슬라이드 방식
+import { AiLearningC } from 'pages/ailearning/AiLearningC'; // 컷 방식
+
+// 오답문제풀이
+import { WrongAnswerS } from 'pages/wronganswer/WrongAnswerS'; // 슬라이드 방식
+import { WrongAnswerC } from 'pages/wronganswer/WrongAnswerC'; // 컷 방식
+
+// 반입금지 물품연습
+import { OXProhibited } from 'pages/oxprohibited';
+
+// 평가
+import { EvaluationS } from 'pages/evaluation/EvaluationS'; // 슬라이드 방식
+import { EvaluationC } from 'pages/evaluation/EvaluationC'; // 컷 방식
 
 export const FrontMain = () => {
     const { confirm } = Modal;
@@ -56,28 +74,34 @@ export const FrontMain = () => {
             setMenutitle('학습-슬라이드');
         } else if (MenuNumber === '12') {
             setMenutitle('학습-컷');
-        } else if (MenuNumber === '2') {
-            setMenutitle('IA강화학습');
-        } else if (MenuNumber === '3') {
-            setMenutitle('오답문제 풀이');
+        } else if (MenuNumber === '21') {
+            setMenutitle('AI강화학습-슬라이드');
+        } else if (MenuNumber === '22') {
+            setMenutitle('AI강화학습-컷');
+        } else if (MenuNumber === '31') {
+            setMenutitle('오답문제 풀이-슬라이드');
+        } else if (MenuNumber === '32') {
+            setMenutitle('오답문제 풀이-컷');
         } else if (MenuNumber === '4') {
             setMenutitle('반입금지 물품연습');
-        } else if (MenuNumber === '5') {
-            setMenutitle('평가');
-        } else if (MenuNumber === '6') {
-            setMenutitle('실제 사례');
-        } else if (MenuNumber === '7') {
-            setMenutitle('물품분류변경');
-        } else if (MenuNumber === '8') {
-            setMenutitle('물품분류연습');
-        } else if (MenuNumber === '9') {
-            setMenutitle('물품분류평가');
-        } else if (MenuNumber === '10') {
-            setMenutitle('이론I');
-        } else if (MenuNumber === '11') {
-            setMenutitle('이론II');
-        } else if (MenuNumber === '12') {
-            setMenutitle('설문조사');
+        } else if (MenuNumber === '51') {
+            setMenutitle('평가-슬라이드');
+        } else if (MenuNumber === '52') {
+            setMenutitle('평가-컷');
+            // } else if (MenuNumber === '6') {
+            //     setMenutitle('실제 사례');
+            // } else if (MenuNumber === '7') {
+            //     setMenutitle('물품분류변경');
+            // } else if (MenuNumber === '8') {
+            //     setMenutitle('물품분류연습');
+            // } else if (MenuNumber === '9') {
+            //     setMenutitle('물품분류평가');
+            // } else if (MenuNumber === '10') {
+            //     setMenutitle('이론I');
+            // } else if (MenuNumber === '11') {
+            //     setMenutitle('이론II');
+            // } else if (MenuNumber === '12') {
+            //     setMenutitle('설문조사');
         }
         setMenuValue(MenuNumber);
         setModalOpen(true);
@@ -183,7 +207,7 @@ export const FrontMain = () => {
                                 </div>
                             </div>
                             <div className="main_right">
-                                <div className="mr_con">
+                                <div className="mr_con" style={{ padding: '98px 0' }}>
                                     <div className="mrcon_tit">
                                         <Typography variant="h1">
                                             X-ray <span>Reading</span>
@@ -216,28 +240,44 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button onClick={() => Menus_Modal('2')}>
+                                                <button onClick={() => Menus_Modal('21')}>
                                                     <div className="circle">
                                                         <img src={xrayrd_03} alt="" />
                                                     </div>
-                                                    <p>AI 강화학습</p>
+                                                    <p>AI 강화학습(슬라이드)</p>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button onClick={() => Menus_Modal('22')}>
+                                                    <div className="circle">
+                                                        <img src={xrayrd_03} alt="" />
+                                                    </div>
+                                                    <p>AI 강화학습(컷)</p>
                                                 </button>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="mr_con">
+                                <div className="mr_con" style={{ padding: '98px 0' }}>
                                     <div className="mrcon_tit">
                                         <Typography variant="h1">Learning</Typography>
                                     </div>
                                     <div className="mrcon_ic">
                                         <ul>
                                             <li>
-                                                <button onClick={() => Menus_Modal('3')}>
+                                                <button onClick={() => Menus_Modal('31')}>
                                                     <div className="circle">
                                                         <img src={learn_01} alt="" />
                                                     </div>
-                                                    <p>오답문제 풀이</p>
+                                                    <p>오답문제 풀이(슬라이드)</p>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button onClick={() => Menus_Modal('32')}>
+                                                    <div className="circle">
+                                                        <img src={learn_01} alt="" />
+                                                    </div>
+                                                    <p>오답문제 풀이(컷)</p>
                                                 </button>
                                             </li>
                                             <li>
@@ -249,17 +289,26 @@ export const FrontMain = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button onClick={() => Menus_Modal('5')}>
+                                                <button onClick={() => Menus_Modal('51')}>
                                                     <div className="circle">
                                                         <img src={learn_03} alt="" />
                                                     </div>
-                                                    <p>평가</p>
+                                                    <p>평가(슬라이드)</p>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button onClick={() => Menus_Modal('52')}>
+                                                    <div className="circle">
+                                                        <img src={learn_03} alt="" />
+                                                    </div>
+                                                    <p>평가(컷)</p>
                                                 </button>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="mr_con">
+                                {/* 
+                                <div className="mr_con" style={{ padding: '46px 0' }}>
                                     <div className="mrcon_tit">
                                         <Typography variant="h1">
                                             Actual <span>Cases</span>
@@ -302,6 +351,7 @@ export const FrontMain = () => {
                                         </ul>
                                     </div>
                                 </div>
+                               
                                 <div className="mr_con">
                                     <div className="mrcon_tit">
                                         <Typography variant="h1">Theory</Typography>
@@ -335,6 +385,7 @@ export const FrontMain = () => {
                                         </ul>
                                     </div>
                                 </div>
+                                 */}
                             </div>
                         </div>
                     </div>
@@ -348,7 +399,7 @@ export const FrontMain = () => {
                 onOk={handleOk}
                 // onCancel={handleCancel}
                 closable={false}
-                width={'97%'}
+                width={menuValue === '4' ? '80%' : '97%'}
                 style={{
                     top: 0,
                     bottom: 0,
@@ -363,29 +414,35 @@ export const FrontMain = () => {
                     <LearningS ModalClose={handleCancel} />
                 ) : menuValue === '12' ? (
                     <LearningC ModalClose={handleCancel} />
-                ) : menuValue === '2' ? (
-                    menutitle
-                ) : menuValue === '3' ? (
-                    menutitle
+                ) : menuValue === '21' ? (
+                    <AiLearningS ModalClose={handleCancel} />
+                ) : menuValue === '22' ? (
+                    <AiLearningC ModalClose={handleCancel} />
+                ) : menuValue === '31' ? (
+                    <WrongAnswerS ModalClose={handleCancel} />
+                ) : menuValue === '32' ? (
+                    <WrongAnswerC ModalClose={handleCancel} />
                 ) : menuValue === '4' ? (
-                    menutitle
-                ) : menuValue === '5' ? (
-                    menutitle
-                ) : menuValue === '6' ? (
-                    menutitle
-                ) : menuValue === '7' ? (
-                    menutitle
-                ) : menuValue === '8' ? (
-                    menutitle
-                ) : menuValue === '9' ? (
-                    menutitle
-                ) : menuValue === '10' ? (
-                    menutitle
-                ) : menuValue === '11' ? (
-                    menutitle
-                ) : menuValue === '12' ? (
-                    menutitle
+                    <OXProhibited ModalClose={handleCancel} />
+                ) : menuValue === '51' ? (
+                    <EvaluationS ModalClose={handleCancel} />
+                ) : menuValue === '52' ? (
+                    <EvaluationC ModalClose={handleCancel} />
                 ) : (
+                    // ) : menuValue === '6' ? (
+                    //     menutitle
+                    // ) : menuValue === '7' ? (
+                    //     menutitle
+                    // ) : menuValue === '8' ? (
+                    //     menutitle
+                    // ) : menuValue === '9' ? (
+                    //     menutitle
+                    // ) : menuValue === '10' ? (
+                    //     menutitle
+                    // ) : menuValue === '11' ? (
+                    //     menutitle
+                    // ) : menuValue === '12' ? (
+                    //     menutitle
                     ''
                 )}
             </Modal>

@@ -13,7 +13,6 @@ import learning_0201 from '../../images/learning/learning_02_1.jpg';
 import learning_0301 from '../../images/learning/learning_03_1.jpg';
 import learning_0401 from '../../images/learning/learning_04_1.jpg';
 import learning_0501 from '../../images/learning/learning_05_1.jpg';
-
 import learnc_0101 from '../../images/learning/learnc_ic01_01.png';
 import learnc_0102 from '../../images/learning/learnc_ic01_02.png';
 import learnc_0103 from '../../images/learning/learnc_ic01_03.png';
@@ -22,18 +21,15 @@ import learnc_0201 from '../../images/learning/learnc_ic02_01.png';
 import learnc_0202 from '../../images/learning/learnc_ic02_02.png';
 import learnc_0203 from '../../images/learning/learnc_ic02_03.png';
 import learnc_0204 from '../../images/learning/learnc_ic02_04.png';
-
 import glas_plus from '../../images/learning/glas_plus.png';
 import transform from '../../images/learning/transform.png';
 import glas_minus from '../../images/learning/glas_minus.png';
 import restoration from '../../images/learning/restoration.png';
-
 import pass from '../../images/learning/pass.png';
 import open from '../../images/learning/open.png';
 import prohibited from '../../images/learning/prohibited.png';
 import stope from '../../images/learning/stop.png';
 import learning_01_1 from '../../images/learning/learning_01_1.jpg';
-
 import pass_color from '../../images/learning/pass_color.png';
 import fail_color from '../../images/learning/fail_color.png';
 
@@ -57,8 +53,12 @@ export const LearningC = (props) => {
     const [copbtc03, setCopbtc03] = useState();
     const [answerSubmit, setAnswerSubmit] = useState();
     const [moveStop, setMoveStop] = useState('move');
-
     const [cut_time, setCut_time] = useState(5000);
+
+    const [ImageCount, setImageCount] = useState('0'); // 출제 문항 카운트
+    const [ImageTotal, setImageTotal] = useState('0'); // 출제 문항의 총수량
+
+    const [state, setState] = useState({ seconds: 0, minutes: 0 });
 
     let is_learn02_play = false;
     //학습시작-컷 타입의 시작 버튼 누르면 실행
@@ -75,6 +75,18 @@ export const LearningC = (props) => {
         let status = 0; //일시정지 버튼 상태
         let learn_time = cut_time; //이미지를 보여줄 시간(ms, 1/1000초)
         let is_learn02_play = true;
+
+        const intervalId = setInterval(() => {
+            setState((prevState) => {
+                const seconds = prevState.seconds + 1;
+                const minutes = prevState.minutes + Math.floor(seconds / 60);
+                return { seconds: seconds % 60, minutes };
+            });
+        }, 1000);
+
+        // 출제 문항 총수량
+        setImageTotal(images.length);
+        setImageCount(currentImageIndex + 1);
 
         //남은시간 표시
         $('#learn02_progress').show();
@@ -94,9 +106,11 @@ export const LearningC = (props) => {
             paused_time = 0;
             $(images[currentImageIndex]).hide();
             currentImageIndex++;
+            setImageCount(currentImageIndex + 1);
             if (currentImageIndex === images.length) {
                 clearTimeout(timer);
                 clearTimeout(timeout);
+                clearInterval(intervalId);
                 alert('시험이 종료되었습니다.');
                 progressBar.stop();
                 progressBar.css({ width: '0%' });
@@ -117,8 +131,10 @@ export const LearningC = (props) => {
                 timeout = setTimeout(function () {
                     $(images[currentImageIndex]).hide();
                     currentImageIndex++;
+                    setImageCount(currentImageIndex + 1);
                     if (currentImageIndex === images.length) {
                         clearTimeout(timer);
+                        clearInterval(intervalId);
                         alert('시험이 종료되었습니다.');
                         progressBar.stop();
                         progressBar.css({ width: '0%' });
@@ -185,6 +201,7 @@ export const LearningC = (props) => {
             if (is_learn02_play) {
                 $(images[currentImageIndex]).hide();
                 currentImageIndex++;
+
                 start_time = Date.now();
                 paused_time = 0;
                 $('#learn02_bimg').attr('src', $(images[currentImageIndex]).data('thum'));
@@ -192,6 +209,7 @@ export const LearningC = (props) => {
                 if (currentImageIndex === images.length) {
                     clearTimeout(timer);
                     clearTimeout(timeout);
+                    clearInterval(intervalId);
                     alert('시험이 종료되었습니다.');
                     progressBar.stop();
                     $('#learn02_bimg').hide();
@@ -204,6 +222,7 @@ export const LearningC = (props) => {
                     setFailModalOpen(true);
                     // 합격, 불합격 모달창 띄움 End
                 } else {
+                    setImageCount(currentImageIndex + 1);
                     // Show the next image and restart the timer
                     $(images[currentImageIndex]).show();
                     updateProgressBar(learn_time);
@@ -312,16 +331,6 @@ export const LearningC = (props) => {
 
     // 종료 처리
     const ModalClose = () => {
-        // if (is_learn02_play) {
-        //     $(images).hide();
-        //     clearTimeout(timer);
-        //     clearTimeout(timeout);
-        //     alert('시험이 종료되었습니다.');
-        //     progressBar.stop();
-        //     progressBar.css({ width: '0%' });
-        //     is_learn02_play = false;
-        //     $('#learn02_bimg').hide();
-        // }
         props.ModalClose();
     };
 
@@ -357,13 +366,16 @@ export const LearningC = (props) => {
                             </li>
                             <li className="learnct02_center">
                                 <div className="question">
-                                    문항 <span>1/15</span>
+                                    문항{' '}
+                                    <span>
+                                        {ImageCount}/{ImageTotal}
+                                    </span>
                                 </div>
                                 <div className="question_box">
                                     <dl>
-                                        <dd className="qsbox">00</dd>
+                                        <dd className="qsbox">{state.minutes < 10 ? `0${state.minutes}` : state.minutes}</dd>
                                         <dd className="qsb_pd">:</dd>
-                                        <dd className="qsbox">00</dd>
+                                        <dd className="qsbox">{state.seconds < 10 ? `0${state.seconds}` : state.seconds}</dd>
                                     </dl>
                                 </div>
                             </li>

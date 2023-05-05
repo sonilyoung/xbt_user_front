@@ -24,7 +24,7 @@ import learning_bimg01 from '../../images/learning/learning_bimg01.jpg';
 // 반입금지물품 페이지
 import { Prohibited } from 'pages/prohibited';
 
-export const LearningP = (props) => {
+export const WrongAnswerP = (props) => {
     const { confirm } = Modal;
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
 
@@ -60,7 +60,7 @@ export const LearningP = (props) => {
                     <div className="learnct01">
                         <ul>
                             <li>
-                                <h1 className="contit">학습</h1>
+                                <h1 className="contit">오답문제풀이</h1>
                             </li>
                             <li>
                                 <h3>X-ray 판독 초급 2023 - 1차</h3>

@@ -39,10 +39,10 @@ import { LearningP } from 'pages/learning/LearningP';
 
 import $ from 'jquery';
 
-export const LearningS = (props) => {
+export const AiLearningS = (props) => {
     const { confirm } = Modal;
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
-    const [PrintModalOpen, setPrintModalOpen] = useState(false); // 학습 결과 정보 Modal창
+    const [PrintModalOpen, setPrintModalOpen] = useState(false); // Ai강화학습 결과 정보 Modal창
     const [PassModalOpen, setPassModalOpen] = useState(false); // 합격 Modal창
     const [FailModalOpen, setFailModalOpen] = useState(false); // 불합격 Modal창
     const [CompleteModalOpen, setCompleteModalOpen] = useState(false); // 완료 Modal창
@@ -366,7 +366,7 @@ export const LearningS = (props) => {
                     <div className="learnct01">
                         <ul>
                             <li>
-                                <h1 className="contit">학습</h1>
+                                <h1 className="contit">Ai강화학습</h1>
                             </li>
                             <li>
                                 <h3>X-ray 판독 초급 2023 - 1차</h3>
@@ -694,7 +694,7 @@ export const LearningS = (props) => {
                         <h1>평가를 마쳤습니다.</h1>
                     </div>
                     <div className="scwd_txt02">
-                        <p>학습이 끝났습니다. 수고하셨습니다.</p>
+                        <p>Ai강화학습이 끝났습니다. 수고하셨습니다.</p>
                     </div>
                     <button
                         id="open-six-modal"

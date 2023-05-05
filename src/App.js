@@ -11,6 +11,7 @@ import './css/main.css';
 import './css/login.css';
 
 import './js/learning.js';
+
 // ==============================|| APP - THEME, ROUTER, LOCAL  ||============================== //
 
 const App = () => (
