@@ -252,7 +252,7 @@ export const FrontMain = () => {
                                 </div>
                             </div>
                             <div className="main_right">
-                                <div className="mr_con" style={{ padding: '98px 0' }}>
+                                <div className="mr_con" style={{ padding: '89px 0' }}>
                                     <div className="mrcon_tit">
                                         <Typography variant="h1">
                                             X-ray<span>Reading</span>
@@ -313,7 +313,7 @@ export const FrontMain = () => {
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="mr_con" style={{ padding: '98px 0' }}>
+                                <div className="mr_con" style={{ padding: '89px 0' }}>
                                     <div className="mrcon_tit">
                                         <Typography variant="h1">Learning</Typography>
                                     </div>
