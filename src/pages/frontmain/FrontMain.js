@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Form, Row, Col, Modal } from 'antd';
 import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useUserToken } from '../../hooks/core/UserToken';
+
+// Notice 목록조회 API
+import { useSelectNoticeListMutation, useSelectNoticeMutation } from '../../hooks/api/NoticeManagement/NoticeManagement';
 
 // Notice 이미지
 import main_plus from '../../images/main/plus.png';
@@ -34,7 +37,7 @@ import theory_03 from '../../images/main/theory_ic03.png';
 import { EduInfo } from 'pages/eduinfo';
 
 // Notice
-import { NoticeList } from 'pages/notice';
+import { NoticeList as NoticeListPlus } from 'pages/notice';
 
 // 물품연습
 import { Practice } from 'pages/practice';
@@ -63,17 +66,31 @@ export const FrontMain = () => {
     const [form] = Form.useForm();
     const navigate = useNavigate();
 
+    // 로그인 토큰 정보
+    const [userToken] = useUserToken();
+
+    // Notice api 정보
+    const [NoticeListApi] = useSelectNoticeListMutation();
+
     const [ModalOpen, setModalOpen] = useState(false); // 메뉴 Modal창
     const [eiModalOpen, setEiModalOpen] = useState(false); // 교육정보 Modal창
     const [nlModalOpen, setNlModalOpen] = useState(false); // Notice List Modal창
+
+    const [noticeListApi, setNoticeListApi] = useState(); // Notice List 값
+
     const [loading, setLoading] = useState(false);
     const [eiloading, setEiLoading] = useState(false);
     const [nlLoading, setNlLoading] = useState(false);
     const [menutitle, setMenutitle] = useState('');
     const [menuValue, setMenuValue] = useState('');
 
-    // 로그인 토큰 정보
-    const [userToken] = useUserToken();
+    const Notice_ApiCall = async () => {
+        const noticeResponse = await NoticeListApi({
+            languageCode: 'kor'
+        });
+
+        setNoticeListApi(noticeResponse?.data?.RET_DATA);
+    };
 
     // 메뉴 Modal 이벤트처리 Start
     const Menus_Modal = (MenuNumber) => {
@@ -156,6 +173,7 @@ export const FrontMain = () => {
     };
     // Notice List Modal 이벤트처리 End
 
+    // 로그아웃 처리
     const LoginOut = () => {
         confirm({
             icon: <ExclamationCircleOutlined />,
@@ -167,6 +185,11 @@ export const FrontMain = () => {
             onCancel() {}
         });
     };
+
+    useEffect(() => {
+        Notice_ApiCall(); // api 호출
+    }, []);
+
     return (
         <>
             <div id="wrap" className="mbg mbg_none">
@@ -492,15 +515,17 @@ export const FrontMain = () => {
                 maskClosable={false}
                 open={nlModalOpen}
                 onOk={nlhandleOk}
-                // onCancel={nlhandleCancel}
                 closable={false}
-                width={800}
+                width={850}
                 style={{
+                    top: 0,
+                    bottom: 0,
+                    marginTop: 40,
                     zIndex: 999
                 }}
                 footer={[]}
             >
-                <NoticeList ModalClose={nlhandleCancel} />
+                <NoticeListPlus ModalClose={nlhandleCancel} />
             </Modal>
             {/* Notice List 모달 창 End */}
         </>
