@@ -5,7 +5,14 @@ const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 export const noticeManagement = createApi({
     reducerPath: 'noticeManagement',
     baseQuery: fetchBaseQuery({
-        baseUrl: `${BASE_URL}`
+        baseUrl: `${BASE_URL}`,
+        prepareHeaders: (headers) => {
+            const jwtToken = localStorage.getItem('userToken');
+            if (jwtToken) {
+                headers.set('authorization', `Bearer ${jwtToken}`);
+            }
+            return headers;
+        }
     }),
     endpoints: (builder) => ({
         //공지사항 목록조회

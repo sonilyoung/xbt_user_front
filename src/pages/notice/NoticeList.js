@@ -7,14 +7,31 @@ import rarrow from '../../images/main/rarrow.svg';
 
 import { NoticeView } from 'pages/notice';
 
+// Notice 목록조회 API
+import { useSelectNoticeListMutation } from '../../hooks/api/NoticeManagement/NoticeManagement';
+
 export const NoticeList = (props) => {
     const { confirm } = Modal;
     const [ndModalOpen, setNdModalOpen] = useState(false); // Notice Detail Modal창
-
+    const [noticeListApi, setNoticeListApi] = useState([]); // Notice List 값
+    const [noticeid, setNoticeid] = useState(); // Notice id 값
     const [ndLoading, setNdLoading] = useState(false);
 
+    // Notice api 정보
+    const [NoticeListApi] = useSelectNoticeListMutation();
+
+    // Notice Api 호출
+    const Notice_ApiCall = async () => {
+        const noticeResponse = await NoticeListApi({
+            languageCode: 'kor'
+        });
+
+        setNoticeListApi(noticeResponse?.data?.RET_DATA);
+    };
+
     // Notice View Modal 이벤트처리 Start
-    const NoticeView_Modal = () => {
+    const NoticeView_Modal = (Notice_Id) => {
+        setNoticeid(Notice_Id);
         setNdModalOpen(true);
         setNdLoading(true);
     };
@@ -31,6 +48,10 @@ export const NoticeList = (props) => {
     const ModalClose = () => {
         props.ModalClose();
     };
+
+    useEffect(() => {
+        Notice_ApiCall(); // api 호출
+    }, []);
 
     return (
         <>
@@ -49,102 +70,23 @@ export const NoticeList = (props) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="num">1</td>
-                                    <td className="al-Left">
-                                        <button
-                                            id="open-thr-md"
-                                            data-mact="open"
-                                            data-minfo="thr-md"
-                                            className="modal_btn"
-                                            onClick={() => NoticeView_Modal()}
-                                        >
-                                            데이터 점검으로 인한 접속제한
-                                        </button>
-                                    </td>
-                                    <td className="Date">2023-03-18</td>
-                                </tr>
-                                <tr>
-                                    <td className="num">2</td>
-                                    <td className="al-Left">
-                                        <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                            개인정보 보호를 위해 PC 로그
-                                        </button>
-                                    </td>
-                                    <td className="Date">2023-03-15</td>
-                                </tr>
-                                <tr>
-                                    <td className="num">3</td>
-                                    <td className="al-Left">
-                                        <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                            교육생 데스트 일정 공지
-                                        </button>
-                                    </td>
-                                    <td className="Date">2023-03-14</td>
-                                </tr>
-                                <tr>
-                                    <td className="num">4</td>
-                                    <td className="al-Left">
-                                        <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                            9월 교육 일정 안내
-                                        </button>
-                                    </td>
-                                    <td className="Date">2023-03-14</td>
-                                </tr>
-                                <tr>
-                                    <td className="num">5</td>
-                                    <td className="al-Left">
-                                        <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                            공지사항 테스트 입력
-                                        </button>
-                                    </td>
-                                    <td className="Date">2023-03-14</td>
-                                </tr>
-                                <tr>
-                                    <td className="num">6</td>
-                                    <td className="al-Left">
-                                        <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                            AI 판독평가 관련 자료
-                                        </button>
-                                    </td>
-                                    <td className="Date">2023-03-11</td>
-                                </tr>
-                                <tr>
-                                    <td className="num">7</td>
-                                    <td className="al-Left">
-                                        <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                            2023년 교육생 교육일정 안내 정보
-                                        </button>
-                                    </td>
-                                    <td className="Date">2023-03-10</td>
-                                </tr>
-                                <tr>
-                                    <td className="num">8</td>
-                                    <td className="al-Left">
-                                        <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                            테스트 공지사항 입니다.
-                                        </button>
-                                    </td>
-                                    <td className="Date">2023-03-06</td>
-                                </tr>
-                                <tr>
-                                    <td className="num">9</td>
-                                    <td className="al-Left">
-                                        <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                            사이트 점검으로 인해 접속이 제한됨을 알려드립니다.
-                                        </button>
-                                    </td>
-                                    <td className="Date">2023-03-03</td>
-                                </tr>
-                                <tr>
-                                    <td className="num">10</td>
-                                    <td className="al-Left">
-                                        <button id="open-thr-md" data-mact="open" data-minfo="thr-md" className="modal_btn">
-                                            교육 테스트 입니다.
-                                        </button>
-                                    </td>
-                                    <td className="Date">2023-03-01</td>
-                                </tr>
+                                {noticeListApi?.map((d, i) => (
+                                    <tr key={i}>
+                                        <td className="num">{d.noticeId}</td>
+                                        <td className="al-Left">
+                                            <button
+                                                id="open-thr-md"
+                                                data-mact="open"
+                                                data-minfo="thr-md"
+                                                className="modal_btn"
+                                                onClick={() => NoticeView_Modal(d.noticeId)}
+                                            >
+                                                {d.title}
+                                            </button>
+                                        </td>
+                                        <td className="Date">{d.insertDate}</td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                         <div className="bbs_pagi">
@@ -214,7 +156,7 @@ export const NoticeList = (props) => {
                 }}
                 footer={[]}
             >
-                <NoticeView />
+                <NoticeView NoticeId={noticeid} />
             </Modal>
             {/* Notice 상세정보 모달 창 End */}
         </>

@@ -76,7 +76,7 @@ export const FrontMain = () => {
     const [eiModalOpen, setEiModalOpen] = useState(false); // 교육정보 Modal창
     const [nlModalOpen, setNlModalOpen] = useState(false); // Notice List Modal창
 
-    const [noticeListApi, setNoticeListApi] = useState(); // Notice List 값
+    const [noticeListApi, setNoticeListApi] = useState([]); // Notice List 값
 
     const [loading, setLoading] = useState(false);
     const [eiloading, setEiLoading] = useState(false);
@@ -224,30 +224,14 @@ export const FrontMain = () => {
                                         </button>
                                     </div>
                                     <ul className="notice_list">
-                                        <li>
-                                            <button className="modal_btn">
-                                                <p className="tit">데이터 점검으로 인한 접속제한</p>
-                                                <p className="date">2022-09-18</p>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button className="modal_btn">
-                                                <p className="tit">개인정보 보호를 위해 PC 로그</p>
-                                                <p className="date">2022-09-18</p>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button className="modal_btn">
-                                                <p className="tit">교육생 데스트 일정 공지</p>
-                                                <p className="date">2022-09-10</p>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button className="modal_btn">
-                                                <p className="tit">9월 교육 일정 안내</p>
-                                                <p className="date">2022-08-23</p>
-                                            </button>
-                                        </li>
+                                        {noticeListApi?.map((d, i) => (
+                                            <li key={i}>
+                                                <button className="modal_btn">
+                                                    <p className="tit">{d.title}</p>
+                                                    <p className="date">{d.insertDate}</p>
+                                                </button>
+                                            </li>
+                                        ))}
                                     </ul>
                                 </div>
                             </div>
