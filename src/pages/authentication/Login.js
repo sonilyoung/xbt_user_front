@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // material-ui
-import { Typography } from '@mui/material';
+import { Typography, Stack, InputLabel, OutlinedInput, FormHelperText } from '@mui/material';
+
 import { Col, Row, Form, Input, Dropdown, Space, Modal } from 'antd';
 import koricon from '../../images/login/kor_icon.svg';
 import engicon from '../../images/login/eng_icon.svg';
@@ -13,18 +14,31 @@ import fail from '../../images/login/fail.svg';
 
 import '../../css/login.css';
 
+import { useUserToken } from '../../hooks/core/UserToken';
+import { useUserStatus } from '../../hooks/core/UserStatus';
+import { useLoginMutation } from '../../hooks/api/LoginManagement/LoginManagement';
+
 // ================================|| LOGIN ||================================ //
 
 const Login = () => {
     const { confirm } = Modal;
     const [form] = Form.useForm();
     const navigate = useNavigate();
+    const isLoggedIn = useUserStatus();
 
     const [isModalOpen, setIsModalOpen] = useState(false); // 로그인창 Modal창
 
     const [loading, setLoading] = useState(false);
+    const [stuId, setStuId] = useState();
+    const [stuPw, setStuPw] = useState();
     const [languageLabel, setLanguageLabel] = useState('한국어');
     const [languageKey, setLanguageKey] = useState('kor');
+
+    // 로그인 토큰 정보
+    const [userToken] = useUserToken();
+
+    // 로그인 api 정보
+    const [login] = useLoginMutation();
 
     // 언어 셀렉트박스 옵션 정의 Start
     const items = [
@@ -125,12 +139,43 @@ const Login = () => {
         setIsModalOpen(false);
     };
 
-    // 로그인 처리
-    const handleSubmit = (values) => {
-        console.log('Received values of form:', values);
-        success_info();
-        failure_info();
+    // Enter시 handleSubmit 호출
+    const handleChangeSubmit = (e) => {
+        if (e.key === 'Enter') handleLogin();
     };
+
+    // 아이디 입력
+    const handleChangeId = (e) => {
+        const value = e.target.value;
+        setStuId(value);
+    };
+
+    // 비밀번호 입력
+    const handleChangePw = (e) => {
+        const value = e.target.value;
+        setStuPw(value);
+    };
+
+    // 로그인 처리
+    const handleLogin = async () => {
+        const userLoginResponse = await login({
+            loginId: stuId,
+            loginPw: stuPw
+        });
+        if (userLoginResponse.data.RET_CODE === '0000') {
+            const jwtToken = userLoginResponse.data.RET_DATA.accessToken;
+            userToken.setItem(jwtToken);
+            success_info();
+        } else {
+            failure_info();
+        }
+    };
+
+    useEffect(() => {
+        if (isLoggedIn === true) {
+            navigate('/frontmain');
+        }
+    }, []);
 
     return (
         <>
@@ -175,7 +220,7 @@ const Login = () => {
                 }}
                 footer={[]}
             >
-                <Form layout="vertical" name="Login_Form" form={form} onFinish={handleSubmit} style={{ marginTop: 30 }}>
+                <Form noValidate layout="vertical" name="Login_Form" form={form} style={{ marginTop: 30 }}>
                     <Row gutter={24}>
                         <Col span={24} style={{ textAlign: 'center' }}>
                             <div>
@@ -219,19 +264,23 @@ const Login = () => {
                                     <div className="form-group id">
                                         <Input
                                             type="text"
-                                            name="id"
+                                            name="stu_id"
                                             className="form-input border-animation set-1"
                                             placeholder="아이디"
-                                            maxlength="16"
+                                            maxLength="16"
+                                            onChange={(e) => handleChangeId(e)}
                                         />
                                     </div>
+
                                     <div className="form-group pw">
                                         <Input
                                             type="password"
-                                            name="pwd"
+                                            name="stu_pw"
                                             className="form-input border-animation set-1"
                                             placeholder="비밀번호"
-                                            maxlength="32"
+                                            maxLength="32"
+                                            onKeyPress={handleChangeSubmit}
+                                            onChange={(e) => handleChangePw(e)}
                                         />
                                     </div>
                                 </div>
@@ -240,6 +289,7 @@ const Login = () => {
                                     data-mact="open"
                                     data-minfo="second-modal"
                                     className="modal_btn blue_btn wide_btn"
+                                    onClick={handleLogin}
                                 >
                                     로그인
                                 </button>

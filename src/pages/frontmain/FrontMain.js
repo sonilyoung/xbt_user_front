@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { Table, Form, Row, Col, Modal } from 'antd';
 import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { useUserToken } from '../../hooks/core/UserToken';
 
 // Notice 이미지
 import main_plus from '../../images/main/plus.png';
@@ -58,6 +61,8 @@ import { EvaluationC } from 'pages/evaluation/EvaluationC'; // 컷 방식
 export const FrontMain = () => {
     const { confirm } = Modal;
     const [form] = Form.useForm();
+    const navigate = useNavigate();
+
     const [ModalOpen, setModalOpen] = useState(false); // 메뉴 Modal창
     const [eiModalOpen, setEiModalOpen] = useState(false); // 교육정보 Modal창
     const [nlModalOpen, setNlModalOpen] = useState(false); // Notice List Modal창
@@ -66,6 +71,10 @@ export const FrontMain = () => {
     const [nlLoading, setNlLoading] = useState(false);
     const [menutitle, setMenutitle] = useState('');
     const [menuValue, setMenuValue] = useState('');
+
+    // 로그인 토큰 정보
+    const [userToken] = useUserToken();
+
     // 메뉴 Modal 이벤트처리 Start
     const Menus_Modal = (MenuNumber) => {
         if (MenuNumber === '0') {
@@ -147,6 +156,17 @@ export const FrontMain = () => {
     };
     // Notice List Modal 이벤트처리 End
 
+    const LoginOut = () => {
+        confirm({
+            icon: <ExclamationCircleOutlined />,
+            content: '로그아웃 하시겠습니까?',
+            onOk() {
+                userToken.setItem('');
+                navigate('/login');
+            },
+            onCancel() {}
+        });
+    };
     return (
         <>
             <div id="wrap" className="mbg mbg_none">
@@ -155,7 +175,9 @@ export const FrontMain = () => {
                         X-ray Security <span>Training</span>
                     </Typography>
                     <nav className="util">
-                        <a href="#">로그아웃</a>
+                        <a href="#" onClick={LoginOut}>
+                            로그아웃
+                        </a>
                     </nav>
                 </div>
                 <div id="wlayer">
