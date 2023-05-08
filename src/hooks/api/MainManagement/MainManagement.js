@@ -15,9 +15,9 @@ export const mainManagement = createApi({
         }
     }),
     endpoints: (builder) => ({
-        getLoginInfo: builder.mutation({
+        selectScheduleList: builder.mutation({
             query: (body) => ({
-                url: 'getLoginInfo.do',
+                url: 'stu/main/selectScheduleList.do',
                 method: 'POST',
                 body: body
             })
@@ -25,4 +25,4 @@ export const mainManagement = createApi({
     })
 });
 
-export const { useGetLoginInfoMutation } = mainManagement;
+export const { useSelectScheduleListMutation } = mainManagement;

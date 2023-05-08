@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useUserToken } from '../../hooks/core/UserToken';
 
+// Main 메뉴 API
+import { useSelectScheduleListMutation } from '../../hooks/api/MainManagement/MainManagement';
 // Notice 목록조회 API
 import { useSelectNoticeListMutation, useSelectNoticeMutation } from '../../hooks/api/NoticeManagement/NoticeManagement';
 
@@ -39,25 +41,25 @@ import { EduInfo } from 'pages/eduinfo';
 // Notice
 import { NoticeList as NoticeListPlus } from 'pages/notice';
 
-// 물품연습
+// 물품연습 페이지 Import
 import { Practice } from 'pages/practice';
 
-// 학습
+// 학습 페이지 Import
 import { LearningS } from 'pages/learning/LearningS'; // 슬라이드 방식
 import { LearningC } from 'pages/learning/LearningC'; // 컷 방식
 
-// Ai강화학습
+// Ai강화학습 페이지 Import
 import { AiLearningS } from 'pages/ailearning/AiLearningS'; // 슬라이드 방식
 import { AiLearningC } from 'pages/ailearning/AiLearningC'; // 컷 방식
 
-// 오답문제풀이
+// 오답문제풀이 페이지 Import
 import { WrongAnswerS } from 'pages/wronganswer/WrongAnswerS'; // 슬라이드 방식
 import { WrongAnswerC } from 'pages/wronganswer/WrongAnswerC'; // 컷 방식
 
-// 반입금지 물품연습
+// 반입금지 물품연습 페이지 Import
 import { OXProhibited } from 'pages/oxprohibited';
 
-// 평가
+// 평가 페이지 Import
 import { EvaluationS } from 'pages/evaluation/EvaluationS'; // 슬라이드 방식
 import { EvaluationC } from 'pages/evaluation/EvaluationC'; // 컷 방식
 
@@ -69,6 +71,8 @@ export const FrontMain = () => {
     // 로그인 토큰 정보
     const [userToken] = useUserToken();
 
+    // Main 메뉴 api 정보
+    const [MenuList] = useSelectScheduleListMutation();
     // Notice api 정보
     const [NoticeListApi] = useSelectNoticeListMutation();
 
@@ -76,6 +80,7 @@ export const FrontMain = () => {
     const [eiModalOpen, setEiModalOpen] = useState(false); // 교육정보 Modal창
     const [nlModalOpen, setNlModalOpen] = useState(false); // Notice List Modal창
 
+    const [mainmenuApi, setMainmenuApi] = useState([]); // Main Menu 값
     const [noticeListApi, setNoticeListApi] = useState([]); // Notice List 값
 
     const [loading, setLoading] = useState(false);
@@ -84,6 +89,16 @@ export const FrontMain = () => {
     const [menutitle, setMenutitle] = useState('');
     const [menuValue, setMenuValue] = useState('');
 
+    // Main Menu Api Call
+    const MainMenu_ApiCall = async () => {
+        const mainmenuResponse = await MenuList({
+            languageCode: 'kor'
+        });
+        console.log(mainmenuResponse?.data?.RET_DATA);
+        setMainmenuApi(mainmenuResponse?.data?.RET_DATA);
+    };
+
+    // Notice List Api Call
     const Notice_ApiCall = async () => {
         const noticeResponse = await NoticeListApi({
             languageCode: 'kor'
@@ -187,7 +202,8 @@ export const FrontMain = () => {
     };
 
     useEffect(() => {
-        Notice_ApiCall(); // api 호출
+        MainMenu_ApiCall(); // Main Menu api 호출
+        Notice_ApiCall(); // Notice List api 호출
     }, []);
 
     return (
@@ -239,11 +255,21 @@ export const FrontMain = () => {
                                 <div className="mr_con" style={{ padding: '98px 0' }}>
                                     <div className="mrcon_tit">
                                         <Typography variant="h1">
-                                            X-ray <span>Reading</span>
+                                            X-ray<span>Reading</span>
                                         </Typography>
                                     </div>
                                     <div className="mrcon_ic">
                                         <ul>
+                                            {/* {mainmenuApi.menu1.map((d, i) => (
+                                                <li key={i}>
+                                                    <button onClick={() => Menus_Modal(d.menuLevel)}>
+                                                        <div className="circle">
+                                                            <img src={xrayrd_01} alt="" />
+                                                        </div>
+                                                        <p>{d.menuName}</p>
+                                                    </button>
+                                                </li>
+                                            ))} */}
                                             <li>
                                                 <button onClick={() => Menus_Modal('0')}>
                                                     <div className="circle">
