@@ -21,6 +21,9 @@ import x_img from '../../images/learning/x.png';
 import o_img from '../../images/learning/o.png';
 import learning_bimg01 from '../../images/learning/learning_bimg01.jpg';
 
+// 학습완료
+import { useEndLeaningMutation } from '../../hooks/api/LearningManagement/LearningManagement';
+
 // 반입금지물품 페이지
 import { Prohibited } from 'pages/prohibited';
 
@@ -31,6 +34,19 @@ export const LearningP = (props) => {
     const [copbtc01, setCopbtc01] = useState();
     const [copbtc02, setCopbtc02] = useState();
     const [copbtc03, setCopbtc03] = useState();
+
+    // 학습완료 api 정보
+    const [EndLeaningApi] = useEndLeaningMutation();
+    const [endLeaningData, setEndLeaningData] = useState();
+
+    // 학습완료 Api Call
+    const EndLeaning_ApiCall = async () => {
+        const EndLeaningResponse = await EndLeaningApi({
+            eduType: 'learn'
+        });
+        //console.log(EndLeaningResponse?.data?.RET_DATA);
+        setEndLeaningData(EndLeaningResponse?.data?.RET_DATA);
+    };
 
     // 반입금지물품 Modal 이벤트처리 Start
     const Prohibitedinfo_Modal = () => {
@@ -50,6 +66,10 @@ export const LearningP = (props) => {
     const ModalClose = () => {
         props.ModalClose();
     };
+
+    useEffect(() => {
+        // EndLeaning_ApiCall(); // 학습완료 api 정보
+    }, []);
 
     return (
         <>

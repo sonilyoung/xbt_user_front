@@ -37,10 +37,19 @@ import fail_color from '../../images/learning/fail_color.png';
 import { Prohibited } from 'pages/prohibited';
 import { LearningP } from 'pages/learning/LearningP';
 
+// 학습자와 학습정보조회, 이미지 조회, pass, open, (prohibited, risricted)
+import {
+    useSelectLearningMutation,
+    useSelectImgListMutation,
+    useUpdateLeanAnswerMutation,
+    useEndLeaningMutation
+} from '../../hooks/api/LearningManagement/LearningManagement';
+
 import $ from 'jquery';
 
 export const LearningS = (props) => {
     const { confirm } = Modal;
+
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
     const [PrintModalOpen, setPrintModalOpen] = useState(false); // 학습 결과 정보 Modal창
     const [PassModalOpen, setPassModalOpen] = useState(false); // 합격 Modal창
@@ -50,7 +59,7 @@ export const LearningS = (props) => {
     const [copbtc01, setCopbtc01] = useState();
     const [copbtc02, setCopbtc02] = useState();
     const [copbtc03, setCopbtc03] = useState();
-    const [answerSubmit, setAnswerSubmit] = useState();
+    const [answerType, setAnswerType] = useState('');
     const [learnStart, setLearnStart] = useState('N');
     const [moveStop, setMoveStop] = useState('move');
 
@@ -61,6 +70,47 @@ export const LearningS = (props) => {
     const [ImageTotal, setImageTotal] = useState('0'); // 출제 문항의 총수량
 
     const [state, setState] = useState({ seconds: 0, minutes: 0 });
+
+    // 학습자와 학습정보조회 api 정보
+    const [LearningApi] = useSelectLearningMutation();
+    const [learningData, setLearningData] = useState();
+
+    // 이미지조회 api 정보
+    const [SelectImgListApi] = useSelectImgListMutation();
+    const [selectImgListData, setSelectImgListData] = useState();
+
+    // PASS, OPEN, (PROHIBITED, RISRICTED) 정답처리 api 정보
+    const [UpdateLeanAnswerApi] = useUpdateLeanAnswerMutation();
+    const [updateLeanAnswerData, setUpdateLeanAnswerData] = useState();
+
+    // 학습자와 학습정보조회 Api Call
+    const Learning_ApiCall = async () => {
+        const LearningResponse = await LearningApi({
+            eduType: 'learn'
+        });
+        //console.log(LearningResponse?.data?.RET_DATA);
+        setLearningData(LearningResponse?.data?.RET_DATA);
+    };
+
+    // 이미지조회 Api Call
+    const SelectImgLis_ApiCall = async (bagScanId) => {
+        const SelectImgLisResponse = await SelectImgListApi({
+            bagScanId: bagScanId
+        });
+        //console.log(SelectImgLisResponse?.data?.RET_DATA);
+        setSelectImgListData(SelectImgLisResponse?.data?.RET_DATA);
+    };
+
+    // PASS, OPEN, (PROHIBITED, RISRICTED) 정답처리 Api Call
+    const UpdateLeanAnswer_ApiCall = async (userActionDiv, bagScanId) => {
+        const UpdateLeanAnswerResponse = await UpdateLeanAnswerApi({
+            userActionDiv: userActionDiv, // 사용자가 선택한 정답
+            eduType: 'learn',
+            bagScanId: bagScanId //xray 가방스캔 아이디
+        });
+        //console.log(UpdateLeanAnswerResponse?.data?.RET_DATA);
+        setUpdateLeanAnswerData(UpdateLeanAnswerResponse?.data?.RET_DATA);
+    };
 
     let time_out; //이미지가 움직임 예약
     let animation; //이미지가 움직이는 상태 저장
@@ -339,9 +389,9 @@ export const LearningS = (props) => {
     };
 
     // 정답 처리
-    const answerEvent = (flag) => {
-        setAnswerSubmit(flag);
-        console.log(flag);
+    const answerEvent = (userActionDiv, bagScanId) => {
+        // PASS, OPEN, (PROHIBITED, RISRICTED) 정답처리
+        UpdateLeanAnswer_ApiCall(userActionDiv, bagScanId);
     };
 
     // 슬라이드 Stop/Move 처리
@@ -351,13 +401,18 @@ export const LearningS = (props) => {
         } else {
             setMoveStop('move');
         }
-        console.log(moveStop);
+        //console.log(moveStop);
     };
 
     // 종료 처리
     const ModalClose = () => {
         props.ModalClose();
     };
+
+    useEffect(() => {
+        Learning_ApiCall(); // 학습자와 학습정보조회 api 호출
+        // SelectImgLis_ApiCall(); // 이미지조회 api 호출
+    }, []);
 
     return (
         <>
@@ -366,7 +421,7 @@ export const LearningS = (props) => {
                     <div className="learnct01">
                         <ul>
                             <li>
-                                <h1 className="contit">학습</h1>
+                                <h1 className="contit">학습(Slide)</h1>
                             </li>
                             <li>
                                 <h3>X-ray 판독 초급 2023 - 1차</h3>
@@ -388,7 +443,7 @@ export const LearningS = (props) => {
                             </li>
                             <li className="learnct02_center">
                                 <div className="question">
-                                    문항{' '}
+                                    문항
                                     <span>
                                         {ImageCount}/{ImageTotal}
                                     </span>
@@ -590,12 +645,12 @@ export const LearningS = (props) => {
                                     className="lnbtc_btn lnbtc_btnon next"
                                     id="learn01_pass"
                                     type="button"
-                                    onClick={() => answerEvent('Pass')}
+                                    onClick={() => (answerType === 'OPEN' ? answerEvent('4', 'X00241') : answerEvent('2', 'X00241'))}
                                 >
                                     <span>
                                         <img src={pass} alt="" />
                                     </span>
-                                    <p>Pass</p>
+                                    <p style={{ fontSize: '16px' }}>Pass</p>
                                 </button>
                             </li>
                             <li>
@@ -603,25 +658,26 @@ export const LearningS = (props) => {
                                     className="lnbtc_btn lnbtc_btnon"
                                     id="learn01_open"
                                     type="button"
-                                    onClick={() => answerEvent('Open')}
+                                    onClick={() => setAnswerType('OPEN')}
                                 >
                                     <span>
                                         <img src={open} alt="" />
                                     </span>
-                                    <p>Open</p>
+                                    <p style={{ fontSize: '16px' }}>Open</p>
                                 </button>
                             </li>
+
                             <li>
                                 <button
                                     className="lnbtc_btn lnbtc_btnon"
                                     id="learn01_prohibited"
                                     type="button"
-                                    onClick={() => answerEvent('Prohibited')}
+                                    onClick={() => (answerType === 'OPEN' ? answerEvent('1', 'X00241') : answerEvent('3', 'X00241'))}
                                 >
                                     <span>
                                         <img src={prohibited} alt="" />
                                     </span>
-                                    <p>Prohibited</p>
+                                    <p style={{ fontSize: '16px' }}>{answerType === 'OPEN' ? 'Risricted' : 'Prohibited'}</p>
                                 </button>
                             </li>
                         </ul>

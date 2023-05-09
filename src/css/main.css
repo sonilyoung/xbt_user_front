@@ -349,7 +349,7 @@
 
 .mrcon_tit {
     flex-basis: 20%;
-    padding: 0 50px 0 77px;
+    padding: 0 35px 0 55px;
 }
 
 .mrcon_tit > h1 {
@@ -364,7 +364,7 @@
 /* 아이콘 */
 .mrcon_ic {
     flex-basis: 80%;
-    padding-right: 20px;
+    padding-right: 10px;
 }
 
 .mrcon_ic > ul {

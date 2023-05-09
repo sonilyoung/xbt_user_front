@@ -9,7 +9,7 @@ import { useUserToken } from '../../hooks/core/UserToken';
 // Main 메뉴 API
 import { useSelectScheduleListMutation } from '../../hooks/api/MainManagement/MainManagement';
 // Notice 목록조회 API
-import { useSelectNoticeListMutation, useSelectNoticeMutation } from '../../hooks/api/NoticeManagement/NoticeManagement';
+import { useSelectNoticeListMutation } from '../../hooks/api/NoticeManagement/NoticeManagement';
 
 // Notice 이미지
 import main_plus from '../../images/main/plus.png';
@@ -252,7 +252,7 @@ export const FrontMain = () => {
                                 </div>
                             </div>
                             <div className="main_right">
-                                <div className="mr_con" style={{ padding: '89px 0' }}>
+                                <div className="mr_con" style={{ padding: '80px 0' }}>
                                     <div className="mrcon_tit">
                                         <Typography variant="h1">
                                             X-ray<span>Reading</span>
@@ -283,7 +283,11 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={xrayrd_02} alt="" />
                                                     </div>
-                                                    <p>학습(슬라이드)</p>
+                                                    <p>
+                                                        학습
+                                                        <br />
+                                                        (Slide)
+                                                    </p>
                                                 </button>
                                             </li>
                                             <li>
@@ -291,7 +295,11 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={xrayrd_02} alt="" />
                                                     </div>
-                                                    <p>학습(컷)</p>
+                                                    <p>
+                                                        학습
+                                                        <br />
+                                                        (Cut)
+                                                    </p>
                                                 </button>
                                             </li>
                                             <li>
@@ -299,7 +307,11 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={xrayrd_03} alt="" />
                                                     </div>
-                                                    <p>AI 강화학습(슬라이드)</p>
+                                                    <p>
+                                                        AI 강화학습
+                                                        <br />
+                                                        (Slide)
+                                                    </p>
                                                 </button>
                                             </li>
                                             <li>
@@ -307,13 +319,17 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={xrayrd_03} alt="" />
                                                     </div>
-                                                    <p>AI 강화학습(컷)</p>
+                                                    <p>
+                                                        AI 강화학습
+                                                        <br />
+                                                        (Cut)
+                                                    </p>
                                                 </button>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="mr_con" style={{ padding: '89px 0' }}>
+                                <div className="mr_con" style={{ padding: '80px 0' }}>
                                     <div className="mrcon_tit">
                                         <Typography variant="h1">Learning</Typography>
                                     </div>
@@ -324,7 +340,11 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={learn_01} alt="" />
                                                     </div>
-                                                    <p>오답문제 풀이(슬라이드)</p>
+                                                    <p>
+                                                        오답문제 풀이
+                                                        <br />
+                                                        (Slide)
+                                                    </p>
                                                 </button>
                                             </li>
                                             <li>
@@ -332,7 +352,11 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={learn_01} alt="" />
                                                     </div>
-                                                    <p>오답문제 풀이(컷)</p>
+                                                    <p>
+                                                        오답문제 풀이
+                                                        <br />
+                                                        (Cut)
+                                                    </p>
                                                 </button>
                                             </li>
                                             <li>
@@ -348,7 +372,11 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={learn_03} alt="" />
                                                     </div>
-                                                    <p>평가(슬라이드)</p>
+                                                    <p>
+                                                        평가
+                                                        <br />
+                                                        (Slide)
+                                                    </p>
                                                 </button>
                                             </li>
                                             <li>
@@ -356,7 +384,11 @@ export const FrontMain = () => {
                                                     <div className="circle">
                                                         <img src={learn_03} alt="" />
                                                     </div>
-                                                    <p>평가(컷)</p>
+                                                    <p>
+                                                        평가
+                                                        <br />
+                                                        (Cut)
+                                                    </p>
                                                 </button>
                                             </li>
                                         </ul>

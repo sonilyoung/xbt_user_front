@@ -37,6 +37,14 @@ import fail_color from '../../images/learning/fail_color.png';
 import { Prohibited } from 'pages/prohibited';
 import { LearningP } from 'pages/learning/LearningP';
 
+// 학습자와 학습정보조회, 이미지 조회, pass, open, (prohibited, risricted)
+import {
+    useSelectLearningMutation,
+    useSelectImgListMutation,
+    useUpdateLeanAnswerMutation,
+    useEndLeaningMutation
+} from '../../hooks/api/LearningManagement/LearningManagement';
+
 import $ from 'jquery';
 
 export const LearningC = (props) => {
@@ -51,7 +59,7 @@ export const LearningC = (props) => {
     const [copbtc01, setCopbtc01] = useState();
     const [copbtc02, setCopbtc02] = useState();
     const [copbtc03, setCopbtc03] = useState();
-    const [answerSubmit, setAnswerSubmit] = useState();
+    const [answerType, setAnswerType] = useState('');
     const [moveStop, setMoveStop] = useState('move');
     const [cut_time, setCut_time] = useState(5000);
 
@@ -59,6 +67,47 @@ export const LearningC = (props) => {
     const [ImageTotal, setImageTotal] = useState('0'); // 출제 문항의 총수량
 
     const [state, setState] = useState({ seconds: 0, minutes: 0 });
+
+    // 학습자와 학습정보조회 api 정보
+    const [LearningApi] = useSelectLearningMutation();
+    const [learningData, setLearningData] = useState();
+
+    // 이미지조회 api 정보
+    const [SelectImgListApi] = useSelectImgListMutation();
+    const [selectImgListData, setSelectImgListData] = useState();
+
+    // PASS, OPEN, (PROHIBITED, RISRICTED) 정답처리 api 정보
+    const [UpdateLeanAnswerApi] = useUpdateLeanAnswerMutation();
+    const [updateLeanAnswerData, setUpdateLeanAnswerData] = useState();
+
+    // 학습자와 학습정보조회 Api Call
+    const Learning_ApiCall = async () => {
+        const LearningResponse = await LearningApi({
+            eduType: 'learn'
+        });
+        //console.log(LearningResponse?.data?.RET_DATA);
+        setLearningData(LearningResponse?.data?.RET_DATA);
+    };
+
+    // 이미지조회 Api Call
+    const SelectImgLis_ApiCall = async (bagScanId) => {
+        const SelectImgLisResponse = await SelectImgListApi({
+            bagScanId: bagScanId
+        });
+        //console.log(SelectImgLisResponse?.data?.RET_DATA);
+        setSelectImgListData(SelectImgLisResponse?.data?.RET_DATA);
+    };
+
+    // PASS, OPEN, (PROHIBITED, RISRICTED) 정답처리 Api Call
+    const UpdateLeanAnswer_ApiCall = async (userActionDiv, bagScanId) => {
+        const UpdateLeanAnswerResponse = await UpdateLeanAnswerApi({
+            userActionDiv: userActionDiv, // 사용자가 선택한 정답
+            eduType: 'learn',
+            bagScanId: bagScanId //xray 가방스캔 아이디
+        });
+        //console.log(UpdateLeanAnswerResponse?.data?.RET_DATA);
+        setUpdateLeanAnswerData(UpdateLeanAnswerResponse?.data?.RET_DATA);
+    };
 
     let is_learn02_play = false;
     //학습시작-컷 타입의 시작 버튼 누르면 실행
@@ -315,8 +364,8 @@ export const LearningC = (props) => {
 
     // 정답 처리
     const answerEvent = (flag) => {
-        setAnswerSubmit(flag);
-        console.log(flag);
+        // PASS, OPEN, (PROHIBITED, RISRICTED) 정답처리
+        UpdateLeanAnswer_ApiCall(userActionDiv, bagScanId);
     };
 
     // 슬라이드 Stop/Move 처리
@@ -334,6 +383,11 @@ export const LearningC = (props) => {
         props.ModalClose();
     };
 
+    useEffect(() => {
+        Learning_ApiCall(); // 학습자와 학습정보조회 api 호출
+        // SelectImgLis_ApiCall(); // 이미지조회 api 호출
+    }, []);
+
     return (
         <>
             <div className="learn_con">
@@ -343,7 +397,7 @@ export const LearningC = (props) => {
                     <div className="learnct01">
                         <ul>
                             <li>
-                                <h1 className="contit">학습</h1>
+                                <h1 className="contit">학습(Cut)</h1>
                             </li>
                             <li>
                                 <h3>X-ray 판독 초급 2023 - 1차</h3>
@@ -569,7 +623,7 @@ export const LearningC = (props) => {
                                     className="lnbtc_btn lnbtc_btnon next"
                                     id="learn02_pass"
                                     type="button"
-                                    onClick={() => answerEvent('Pass')}
+                                    onClick={() => (answerType === 'OPEN' ? answerEvent('4', 'X00241') : answerEvent('2', 'X00241'))}
                                 >
                                     <span>
                                         <img src={pass} alt="" />
@@ -582,7 +636,7 @@ export const LearningC = (props) => {
                                     className="lnbtc_btn lnbtc_btnon"
                                     id="learn02_open"
                                     type="button"
-                                    onClick={() => answerEvent('Open')}
+                                    onClick={() => setAnswerType('OPEN')}
                                 >
                                     <span>
                                         <img src={open} alt="" />
@@ -595,12 +649,12 @@ export const LearningC = (props) => {
                                     className="lnbtc_btn lnbtc_btnon"
                                     id="learn02_prohibited"
                                     type="button"
-                                    onClick={() => answerEvent('Prohibited')}
+                                    onClick={() => (answerType === 'OPEN' ? answerEvent('1', 'X00241') : answerEvent('3', 'X00241'))}
                                 >
                                     <span>
                                         <img src={prohibited} alt="" />
                                     </span>
-                                    <p>Prohibited</p>
+                                    <p>{answerType === 'OPEN' ? 'Risricted' : 'Prohibited'}</p>
                                 </button>
                             </li>
                         </ul>
