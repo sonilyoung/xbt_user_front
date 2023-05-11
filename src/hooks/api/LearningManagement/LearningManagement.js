@@ -25,14 +25,13 @@ export const learningManagement = createApi({
         }),
 
         // 학습 > 이미지조회
-        selectImgList: builder.mutation({
+        selectImg: builder.mutation({
             query: (body) => ({
-                url: 'stu/learning/selectImgList.do',
+                url: 'stu/learning/selectImg.do',
                 method: 'POST',
                 body: body
             })
         }),
-
         // 학습 > PASS, OPEN, (PROHIBITED, RISRICTED) 처리
         updateLeanAnswer: builder.mutation({
             query: (body) => ({
@@ -53,5 +52,4 @@ export const learningManagement = createApi({
     })
 });
 
-export const { useSelectLearningMutation, useSelectImgListMutation, useUpdateLeanAnswerMutation, useEndLeaningMutation } =
-    learningManagement;
+export const { useSelectLearningMutation, useSelectImgMutation, useUpdateLeanAnswerMutation, useEndLeaningMutation } = learningManagement;

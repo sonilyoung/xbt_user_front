@@ -37,10 +37,10 @@ import fail_color from '../../images/learning/fail_color.png';
 import { Prohibited } from 'pages/prohibited';
 import { LearningP } from 'pages/learning/LearningP';
 
-// 학습자와 학습정보조회, 이미지 조회, pass, open, (prohibited, risricted)
+// 학습자와 학습정보조회, 이미지 조회, pass, open, (prohibited, resricted)
 import {
     useSelectLearningMutation,
-    useSelectImgListMutation,
+    useSelectImgMutation,
     useUpdateLeanAnswerMutation,
     useEndLeaningMutation
 } from '../../hooks/api/LearningManagement/LearningManagement';
@@ -73,12 +73,16 @@ export const LearningC = (props) => {
     const [learningData, setLearningData] = useState();
 
     // 이미지조회 api 정보
-    const [SelectImgListApi] = useSelectImgListMutation();
-    const [selectImgListData, setSelectImgListData] = useState();
+    const [SelectImgApi] = useSelectImgMutation();
+    const [selectImgData, setSelectImgData] = useState();
 
-    // PASS, OPEN, (PROHIBITED, RISRICTED) 정답처리 api 정보
+    // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리 api 정보
     const [UpdateLeanAnswerApi] = useUpdateLeanAnswerMutation();
     const [updateLeanAnswerData, setUpdateLeanAnswerData] = useState();
+
+    // 학습완료(합격,불합격) api 정보
+    const [EndLeaningApi] = useEndLeaningMutation();
+    const [endLeaningData, setEndLeaningData] = useState();
 
     // 학습자와 학습정보조회 Api Call
     const Learning_ApiCall = async () => {
@@ -90,15 +94,15 @@ export const LearningC = (props) => {
     };
 
     // 이미지조회 Api Call
-    const SelectImgLis_ApiCall = async (bagScanId) => {
-        const SelectImgLisResponse = await SelectImgListApi({
+    const SelectImg_ApiCall = async (bagScanId) => {
+        const SelectImgResponse = await SelectImgApi({
             bagScanId: bagScanId
         });
         //console.log(SelectImgLisResponse?.data?.RET_DATA);
-        setSelectImgListData(SelectImgLisResponse?.data?.RET_DATA);
+        setSelectImgData(SelectImgLisResponse?.data?.RET_DATA);
     };
 
-    // PASS, OPEN, (PROHIBITED, RISRICTED) 정답처리 Api Call
+    // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리 Api Call
     const UpdateLeanAnswer_ApiCall = async (userActionDiv, bagScanId) => {
         const UpdateLeanAnswerResponse = await UpdateLeanAnswerApi({
             userActionDiv: userActionDiv, // 사용자가 선택한 정답
@@ -107,6 +111,15 @@ export const LearningC = (props) => {
         });
         //console.log(UpdateLeanAnswerResponse?.data?.RET_DATA);
         setUpdateLeanAnswerData(UpdateLeanAnswerResponse?.data?.RET_DATA);
+    };
+
+    // 학습완료(합격,불합격) Api Call
+    const EndLeaning_ApiCall = async () => {
+        const EndLeaningResponse = await EndLeaningApi({
+            eduType: 'learn'
+        });
+        //console.log(EndLeaningResponse?.data?.RET_DATA);
+        setEndLeaningData(EndLeaningResponse?.data?.RET_DATA);
     };
 
     let is_learn02_play = false;
@@ -248,6 +261,8 @@ export const LearningC = (props) => {
         //Pass, Open, Prohibited 눌렀을 때 다음 이미지 보이게
         function learn02_btn() {
             if (is_learn02_play) {
+                // open 초기화 (RESRICTED -> PROHIBITED)
+                setAnswerType('');
                 $(images[currentImageIndex]).hide();
                 currentImageIndex++;
 
@@ -291,9 +306,9 @@ export const LearningC = (props) => {
             learn02_btn();
         });
 
-        $('#learn02_open').click(function () {
-            learn02_btn();
-        });
+        // $('#learn02_open').click(function () {
+        //     learn02_btn();
+        // });
 
         $('#learn02_prohibited').click(function () {
             learn02_btn();
@@ -347,7 +362,7 @@ export const LearningC = (props) => {
     const CompletehandleOk = () => {
         setPrintModalOpen(true); // 정답확인 modal 창 닫기
         setCompleteModalOpen(false); // 완료 modal 창 닫기
-        ModalClose(); // 학습 modal 창 닫기
+        // ModalClose(); // 학습 modal 창 닫기
     };
 
     const copbtc01_Cho = (cop01flag) => {
@@ -363,8 +378,8 @@ export const LearningC = (props) => {
     };
 
     // 정답 처리
-    const answerEvent = (flag) => {
-        // PASS, OPEN, (PROHIBITED, RISRICTED) 정답처리
+    const answerEvent = (userActionDiv, bagScanId) => {
+        // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리
         UpdateLeanAnswer_ApiCall(userActionDiv, bagScanId);
     };
 
@@ -383,9 +398,21 @@ export const LearningC = (props) => {
         props.ModalClose();
     };
 
+    // 강제종료 처리
+    const LearningSModalClose = () => {
+        props.ModalClose();
+    };
+
+    // 종료 처리2
+    const ModalClose2 = () => {
+        LearningSModalClose();
+        setPrintModalOpen(false);
+    };
+
     useEffect(() => {
         Learning_ApiCall(); // 학습자와 학습정보조회 api 호출
-        // SelectImgLis_ApiCall(); // 이미지조회 api 호출
+        // SelectImg_ApiCall(); // 이미지조회 api 호출
+        // EndLeaning_ApiCall(); // 합격, 불합격 api 호출
     }, []);
 
     return (
@@ -654,7 +681,7 @@ export const LearningC = (props) => {
                                     <span>
                                         <img src={prohibited} alt="" />
                                     </span>
-                                    <p>{answerType === 'OPEN' ? 'Risricted' : 'Prohibited'}</p>
+                                    <p>{answerType === 'OPEN' ? 'Resricted' : 'Prohibited'}</p>
                                 </button>
                             </li>
                         </ul>
@@ -705,7 +732,7 @@ export const LearningC = (props) => {
                 }}
                 footer={[]}
             >
-                <LearningP ModalClose={PrinthandleOk} />
+                <LearningP ModalClose2={ModalClose2} />
             </Modal>
             {/* 정답 확인 End */}
 

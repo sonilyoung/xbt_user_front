@@ -77,6 +77,7 @@ export const FrontMain = () => {
     const [NoticeListApi] = useSelectNoticeListMutation();
 
     const [ModalOpen, setModalOpen] = useState(false); // 메뉴 Modal창
+    const [resetCounter, setResetCounter] = useState(0);
     const [eiModalOpen, setEiModalOpen] = useState(false); // 교육정보 Modal창
     const [nlModalOpen, setNlModalOpen] = useState(false); // Notice List Modal창
 
@@ -94,7 +95,7 @@ export const FrontMain = () => {
         const mainmenuResponse = await MenuList({
             languageCode: 'kor'
         });
-        console.log(mainmenuResponse?.data?.RET_DATA);
+        // console.log(mainmenuResponse?.data?.RET_DATA);
         setMainmenuApi(mainmenuResponse?.data?.RET_DATA);
     };
 
@@ -145,6 +146,9 @@ export const FrontMain = () => {
             //     setMenutitle('설문조사');
         }
         setMenuValue(MenuNumber);
+
+        setResetCounter(0);
+
         setModalOpen(true);
         setLoading(true);
     };
@@ -486,6 +490,7 @@ export const FrontMain = () => {
                 onOk={handleOk}
                 // onCancel={handleCancel}
                 closable={false}
+                destroyOnClose={true}
                 width={menuValue === '4' ? '80%' : '97%'}
                 style={{
                     top: 0,
@@ -495,8 +500,9 @@ export const FrontMain = () => {
                 }}
                 footer={[]}
             >
+                {/* {console.log(resetCounter)} */}
                 {menuValue === '0' ? (
-                    <Practice ModalClose={handleCancel} />
+                    <Practice key={resetCounter} ModalClose={handleCancel} />
                 ) : menuValue === '11' ? (
                     <LearningS ModalClose={handleCancel} />
                 ) : menuValue === '12' ? (
