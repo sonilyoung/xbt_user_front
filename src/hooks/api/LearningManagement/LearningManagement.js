@@ -33,18 +33,18 @@ export const learningManagement = createApi({
             })
         }),
         // 학습 > PASS, OPEN, (PROHIBITED, RISRICTED) 처리
-        updateLeanAnswer: builder.mutation({
+        updateLearningAnswer: builder.mutation({
             query: (body) => ({
-                url: 'stu/learning/updateLeanAnswer.do',
+                url: 'stu/learning/updateLearningAnswer.do',
                 method: 'POST',
                 body: body
             })
         }),
 
         // 학습 > 학습완료
-        endLeaning: builder.mutation({
+        endLearning: builder.mutation({
             query: (body) => ({
-                url: 'stu/learning/endLeaning.do',
+                url: 'stu/learning/endLearning.do',
                 method: 'POST',
                 body: body
             })
@@ -52,4 +52,5 @@ export const learningManagement = createApi({
     })
 });
 
-export const { useSelectLearningMutation, useSelectImgMutation, useUpdateLeanAnswerMutation, useEndLeaningMutation } = learningManagement;
+export const { useSelectLearningMutation, useSelectImgMutation, useUpdateLearningAnswerMutation, useEndLearningMutation } =
+    learningManagement;

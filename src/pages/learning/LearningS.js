@@ -33,8 +33,8 @@ import { LearningP } from 'pages/learning/LearningP';
 import {
     useSelectLearningMutation,
     useSelectImgMutation,
-    useUpdateLeanAnswerMutation,
-    useEndLeaningMutation
+    useUpdateLearningAnswerMutation,
+    useEndLearningMutation
 } from '../../hooks/api/LearningManagement/LearningManagement';
 
 export const LearningS = (props) => {
@@ -60,9 +60,7 @@ export const LearningS = (props) => {
     const [textFrontSide, setTextFrontSide] = useState('F'); // 정면/측면 선택 설정
     const [state, setState] = useState({ seconds: 0, minutes: 0 }); // 카운트
 
-    const [zoom, setZoom] = useState(1);
-    const [pos, setPos] = useState({ x: 0, y: 0 });
-
+    const [imgView, setImgView] = useState(); // Preview 이미지 설장
     const [loading, setLoading] = useState(false);
 
     // 학습자와 학습정보조회 api 정보
@@ -73,12 +71,12 @@ export const LearningS = (props) => {
     const [SelectImgApi] = useSelectImgMutation();
 
     // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리 api 정보
-    const [UpdateLeanAnswerApi] = useUpdateLeanAnswerMutation();
-    const [updateLeanAnswerData, setUpdateLeanAnswerData] = useState();
+    const [UpdateLearnAnswerApi] = useUpdateLearningAnswerMutation();
+    const [updateLearnAnswerData, setUpdateLearnAnswerData] = useState();
 
     // 학습완료 api 정보
-    const [EndLeaningApi] = useEndLeaningMutation();
-    const [endLeaningData, setEndLeaningData] = useState();
+    const [EndLearningApi] = useEndLearningMutation();
+    const [endLearningData, setEndLearningData] = useState();
 
     // 학습자와 학습정보조회 Api Call
     const Learning_ApiCall = async () => {
@@ -92,23 +90,30 @@ export const LearningS = (props) => {
     };
 
     // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리 Api Call
-    const UpdateLeanAnswer_ApiCall = async (userActionDiv, bagScanId) => {
-        const UpdateLeanAnswerResponse = await UpdateLeanAnswerApi({
+    const UpdateLearnAnswer_ApiCall = async (userActionDiv, bagScanId) => {
+        const UpdateLearnAnswerResponse = await UpdateLearnAnswerApi({
             userActionDiv: userActionDiv, // 사용자가 선택한 정답
             eduType: 'learn',
             bagScanId: bagScanId //xray 가방스캔 아이디
         });
-        //console.log(UpdateLeanAnswerResponse?.data?.RET_DATA);
-        setUpdateLeanAnswerData(UpdateLeanAnswerResponse?.data?.RET_DATA);
+        console.log(UpdateLearnAnswerResponse?.data?.RET_CODE);
+        setUpdateLearnAnswerData(UpdateLearnAnswerResponse?.data?.RET_CODE);
     };
 
     // 학습완료 Api Call
-    const EndLeaning_ApiCall = async () => {
-        const EndLeaningResponse = await EndLeaningApi({
+    const EndLearning_ApiCall = async () => {
+        // 학습 합격불합격 Api Call
+        const EndLearningResponse = await EndLearningApi({
             eduType: 'learn'
         });
-        //console.log(EndLeaningResponse?.data?.RET_DATA);
-        setEndLeaningData(EndLeaningResponse?.data?.RET_DATA);
+        console.log(EndLearningResponse?.data?.RET_DATA);
+        setEndLearningData(EndLearningResponse?.data?.RET_DATA);
+
+        // if (UpdateLearnAnswerResponse.RET_CODE === '0100') {
+        //     //합격
+        // } else {
+        //     //불합격
+        // }
     };
 
     let time_out; //이미지가 움직임 예약
@@ -174,6 +179,7 @@ export const LearningS = (props) => {
 
                         is_learn01_play = false;
                         setCompleteModalOpen(true);
+                        EndLearning_ApiCall();
                     }
 
                     return { seconds, minutes };
@@ -225,6 +231,7 @@ export const LearningS = (props) => {
 
                 if (current_image >= images.length) {
                     setCompleteModalOpen(true);
+                    EndLearning_ApiCall();
                     clearTimeout(animation);
                     clearTimeout(time_out);
                     clearInterval(position);
@@ -345,11 +352,28 @@ export const LearningS = (props) => {
             //<====================
             //각각 버튼 눌렀을 때 처리할 부분
             //다음 이미지로 넘어가는 기능만 구현
-            $('#learn01_pass').click(function () {
+
+            // 미개봉/금지 prohibited [1]
+            $('#learn01_prohibited').click(function () {
+                UpdateLearnAnswer_ApiCall('1', bag_id[current_image]);
                 learn01_btn();
             });
 
-            $('#learn01_prohibited').click(function () {
+            // 미개봉/통과 pass [2]
+            $('#learn01_pass').click(function () {
+                UpdateLearnAnswer_ApiCall('2', bag_id[current_image]);
+                learn01_btn();
+            });
+
+            // 개봉/제한 Open/risricted [3]
+            $('#learn01_Open_Risricted').click(function () {
+                UpdateLearnAnswer_ApiCall('2', bag_id[current_image]);
+                learn01_btn();
+            });
+
+            // 개봉/통과 Open/pass [4]
+            $('#learn01_Open_Pass').click(function () {
+                UpdateLearnAnswer_ApiCall('1', bag_id[current_image]);
                 learn01_btn();
             });
             //======================>
@@ -507,6 +531,11 @@ export const LearningS = (props) => {
                 });
             });
 
+            // 이미지 클릭시 preview 이벤트
+            $(images[current_image]).click(function (e) {
+                PreviewCall(e.target.src);
+            });
+
             var scale = 1;
             var isFlipped = false;
             var originalWidth = $(images[current_image]).width();
@@ -629,7 +658,7 @@ export const LearningS = (props) => {
     // 정답 처리
     const answerEvent = (userActionDiv, bagScanId) => {
         // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리
-        UpdateLeanAnswer_ApiCall(userActionDiv, bagScanId);
+        UpdateLearnAnswer_ApiCall(userActionDiv, bagScanId);
     };
 
     // 슬라이드 Stop/Move 처리
@@ -639,6 +668,12 @@ export const LearningS = (props) => {
         } else {
             setMoveStop('move');
         }
+    };
+
+    // Preview 이미지 처리
+    const PreviewCall = (previewimage) => {
+        setImgView(previewimage);
+        setVisible(true);
     };
 
     // 종료 처리
@@ -660,7 +695,7 @@ export const LearningS = (props) => {
     useEffect(() => {
         setLoading(true);
         Learning_ApiCall(); // 학습자와 학습정보조회 api 호출
-        // EndLeaning_ApiCall(); // 합격, 불합격 api 호출
+        // EndLearning_ApiCall(); // 합격, 불합격 api 호출
     }, []);
 
     return (
@@ -744,52 +779,40 @@ export const LearningS = (props) => {
                             {learningData?.learningProblemList?.map((imgs, i) => {
                                 return (
                                     <>
-                                        <a href="#" onClick={() => setVisible(true)}>
-                                            <img
-                                                key={i}
-                                                src={'data:image/png;base64,' + imgs.imgFront}
-                                                data-thum={'data:image/png;base64,' + imgs.imgSide}
-                                                data-value={imgs.bagScanId}
-                                                className="image"
-                                                alt={imgs.bagScanId}
-                                                title={imgs.bagScanId}
-                                            />
-                                        </a>
-                                        {textFrontSide === 'F' ? (
-                                            <Image
-                                                width={200}
-                                                style={{
-                                                    display: 'none'
-                                                }}
-                                                src={'data:image/png;base64,' + imgs.imgFront}
-                                                preview={{
-                                                    visible,
-                                                    onVisibleChange: (value) => {
-                                                        setVisible(value);
-                                                    }
-                                                }}
-                                            />
-                                        ) : (
-                                            <Image
-                                                width={200}
-                                                style={{
-                                                    display: 'none'
-                                                }}
-                                                src={'data:image/png;base64,' + imgs.imgSide}
-                                                preview={{
-                                                    visible,
-                                                    onVisibleChange: (value) => {
-                                                        setVisible(value);
-                                                    }
-                                                }}
-                                            />
-                                        )}
+                                        {/* <a
+                                            href="#"
+                                            onClick={() => {
+                                                textFrontSide === 'F' ? PreviewCall(imgs.imgFront) : PreviewCall(imgs.imgSide);
+                                            }}
+                                        > */}
+                                        <img
+                                            key={i}
+                                            src={'data:image/png;base64,' + imgs.imgFront}
+                                            data-thum={'data:image/png;base64,' + imgs.imgSide}
+                                            data-value={imgs.bagScanId}
+                                            className="image"
+                                            alt="Preview"
+                                            title="Preview"
+                                        />
+                                        {/* </a> */}
                                     </>
                                 );
                             })}
                         </div>
                     </div>
                     <input type="range" name="" id="myRange" max="1000" disabled style={{ width: '100%', visibility: 'hidden' }} />
+                    <Image
+                        style={{
+                            display: 'none'
+                        }}
+                        src={imgView}
+                        preview={{
+                            visible,
+                            onVisibleChange: (value) => {
+                                setVisible(value);
+                            }
+                        }}
+                    />
                 </div>
                 {/* <!-- learn_bottom --> */}
                 <div className="learn_bottom">
@@ -1057,20 +1080,37 @@ export const LearningS = (props) => {
                             </ul>
                         </div>
                         {/* <!-- learnbtc04 --> */}
+
                         <div className="learnbtc04">
                             <ul>
                                 <li>
-                                    <button
-                                        className="lnbtc_btn lnbtc_btnon next"
-                                        id="learn01_pass"
-                                        type="button"
-                                        onClick={() => (answerType === 'OPEN' ? answerEvent('4', 'X00241') : answerEvent('2', 'X00241'))}
-                                    >
-                                        <span>
-                                            <img src={pass} alt="" />
-                                        </span>
-                                        <p style={{ fontSize: '16px' }}>Pass</p>
-                                    </button>
+                                    {answerType === 'OPEN' ? (
+                                        // 개봉/통과 Open/Pass [4]
+                                        <button
+                                            className="lnbtc_btn lnbtc_btnon next"
+                                            id="learn01_Open_Pass"
+                                            type="button"
+                                            // onClick={() => answerEvent('4')}
+                                        >
+                                            <span>
+                                                <img src={pass} alt="" />
+                                            </span>
+                                            <p style={{ fontSize: '16px' }}>Pass</p>
+                                        </button>
+                                    ) : (
+                                        // 미개봉/통과 pass [2]
+                                        <button
+                                            className="lnbtc_btn lnbtc_btnon next"
+                                            id="learn01_pass"
+                                            type="button"
+                                            // onClick={() => answerEvent('2')}
+                                        >
+                                            <span>
+                                                <img src={pass} alt="" />
+                                            </span>
+                                            <p style={{ fontSize: '16px' }}>Pass</p>
+                                        </button>
+                                    )}
                                 </li>
                                 <li>
                                     <button
@@ -1086,17 +1126,33 @@ export const LearningS = (props) => {
                                     </button>
                                 </li>
                                 <li>
-                                    <button
-                                        className="lnbtc_btn lnbtc_btnon"
-                                        id="learn01_prohibited"
-                                        type="button"
-                                        onClick={() => (answerType === 'OPEN' ? answerEvent('1', 'X00241') : answerEvent('3', 'X00241'))}
-                                    >
-                                        <span>
-                                            <img src={prohibited} alt="" />
-                                        </span>
-                                        <p style={{ fontSize: '16px' }}>{answerType === 'OPEN' ? 'Resricted' : 'Prohibited'}</p>
-                                    </button>
+                                    {answerType === 'OPEN' ? (
+                                        // 개봉/제한 Open/Resricted [3]
+                                        <button
+                                            className="lnbtc_btn lnbtc_btnon"
+                                            id="learn01_Open_Risricted"
+                                            type="button"
+                                            // onClick={() => answerEvent('3')}
+                                        >
+                                            <span>
+                                                <img src={prohibited} alt="" />
+                                            </span>
+                                            <p style={{ fontSize: '16px' }}>Resricted</p>
+                                        </button>
+                                    ) : (
+                                        // 미개봉/금지 prohibited [1]
+                                        <button
+                                            className="lnbtc_btn lnbtc_btnon"
+                                            id="learn01_prohibited"
+                                            type="button"
+                                            // onClick={() => answerEvent('1')}
+                                        >
+                                            <span>
+                                                <img src={prohibited} alt="" />
+                                            </span>
+                                            <p style={{ fontSize: '16px' }}>Prohibited</p>
+                                        </button>
+                                    )}
                                 </li>
                             </ul>
                         </div>
