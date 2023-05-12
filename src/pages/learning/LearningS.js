@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Button, Space, Modal, Spin, Image } from 'antd';
+import { Modal, Spin, Image } from 'antd';
 import 'antd/dist/antd.css';
-import { FullscreenOutlined } from '@ant-design/icons';
-
 import $ from 'jquery';
 import learnc_0101 from '../../images/learning/learnc_ic01_01.png';
 import learnc_0102 from '../../images/learning/learnc_ic01_02.png';
@@ -27,9 +25,11 @@ import fail_color from '../../images/learning/fail_color.png';
 
 // 반입금지물품 페이지
 import { Prohibited } from 'pages/prohibited';
+
+// 학습/정답정보내역
 import { LearningP } from 'pages/learning/LearningP';
 
-// 학습자와 학습정보조회, 이미지 조회, pass, open, (prohibited, resricted)
+// 학습자와 학습정보조회, 의사색체 이미지 조회, pass, open, (prohibited, resricted), 합격/불합격 여부
 import {
     useSelectLearningMutation,
     useSelectImgMutation,
@@ -38,7 +38,7 @@ import {
 } from '../../hooks/api/LearningManagement/LearningManagement';
 
 export const LearningS = (props) => {
-    const { confirm } = Modal;
+    const { confirm } = Modal; // Modal
     const [visible, setVisible] = useState(false); // 이미지 클릭시
 
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
@@ -47,11 +47,10 @@ export const LearningS = (props) => {
     const [FailModalOpen, setFailModalOpen] = useState(false); // 불합격 Modal창
     const [CompleteModalOpen, setCompleteModalOpen] = useState(false); // 완료 Modal창
 
-    const [copbtc01, setCopbtc01] = useState();
-    const [copbtc02, setCopbtc02] = useState();
-    const [copbtc03, setCopbtc03] = useState();
-    const [answerType, setAnswerType] = useState('');
-    const [moveStop, setMoveStop] = useState('move');
+    const [copbtc01, setCopbtc01] = useState(); // 의사색체 첫번째 블럭
+    const [copbtc02, setCopbtc02] = useState(); // 의사색체 두번째 블럭
+    const [copbtc03, setCopbtc03] = useState(); // 의사색체 세번째 블럭
+    const [answerType, setAnswerType] = useState(''); // 정답의 Open 설정
 
     const [learnbagScanId, setLearnbagScanId] = useState([]); // 가방아이디
     const [ImageCount, setImageCount] = useState('0'); // 출제 문항 카운트
@@ -61,7 +60,7 @@ export const LearningS = (props) => {
     const [state, setState] = useState({ seconds: 0, minutes: 0 }); // 카운트
 
     const [imgView, setImgView] = useState(); // Preview 이미지 설장
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false); // 로딩
 
     // 학습자와 학습정보조회 api 정보
     const [LearningApi] = useSelectLearningMutation();
@@ -74,10 +73,13 @@ export const LearningS = (props) => {
     const [UpdateLearnAnswerApi] = useUpdateLearningAnswerMutation();
     const [updateLearnAnswerData, setUpdateLearnAnswerData] = useState();
 
-    // 학습완료 api 정보
+    // 합격/불합격 api 정보
     const [EndLearningApi] = useEndLearningMutation();
     const [endLearningData, setEndLearningData] = useState();
 
+    // =====================================================================================
+    // API 호출 Start
+    // =====================================================================================
     // 학습자와 학습정보조회 Api Call
     const Learning_ApiCall = async () => {
         const LearningResponse = await LearningApi({
@@ -96,25 +98,27 @@ export const LearningS = (props) => {
             eduType: 'learn',
             bagScanId: bagScanId //xray 가방스캔 아이디
         });
-        console.log(UpdateLearnAnswerResponse?.data?.RET_CODE);
+        //console.log(UpdateLearnAnswerResponse?.data?.RET_CODE);
         setUpdateLearnAnswerData(UpdateLearnAnswerResponse?.data?.RET_CODE);
     };
 
-    // 학습완료 Api Call
+    // 학습 합격불합격 Api Call
     const EndLearning_ApiCall = async () => {
-        // 학습 합격불합격 Api Call
         const EndLearningResponse = await EndLearningApi({
             eduType: 'learn'
         });
-        console.log(EndLearningResponse?.data?.RET_DATA);
+        //console.log(EndLearningResponse?.data?.RET_DATA);
         setEndLearningData(EndLearningResponse?.data?.RET_DATA);
 
-        // if (UpdateLearnAnswerResponse.RET_CODE === '0100') {
-        //     //합격
-        // } else {
-        //     //불합격
-        // }
+        if (EndLearningResponse?.data?.RET_DATA?.passYn === 'Y') {
+            setPassModalOpen(true); // 합격 모달
+        } else {
+            setFailModalOpen(true); // 불합격 모달
+        }
     };
+    // =====================================================================================
+    // API 호출 End
+    // =====================================================================================
 
     let time_out; //이미지가 움직임 예약
     let animation; //이미지가 움직이는 상태 저장
@@ -154,7 +158,6 @@ export const LearningS = (props) => {
             clearInterval(position);
             $('#learn01_bimg').hide();
             $('#myRange').css('visibility', 'hidden');
-            $('#fullscreen').css('visibility', 'hidden');
             is_learn01_play = false;
         } else {
             const intervalId = setInterval(() => {
@@ -175,11 +178,8 @@ export const LearningS = (props) => {
                         // clearInterval(intervalId);
                         $('#learn01_bimg').hide();
                         $('#myRange').css('visibility', 'hidden');
-                        $('#fullscreen').css('visibility', 'hidden');
-
                         is_learn01_play = false;
                         setCompleteModalOpen(true);
-                        EndLearning_ApiCall();
                     }
 
                     return { seconds, minutes };
@@ -190,11 +190,6 @@ export const LearningS = (props) => {
             $('#myRange').attr('max', $('#learn01_img').width());
             $('#myRange').val($('#learn01_img').width());
             $('#myRange').css('visibility', 'visible');
-
-            $('#fullscreen').attr('max', $('#learn01_img').width());
-            $('#fullscreen').val($('#learn01_img').width());
-            $('#fullscreen').css('visibility', 'visible');
-
             $('#learn01_bimg').show();
 
             //시작 버튼 비활성화
@@ -231,15 +226,12 @@ export const LearningS = (props) => {
 
                 if (current_image >= images.length) {
                     setCompleteModalOpen(true);
-                    EndLearning_ApiCall();
                     clearTimeout(animation);
                     clearTimeout(time_out);
                     clearInterval(position);
                     clearInterval(intervalId);
                     $('#learn01_bimg').hide();
                     $('#myRange').css('visibility', 'hidden');
-                    $('#fullscreen').css('visibility', 'hidden');
-
                     is_learn01_play = false;
                 } else {
                     var $nextImage = $(images[current_image]);
@@ -259,7 +251,6 @@ export const LearningS = (props) => {
             function image_position() {
                 $currentImage = $(images[current_image]);
                 var image_left = $currentImage.position().left;
-
                 if (image_left > containerWidth + 50) {
                     clearInterval(animation);
                     resetImage();
@@ -278,26 +269,14 @@ export const LearningS = (props) => {
                 var imageWidth = $currentImage.width();
                 var currentPosition = $currentImage.position().left + imageWidth / 2;
                 $('#myRange').val(currentPosition);
-                $('#fullscreen').val(currentPosition);
             }
             resetImage();
-            //moveImage();
             position = setInterval(set_position, 10);
 
             //하단 버튼을 드래그하여 이미지 위치 이동
             $('#myRange').on('input', function () {
                 if (isPaused) {
                     position = $('#myRange').val();
-                    $currentImage = $(images[current_image]);
-                    var imageWidth = $currentImage.width();
-                    var image_left = Number(position) - imageWidth / 2;
-                    $currentImage.attr('style', 'left:' + image_left + 'px');
-                }
-            });
-
-            $('#fullscreen').on('Button', function () {
-                if (isPaused) {
-                    position = $('#fullscreen').val();
                     $currentImage = $(images[current_image]);
                     var imageWidth = $currentImage.width();
                     var image_left = Number(position) - imageWidth / 2;
@@ -333,7 +312,6 @@ export const LearningS = (props) => {
             function learn01_btn() {
                 if (is_learn01_play) {
                     isPaused = false;
-
                     // open 초기화 (RESRICTED -> PROHIBITED)
                     setAnswerType('');
                     $('#learn01_stop').removeClass('lnbtc_btnon');
@@ -342,7 +320,6 @@ export const LearningS = (props) => {
                     clearTimeout(time_out);
                     clearInterval(position);
                     position = setInterval(set_position, 10);
-
                     $('#myRange').attr('disabled', '');
                     $('#fullscreen').attr('disabled', '');
                     resetImage();
@@ -350,30 +327,29 @@ export const LearningS = (props) => {
             }
 
             //<====================
-            //각각 버튼 눌렀을 때 처리할 부분
-            //다음 이미지로 넘어가는 기능만 구현
-
-            // 미개봉/금지 prohibited [1]
+            // Pass, Open, Prohibited, Risricted 버튼 눌렀을 때 처리할 부분
+            // 다음 이미지로 넘어감
+            // 미개봉/금지 Prohibited [1]
             $('#learn01_prohibited').click(function () {
                 UpdateLearnAnswer_ApiCall('1', bag_id[current_image]);
                 learn01_btn();
             });
 
-            // 미개봉/통과 pass [2]
+            // 미개봉/통과 Pass [2]
             $('#learn01_pass').click(function () {
                 UpdateLearnAnswer_ApiCall('2', bag_id[current_image]);
                 learn01_btn();
             });
 
-            // 개봉/제한 Open/risricted [3]
+            // 개봉/제한 Open/Risricted [3]
             $('#learn01_Open_Risricted').click(function () {
-                UpdateLearnAnswer_ApiCall('2', bag_id[current_image]);
+                UpdateLearnAnswer_ApiCall('3', bag_id[current_image]);
                 learn01_btn();
             });
 
-            // 개봉/통과 Open/pass [4]
+            // 개봉/통과 Open/Pass [4]
             $('#learn01_Open_Pass').click(function () {
-                UpdateLearnAnswer_ApiCall('1', bag_id[current_image]);
+                UpdateLearnAnswer_ApiCall('4', bag_id[current_image]);
                 learn01_btn();
             });
             //======================>
@@ -618,6 +594,7 @@ export const LearningS = (props) => {
     // 합격 Modal 이벤트 처리
     const PasshandleOk = () => {
         setPassModalOpen(false);
+        setPrintModalOpen(true); // 정답확인 modal 창 열기
     };
 
     // 불합격 Modal 이벤트 처리
@@ -626,11 +603,10 @@ export const LearningS = (props) => {
         setPrintModalOpen(true); // 정답확인 modal 창 열기
     };
 
-    // 완료 Modal 이벤트 처리
+    // 학습완료 Modal 이벤트 처리
     const CompletehandleOk = () => {
-        setCompleteModalOpen(false); // 완료 modal 창 닫기
-        setFailModalOpen(true);
-        setPassModalOpen(true);
+        EndLearning_ApiCall();
+        setCompleteModalOpen(false); // 학습완료 modal 창 닫기
     };
 
     const copbtc01_Cho = (ImgColorCode) => {
@@ -653,21 +629,6 @@ export const LearningS = (props) => {
 
     const copbtc03_Cho = (ImgColorCode) => {
         setCopbtc03(ImgColorCode);
-    };
-
-    // 정답 처리
-    const answerEvent = (userActionDiv, bagScanId) => {
-        // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리
-        UpdateLearnAnswer_ApiCall(userActionDiv, bagScanId);
-    };
-
-    // 슬라이드 Stop/Move 처리
-    const MoveStopEvent = () => {
-        if (moveStop == 'move') {
-            setMoveStop('stop');
-        } else {
-            setMoveStop('move');
-        }
     };
 
     // Preview 이미지 처리
@@ -709,10 +670,10 @@ export const LearningS = (props) => {
                                     <h1 className="contit">학습(Slide)</h1>
                                 </li>
                                 <li>
-                                    <h3>{learningData.moduleNm}</h3>
+                                    <h3>{learningData?.moduleNm}</h3>
                                 </li>
                                 <li>
-                                    <h2 className="conname pr30">{learningData.userName}</h2>
+                                    <h2 className="conname pr30">{learningData?.userName}</h2>
                                     <button type="button" className="conbtn01" onClick={() => Prohibitedinfo_Modal()}>
                                         반입금지물품
                                     </button>
@@ -779,12 +740,6 @@ export const LearningS = (props) => {
                             {learningData?.learningProblemList?.map((imgs, i) => {
                                 return (
                                     <>
-                                        {/* <a
-                                            href="#"
-                                            onClick={() => {
-                                                textFrontSide === 'F' ? PreviewCall(imgs.imgFront) : PreviewCall(imgs.imgSide);
-                                            }}
-                                        > */}
                                         <img
                                             key={i}
                                             src={'data:image/png;base64,' + imgs.imgFront}
@@ -794,7 +749,6 @@ export const LearningS = (props) => {
                                             alt="Preview"
                                             title="Preview"
                                         />
-                                        {/* </a> */}
                                     </>
                                 );
                             })}
@@ -1158,7 +1112,7 @@ export const LearningS = (props) => {
                         </div>
                         {/* <!-- learnbtc05 멈춤 이미지 --> */}
                         <div className="learnbtc05">
-                            <button className="lnbtc_btn stop" id="learn01_stop" type="button" onClick={MoveStopEvent}>
+                            <button className="lnbtc_btn stop" id="learn01_stop" type="button">
                                 <span>
                                     <img src={stope} alt="" />
                                 </span>
@@ -1216,7 +1170,6 @@ export const LearningS = (props) => {
                 open={CompleteModalOpen}
                 onOk={CompletehandleOk}
                 closable={false}
-                // onCancel={handleCancel}
                 width={590}
                 style={{
                     zIndex: 999
@@ -1250,7 +1203,6 @@ export const LearningS = (props) => {
                 open={PassModalOpen}
                 onOk={PasshandleOk}
                 closable={false}
-                // onCancel={handleCancel}
                 width={590}
                 style={{
                     zIndex: 999
@@ -1263,12 +1215,12 @@ export const LearningS = (props) => {
                     </div>
                     <div className="scwd_txt01">
                         <h3>
-                            X-ray 판독 초급 2023 - 1차 <span>평균 : 81</span>
+                            {learningData?.moduleNm} <span>획득점수 : {endLearningData?.gainScore}</span>
                         </h3>
                     </div>
                     <div className="scwd_txt02">
                         <h1>
-                            금지물품 통과로 <span className="scwd_pass">합격입니다.</span>
+                            <span className="scwd_pass">합격입니다.</span>
                         </h1>
                     </div>
                     <button
@@ -1291,7 +1243,6 @@ export const LearningS = (props) => {
                 open={FailModalOpen}
                 onOk={FailhandleOk}
                 closable={false}
-                // onCancel={handleCancel}
                 width={590}
                 style={{
                     zIndex: 999
@@ -1304,7 +1255,7 @@ export const LearningS = (props) => {
                     </div>
                     <div className="scwd_txt01">
                         <h3>
-                            X-ray 판독 초급 2023 - 1차 <span>평균 : 50</span>
+                            {learningData?.moduleNm} <span>획득점수 : {endLearningData?.gainScore}</span>
                         </h3>
                     </div>
                     <div className="scwd_txt02">

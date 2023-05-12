@@ -41,10 +41,19 @@ export const learningManagement = createApi({
             })
         }),
 
-        // 학습 > 학습완료
+        // 학습 > 합격/불합격
         endLearning: builder.mutation({
             query: (body) => ({
                 url: 'stu/learning/endLearning.do',
+                method: 'POST',
+                body: body
+            })
+        }),
+
+        // 학습 > 학습완료 정답확인
+        selectLearningComplete: builder.mutation({
+            query: (body) => ({
+                url: 'stu/learning/selectLearningComplete.do',
                 method: 'POST',
                 body: body
             })
@@ -52,5 +61,10 @@ export const learningManagement = createApi({
     })
 });
 
-export const { useSelectLearningMutation, useSelectImgMutation, useUpdateLearningAnswerMutation, useEndLearningMutation } =
-    learningManagement;
+export const {
+    useSelectLearningMutation,
+    useSelectImgMutation,
+    useUpdateLearningAnswerMutation,
+    useEndLearningMutation,
+    useSelectLearningCompleteMutation
+} = learningManagement;
