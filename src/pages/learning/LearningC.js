@@ -41,8 +41,8 @@ import { LearningP } from 'pages/learning/LearningP';
 import {
     useSelectLearningMutation,
     useSelectImgMutation,
-    useUpdateLeanAnswerMutation,
-    useEndLeaningMutation
+    useUpdateLearningAnswerMutation,
+    useEndLearningMutation
 } from '../../hooks/api/LearningManagement/LearningManagement';
 
 import $ from 'jquery';
@@ -77,12 +77,12 @@ export const LearningC = (props) => {
     const [selectImgData, setSelectImgData] = useState();
 
     // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리 api 정보
-    const [UpdateLeanAnswerApi] = useUpdateLeanAnswerMutation();
-    const [updateLeanAnswerData, setUpdateLeanAnswerData] = useState();
+    const [UpdateLearnAnswerApi] = useUpdateLearningAnswerMutation();
+    const [updateLearnAnswerData, setUpdateLearnAnswerData] = useState();
 
     // 학습완료(합격,불합격) api 정보
-    const [EndLeaningApi] = useEndLeaningMutation();
-    const [endLeaningData, setEndLeaningData] = useState();
+    const [EndLearningApi] = useEndLearningMutation();
+    const [endLearningData, setEndLearningData] = useState();
 
     // 학습자와 학습정보조회 Api Call
     const Learning_ApiCall = async () => {
@@ -103,23 +103,23 @@ export const LearningC = (props) => {
     };
 
     // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리 Api Call
-    const UpdateLeanAnswer_ApiCall = async (userActionDiv, bagScanId) => {
-        const UpdateLeanAnswerResponse = await UpdateLeanAnswerApi({
+    const UpdateLearnAnswer_ApiCall = async (userActionDiv, bagScanId) => {
+        const UpdateLearnAnswerResponse = await UpdateLearnAnswerApi({
             userActionDiv: userActionDiv, // 사용자가 선택한 정답
             eduType: 'learn',
             bagScanId: bagScanId //xray 가방스캔 아이디
         });
-        //console.log(UpdateLeanAnswerResponse?.data?.RET_DATA);
-        setUpdateLeanAnswerData(UpdateLeanAnswerResponse?.data?.RET_DATA);
+        //console.log(UpdateLearnAnswerResponse?.data?.RET_DATA);
+        setUpdateLearnAnswerData(UpdateLearnAnswerResponse?.data?.RET_DATA);
     };
 
     // 학습완료(합격,불합격) Api Call
-    const EndLeaning_ApiCall = async () => {
-        const EndLeaningResponse = await EndLeaningApi({
+    const EndLearning_ApiCall = async () => {
+        const EndLearningResponse = await EndLearningApi({
             eduType: 'learn'
         });
-        //console.log(EndLeaningResponse?.data?.RET_DATA);
-        setEndLeaningData(EndLeaningResponse?.data?.RET_DATA);
+        //console.log(EndLearningResponse?.data?.RET_DATA);
+        setEndLearningData(EndLearningResponse?.data?.RET_DATA);
     };
 
     let is_learn02_play = false;
@@ -380,7 +380,7 @@ export const LearningC = (props) => {
     // 정답 처리
     const answerEvent = (userActionDiv, bagScanId) => {
         // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리
-        UpdateLeanAnswer_ApiCall(userActionDiv, bagScanId);
+        UpdateLearnAnswer_ApiCall(userActionDiv, bagScanId);
     };
 
     // 슬라이드 Stop/Move 처리
@@ -412,7 +412,7 @@ export const LearningC = (props) => {
     useEffect(() => {
         Learning_ApiCall(); // 학습자와 학습정보조회 api 호출
         // SelectImg_ApiCall(); // 이미지조회 api 호출
-        // EndLeaning_ApiCall(); // 합격, 불합격 api 호출
+        // EndLearning_ApiCall(); // 합격, 불합격 api 호출
     }, []);
 
     return (
