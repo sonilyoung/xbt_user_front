@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Button, Space, Modal, Spin } from 'antd';
+import { Col, Row, Button, Space, Modal, Spin, Image } from 'antd';
 import 'antd/dist/antd.css';
+import { FullscreenOutlined } from '@ant-design/icons';
 
+import $ from 'jquery';
 import learnc_0101 from '../../images/learning/learnc_ic01_01.png';
 import learnc_0102 from '../../images/learning/learnc_ic01_02.png';
 import learnc_0103 from '../../images/learning/learnc_ic01_03.png';
@@ -35,10 +37,9 @@ import {
     useEndLeaningMutation
 } from '../../hooks/api/LearningManagement/LearningManagement';
 
-import $ from 'jquery';
-
 export const LearningS = (props) => {
     const { confirm } = Modal;
+    const [visible, setVisible] = useState(false); // 이미지 클릭시
 
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
     const [PrintModalOpen, setPrintModalOpen] = useState(false); // 학습 결과 정보 Modal창
@@ -58,6 +59,9 @@ export const LearningS = (props) => {
 
     const [textFrontSide, setTextFrontSide] = useState('F'); // 정면/측면 선택 설정
     const [state, setState] = useState({ seconds: 0, minutes: 0 }); // 카운트
+
+    const [zoom, setZoom] = useState(1);
+    const [pos, setPos] = useState({ x: 0, y: 0 });
 
     const [loading, setLoading] = useState(false);
 
@@ -145,6 +149,7 @@ export const LearningS = (props) => {
             clearInterval(position);
             $('#learn01_bimg').hide();
             $('#myRange').css('visibility', 'hidden');
+            $('#fullscreen').css('visibility', 'hidden');
             is_learn01_play = false;
         } else {
             const intervalId = setInterval(() => {
@@ -165,6 +170,7 @@ export const LearningS = (props) => {
                         // clearInterval(intervalId);
                         $('#learn01_bimg').hide();
                         $('#myRange').css('visibility', 'hidden');
+                        $('#fullscreen').css('visibility', 'hidden');
 
                         is_learn01_play = false;
                         setCompleteModalOpen(true);
@@ -178,6 +184,10 @@ export const LearningS = (props) => {
             $('#myRange').attr('max', $('#learn01_img').width());
             $('#myRange').val($('#learn01_img').width());
             $('#myRange').css('visibility', 'visible');
+
+            $('#fullscreen').attr('max', $('#learn01_img').width());
+            $('#fullscreen').val($('#learn01_img').width());
+            $('#fullscreen').css('visibility', 'visible');
 
             $('#learn01_bimg').show();
 
@@ -221,6 +231,7 @@ export const LearningS = (props) => {
                     clearInterval(intervalId);
                     $('#learn01_bimg').hide();
                     $('#myRange').css('visibility', 'hidden');
+                    $('#fullscreen').css('visibility', 'hidden');
 
                     is_learn01_play = false;
                 } else {
@@ -260,6 +271,7 @@ export const LearningS = (props) => {
                 var imageWidth = $currentImage.width();
                 var currentPosition = $currentImage.position().left + imageWidth / 2;
                 $('#myRange').val(currentPosition);
+                $('#fullscreen').val(currentPosition);
             }
             resetImage();
             //moveImage();
@@ -269,6 +281,16 @@ export const LearningS = (props) => {
             $('#myRange').on('input', function () {
                 if (isPaused) {
                     position = $('#myRange').val();
+                    $currentImage = $(images[current_image]);
+                    var imageWidth = $currentImage.width();
+                    var image_left = Number(position) - imageWidth / 2;
+                    $currentImage.attr('style', 'left:' + image_left + 'px');
+                }
+            });
+
+            $('#fullscreen').on('Button', function () {
+                if (isPaused) {
+                    position = $('#fullscreen').val();
                     $currentImage = $(images[current_image]);
                     var imageWidth = $currentImage.width();
                     var image_left = Number(position) - imageWidth / 2;
@@ -288,12 +310,14 @@ export const LearningS = (props) => {
                         clearInterval(position);
                         $('#learn01_stop').addClass('lnbtc_btnon');
                         $('#myRange').removeAttr('disabled');
+                        $('#fullscreen').removeAttr('disabled');
                     } else {
                         isPaused = false;
                         moveImage();
                         $('#learn01_stop').removeClass('lnbtc_btnon');
                         position = setInterval(set_position, 10);
                         $('#myRange').attr('disabled', '');
+                        $('#fullscreen').attr('disabled', '');
                     }
                 }
             });
@@ -313,6 +337,7 @@ export const LearningS = (props) => {
                     position = setInterval(set_position, 10);
 
                     $('#myRange').attr('disabled', '');
+                    $('#fullscreen').attr('disabled', '');
                     resetImage();
                 }
             }
@@ -480,6 +505,65 @@ export const LearningS = (props) => {
                         $currentImage.attr('src', 'data:image/png;base64,' + image_src);
                     } catch (error) {}
                 });
+            });
+
+            var scale = 1;
+            var isFlipped = false;
+            var originalWidth = $(images[current_image]).width();
+
+            // 확대
+            $('#color_glas_plus').click(async function () {
+                scale += 0.1;
+                $(images[current_image]).css('transform', 'scaleX(' + (isFlipped ? -1 : 1) + ') scale(' + scale + ')');
+            });
+
+            // 좌우 반전
+            $('#color_transform').click(async function () {
+                isFlipped = !isFlipped;
+                $(images[current_image]).css('transform', 'scaleX(' + (isFlipped ? -1 : 1) + ') scale(' + scale + ')');
+            });
+
+            // 축소
+            $('#color_glas_minus').click(async function () {
+                scale -= 0.1;
+                $(images[current_image]).css('transform', 'scaleX(' + (isFlipped ? -1 : 1) + ') scale(' + scale + ')');
+            });
+
+            // 복원
+            $('#color_restoration').click(async function () {
+                scale = 1;
+                isFlipped = false;
+                $(images[current_image]).css('transform', 'scaleX(1) scale(1)');
+                $(images[current_image]).width(originalWidth);
+            });
+
+            var mouseX = 0;
+            var mouseY = 0;
+            var isDragging = false;
+            var startLeft = 0;
+            var startTop = 0;
+
+            $(images[current_image]).mousedown(function (e) {
+                isDragging = true;
+                mouseX = e.pageX;
+                mouseY = e.pageY;
+                startLeft = parseInt($(images[current_image]).css('left')) || 0;
+                startTop = parseInt($(images[current_image]).css('top')) || 0;
+            });
+
+            $(document).mouseup(function (e) {
+                isDragging = false;
+            });
+
+            $(document).mousemove(function (e) {
+                if (isDragging) {
+                    var x = e.pageX - mouseX;
+                    var y = e.pageY - mouseY;
+                    var newLeft = startLeft + x;
+                    var newTop = startTop + y;
+                    $(images[current_image]).css('left', newLeft + 'px');
+                    $(images[current_image]).css('top', newTop + 'px');
+                }
             });
         }
     };
@@ -656,19 +740,54 @@ export const LearningS = (props) => {
                     </div>
                     {/* <!-- learnc_img --> */}
                     <div className="learnc_img" id="learn01_img" style={{ height: '450px' }}>
-                        {learningData?.learningProblemList?.map((imgs, i) => {
-                            return (
-                                <img
-                                    key={i}
-                                    src={'data:image/png;base64,' + imgs.imgFront}
-                                    data-thum={'data:image/png;base64,' + imgs.imgSide}
-                                    data-value={imgs.bagScanId}
-                                    className="image"
-                                    alt={imgs.bagScanId}
-                                    title={imgs.bagScanId}
-                                />
-                            );
-                        })}
+                        <div id="container">
+                            {learningData?.learningProblemList?.map((imgs, i) => {
+                                return (
+                                    <>
+                                        <a href="#" onClick={() => setVisible(true)}>
+                                            <img
+                                                key={i}
+                                                src={'data:image/png;base64,' + imgs.imgFront}
+                                                data-thum={'data:image/png;base64,' + imgs.imgSide}
+                                                data-value={imgs.bagScanId}
+                                                className="image"
+                                                alt={imgs.bagScanId}
+                                                title={imgs.bagScanId}
+                                            />
+                                        </a>
+                                        {textFrontSide === 'F' ? (
+                                            <Image
+                                                width={200}
+                                                style={{
+                                                    display: 'none'
+                                                }}
+                                                src={'data:image/png;base64,' + imgs.imgFront}
+                                                preview={{
+                                                    visible,
+                                                    onVisibleChange: (value) => {
+                                                        setVisible(value);
+                                                    }
+                                                }}
+                                            />
+                                        ) : (
+                                            <Image
+                                                width={200}
+                                                style={{
+                                                    display: 'none'
+                                                }}
+                                                src={'data:image/png;base64,' + imgs.imgSide}
+                                                preview={{
+                                                    visible,
+                                                    onVisibleChange: (value) => {
+                                                        setVisible(value);
+                                                    }
+                                                }}
+                                            />
+                                        )}
+                                    </>
+                                );
+                            })}
+                        </div>
                     </div>
                     <input type="range" name="" id="myRange" max="1000" disabled style={{ width: '100%', visibility: 'hidden' }} />
                 </div>
@@ -891,24 +1010,48 @@ export const LearningS = (props) => {
                         {/* <!-- learnbtc03 확대, 축소, 반전, 복구 --> */}
                         <div className="learnbtc03">
                             <ul>
+                                {/* 확대 */}
                                 <li>
-                                    <a href="#" id="color_group" onClick={() => copbtc03_Cho('0')} className={copbtc03 === '0' ? 'on' : ''}>
-                                        <img src={glas_plus} alt="" />
+                                    <a
+                                        href="#"
+                                        id="color_glas_plus"
+                                        onClick={() => copbtc03_Cho('0')}
+                                        className={copbtc03 === '0' ? 'on' : ''}
+                                    >
+                                        <img src={glas_plus} alt="확대" title="확대" />
                                     </a>
                                 </li>
+                                {/* 반전 */}
                                 <li>
-                                    <a href="#" id="color_group" onClick={() => copbtc03_Cho('1')} className={copbtc03 === '1' ? 'on' : ''}>
-                                        <img src={transform} alt="" />
+                                    <a
+                                        href="#"
+                                        id="color_transform"
+                                        onClick={() => copbtc03_Cho('1')}
+                                        className={copbtc03 === '1' ? 'on' : ''}
+                                    >
+                                        <img src={transform} alt="좌우반전" title="좌우반전" />
                                     </a>
                                 </li>
+                                {/* 축소 */}
                                 <li>
-                                    <a href="#" id="color_group" onClick={() => copbtc03_Cho('2')} className={copbtc03 === '2' ? 'on' : ''}>
-                                        <img src={glas_minus} alt="" />
+                                    <a
+                                        href="#"
+                                        id="color_glas_minus"
+                                        onClick={() => copbtc03_Cho('2')}
+                                        className={copbtc03 === '2' ? 'on' : ''}
+                                    >
+                                        <img src={glas_minus} alt="축소" title="축소" />
                                     </a>
                                 </li>
+                                {/* 복원 */}
                                 <li>
-                                    <a href="#" id="color_group" onClick={() => copbtc03_Cho('3')} className={copbtc03 === '3' ? 'on' : ''}>
-                                        <img src={restoration} alt="" />
+                                    <a
+                                        href="#"
+                                        id="color_restoration"
+                                        onClick={() => copbtc03_Cho('3')}
+                                        className={copbtc03 === '3' ? 'on' : ''}
+                                    >
+                                        <img src={restoration} alt="복원" title="복원" />
                                     </a>
                                 </li>
                             </ul>
