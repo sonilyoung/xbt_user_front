@@ -179,7 +179,7 @@ export const LearningS = (props) => {
                         $('#learn01_bimg').hide();
                         $('#myRange').css('visibility', 'hidden');
                         is_learn01_play = false;
-                        setCompleteModalOpen(true);
+                        setCompleteModalOpen(true); //학습 종료 Modal
                     }
 
                     return { seconds, minutes };
@@ -362,150 +362,262 @@ export const LearningS = (props) => {
                 $currentImage.attr('src', image_src);
             });
 
-            // 의사색체 버튼 클릭시 처리 정면
-            ['101', '102', '103', '104', '111', '112', '113', '114', '201', '202', '203', '204', '211', '212', '213', '214'].forEach(
-                (group) => {
-                    $(`#color_group${group}`).click(async function () {
-                        try {
-                            const SelectImgResponse = await SelectImgApi({
-                                bagScanId: bag_id[current_image],
-                                command: group
-                            }); // 비동기 함수 호출
-
-                            if (group === '101') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColor; //정면컬러 101
-                            } else if (group === '102') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorMineral; //정면무기물 102
-                            } else if (group === '103') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorOrganism; //정면유기물 103
-                            } else if (group === '104') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorReversal; //정면반전 104
-                            } else if (group === '111') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBw; //정면흑백 111
-                            } else if (group === '112') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwMineral; //정면흑백무기물 112
-                            } else if (group === '113') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwOrganism; //정면흑백유기물 113
-                            } else if (group === '114') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwReversal; //정면흑백반전 114
-                            } else if (group === '201') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColor; //측면컬러 201
-                            } else if (group === '202') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorMineral; //측면무기물 202
-                            } else if (group === '203') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorOrganism; //측면유기물 203
-                            } else if (group === '204') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorReversal; //측면반전 204
-                            } else if (group === '211') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBw; //측면흑백211
-                            } else if (group === '212') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwMinerals; //측면흑백무기물212
-                            } else if (group === '213') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwOrganism; //측면흑백유기물213
-                            } else if (group === '214') {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwReversal; //측면흑백반전214
-                            } else {
-                                var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColor; //정면컬러 101
-                            }
-                            $currentImage = $(images[current_image]);
-                            $(this).attr('src', $currentImage.attr('src'));
-                            $currentImage.attr('src', 'data:image/png;base64,' + image_src);
-                        } catch (error) {}
-                    });
+            // 의사색체 버튼 클릭
+            $('#color_group101').click(function () {
+                if ($(this)[0].id == 'color_group101') {
+                    imagesrcApi(bag_id[current_image], '101');
+                } else {
+                    imagesrcApi(bag_id[current_image], '201');
                 }
-            );
-
-            // 의사색체 버튼 클릭시 처리 측면
-            [
-                '105',
-                '106',
-                '107',
-                '108',
-                '109',
-                '110',
-                '115',
-                '116',
-                '117',
-                '118',
-                '119',
-                '120',
-                '205',
-                '206',
-                '207',
-                '208',
-                '209',
-                '210',
-                '215',
-                '216',
-                '217',
-                '218',
-                '219',
-                '220'
-            ].forEach((group) => {
-                $(`#color_group${group}`).click(async function () {
-                    try {
-                        const SelectImgResponse = await SelectImgApi({
-                            bagScanId: bag_id[current_image],
-                            command: group
-                        }); // 비동기 함수 호출
-
-                        if (group === '105') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate1; //정면채도 105
-                        } else if (group === '106') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate2; //정면채도 106
-                        } else if (group === '107') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate3; //정면채도 107
-                        } else if (group === '108') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate4; //정면채도 108
-                        } else if (group === '109') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate5; //정면채도 109
-                        } else if (group === '110') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate6; //정면채도 110
-                        } else if (group === '115') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate1; //정면흑백채도 115
-                        } else if (group === '116') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate2; //정면흑백채도 116
-                        } else if (group === '117') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate3; //정면흑백채도 117
-                        } else if (group === '118') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate4; // 정면흑백채도118
-                        } else if (group === '119') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate5; //정면흑백채도 119
-                        } else if (group === '120') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate6; //정면흑백채도 120
-                        } else if (group === '205') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate1; //측면채도 205
-                        } else if (group === '206') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate2; //측면채도206
-                        } else if (group === '207') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate3; //측면채도207
-                        } else if (group === '208') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate4; //측면채도208
-                        } else if (group === '209') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate5; //측면채도209
-                        } else if (group === '210') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate6; //측면채도210
-                        } else if (group === '215') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate1; //측면흑백채도215
-                        } else if (group === '216') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate2; //측면흑백채도216
-                        } else if (group === '217') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate3; //측면흑백채도217
-                        } else if (group === '218') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate4; //측면흑백채도218
-                        } else if (group === '219') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate5; //측면흑백채도219
-                        } else if (group === '220') {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate6; //측면흑백채도220
-                        } else {
-                            var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate1; //정면컬러 101
-                        }
-                        $currentImage = $(images[current_image]);
-                        $(this).attr('src', $currentImage.attr('src'));
-                        $currentImage.attr('src', 'data:image/png;base64,' + image_src);
-                    } catch (error) {}
-                });
             });
+
+            $('#color_group102').click(function () {
+                if ($(this)[0].id == 'color_group102') {
+                    imagesrcApi(bag_id[current_image], '102');
+                } else {
+                    imagesrcApi(bag_id[current_image], '202');
+                }
+            });
+
+            $('#color_group103').click(function () {
+                if ($(this)[0].id == 'color_group103') {
+                    imagesrcApi(bag_id[current_image], '103');
+                } else {
+                    imagesrcApi(bag_id[current_image], '203');
+                }
+            });
+
+            $('#color_group104').click(function () {
+                if ($(this)[0].id == 'color_group104') {
+                    imagesrcApi(bag_id[current_image], '104');
+                } else {
+                    imagesrcApi(bag_id[current_image], '204');
+                }
+            });
+
+            $('#color_group105').click(function () {
+                if ($(this)[0].id == 'color_group105') {
+                    imagesrcApi(bag_id[current_image], '105');
+                } else {
+                    imagesrcApi(bag_id[current_image], '205');
+                }
+            });
+
+            $('#color_group106').click(function () {
+                if ($(this)[0].id == 'color_group106') {
+                    imagesrcApi(bag_id[current_image], '106');
+                } else {
+                    imagesrcApi(bag_id[current_image], '206');
+                }
+            });
+
+            $('#color_group107').click(function () {
+                if ($(this)[0].id == 'color_group107') {
+                    imagesrcApi(bag_id[current_image], '107');
+                } else {
+                    imagesrcApi(bag_id[current_image], '207');
+                }
+            });
+
+            $('#color_group108').click(function () {
+                if ($(this)[0].id == 'color_group108') {
+                    imagesrcApi(bag_id[current_image], '108');
+                } else {
+                    imagesrcApi(bag_id[current_image], '208');
+                }
+            });
+
+            $('#color_group109').click(function () {
+                if ($(this)[0].id == 'color_group109') {
+                    imagesrcApi(bag_id[current_image], '109');
+                } else {
+                    imagesrcApi(bag_id[current_image], '209');
+                }
+            });
+
+            $('#color_group110').click(function () {
+                if ($(this)[0].id == 'color_group110') {
+                    imagesrcApi(bag_id[current_image], '110');
+                } else {
+                    imagesrcApi(bag_id[current_image], '210');
+                }
+            });
+
+            $('#color_group111').click(function () {
+                if ($(this)[0].id == 'color_group111') {
+                    imagesrcApi(bag_id[current_image], '111');
+                } else {
+                    imagesrcApi(bag_id[current_image], '211');
+                }
+            });
+
+            $('#color_group112').click(function () {
+                if ($(this)[0].id == 'color_group112') {
+                    imagesrcApi(bag_id[current_image], '112');
+                } else {
+                    imagesrcApi(bag_id[current_image], '212');
+                }
+            });
+
+            $('#color_group113').click(function () {
+                if ($(this)[0].id == 'color_group113') {
+                    imagesrcApi(bag_id[current_image], '113');
+                } else {
+                    imagesrcApi(bag_id[current_image], '213');
+                }
+            });
+
+            $('#color_group114').click(function () {
+                if ($(this)[0].id == 'color_group114') {
+                    imagesrcApi(bag_id[current_image], '114');
+                } else {
+                    imagesrcApi(bag_id[current_image], '214');
+                }
+            });
+
+            $('#color_group115').click(function () {
+                if ($(this)[0].id == 'color_group115') {
+                    imagesrcApi(bag_id[current_image], '115');
+                } else {
+                    imagesrcApi(bag_id[current_image], '215');
+                }
+            });
+
+            $('#color_group116').click(function () {
+                if ($(this)[0].id == 'color_group116') {
+                    imagesrcApi(bag_id[current_image], '116');
+                } else {
+                    imagesrcApi(bag_id[current_image], '216');
+                }
+            });
+
+            $('#color_group117').click(function () {
+                if ($(this)[0].id == 'color_group117') {
+                    imagesrcApi(bag_id[current_image], '117');
+                } else {
+                    imagesrcApi(bag_id[current_image], '217');
+                }
+            });
+
+            $('#color_group118').click(function () {
+                if ($(this)[0].id == 'color_group118') {
+                    imagesrcApi(bag_id[current_image], '118');
+                } else {
+                    imagesrcApi(bag_id[current_image], '218');
+                }
+            });
+
+            $('#color_group119').click(function () {
+                if ($(this)[0].id == 'color_group119') {
+                    imagesrcApi(bag_id[current_image], '119');
+                } else {
+                    imagesrcApi(bag_id[current_image], '219');
+                }
+            });
+
+            $('#color_group120').click(function () {
+                if ($(this)[0].id == 'color_group120') {
+                    imagesrcApi(bag_id[current_image], '120');
+                } else {
+                    imagesrcApi(bag_id[current_image], '220');
+                }
+            });
+
+            async function imagesrcApi(bagScanId, command) {
+                try {
+                    const SelectImgResponse = await SelectImgApi({
+                        bagScanId: bagScanId,
+                        command: command
+                    }); // 비동기 함수 호출
+
+                    if (command === '101') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColor; //정면컬러 101
+                    } else if (command === '102') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorMineral; //정면무기물 102
+                    } else if (command === '103') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorOrganism; //정면유기물 103
+                    } else if (command === '104') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorReversal; //정면반전 104
+                    } else if (command === '105') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate1; //정면채도 105
+                    } else if (command === '106') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate2; //정면채도 106
+                    } else if (command === '107') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate3; //정면채도 107
+                    } else if (command === '108') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate4; //정면채도 108
+                    } else if (command === '109') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate5; //정면채도 109
+                    } else if (command === '110') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate6; //정면채도 110
+                    } else if (command === '111') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBw; //정면흑백 111
+                    } else if (command === '112') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwMineral; //정면흑백무기물 112
+                    } else if (command === '113') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwOrganism; //정면흑백유기물 113
+                    } else if (command === '114') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwReversal; //정면흑백반전 114
+                    } else if (command === '115') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate1; //정면흑백채도 115
+                    } else if (command === '116') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate2; //정면흑백채도 116
+                    } else if (command === '117') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate3; //정면흑백채도 117
+                    } else if (command === '118') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate4; // 정면흑백채도118
+                    } else if (command === '119') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate5; //정면흑백채도 119
+                    } else if (command === '120') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate6; //정면흑백채도 120
+                    } else if (command === '201') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColor; //측면컬러 201
+                    } else if (command === '202') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorMineral; //측면무기물 202
+                    } else if (command === '203') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorOrganism; //측면유기물 203
+                    } else if (command === '204') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorReversal; //측면반전 204
+                    } else if (command === '205') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate1; //측면채도 205
+                    } else if (command === '206') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate2; //측면채도206
+                    } else if (command === '207') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate3; //측면채도207
+                    } else if (command === '208') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate4; //측면채도208
+                    } else if (command === '209') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate5; //측면채도209
+                    } else if (command === '210') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate6; //측면채도210
+                    } else if (command === '211') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBw; //측면흑백211
+                    } else if (command === '212') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwMinerals; //측면흑백무기물212
+                    } else if (command === '213') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwOrganism; //측면흑백유기물213
+                    } else if (command === '214') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwReversal; //측면흑백반전214
+                    } else if (command === '215') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate1; //측면흑백채도215
+                    } else if (command === '216') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate2; //측면흑백채도216
+                    } else if (command === '217') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate3; //측면흑백채도217
+                    } else if (command === '218') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate4; //측면흑백채도218
+                    } else if (command === '219') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate5; //측면흑백채도219
+                    } else if (command === '220') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate6; //측면흑백채도220
+                    } else {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColor; //정면컬러 101
+                    }
+                    $currentImage = $(images[current_image]);
+                    $(this).attr('src', $currentImage.attr('src'));
+                    $currentImage.attr('src', 'data:image/png;base64,' + image_src);
+                } catch (error) {}
+            }
 
             // 이미지 클릭시 preview 이벤트
             $(images[current_image]).click(function (e) {
@@ -611,23 +723,19 @@ export const LearningS = (props) => {
 
     const copbtc01_Cho = (ImgColorCode) => {
         setCopbtc01(ImgColorCode);
-        if (textFrontSide === 'F') {
-            ImgColorCode = '1' + ImgColorCode;
-        } else {
-            ImgColorCode = '2' + ImgColorCode;
-        }
+        setCopbtc02();
+        setCopbtc03();
     };
 
     const copbtc02_Cho = (ImgColorCode) => {
         setCopbtc02(ImgColorCode);
-        if (textFrontSide === 'F') {
-            ImgColorCode = '1' + ImgColorCode;
-        } else {
-            ImgColorCode = '2' + ImgColorCode;
-        }
+        setCopbtc01();
+        setCopbtc03();
     };
 
     const copbtc03_Cho = (ImgColorCode) => {
+        setCopbtc01();
+        setCopbtc02();
         setCopbtc03(ImgColorCode);
     };
 
@@ -1127,7 +1235,6 @@ export const LearningS = (props) => {
                         </div>
                     </div>
                 </div>
-                {/*  */}
             </Spin>
             {/* 반입금지물품 모달 창 Start */}
             <Modal
@@ -1135,7 +1242,6 @@ export const LearningS = (props) => {
                 open={ModalOpen}
                 onOk={handleOk}
                 closable={false}
-                // onCancel={handleCancel}
                 width={950}
                 style={{
                     zIndex: 999
@@ -1152,7 +1258,6 @@ export const LearningS = (props) => {
                 open={PrintModalOpen}
                 onOk={PrinthandleOk}
                 closable={false}
-                // onCancel={handleCancel}
                 width={'97%'}
                 style={{
                     top: 15,
