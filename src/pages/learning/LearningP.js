@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { Modal } from 'antd';
+import { Modal, Image } from 'antd';
 import 'antd/dist/antd.css';
 import $ from 'jquery';
 import lrncomp_img01 from '../../images/learning/lrncomp_img01.jpg';
@@ -19,30 +19,57 @@ import glas_minus from '../../images/learning/glas_minus.png';
 import restoration from '../../images/learning/restoration.png';
 import x_img from '../../images/learning/x.png';
 import o_img from '../../images/learning/o.png';
-import learning_bimg01 from '../../images/learning/learning_bimg01.jpg';
+import loading_bg from '../../images/common/bg.png';
 
 // 학습자와 학습정보조회, 의사색체 이미지 조회, pass, open, (prohibited, resricted), 합격/불합격 여부
-import { useSelectLearningCompleteMutation } from '../../hooks/api/LearningManagement/LearningManagement';
+import {
+    useSelectLearningCompleteMutation,
+    useSelectCommonLearningImgMutation,
+    useSelectCommonColorImgMutation
+} from '../../hooks/api/CommonManagement/CommonManagement';
 
 // 반입금지물품 페이지
 import { Prohibited } from 'pages/prohibited';
 
 export const LearningP = (props) => {
     const { confirm } = Modal;
+    const [visible, setVisible] = useState(false); // 이미지 클릭시
+    const [imgView, setImgView] = useState(); // Preview 이미지 설장
+
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
 
     const [copbtc01, setCopbtc01] = useState();
     const [copbtc02, setCopbtc02] = useState();
     const [copbtc03, setCopbtc03] = useState();
-    const [loading, setLoading] = useState(false); // 로딩
-    const [textFrontSide, setTextFrontSide] = useState('F'); // 정면/측면 선택 설정
-    const [learnbagScanId, setLearnbagScanId] = useState([]); // 가방아이디
+    const [loading, setLoading] = useState(false); // 상단 (가방id) 테이블 로딩
+    const [imgLoading, setImgLoading] = useState(false); // 이미지 영역 로딩
+    const [subLoading, setSubLoading] = useState(false); // 하단 테이블 로딩
 
-    const [choiceGoods, setChoiceGoods] = useState(''); // 가방 선택
+    const [textFrontSide, setTextFrontSide] = useState('F'); // 정면/측면 선택 설정
+
+    const [choiceGoods, setChoiceGoods] = useState(null); // 선택된 가방ID
+    const [choiceActionDivNm, setChoiceActionDivNm] = useState(null); // 선택된 가방 정답
 
     // 학습완료 정답확인 Api
     const [LearningCompleteApi] = useSelectLearningCompleteMutation();
     const [learningCompleteData, setLearningCompleteData] = useState([]);
+
+    // 학습완료 이미지 조회 Api
+    const [CompleteBagScanIdApi] = useSelectCommonLearningImgMutation();
+    const [completeBagScanIdData, setCompleteBagScanIdData] = useState([]);
+    const [frontImage, setFrontImage] = useState(null); // 정면 이미지
+    const [sideImage, setSideImage] = useState(null); // 측면 이미지
+
+    // 학습완료 의사색체 이미지 조회
+    const [CompleteColorImgApi] = useSelectCommonColorImgMutation();
+    const [completeColorImgData, setCompleteColorImgData] = useState([]);
+
+    const [scale, setScale] = useState(1); // 확대, 축소
+    const [flip, setFlip] = useState(false); // 반전(좌우)
+
+    // 학습완료 의사색체 이미지 조회
+    const [SelectLearnProblemsApi] = useSelectLearnProblemsResultMutation();
+    const [selectLearnProblemsData, setSelectLearnProblemsData] = useState([]);
 
     // =====================================================================================
     // API 호출 Start
@@ -53,347 +80,163 @@ export const LearningP = (props) => {
             eduType: 'learn',
             languageCode: 'kor'
         });
-        console.log(LearningCompleteResponse?.data?.RET_DATA);
         setLearningCompleteData(LearningCompleteResponse?.data?.RET_DATA);
         setLoading(false);
     };
+
+    // 학습완료 이미지조회 Api Call
+    const SelectCompleteBagScanId_ApiCall = async (bagScanId) => {
+        const CompleteBagScanIdResponse = await CompleteBagScanIdApi({
+            bagScanId: bagScanId
+        });
+        setFrontImage(CompleteBagScanIdResponse?.data?.RET_DATA?.imgFront); // 정면 이미지
+        setSideImage(CompleteBagScanIdResponse?.data?.RET_DATA?.imgSide); // 측면 이미지
+        setCompleteBagScanIdData(CompleteBagScanIdResponse?.data?.RET_DATA);
+        setImgLoading(false);
+    };
+
+    // 학습완료 의사색체 이미지 조회 Api Call
+    const SelectCompleteColorImg_ApiCall = async (command, bagscanid) => {
+        const CompleteColorImgResponse = await CompleteColorImgApi({
+            bagScanId: bagscanid,
+            command: command
+        });
+        console.log(bagscanid, command);
+        command === '101'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColor) //정면컬러 101
+            : command === '102'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColorMineral) //정면무기물 102
+            : command === '103'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColorOrganism) //정면유기물 103
+            : command === '104'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColorReversal) //정면반전 104
+            : command === '105'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColorBwRate1) //정면채도 105
+            : command === '106'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColorBwRate2) //정면채도 106
+            : command === '107'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColorBwRate3) //정면채도 107
+            : command === '108'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColorBwRate4) //정면채도 108
+            : command === '109'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColorBwRate5) //정면채도 109
+            : command === '110'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColorBwRate6) //정면채도 110
+            : command === '111'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontBw) //정면흑백 111
+            : command === '112'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontBwMineral) //정면흑백무기물 112
+            : command === '113'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontBwOrganism) //정면흑백유기물 113
+            : command === '114'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontBwReversal) //정면흑백반전 114
+            : command === '115'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontBwBwRate1) //정면흑백채도 115
+            : command === '116'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontBwBwRate2) //정면흑백채도 116
+            : command === '117'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontBwBwRate3) //정면흑백채도 117
+            : command === '118'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontBwBwRate4) // 정면흑백채도118
+            : command === '119'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontBwBwRate5) //정면흑백채도 119
+            : command === '120'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontBwBwRate6) //정면흑백채도 120
+            : command === '201'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideColor) //측면컬러 201
+            : command === '202'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideColorMineral) //측면무기물 202
+            : command === '203'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideColorOrganism) //측면유기물 203
+            : command === '204'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideColorReversal) //측면반전 204
+            : command === '205'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideColorBwRate1) //측면채도 205
+            : command === '206'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideColorBwRate2) //측면채도206
+            : command === '207'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideColorBwRate3) //측면채도207
+            : command === '208'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideColorBwRate4) //측면채도208
+            : command === '209'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideColorBwRate5) //측면채도209
+            : command === '210'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideColorBwRate6) //측면채도210
+            : command === '211'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideBw) //측면흑백211
+            : command === '212'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideBwMinerals) //측면흑백무기물212
+            : command === '213'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideBwOrganism) //측면흑백유기물213
+            : command === '214'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideBwReversal) //측면흑백반전214
+            : command === '215'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideBwBwRate1) //측면흑백채도215
+            : command === '216'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideBwBwRate2) //측면흑백채도216
+            : command === '217'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideBwBwRate3) //측면흑백채도217
+            : command === '218'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideBwBwRate4) //측면흑백채도218
+            : command === '219'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideBwBwRate5) //측면흑백채도219
+            : command === '220'
+            ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgSideBwBwRate6) //측면흑백채도220
+            : '';
+    };
+
+    // 학습완료 상세물품목록조회 Api Call
+    const SelectLearnProblems_ApiCall = async (bagScanId) => {
+        const SelectLearnProblemsResponse = await SelectLearnProblemsApi({
+            eduType: 'learn',
+            languageCode: 'kor',
+            bagScanId: bagScanId
+        });
+        setSelectLearnProblemsData(SelectLearnProblemsResponse?.data?.RET_DATA);
+        setSubLoading(false);
+    };
+
     // =====================================================================================
     // API 호출 End
     // =====================================================================================
 
-    // let images = $('#learn02_img img'); //이미지 목록
-    // let $currentImage; //현재 움직이는 이미지
-    // var start_count = 0;
-    // let currentImageIndex = 0; //현재 보여지는 이미지 순서
+    // 측면 이미지 클릭
+    const FrontSide_Change = (textFrontSide) => {
+        textFrontSide === 'S' ? setTextFrontSide('F') : setTextFrontSide('S');
+        setFrontImage(sideImage);
+        setSideImage(frontImage);
+    };
 
-    // // 측면 이미지 클릭시 처리
-    // $('#learn02_bimg').click(function () {
-    //     var image_src = $(this).attr('src');
-    //     $currentImage = $(images[currentImageIndex]);
-    //     $(this).attr('src', $currentImage.attr('src'));
-    //     $currentImage.attr('src', image_src);
-    // });
+    // Preview 이미지 처리
+    const PreviewCall = (previewimage) => {
+        setImgView(previewimage);
+        setVisible(true);
+    };
 
-    // // 의사색체 버튼 클릭
-    // $('#color_group101').click(function () {
-    //     if ($(this)[0].id == 'color_group101') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '101');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '201');
-    //     }
-    // });
+    const ColorGroup = (command, bagscanid) => {
+        SelectCompleteColorImg_ApiCall(command, bagscanid);
+    };
 
-    // $('#color_group102').click(function () {
-    //     if ($(this)[0].id == 'color_group102') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '102');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '202');
-    //     }
-    // });
+    // 확대
+    const handleZoomIn = () => {
+        setScale(scale + 0.1);
+    };
 
-    // $('#color_group103').click(function () {
-    //     if ($(this)[0].id == 'color_group103') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '103');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '203');
-    //     }
-    // });
+    // 축소
+    const handleZoomOut = () => {
+        setScale(scale - 0.1);
+    };
 
-    // $('#color_group104').click(function () {
-    //     if ($(this)[0].id == 'color_group104') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '104');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '204');
-    //     }
-    // });
+    // 반전(좌우)
+    const handleFlip = () => {
+        setFlip(!flip);
+    };
 
-    // $('#color_group105').click(function () {
-    //     if ($(this)[0].id == 'color_group105') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '105');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '205');
-    //     }
-    // });
-
-    // $('#color_group106').click(function () {
-    //     if ($(this)[0].id == 'color_group106') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '106');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '206');
-    //     }
-    // });
-
-    // $('#color_group107').click(function () {
-    //     if ($(this)[0].id == 'color_group107') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '107');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '207');
-    //     }
-    // });
-
-    // $('#color_group108').click(function () {
-    //     if ($(this)[0].id == 'color_group108') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '108');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '208');
-    //     }
-    // });
-
-    // $('#color_group109').click(function () {
-    //     if ($(this)[0].id == 'color_group109') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '109');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '209');
-    //     }
-    // });
-
-    // $('#color_group110').click(function () {
-    //     if ($(this)[0].id == 'color_group110') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '110');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '210');
-    //     }
-    // });
-
-    // $('#color_group111').click(function () {
-    //     if ($(this)[0].id == 'color_group111') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '111');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '211');
-    //     }
-    // });
-
-    // $('#color_group112').click(function () {
-    //     if ($(this)[0].id == 'color_group112') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '112');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '212');
-    //     }
-    // });
-
-    // $('#color_group113').click(function () {
-    //     if ($(this)[0].id == 'color_group113') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '113');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '213');
-    //     }
-    // });
-
-    // $('#color_group114').click(function () {
-    //     if ($(this)[0].id == 'color_group114') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '114');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '214');
-    //     }
-    // });
-
-    // $('#color_group115').click(function () {
-    //     if ($(this)[0].id == 'color_group115') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '115');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '215');
-    //     }
-    // });
-
-    // $('#color_group116').click(function () {
-    //     if ($(this)[0].id == 'color_group116') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '116');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '216');
-    //     }
-    // });
-
-    // $('#color_group117').click(function () {
-    //     if ($(this)[0].id == 'color_group117') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '117');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '217');
-    //     }
-    // });
-
-    // $('#color_group118').click(function () {
-    //     if ($(this)[0].id == 'color_group118') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '118');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '218');
-    //     }
-    // });
-
-    // $('#color_group119').click(function () {
-    //     if ($(this)[0].id == 'color_group119') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '119');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '219');
-    //     }
-    // });
-
-    // $('#color_group120').click(function () {
-    //     if ($(this)[0].id == 'color_group120') {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '120');
-    //     } else {
-    //         imagesrcApi($(images[currentImageIndex]).data('value'), '220');
-    //     }
-    // });
-
-    // async function imagesrcApi(bagScanId, command) {
-    //     try {
-    //         const SelectImgResponse = await SelectImgApi({
-    //             bagScanId: bagScanId,
-    //             command: command
-    //         }); // 비동기 함수 호출
-
-    //         if (command === '101') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColor; //정면컬러 101
-    //         } else if (command === '102') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorMineral; //정면무기물 102
-    //         } else if (command === '103') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorOrganism; //정면유기물 103
-    //         } else if (command === '104') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorReversal; //정면반전 104
-    //         } else if (command === '105') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate1; //정면채도 105
-    //         } else if (command === '106') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate2; //정면채도 106
-    //         } else if (command === '107') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate3; //정면채도 107
-    //         } else if (command === '108') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate4; //정면채도 108
-    //         } else if (command === '109') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate5; //정면채도 109
-    //         } else if (command === '110') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate6; //정면채도 110
-    //         } else if (command === '111') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBw; //정면흑백 111
-    //         } else if (command === '112') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwMineral; //정면흑백무기물 112
-    //         } else if (command === '113') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwOrganism; //정면흑백유기물 113
-    //         } else if (command === '114') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwReversal; //정면흑백반전 114
-    //         } else if (command === '115') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate1; //정면흑백채도 115
-    //         } else if (command === '116') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate2; //정면흑백채도 116
-    //         } else if (command === '117') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate3; //정면흑백채도 117
-    //         } else if (command === '118') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate4; // 정면흑백채도118
-    //         } else if (command === '119') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate5; //정면흑백채도 119
-    //         } else if (command === '120') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate6; //정면흑백채도 120
-    //         } else if (command === '201') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColor; //측면컬러 201
-    //         } else if (command === '202') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorMineral; //측면무기물 202
-    //         } else if (command === '203') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorOrganism; //측면유기물 203
-    //         } else if (command === '204') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorReversal; //측면반전 204
-    //         } else if (command === '205') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate1; //측면채도 205
-    //         } else if (command === '206') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate2; //측면채도206
-    //         } else if (command === '207') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate3; //측면채도207
-    //         } else if (command === '208') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate4; //측면채도208
-    //         } else if (command === '209') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate5; //측면채도209
-    //         } else if (command === '210') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate6; //측면채도210
-    //         } else if (command === '211') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBw; //측면흑백211
-    //         } else if (command === '212') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwMinerals; //측면흑백무기물212
-    //         } else if (command === '213') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwOrganism; //측면흑백유기물213
-    //         } else if (command === '214') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwReversal; //측면흑백반전214
-    //         } else if (command === '215') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate1; //측면흑백채도215
-    //         } else if (command === '216') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate2; //측면흑백채도216
-    //         } else if (command === '217') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate3; //측면흑백채도217
-    //         } else if (command === '218') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate4; //측면흑백채도218
-    //         } else if (command === '219') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate5; //측면흑백채도219
-    //         } else if (command === '220') {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate6; //측면흑백채도220
-    //         } else {
-    //             var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColor; //정면컬러 101
-    //         }
-    //         $currentImage = $(images[currentImageIndex]);
-    //         $(this).attr('src', $currentImage.attr('src'));
-    //         $currentImage.attr('src', 'data:image/png;base64,' + image_src);
-    //     } catch (error) {}
-    // }
-
-    // // 이미지 클릭시 preview 이벤트
-    // $(images[currentImageIndex]).click(function (e) {
-    //     PreviewCall(e.target.src);
-    // });
-
-    // var scale = 1;
-    // var isFlipped = false;
-    // var originalWidth = $(images[currentImageIndex]).width();
-
-    // // 확대
-    // $('#color_glas_plus').click(async function () {
-    //     scale += 0.1;
-    //     $(images[currentImageIndex]).css('transform', 'scaleX(' + (isFlipped ? -1 : 1) + ') scale(' + scale + ')');
-    // });
-
-    // // 좌우 반전
-    // $('#color_transform').click(async function () {
-    //     isFlipped = !isFlipped;
-    //     $(images[currentImageIndex]).css('transform', 'scaleX(' + (isFlipped ? -1 : 1) + ') scale(' + scale + ')');
-    // });
-
-    // // 축소
-    // $('#color_glas_minus').click(async function () {
-    //     scale -= 0.1;
-    //     $(images[currentImageIndex]).css('transform', 'scaleX(' + (isFlipped ? -1 : 1) + ') scale(' + scale + ')');
-    // });
-
-    // // 복원
-    // $('#color_restoration').click(async function () {
-    //     scale = 1;
-    //     isFlipped = false;
-    //     $(images[currentImageIndex]).css('transform', 'scaleX(1) scale(1)');
-    //     $(images[currentImageIndex]).width(originalWidth);
-    // });
-
-    // var mouseX = 0;
-    // var mouseY = 0;
-    // var isDragging = false;
-    // var startLeft = 0;
-    // var startTop = 0;
-
-    // $(images[currentImageIndex]).mousedown(function (e) {
-    //     isDragging = true;
-    //     mouseX = e.pageX;
-    //     mouseY = e.pageY;
-    //     startLeft = parseInt($(images[currentImageIndex]).css('left')) || 0;
-    //     startTop = parseInt($(images[currentImageIndex]).css('top')) || 0;
-    // });
-
-    // $(document).mouseup(function (e) {
-    //     isDragging = false;
-    // });
-
-    // $(document).mousemove(function (e) {
-    //     if (isDragging) {
-    //         var x = e.pageX - mouseX;
-    //         var y = e.pageY - mouseY;
-    //         var newLeft = startLeft + x;
-    //         var newTop = startTop + y;
-    //         $(images[currentImageIndex]).css('left', newLeft + 'px');
-    //         $(images[currentImageIndex]).css('top', newTop + 'px');
-    //     }
-    // });
+    // 복원
+    const handleRestore = () => {
+        setScale(1);
+        setFlip(false);
+    };
 
     const copbtc01_Cho = (ImgColorCode) => {
         setCopbtc01(ImgColorCode);
@@ -413,9 +256,12 @@ export const LearningP = (props) => {
         setCopbtc03(ImgColorCode);
     };
 
-    // 가방 선택
-    const handChoiceGoods = (choice) => {
-        setChoiceGoods(choice);
+    // 상단 테이블 - 가방ID 선택
+    const handChoiceGoods = (bagScanId, actionDivName) => {
+        setChoiceGoods(bagScanId);
+        setChoiceActionDivNm(actionDivName);
+        SelectCompleteBagScanId_ApiCall(bagScanId);
+        SelectLearnProblems_ApiCall(bagScanId);
     };
 
     // 반입금지물품 Modal 이벤트처리 Start
@@ -446,7 +292,7 @@ export const LearningP = (props) => {
         <>
             <div className="xbt_content">
                 {/* <!-- xbt_top --> */}
-                <div className="xbt_top">
+                <div className="xbt_top" style={{ zIndex: '9999' }}>
                     {/* <!-- learnct01 --> */}
                     <div className="learnct01">
                         <ul>
@@ -481,97 +327,165 @@ export const LearningP = (props) => {
                         {/* <!-- lrncompl_top --> */}
                         <div className="lrncompl_top conbox_sty">
                             {/* <!-- lrncompl_tit --> */}
-                            <div className="lrncompl_tit">
-                                <h3>미개봉 / 금지</h3>
+                            {choiceActionDivNm === '' ? (
+                                ''
+                            ) : (
+                                <div className="lrncompl_tit">
+                                    <h3>{choiceActionDivNm}</h3>
+                                </div>
+                            )}
+                            <div className="lrncompl_img" id="Front_Images" style={{ height: '100%', overflow: 'hidden' }}>
+                                {choiceGoods === '' ? (
+                                    <div id="container" style={{ height: '455px' }}>
+                                        <img src={loading_bg} alt="" style={{ height: '450px', opacity: '0.05' }} />
+                                    </div>
+                                ) : (
+                                    <div id="container" style={{ height: '455px' }}>
+                                        <button onClick={() => PreviewCall(frontImage)}>
+                                            <img
+                                                id="frontimages"
+                                                src={`data:image/png;base64,${frontImage}`}
+                                                alt=""
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    objectFit: 'contain',
+                                                    transform: `scaleX(${flip ? -1 : 1}) scale(${scale})`
+                                                }}
+                                            />
+                                        </button>
+                                    </div>
+                                )}
                             </div>
-                            <div className="lrncompl_img">
-                                <img src={lrncomp_img01} alt="" style={{ width: '70%' }} />
-                            </div>
+                            <Image
+                                style={{
+                                    display: 'none'
+                                }}
+                                src={`data:image/png;base64,${imgView}`}
+                                preview={{
+                                    visible,
+                                    onVisibleChange: (value) => {
+                                        setVisible(value);
+                                    }
+                                }}
+                            />
                         </div>
                         {/* <!-- lrncompl_bot --> */}
-                        <div className="lrncompl_bot">
+                        <div className="lrncompl_bot" style={{ zIndex: '9999' }}>
                             <div className="learn_btcon">
                                 {/* <!-- learnbtc01 --> */}
                                 <div className="learnbtc01">
                                     <ul>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group101' : 'color_group201'}
                                                 href="#"
-                                                onClick={() => copbtc01_Cho('01', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc01_Cho('01', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('101', choiceGoods)
+                                                        : () => ColorGroup('201', choiceGoods))
+                                                }
                                                 className={copbtc01 === '01' ? 'on' : ''}
                                             >
-                                                <img src={learnc_0101} alt="" data-value={textFrontSide === 'F' ? '101' : '201'} />
+                                                <img src={learnc_0101} alt="" />
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group102' : 'color_group202'}
                                                 href="#"
-                                                onClick={() => copbtc01_Cho('02', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc01_Cho('02', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('102', choiceGoods)
+                                                        : () => ColorGroup('202', choiceGoods))
+                                                }
                                                 className={copbtc01 === '02' ? 'on' : ''}
                                             >
-                                                <img src={learnc_0102} alt="" data-value={textFrontSide === 'F' ? '102' : '202'} />
+                                                <img src={learnc_0102} alt="" />
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group103' : 'color_group203'}
                                                 href="#"
-                                                onClick={() => copbtc01_Cho('03', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc01_Cho('03', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('103', choiceGoods)
+                                                        : () => ColorGroup('203', choiceGoods))
+                                                }
                                                 className={copbtc01 === '03' ? 'on' : ''}
                                             >
-                                                <img src={learnc_0103} alt="" data-value={textFrontSide === 'F' ? '103' : '203'} />
+                                                <img src={learnc_0103} alt="" />
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group104' : 'color_group204'}
                                                 href="#"
-                                                onClick={() => copbtc01_Cho('04', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc01_Cho('04', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('104', choiceGoods)
+                                                        : () => ColorGroup('204', choiceGoods))
+                                                }
                                                 className={copbtc01 === '04' ? 'on' : ''}
                                             >
-                                                <img src={learnc_0104} alt="" data-value={textFrontSide === 'F' ? '104' : '204'} />
+                                                <img src={learnc_0104} alt="" />
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group111' : 'color_group211'}
                                                 href="#"
-                                                onClick={() => copbtc01_Cho('05', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc01_Cho('05', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('105', choiceGoods)
+                                                        : () => ColorGroup('205', choiceGoods))
+                                                }
                                                 className={copbtc01 === '05' ? 'on' : ''}
                                             >
-                                                <img src={learnc_0201} alt="" data-value={textFrontSide === 'F' ? '111' : '211'} />
+                                                <img src={learnc_0201} alt="" />
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group112' : 'color_group212'}
                                                 href="#"
-                                                onClick={() => copbtc01_Cho('06', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc01_Cho('06', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('106', choiceGoods)
+                                                        : () => ColorGroup('206', choiceGoods))
+                                                }
                                                 className={copbtc01 === '06' ? 'on' : ''}
                                             >
-                                                <img src={learnc_0202} alt="" data-value={textFrontSide === 'F' ? '112' : '212'} />
+                                                <img src={learnc_0202} alt="" />
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group113' : 'color_group213'}
                                                 href="#"
-                                                onClick={() => copbtc01_Cho('07', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc01_Cho('07', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('107', choiceGoods)
+                                                        : () => ColorGroup('207', choiceGoods))
+                                                }
                                                 className={copbtc01 === '07' ? 'on' : ''}
                                             >
-                                                <img src={learnc_0203} alt="" data-value={textFrontSide === 'F' ? '113' : '213'} />
+                                                <img src={learnc_0203} alt="" />
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group114' : 'color_group214'}
                                                 href="#"
-                                                onClick={() => copbtc01_Cho('08', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc01_Cho('08', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('108', choiceGoods)
+                                                        : () => ColorGroup('208', choiceGoods))
+                                                }
                                                 className={copbtc01 === '08' ? 'on' : ''}
                                             >
-                                                <img src={learnc_0204} alt="" data-value={textFrontSide === 'F' ? '114' : '214'} />
+                                                <img src={learnc_0204} alt="" />
                                             </a>
                                         </li>
                                     </ul>
@@ -581,124 +495,172 @@ export const LearningP = (props) => {
                                     <ul>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group105' : 'color_group205'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('09', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('09', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('109', choiceGoods)
+                                                        : () => ColorGroup('209', choiceGoods))
+                                                }
                                                 className={copbtc02 === '09' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic01_01" data-value={textFrontSide === 'F' ? '105' : '205'}></span>
+                                                <span className="brig_ic01_01"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group106' : 'color_group206'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('10', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('10', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('110', choiceGoods)
+                                                        : () => ColorGroup('210', choiceGoods))
+                                                }
                                                 className={copbtc02 === '10' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic01_02" data-value={textFrontSide === 'F' ? '106' : '206'}></span>
+                                                <span className="brig_ic01_02"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group107' : 'color_group207'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('11', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('11', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('111', choiceGoods)
+                                                        : () => ColorGroup('211', choiceGoods))
+                                                }
                                                 className={copbtc02 === '11' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic01_03" data-value={textFrontSide === 'F' ? '107' : '207'}></span>
+                                                <span className="brig_ic01_03"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group108' : 'color_group208'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('12', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('12', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('112', choiceGoods)
+                                                        : () => ColorGroup('212', choiceGoods))
+                                                }
                                                 className={copbtc02 === '12' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic01_04" data-value={textFrontSide === 'F' ? '108' : '208'}></span>
+                                                <span className="brig_ic01_04"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group109' : 'color_group209'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('13', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('13', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('113', choiceGoods)
+                                                        : () => ColorGroup('213', choiceGoods))
+                                                }
                                                 className={copbtc02 === '13' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic01_05" data-value={textFrontSide === 'F' ? '109' : '209'}></span>
+                                                <span className="brig_ic01_05"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group110' : 'color_group210'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('14', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('14', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('114', choiceGoods)
+                                                        : () => ColorGroup('214', choiceGoods))
+                                                }
                                                 className={copbtc02 === '14' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic01_06" data-value={textFrontSide === 'F' ? '110' : '210'}></span>
+                                                <span className="brig_ic01_06"></span>
                                             </a>
                                         </li>
                                     </ul>
                                     <ul>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group115' : 'color_group215'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('15', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('15', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('115', choiceGoods)
+                                                        : () => ColorGroup('215', choiceGoods))
+                                                }
                                                 className={copbtc02 === '15' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic02_01" data-value={textFrontSide === 'F' ? '115' : '215'}></span>
+                                                <span className="brig_ic02_01"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group116' : 'color_group216'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('16', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('16', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('116', choiceGoods)
+                                                        : () => ColorGroup('216', choiceGoods))
+                                                }
                                                 className={copbtc02 === '16' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic02_02" data-value={textFrontSide === 'F' ? '116' : '216'}></span>
+                                                <span className="brig_ic02_02"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group117' : 'color_group217'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('17', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('17', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('117', choiceGoods)
+                                                        : () => ColorGroup('217', choiceGoods))
+                                                }
                                                 className={copbtc02 === '17' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic02_03" data-value={textFrontSide === 'F' ? '117' : '217'}></span>
+                                                <span className="brig_ic02_03"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group118' : 'color_group218'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('18', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('18', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('118', choiceGoods)
+                                                        : () => ColorGroup('218', choiceGoods))
+                                                }
                                                 className={copbtc02 === '18' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic02_04" data-value={textFrontSide === 'F' ? '118' : '218'}></span>
+                                                <span className="brig_ic02_04"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group119' : 'color_group219'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('19', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('19', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('119', choiceGoods)
+                                                        : () => ColorGroup('219', choiceGoods))
+                                                }
                                                 className={copbtc02 === '19' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic02_05" data-value={textFrontSide === 'F' ? '119' : '219'}></span>
+                                                <span className="brig_ic02_05"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                id={textFrontSide === 'F' ? 'color_group120' : 'color_group220'}
                                                 href="#"
-                                                onClick={() => copbtc02_Cho('20', learnbagScanId)}
+                                                onClick={
+                                                    (() => copbtc02_Cho('20', choiceGoods),
+                                                    textFrontSide === 'F'
+                                                        ? () => ColorGroup('120', choiceGoods)
+                                                        : () => ColorGroup('220', choiceGoods))
+                                                }
                                                 className={copbtc02 === '20' ? 'on' : ''}
                                             >
-                                                <span className="brig_ic02_06" data-value={textFrontSide === 'F' ? '120' : '220'}></span>
+                                                <span className="brig_ic02_06"></span>
                                             </a>
                                         </li>
                                     </ul>
@@ -711,7 +673,7 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 id="color_glas_plus"
-                                                onClick={() => copbtc03_Cho('0')}
+                                                onClick={(() => copbtc03_Cho('0'), handleZoomIn)}
                                                 className={copbtc03 === '0' ? 'on' : ''}
                                             >
                                                 <img src={glas_plus} alt="확대" title="확대" />
@@ -722,7 +684,7 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 id="color_transform"
-                                                onClick={() => copbtc03_Cho('1')}
+                                                onClick={(() => copbtc03_Cho('1'), handleFlip)}
                                                 className={copbtc03 === '1' ? 'on' : ''}
                                             >
                                                 <img src={transform} alt="좌우반전" title="좌우반전" />
@@ -733,7 +695,7 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 id="color_glas_minus"
-                                                onClick={() => copbtc03_Cho('2')}
+                                                onClick={(() => copbtc03_Cho('2'), handleZoomOut)}
                                                 className={copbtc03 === '2' ? 'on' : ''}
                                             >
                                                 <img src={glas_minus} alt="축소" title="축소" />
@@ -744,7 +706,7 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 id="color_restoration"
-                                                onClick={() => copbtc03_Cho('3')}
+                                                onClick={(() => copbtc03_Cho('3'), handleRestore)}
                                                 className={copbtc03 === '3' ? 'on' : ''}
                                             >
                                                 <img src={restoration} alt="복원" title="복원" />
@@ -752,9 +714,11 @@ export const LearningP = (props) => {
                                         </li>
                                     </ul>
                                 </div>
-                                {/* <!-- learnbtc06 --> */}
-                                <div className="learnbtc06">
-                                    <img src={learning_bimg01} alt="" />
+                                {/* <!-- learnbtc06 측면 이미지 --> */}
+                                <div className="learnbtc06" id="Side_Images" style={{ alignItems: 'center', justifyContent: 'center' }}>
+                                    <button onClick={() => FrontSide_Change(textFrontSide)}>
+                                        <img src={`data:image/png;base64,${sideImage}`} alt="" style={{ width: '100%', height: '75px' }} />
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -782,7 +746,11 @@ export const LearningP = (props) => {
                                     <tbody>
                                         {learningCompleteData?.learningProblemList?.map((t, i) => {
                                             return (
-                                                <tr className={choiceGoods === i ? 'on' : ''} key={i} onClick={() => handChoiceGoods(i)}>
+                                                <tr
+                                                    className={choiceGoods === i ? 'on' : ''}
+                                                    key={i}
+                                                    onClick={() => handChoiceGoods(t.bagScanId, t.actionDivName)}
+                                                >
                                                     <td style={{ width: '11%' }}>{i + 1}</td>
                                                     <td style={{ width: '21%' }}>{t.bagScanId}</td>
                                                     <td style={{ width: '21%' }}>{t.actionDivName}</td>
@@ -800,8 +768,8 @@ export const LearningP = (props) => {
                             </div>
                         </div>
                         {/* <!-- lrncompr_con02 --> */}
-                        <div className="lrncompr_con02 conbox_sty conbox_pd01">
-                            <img src={lrncomp_img02} alt="" style={{ width: '50%' }} />
+                        <div className="lrncompr_con02 conbox_sty conbox_pd01" id="Real_Img">
+                            <img src={`data:image/png;base64,${completeBagScanIdData.imgReal}`} alt="" style={{ width: '50%' }} />
                         </div>
                         {/* <!-- lrncompr_con03 --> */}
                         <div className="lrncompr_con03 conbox_sty conbox_pd01">
@@ -820,66 +788,16 @@ export const LearningP = (props) => {
                             <div className="con_table height110 scrollbar">
                                 <table className="table">
                                     <tbody>
-                                        <tr className="on">
-                                            <td>1</td>
-                                            <td>머리 클립형 나이프</td>
-                                            <td>Opened</td>
-                                            <td>Restricte</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>노트북가방</td>
-                                            <td>Unopened</td>
-                                            <td>Pass</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>스템플러 심</td>
-                                            <td>Unopened</td>
-                                            <td>Pass</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>눈썹칼</td>
-                                            <td>Unopened</td>
-                                            <td>Pass</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>팬티</td>
-                                            <td>Unopened</td>
-                                            <td>Pass</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>머리 클립형 나이프</td>
-                                            <td>Opened</td>
-                                            <td>Restricte</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>노트북가방</td>
-                                            <td>Unopened</td>
-                                            <td>Pass</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>스템플러 심</td>
-                                            <td>Unopened</td>
-                                            <td>Pass</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>눈썹칼</td>
-                                            <td>Unopened</td>
-                                            <td>Pass</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>팬티</td>
-                                            <td>Unopened</td>
-                                            <td>Pass</td>
-                                        </tr>
+                                        {selectLearnProblemsData?.map((pd, i) => {
+                                            return (
+                                                <tr className="on" key={i}>
+                                                    <td>1</td>
+                                                    <td>머리 클립형 나이프</td>
+                                                    <td>Opened</td>
+                                                    <td>Restricte</td>
+                                                </tr>
+                                            );
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
