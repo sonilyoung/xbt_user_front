@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Image } from 'antd';
 import 'antd/dist/antd.css';
-import $ from 'jquery';
-import lrncomp_img01 from '../../images/learning/lrncomp_img01.jpg';
-import lrncomp_img02 from '../../images/learning/lrncomp_img02.png';
+
 import learnc_0101 from '../../images/learning/learnc_ic01_01.png';
 import learnc_0102 from '../../images/learning/learnc_ic01_02.png';
 import learnc_0103 from '../../images/learning/learnc_ic01_03.png';
@@ -25,7 +23,8 @@ import loading_bg from '../../images/common/bg.png';
 import {
     useSelectLearningCompleteMutation,
     useSelectCommonLearningImgMutation,
-    useSelectCommonColorImgMutation
+    useSelectCommonColorImgMutation,
+    useSelectLearnProblemsResultMutation
 } from '../../hooks/api/CommonManagement/CommonManagement';
 
 // 반입금지물품 페이지
