@@ -100,7 +100,6 @@ export const LearningP = (props) => {
             bagScanId: bagscanid,
             command: command
         });
-        console.log(bagscanid, command);
         command === '101'
             ? setFrontImage(CompleteColorImgResponse?.data?.RET_DATA.imgFrontColor) //정면컬러 101
             : command === '102'
@@ -213,7 +212,12 @@ export const LearningP = (props) => {
     };
 
     const ColorGroup = (command, bagscanid) => {
-        SelectCompleteColorImg_ApiCall(command, bagscanid);
+        bagscanid !== null
+            ? SelectCompleteColorImg_ApiCall(command, bagscanid)
+            : Modal.warning({
+                  title: 'Warning',
+                  content: '가방ID가 선택되지 않았습니다.'
+              });
     };
 
     // 확대
