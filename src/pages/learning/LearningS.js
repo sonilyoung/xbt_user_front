@@ -54,10 +54,10 @@ export const LearningS = (props) => {
 
     const [learnbagScanId, setLearnbagScanId] = useState([]); // 가방아이디
     const [ImageCount, setImageCount] = useState('0'); // 출제 문항 카운트
-    const [ImageTotal, setImageTotal] = useState('0'); // 출제 문항의 총수량
+    const [ImageTotal, setImageTotal] = useState('00'); // 출제 문항의 총수량
 
     const [textFrontSide, setTextFrontSide] = useState('F'); // 정면/측면 선택 설정
-    const [state, setState] = useState({ seconds: 0, minutes: 0 }); // 카운트
+    const [state, setState] = useState({ seconds: '00', minutes: '00' }); // 카운트
 
     const [imgView, setImgView] = useState(); // Preview 이미지 설장
     const [loading, setLoading] = useState(false); // 로딩
@@ -93,12 +93,13 @@ export const LearningS = (props) => {
 
     // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리 Api Call
     const UpdateLearnAnswer_ApiCall = async (userActionDiv, bagScanId) => {
+        console.log(bagScanId, userActionDiv);
         const UpdateLearnAnswerResponse = await UpdateLearnAnswerApi({
             userActionDiv: userActionDiv, // 사용자가 선택한 정답
             eduType: 'learn',
             bagScanId: bagScanId //xray 가방스캔 아이디
         });
-        //console.log(UpdateLearnAnswerResponse?.data?.RET_CODE);
+        // console.log(UpdateLearnAnswerResponse?.data?.RET_CODE);
         setUpdateLearnAnswerData(UpdateLearnAnswerResponse?.data?.RET_CODE);
     };
 
@@ -107,7 +108,7 @@ export const LearningS = (props) => {
         const EndLearningResponse = await EndLearningApi({
             eduType: 'learn'
         });
-        //console.log(EndLearningResponse?.data?.RET_DATA);
+        console.log(EndLearningResponse?.data?.RET_DATA);
         setEndLearningData(EndLearningResponse?.data?.RET_DATA);
 
         if (EndLearningResponse?.data?.RET_DATA?.passYn === 'Y') {
@@ -330,26 +331,27 @@ export const LearningS = (props) => {
             // Pass, Open, Prohibited, Risricted 버튼 눌렀을 때 처리할 부분
             // 다음 이미지로 넘어감
             // 미개봉/금지 Prohibited [1]
+            // learn01_Open_Pass -4, learn01_pass-2, learn01_Open_Risricted-3, learn01_prohibited-1
             $('#learn01_prohibited').click(function () {
-                UpdateLearnAnswer_ApiCall('1', bag_id[current_image]);
+                UpdateLearnAnswer_ApiCall($(this).data('value'), bag_id[current_image]);
                 learn01_btn();
             });
 
             // 미개봉/통과 Pass [2]
             $('#learn01_pass').click(function () {
-                UpdateLearnAnswer_ApiCall('2', bag_id[current_image]);
+                UpdateLearnAnswer_ApiCall($(this).data('value'), bag_id[current_image]);
                 learn01_btn();
             });
 
             // 개봉/제한 Open/Risricted [3]
             $('#learn01_Open_Risricted').click(function () {
-                UpdateLearnAnswer_ApiCall('3', bag_id[current_image]);
+                UpdateLearnAnswer_ApiCall($(this).data('value'), bag_id[current_image]);
                 learn01_btn();
             });
 
             // 개봉/통과 Open/Pass [4]
             $('#learn01_Open_Pass').click(function () {
-                UpdateLearnAnswer_ApiCall('4', bag_id[current_image]);
+                UpdateLearnAnswer_ApiCall($(this).data('value'), bag_id[current_image]);
                 learn01_btn();
             });
             //======================>
@@ -1152,6 +1154,7 @@ export const LearningS = (props) => {
                                             className="lnbtc_btn lnbtc_btnon next"
                                             id="learn01_Open_Pass"
                                             type="button"
+                                            data-value="4"
                                             // onClick={() => answerEvent('4')}
                                         >
                                             <span>
@@ -1161,12 +1164,7 @@ export const LearningS = (props) => {
                                         </button>
                                     ) : (
                                         // 미개봉/통과 pass [2]
-                                        <button
-                                            className="lnbtc_btn lnbtc_btnon next"
-                                            id="learn01_pass"
-                                            type="button"
-                                            // onClick={() => answerEvent('2')}
-                                        >
+                                        <button className="lnbtc_btn lnbtc_btnon next" id="learn01_pass" type="button" data-value="2">
                                             <span>
                                                 <img src={pass} alt="" />
                                             </span>
@@ -1190,12 +1188,7 @@ export const LearningS = (props) => {
                                 <li>
                                     {answerType === 'OPEN' ? (
                                         // 개봉/제한 Open/Resricted [3]
-                                        <button
-                                            className="lnbtc_btn lnbtc_btnon"
-                                            id="learn01_Open_Risricted"
-                                            type="button"
-                                            // onClick={() => answerEvent('3')}
-                                        >
+                                        <button className="lnbtc_btn lnbtc_btnon" id="learn01_Open_Risricted" type="button" data-value="3">
                                             <span>
                                                 <img src={prohibited} alt="" />
                                             </span>
@@ -1203,12 +1196,7 @@ export const LearningS = (props) => {
                                         </button>
                                     ) : (
                                         // 미개봉/금지 prohibited [1]
-                                        <button
-                                            className="lnbtc_btn lnbtc_btnon"
-                                            id="learn01_prohibited"
-                                            type="button"
-                                            // onClick={() => answerEvent('1')}
-                                        >
+                                        <button className="lnbtc_btn lnbtc_btnon" id="learn01_prohibited" type="button" data-value="1">
                                             <span>
                                                 <img src={prohibited} alt="" />
                                             </span>

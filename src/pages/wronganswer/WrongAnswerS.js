@@ -1,18 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Button, Space, Modal } from 'antd';
+import { Modal, Spin, Image } from 'antd';
 import 'antd/dist/antd.css';
-
-import learning_01 from '../../images/learning/learning_01.jpg';
-import learning_02 from '../../images/learning/learning_02.jpg';
-import learning_03 from '../../images/learning/learning_03.jpg';
-import learning_04 from '../../images/learning/learning_04.jpg';
-import learning_05 from '../../images/learning/learning_05.jpg';
-import learning_0101 from '../../images/learning/learning_01_1.jpg';
-import learning_0201 from '../../images/learning/learning_02_1.jpg';
-import learning_0301 from '../../images/learning/learning_03_1.jpg';
-import learning_0401 from '../../images/learning/learning_04_1.jpg';
-import learning_0501 from '../../images/learning/learning_05_1.jpg';
+import $ from 'jquery';
 import learnc_0101 from '../../images/learning/learnc_ic01_01.png';
 import learnc_0102 from '../../images/learning/learnc_ic01_02.png';
 import learnc_0103 from '../../images/learning/learnc_ic01_03.png';
@@ -35,32 +25,101 @@ import fail_color from '../../images/learning/fail_color.png';
 
 // 반입금지물품 페이지
 import { Prohibited } from 'pages/prohibited';
-import { LearningP } from 'pages/learning/LearningP';
 
-import $ from 'jquery';
+// 오답문제풀이/정답정보내역
+import { WrongAnswerP } from 'pages/wronganswer/WrongAnswerP';
+
+// 학습자와 오답문제풀이정보조회, 의사색체 이미지 조회, pass, open, (prohibited, resricted), 합격/불합격 여부
+import {
+    useSelectWrongAnswerMutation,
+    useSelectImgMutation,
+    useUpdateWrongAnswerMutation,
+    useEndWrongAnswerMutation
+} from '../../hooks/api/WrongAnswerManagement/WrongAnswerManagement';
 
 export const WrongAnswerS = (props) => {
-    const { confirm } = Modal;
+    const { confirm } = Modal; // Modal
+    const [visible, setVisible] = useState(false); // 이미지 클릭시
+
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
     const [PrintModalOpen, setPrintModalOpen] = useState(false); // 오답문제풀이 결과 정보 Modal창
     const [PassModalOpen, setPassModalOpen] = useState(false); // 합격 Modal창
     const [FailModalOpen, setFailModalOpen] = useState(false); // 불합격 Modal창
     const [CompleteModalOpen, setCompleteModalOpen] = useState(false); // 완료 Modal창
 
-    const [copbtc01, setCopbtc01] = useState();
-    const [copbtc02, setCopbtc02] = useState();
-    const [copbtc03, setCopbtc03] = useState();
-    const [answerSubmit, setAnswerSubmit] = useState();
-    const [learnStart, setLearnStart] = useState('N');
-    const [moveStop, setMoveStop] = useState('move');
+    const [copbtc01, setCopbtc01] = useState(); // 의사색체 첫번째 블럭
+    const [copbtc02, setCopbtc02] = useState(); // 의사색체 두번째 블럭
+    const [copbtc03, setCopbtc03] = useState(); // 의사색체 세번째 블럭
+    const [answerType, setAnswerType] = useState(''); // 정답의 Open 설정
 
-    const [slide_speed, setSlide_speed] = useState(5);
-    const [slide_time, setSlide_time] = useState(10);
-
+    const [learnbagScanId, setLearnbagScanId] = useState([]); // 가방아이디
     const [ImageCount, setImageCount] = useState('0'); // 출제 문항 카운트
-    const [ImageTotal, setImageTotal] = useState('0'); // 출제 문항의 총수량
+    const [ImageTotal, setImageTotal] = useState('00'); // 출제 문항의 총수량
 
-    const [state, setState] = useState({ seconds: 0, minutes: 0 });
+    const [textFrontSide, setTextFrontSide] = useState('F'); // 정면/측면 선택 설정
+    const [state, setState] = useState({ seconds: '00', minutes: '00' }); // 카운트
+
+    const [imgView, setImgView] = useState(); // Preview 이미지 설장
+    const [loading, setLoading] = useState(false); // 로딩
+
+    // 학습자와 오답문제풀이정보조회 api 정보
+    const [WrongAnswerApi] = useSelectWrongAnswerMutation();
+    const [wrongAnswerData, setWrongAnswerData] = useState([]);
+
+    // 이미지조회 api 정보
+    const [SelectImgApi] = useSelectImgMutation();
+
+    // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리 api 정보
+    const [UpdateWrongAnswerApi] = useUpdateWrongAnswerMutation();
+    const [updateWrongAnswerData, setUpdateWrongAnswerData] = useState();
+
+    // 합격/불합격 api 정보
+    const [EndWrongAnswerApi] = useEndWrongAnswerMutation();
+    const [endWrongAnswerData, setEndWrongAnswerData] = useState();
+
+    // =====================================================================================
+    // API 호출 Start
+    // =====================================================================================
+    // 학습자와 오답문제풀이정보조회 Api Call
+    const WrongAnswer_ApiCall = async () => {
+        const WrongAnswerResponse = await WrongAnswerApi({
+            eduType: 'learn'
+        });
+        setWrongAnswerData(WrongAnswerResponse?.data?.RET_DATA);
+        setImageTotal(WrongAnswerResponse?.data?.RET_DATA.WrongAnswerProblemList.length); // 총 문항 수
+        setState({ seconds: 0, minutes: WrongAnswerResponse?.data?.RET_DATA?.timeLimit }); // 카운트
+        setLoading(false);
+    };
+
+    // PASS, OPEN, (PROHIBITED, RESRICTED) 정답처리 Api Call
+    const UpdateWrongAnswer_ApiCall = async (userActionDiv, bagScanId) => {
+        console.log(bagScanId, userActionDiv);
+        const UpdateWrongAnswerResponse = await UpdateWrongAnswerApi({
+            userActionDiv: userActionDiv, // 사용자가 선택한 정답
+            eduType: 'learn',
+            bagScanId: bagScanId //xray 가방스캔 아이디
+        });
+        // console.log(UpdateWrongAnswerResponse?.data?.RET_CODE);
+        setUpdateWrongAnswerData(UpdateWrongAnswerResponse?.data?.RET_CODE);
+    };
+
+    // 오답문제풀이 합격불합격 Api Call
+    const EndWrongAnswer_ApiCall = async () => {
+        const EndWrongAnswerResponse = await EndWrongAnswerApi({
+            eduType: 'learn'
+        });
+        console.log(EndWrongAnswerResponse?.data?.RET_DATA);
+        setEndWrongAnswerData(EndWrongAnswerResponse?.data?.RET_DATA);
+
+        if (EndWrongAnswerResponse?.data?.RET_DATA?.passYn === 'Y') {
+            setPassModalOpen(true); // 합격 모달
+        } else {
+            setFailModalOpen(true); // 불합격 모달
+        }
+    };
+    // =====================================================================================
+    // API 호출 End
+    // =====================================================================================
 
     let time_out; //이미지가 움직임 예약
     let animation; //이미지가 움직이는 상태 저장
@@ -74,220 +133,558 @@ export const WrongAnswerS = (props) => {
         var isPaused = false; //일시정지 상태 저장
         var current_image = 0; //현재 움직이는 이미지가 몇번째인가
         var start_count = 0;
+        var imageslength = ImageTotal;
 
         var origin_img = [];
         var thum_img = [];
+        var bag_id = [];
         $('#learn01_img img').each(function (i) {
             origin_img[i] = $(this);
             thum_img[i] = $(this).data('thum');
+            bag_id[i] = $(this).data('value');
         });
         var images = origin_img; //이미지 목록(배열)
-        var move_timer = slide_time; //움직이는 시간(ms, 1/1000초)
-        var move_distance = slide_speed; //움직일 거리
+        var move_timer = WrongAnswerData.slideSpeed; //움직이는 시간(ms, 1/1000초) (slide_time / WrongAnswerData.timeLimit)
+        var move_distance = WrongAnswerData.slideSpeed; //움직일 거리 (slide_speed / WrongAnswerData.slideSpeed)
         is_learn01_play = true;
 
-        const intervalId = setInterval(() => {
-            setState((prevState) => {
-                const seconds = prevState.seconds + 1;
-                const minutes = prevState.minutes + Math.floor(seconds / 60);
-                return { seconds: seconds % 60, minutes };
+        if (imageslength == 0) {
+            Modal.warning({
+                title: 'Warning',
+                content: '출제된 문제가 없습니다.'
             });
-        }, 1000);
 
-        // 출제 문항 총수량
-        setImageTotal(images.length);
+            clearTimeout(animation);
+            clearTimeout(time_out);
+            clearInterval(position);
+            $('#learn01_bimg').hide();
+            $('#myRange').css('visibility', 'hidden');
+            is_learn01_play = false;
+        } else {
+            const intervalId = setInterval(() => {
+                setState((prevState) => {
+                    let seconds = prevState.seconds - 1;
+                    let minutes = prevState.minutes;
 
-        //하단 바 초기화 작업
-        //$("#myRange").removeAttr("disabled");
-        $('#myRange').attr('max', $('#learn01_img').width());
-        $('#myRange').val($('#learn01_img').width());
-        $('#myRange').css('visibility', 'visible');
+                    if (seconds < 0) {
+                        seconds = 59;
+                        minutes = minutes - 1;
+                    }
 
-        $('#learn01_bimg').show();
+                    if (minutes === 0 && seconds === 0) {
+                        clearInterval(intervalId);
+                        clearTimeout(animation);
+                        clearTimeout(time_out);
+                        clearInterval(position);
+                        // clearInterval(intervalId);
+                        $('#learn01_bimg').hide();
+                        $('#myRange').css('visibility', 'hidden');
+                        is_learn01_play = false;
+                        setCompleteModalOpen(true); //오답문제풀이 종료 Modal
+                    }
 
-        //시작 버튼 비활성화
-        //브라우저에 따라 정상작동 되지 않는 경우가 있어
-        //시작 기능이 있는 버튼을 숨기고, 기능이 없는 버튼 노출
-        $('#learn01_start').hide();
-        $('#learn01_start_on').show();
-        $('#close-first-modal').hide();
-        $('#close-first-modal_on').show();
+                    return { seconds, minutes };
+                });
+            }, 1000);
 
-        //이미지를 유지한 상태로 이동 시작
-        function moveImage() {
-            $currentImage = $(images[current_image]);
-            animation = $currentImage.animate({ left: '-=' + move_distance }, move_timer, function () {
-                time_out = setTimeout(image_position, move_timer);
-            });
-        }
+            //하단 바 초기화 작업
+            $('#myRange').attr('max', $('#learn01_img').width());
+            $('#myRange').val($('#learn01_img').width());
+            $('#myRange').css('visibility', 'visible');
+            $('#learn01_bimg').show();
 
-        //기존 이미지 제거하고 이동 시작
-        //마지막 이미지가 끝났을 경우 시험 종료
-        function resetImage() {
-            $currentImage = $(images[current_image]);
-            if (start_count > 0) {
-                $currentImage.remove();
-                //$currentImage.hide();
-                current_image++;
-            }
+            //시작 버튼 비활성화
+            //브라우저에 따라 정상작동 되지 않는 경우가 있어
+            //시작 기능이 있는 버튼을 숨기고, 기능이 없는 버튼 노출
+            $('#learn01_start').hide();
+            $('#learn01_start_on').show();
+            $('#close-first-modal').hide();
+            $('#close-first-modal_on').show();
 
-            // 현재 문항 수량
-            if (start_count === images.length) {
-                setImageCount(start_count);
-            } else {
-                setImageCount(start_count + 1);
-            }
-
-            //current_image++;
-            if (current_image >= images.length) {
-                alert('시험이 종료되었습니다.');
-                clearTimeout(animation);
-                clearTimeout(time_out);
-                clearInterval(position);
-                clearInterval(intervalId);
-                $('#learn01_bimg').hide();
-                $('#myRange').css('visibility', 'hidden');
-                $('#close-first-modal').show();
-                $('#close-first-modal_on').hide();
-                is_learn01_play = false;
-                // 합격, 불합격 모달창 띄움 Strart
-                setPassModalOpen(true);
-                setFailModalOpen(true);
-                // 합격, 불합격 모달창 띄움 End
-            } else {
-                var $nextImage = $(images[current_image]);
-                $nextImage.css('right', containerWidth);
-                $('#learn01_bimg').attr('src', $nextImage.data('thum'));
-                animation = $nextImage.animate({ left: '-=' + move_distance }, move_timer, function () {
+            //이미지를 유지한 상태로 이동 시작
+            function moveImage() {
+                $currentImage = $(images[current_image]);
+                animation = $currentImage.animate({ left: '-=' + move_distance }, move_timer, function () {
                     time_out = setTimeout(image_position, move_timer);
                 });
             }
-            start_count++;
-        }
 
-        //이미지 이동 진행
-        //이미지가 화면 밖으로 사라질 경우 resetImage() 호출
-        //왼쪽에서 오른쪽으로 이동
-        function image_position() {
-            $currentImage = $(images[current_image]);
-            var imageWidth = $currentImage.width();
-            var image_left = $currentImage.position().left;
+            //기존 이미지 제거하고 이동 시작
+            //마지막 이미지가 끝났을 경우 시험 종료
+            function resetImage() {
+                $currentImage = $(images[current_image]);
+                if (start_count > 0) {
+                    $currentImage.remove();
+                    current_image++;
+                }
 
-            if (image_left > containerWidth + 50) {
-                clearInterval(animation);
-                resetImage();
-            } else {
-                if (is_learn01_play) {
-                    animation = $currentImage.animate({ left: '+=' + move_distance }, move_timer, function () {
+                // 현재 문항 수량
+                if (start_count === images.length) {
+                    setImageCount(start_count);
+                } else {
+                    setImageCount(start_count + 1);
+                }
+
+                if (current_image >= images.length) {
+                    setCompleteModalOpen(true);
+                    clearTimeout(animation);
+                    clearTimeout(time_out);
+                    clearInterval(position);
+                    clearInterval(intervalId);
+                    $('#learn01_bimg').hide();
+                    $('#myRange').css('visibility', 'hidden');
+                    is_learn01_play = false;
+                } else {
+                    var $nextImage = $(images[current_image]);
+                    $nextImage.css('right', containerWidth);
+                    $('#learn01_bimg').attr('src', $nextImage.data('thum'));
+                    animation = $nextImage.animate({ left: '-=' + move_distance }, move_timer, function () {
                         time_out = setTimeout(image_position, move_timer);
                     });
                 }
+                start_count++;
+                setLearnbagScanId(bag_id[current_image]);
             }
-        }
-        //오른쪽에서 왼쪽으로 이동
-        // function image_position() {
-        //     $currentImage = $(images[current_image]);
-        //     var imageWidth = $currentImage.width();
-        //     var image_left = $currentImage.position().left;
 
-        //     console.log(containerWidth);
-        //     if (image_left > containerWidth + 50) {
-        //         // if (image_left < -(imageWidth + 50)) {
-        //         clearInterval(animation);
-        //         //current_image++;
-        //         resetImage();
-        //     } else {
-        //         if (is_learn01_play) {
-        //             animation = $currentImage.animate({ left: '+=' + move_distance }, move_timer, function () {
-        //                 time_out = setTimeout(image_position, move_timer);
-        //             });
-        //         }
-        //     }
-        // }
+            //이미지 이동 진행
+            //이미지가 화면 밖으로 사라질 경우 resetImage() 호출
+            //왼쪽에서 오른쪽으로 이동
+            function image_position() {
+                $currentImage = $(images[current_image]);
+                var image_left = $currentImage.position().left;
+                if (image_left > containerWidth + 50) {
+                    clearInterval(animation);
+                    resetImage();
+                } else {
+                    if (is_learn01_play) {
+                        animation = $currentImage.animate({ left: '+=' + move_distance }, move_timer, function () {
+                            time_out = setTimeout(image_position, move_timer);
+                        });
+                    }
+                }
+            }
 
-        //하단 버튼과 이미지의 위치를 동기화
-        function set_position() {
-            $currentImage = $(images[current_image]);
-            var imageWidth = $currentImage.width();
-            var currentPosition = $currentImage.position().left + imageWidth / 2;
-            $('#myRange').val(currentPosition);
-        }
-        resetImage();
-        //moveImage();
-        position = setInterval(set_position, 10);
-
-        //하단 버튼을 드래그하여 이미지 위치 이동
-        $('#myRange').on('input', function () {
-            if (isPaused) {
-                position = $('#myRange').val();
+            //하단 버튼과 이미지의 위치를 동기화
+            function set_position() {
                 $currentImage = $(images[current_image]);
                 var imageWidth = $currentImage.width();
-                var image_left = Number(position) - imageWidth / 2;
-                $currentImage.attr('style', 'left:' + image_left + 'px');
+                var currentPosition = $currentImage.position().left + imageWidth / 2;
+                $('#myRange').val(currentPosition);
             }
-        });
+            resetImage();
+            position = setInterval(set_position, 10);
 
-        //진행중일때 Stop 버튼을 누르면 일시정지
-        //일시정지일때 Stop 버튼을 누르면 다시재생
-        $('#learn01_stop').click(function () {
-            if (is_learn01_play) {
-                if (!isPaused) {
-                    isPaused = true;
+            //하단 버튼을 드래그하여 이미지 위치 이동
+            $('#myRange').on('input', function () {
+                if (isPaused) {
+                    position = $('#myRange').val();
+                    $currentImage = $(images[current_image]);
+                    var imageWidth = $currentImage.width();
+                    var image_left = Number(position) - imageWidth / 2;
+                    $currentImage.attr('style', 'left:' + image_left + 'px');
+                }
+            });
+
+            //진행중일때 Stop 버튼을 누르면 일시정지
+            //일시정지일때 Stop 버튼을 누르면 다시재생
+            $('#learn01_stop').click(function () {
+                if (is_learn01_play) {
+                    if (!isPaused) {
+                        isPaused = true;
+                        $(images[current_image]).stop();
+                        clearTimeout(animation);
+                        clearTimeout(time_out);
+                        clearInterval(position);
+                        $('#learn01_stop').addClass('lnbtc_btnon');
+                        $('#myRange').removeAttr('disabled');
+                        $('#fullscreen').removeAttr('disabled');
+                    } else {
+                        isPaused = false;
+                        moveImage();
+                        $('#learn01_stop').removeClass('lnbtc_btnon');
+                        position = setInterval(set_position, 10);
+                        $('#myRange').attr('disabled', '');
+                        $('#fullscreen').attr('disabled', '');
+                    }
+                }
+            });
+
+            //Pass, Open, Prohibited 눌렀을 때 다음 이미지 보이게
+            function learn01_btn() {
+                if (is_learn01_play) {
+                    isPaused = false;
+                    // open 초기화 (RESRICTED -> PROHIBITED)
+                    setAnswerType('');
+                    $('#learn01_stop').removeClass('lnbtc_btnon');
                     $(images[current_image]).stop();
                     clearTimeout(animation);
                     clearTimeout(time_out);
                     clearInterval(position);
-                    $('#learn01_stop').addClass('lnbtc_btnon');
-                    $('#myRange').removeAttr('disabled');
-                } else {
-                    isPaused = false;
-                    moveImage();
-                    $('#learn01_stop').removeClass('lnbtc_btnon');
                     position = setInterval(set_position, 10);
                     $('#myRange').attr('disabled', '');
+                    $('#fullscreen').attr('disabled', '');
+                    resetImage();
                 }
             }
-        });
 
-        //Pass, Open, Prohibited 눌렀을 때 다음 이미지 보이게
-        function learn01_btn() {
-            if (is_learn01_play) {
-                isPaused = false;
+            //<====================
+            // Pass, Open, Prohibited, Risricted 버튼 눌렀을 때 처리할 부분
+            // 다음 이미지로 넘어감
+            // 미개봉/금지 Prohibited [1]
+            // learn01_Open_Pass -4, learn01_pass-2, learn01_Open_Risricted-3, learn01_prohibited-1
+            $('#learn01_prohibited').click(function () {
+                UpdateWrongAnswer_ApiCall($(this).data('value'), bag_id[current_image]);
+                learn01_btn();
+            });
 
-                $('#learn01_stop').removeClass('lnbtc_btnon');
-                $(images[current_image]).stop();
-                clearTimeout(animation);
-                clearTimeout(time_out);
-                clearInterval(position);
-                position = setInterval(set_position, 10);
+            // 미개봉/통과 Pass [2]
+            $('#learn01_pass').click(function () {
+                UpdateWrongAnswer_ApiCall($(this).data('value'), bag_id[current_image]);
+                learn01_btn();
+            });
 
-                $('#myRange').attr('disabled', '');
-                resetImage();
+            // 개봉/제한 Open/Risricted [3]
+            $('#learn01_Open_Risricted').click(function () {
+                UpdateWrongAnswer_ApiCall($(this).data('value'), bag_id[current_image]);
+                learn01_btn();
+            });
+
+            // 개봉/통과 Open/Pass [4]
+            $('#learn01_Open_Pass').click(function () {
+                UpdateWrongAnswer_ApiCall($(this).data('value'), bag_id[current_image]);
+                learn01_btn();
+            });
+            //======================>
+
+            // 측면 이미지 클릭시 처리
+            $('#learn01_bimg').click(function () {
+                var image_src = $(this).attr('src');
+                $currentImage = $(images[current_image]);
+                $(this).attr('src', $currentImage.attr('src'));
+                $currentImage.attr('src', image_src);
+            });
+
+            // 의사색체 버튼 클릭
+            $('#color_group101').click(function () {
+                if ($(this)[0].id == 'color_group101') {
+                    imagesrcApi(bag_id[current_image], '101');
+                } else {
+                    imagesrcApi(bag_id[current_image], '201');
+                }
+            });
+
+            $('#color_group102').click(function () {
+                if ($(this)[0].id == 'color_group102') {
+                    imagesrcApi(bag_id[current_image], '102');
+                } else {
+                    imagesrcApi(bag_id[current_image], '202');
+                }
+            });
+
+            $('#color_group103').click(function () {
+                if ($(this)[0].id == 'color_group103') {
+                    imagesrcApi(bag_id[current_image], '103');
+                } else {
+                    imagesrcApi(bag_id[current_image], '203');
+                }
+            });
+
+            $('#color_group104').click(function () {
+                if ($(this)[0].id == 'color_group104') {
+                    imagesrcApi(bag_id[current_image], '104');
+                } else {
+                    imagesrcApi(bag_id[current_image], '204');
+                }
+            });
+
+            $('#color_group105').click(function () {
+                if ($(this)[0].id == 'color_group105') {
+                    imagesrcApi(bag_id[current_image], '105');
+                } else {
+                    imagesrcApi(bag_id[current_image], '205');
+                }
+            });
+
+            $('#color_group106').click(function () {
+                if ($(this)[0].id == 'color_group106') {
+                    imagesrcApi(bag_id[current_image], '106');
+                } else {
+                    imagesrcApi(bag_id[current_image], '206');
+                }
+            });
+
+            $('#color_group107').click(function () {
+                if ($(this)[0].id == 'color_group107') {
+                    imagesrcApi(bag_id[current_image], '107');
+                } else {
+                    imagesrcApi(bag_id[current_image], '207');
+                }
+            });
+
+            $('#color_group108').click(function () {
+                if ($(this)[0].id == 'color_group108') {
+                    imagesrcApi(bag_id[current_image], '108');
+                } else {
+                    imagesrcApi(bag_id[current_image], '208');
+                }
+            });
+
+            $('#color_group109').click(function () {
+                if ($(this)[0].id == 'color_group109') {
+                    imagesrcApi(bag_id[current_image], '109');
+                } else {
+                    imagesrcApi(bag_id[current_image], '209');
+                }
+            });
+
+            $('#color_group110').click(function () {
+                if ($(this)[0].id == 'color_group110') {
+                    imagesrcApi(bag_id[current_image], '110');
+                } else {
+                    imagesrcApi(bag_id[current_image], '210');
+                }
+            });
+
+            $('#color_group111').click(function () {
+                if ($(this)[0].id == 'color_group111') {
+                    imagesrcApi(bag_id[current_image], '111');
+                } else {
+                    imagesrcApi(bag_id[current_image], '211');
+                }
+            });
+
+            $('#color_group112').click(function () {
+                if ($(this)[0].id == 'color_group112') {
+                    imagesrcApi(bag_id[current_image], '112');
+                } else {
+                    imagesrcApi(bag_id[current_image], '212');
+                }
+            });
+
+            $('#color_group113').click(function () {
+                if ($(this)[0].id == 'color_group113') {
+                    imagesrcApi(bag_id[current_image], '113');
+                } else {
+                    imagesrcApi(bag_id[current_image], '213');
+                }
+            });
+
+            $('#color_group114').click(function () {
+                if ($(this)[0].id == 'color_group114') {
+                    imagesrcApi(bag_id[current_image], '114');
+                } else {
+                    imagesrcApi(bag_id[current_image], '214');
+                }
+            });
+
+            $('#color_group115').click(function () {
+                if ($(this)[0].id == 'color_group115') {
+                    imagesrcApi(bag_id[current_image], '115');
+                } else {
+                    imagesrcApi(bag_id[current_image], '215');
+                }
+            });
+
+            $('#color_group116').click(function () {
+                if ($(this)[0].id == 'color_group116') {
+                    imagesrcApi(bag_id[current_image], '116');
+                } else {
+                    imagesrcApi(bag_id[current_image], '216');
+                }
+            });
+
+            $('#color_group117').click(function () {
+                if ($(this)[0].id == 'color_group117') {
+                    imagesrcApi(bag_id[current_image], '117');
+                } else {
+                    imagesrcApi(bag_id[current_image], '217');
+                }
+            });
+
+            $('#color_group118').click(function () {
+                if ($(this)[0].id == 'color_group118') {
+                    imagesrcApi(bag_id[current_image], '118');
+                } else {
+                    imagesrcApi(bag_id[current_image], '218');
+                }
+            });
+
+            $('#color_group119').click(function () {
+                if ($(this)[0].id == 'color_group119') {
+                    imagesrcApi(bag_id[current_image], '119');
+                } else {
+                    imagesrcApi(bag_id[current_image], '219');
+                }
+            });
+
+            $('#color_group120').click(function () {
+                if ($(this)[0].id == 'color_group120') {
+                    imagesrcApi(bag_id[current_image], '120');
+                } else {
+                    imagesrcApi(bag_id[current_image], '220');
+                }
+            });
+
+            async function imagesrcApi(bagScanId, command) {
+                try {
+                    const SelectImgResponse = await SelectImgApi({
+                        bagScanId: bagScanId,
+                        command: command
+                    }); // 비동기 함수 호출
+
+                    if (command === '101') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColor; //정면컬러 101
+                    } else if (command === '102') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorMineral; //정면무기물 102
+                    } else if (command === '103') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorOrganism; //정면유기물 103
+                    } else if (command === '104') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorReversal; //정면반전 104
+                    } else if (command === '105') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate1; //정면채도 105
+                    } else if (command === '106') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate2; //정면채도 106
+                    } else if (command === '107') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate3; //정면채도 107
+                    } else if (command === '108') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate4; //정면채도 108
+                    } else if (command === '109') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate5; //정면채도 109
+                    } else if (command === '110') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColorBwRate6; //정면채도 110
+                    } else if (command === '111') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBw; //정면흑백 111
+                    } else if (command === '112') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwMineral; //정면흑백무기물 112
+                    } else if (command === '113') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwOrganism; //정면흑백유기물 113
+                    } else if (command === '114') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwReversal; //정면흑백반전 114
+                    } else if (command === '115') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate1; //정면흑백채도 115
+                    } else if (command === '116') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate2; //정면흑백채도 116
+                    } else if (command === '117') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate3; //정면흑백채도 117
+                    } else if (command === '118') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate4; // 정면흑백채도118
+                    } else if (command === '119') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate5; //정면흑백채도 119
+                    } else if (command === '120') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontBwBwRate6; //정면흑백채도 120
+                    } else if (command === '201') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColor; //측면컬러 201
+                    } else if (command === '202') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorMineral; //측면무기물 202
+                    } else if (command === '203') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorOrganism; //측면유기물 203
+                    } else if (command === '204') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorReversal; //측면반전 204
+                    } else if (command === '205') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate1; //측면채도 205
+                    } else if (command === '206') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate2; //측면채도206
+                    } else if (command === '207') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate3; //측면채도207
+                    } else if (command === '208') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate4; //측면채도208
+                    } else if (command === '209') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate5; //측면채도209
+                    } else if (command === '210') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideColorBwRate6; //측면채도210
+                    } else if (command === '211') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBw; //측면흑백211
+                    } else if (command === '212') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwMinerals; //측면흑백무기물212
+                    } else if (command === '213') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwOrganism; //측면흑백유기물213
+                    } else if (command === '214') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwReversal; //측면흑백반전214
+                    } else if (command === '215') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate1; //측면흑백채도215
+                    } else if (command === '216') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate2; //측면흑백채도216
+                    } else if (command === '217') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate3; //측면흑백채도217
+                    } else if (command === '218') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate4; //측면흑백채도218
+                    } else if (command === '219') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate5; //측면흑백채도219
+                    } else if (command === '220') {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgSideBwBwRate6; //측면흑백채도220
+                    } else {
+                        var image_src = SelectImgResponse?.data?.RET_DATA.imgFrontColor; //정면컬러 101
+                    }
+                    $currentImage = $(images[current_image]);
+                    $(this).attr('src', $currentImage.attr('src'));
+                    $currentImage.attr('src', 'data:image/png;base64,' + image_src);
+                } catch (error) {}
             }
+
+            // 이미지 클릭시 preview 이벤트
+            $(images[current_image]).click(function (e) {
+                PreviewCall(e.target.src);
+            });
+
+            var scale = 1;
+            var isFlipped = false;
+            var originalWidth = $(images[current_image]).width();
+
+            // 확대
+            $('#color_glas_plus').click(async function () {
+                scale += 0.1;
+                $(images[current_image]).css('transform', 'scaleX(' + (isFlipped ? -1 : 1) + ') scale(' + scale + ')');
+            });
+
+            // 좌우 반전
+            $('#color_transform').click(async function () {
+                isFlipped = !isFlipped;
+                $(images[current_image]).css('transform', 'scaleX(' + (isFlipped ? -1 : 1) + ') scale(' + scale + ')');
+            });
+
+            // 축소
+            $('#color_glas_minus').click(async function () {
+                scale -= 0.1;
+                $(images[current_image]).css('transform', 'scaleX(' + (isFlipped ? -1 : 1) + ') scale(' + scale + ')');
+            });
+
+            // 복원
+            $('#color_restoration').click(async function () {
+                scale = 1;
+                isFlipped = false;
+                $(images[current_image]).css('transform', 'scaleX(1) scale(1)');
+                $(images[current_image]).width(originalWidth);
+            });
+
+            var mouseX = 0;
+            var mouseY = 0;
+            var isDragging = false;
+            var startLeft = 0;
+            var startTop = 0;
+
+            $(images[current_image]).mousedown(function (e) {
+                isDragging = true;
+                mouseX = e.pageX;
+                mouseY = e.pageY;
+                startLeft = parseInt($(images[current_image]).css('left')) || 0;
+                startTop = parseInt($(images[current_image]).css('top')) || 0;
+            });
+
+            $(document).mouseup(function (e) {
+                isDragging = false;
+            });
+
+            $(document).mousemove(function (e) {
+                if (isDragging) {
+                    var x = e.pageX - mouseX;
+                    var y = e.pageY - mouseY;
+                    var newLeft = startLeft + x;
+                    var newTop = startTop + y;
+                    $(images[current_image]).css('left', newLeft + 'px');
+                    $(images[current_image]).css('top', newTop + 'px');
+                }
+            });
         }
-
-        //<====================
-        //각각 버튼 눌렀을 때 처리할 부분
-        //다음 이미지로 넘어가는 기능만 구현
-        $('#learn01_pass').click(function () {
-            learn01_btn();
-        });
-
-        $('#learn01_open').click(function () {
-            learn01_btn();
-        });
-
-        $('#learn01_prohibited').click(function () {
-            learn01_btn();
-        });
-        //======================>
-
-        $('#learn01_bimg').click(function () {
-            var image_src = $(this).attr('src');
-            $currentImage = $(images[current_image]);
-            $(this).attr('src', $currentImage.attr('src'));
-            $currentImage.attr('src', image_src);
-        });
     };
 
     // 반입금지물품 Modal 이벤트처리 Start
@@ -311,47 +708,43 @@ export const WrongAnswerS = (props) => {
     // 합격 Modal 이벤트 처리
     const PasshandleOk = () => {
         setPassModalOpen(false);
-        setCompleteModalOpen(true);
+        setPrintModalOpen(true); // 정답확인 modal 창 열기
     };
 
     // 불합격 Modal 이벤트 처리
     const FailhandleOk = () => {
         setFailModalOpen(false);
+        setPrintModalOpen(true); // 정답확인 modal 창 열기
     };
 
-    // 완료 Modal 이벤트 처리
+    // 오답문제풀이완료 Modal 이벤트 처리
     const CompletehandleOk = () => {
-        setPrintModalOpen(true); // 정답확인 modal 창 닫기
-        setCompleteModalOpen(false); // 완료 modal 창 닫기
-        ModalClose(); // 학습 modal 창 닫기
+        EndWrongAnswer_ApiCall();
+        setCompleteModalOpen(false); // 오답문제풀이완료 modal 창 닫기
     };
 
-    const copbtc01_Cho = (cop01flag) => {
-        setCopbtc01(cop01flag);
+    const copbtc01_Cho = (ImgColorCode) => {
+        setCopbtc01(ImgColorCode);
+        setCopbtc02();
+        setCopbtc03();
     };
 
-    const copbtc02_Cho = (cop02flag) => {
-        setCopbtc02(cop02flag);
+    const copbtc02_Cho = (ImgColorCode) => {
+        setCopbtc02(ImgColorCode);
+        setCopbtc01();
+        setCopbtc03();
     };
 
-    const copbtc03_Cho = (cop03flag) => {
-        setCopbtc03(cop03flag);
+    const copbtc03_Cho = (ImgColorCode) => {
+        setCopbtc01();
+        setCopbtc02();
+        setCopbtc03(ImgColorCode);
     };
 
-    // 정답 처리
-    const answerEvent = (flag) => {
-        setAnswerSubmit(flag);
-        console.log(flag);
-    };
-
-    // 슬라이드 Stop/Move 처리
-    const MoveStopEvent = () => {
-        if (moveStop == 'move') {
-            setMoveStop('stop');
-        } else {
-            setMoveStop('move');
-        }
-        console.log(moveStop);
+    // Preview 이미지 처리
+    const PreviewCall = (previewimage) => {
+        setImgView(previewimage);
+        setVisible(true);
     };
 
     // 종료 처리
@@ -359,295 +752,484 @@ export const WrongAnswerS = (props) => {
         props.ModalClose();
     };
 
+    // 강제종료 처리
+    const WrongAnswerSModalClose = () => {
+        props.ModalClose();
+    };
+
+    // 종료 처리2
+    const ModalClose2 = () => {
+        WrongAnswerSModalClose();
+        setPrintModalOpen(false);
+    };
+
+    useEffect(() => {
+        setLoading(true);
+        WrongAnswer_ApiCall(); // 학습자와 오답문제풀이정보조회 api 호출
+        // EndWrongAnswer_ApiCall(); // 합격, 불합격 api 호출
+    }, []);
+
     return (
         <>
-            <div className="learn_con">
-                <div className="xbt_top">
-                    <div className="learnct01">
-                        <ul>
-                            <li>
-                                <h1 className="contit">오답문제풀이</h1>
-                            </li>
-                            <li>
-                                <h3>X-ray 판독 초급 2023 - 1차</h3>
-                            </li>
-                            <li>
-                                <h2 className="conname pr30">홍길동</h2>
-                                <button type="button" className="conbtn01" onClick={() => Prohibitedinfo_Modal()}>
-                                    반입금지물품
-                                </button>
-                            </li>
-                        </ul>
+            <Spin spinning={loading}>
+                <div className="learn_con">
+                    <div className="xbt_top">
+                        <div className="learnct01">
+                            <ul>
+                                <li>
+                                    <h1 className="contit">오답문제풀이(Slide)</h1>
+                                </li>
+                                <li>
+                                    <h3>{wrongAnswerData?.moduleNm}</h3>
+                                </li>
+                                <li>
+                                    <h2 className="conname pr30">{wrongAnswerData?.userName}</h2>
+                                    <button type="button" className="conbtn01" onClick={() => Prohibitedinfo_Modal()}>
+                                        반입금지물품
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="learnct02">
+                            <ul>
+                                <li className="learntit_con">
+                                    <div className="learntit">OR Normal</div>
+                                    <div className="learntit">
+                                        {textFrontSide === 'F' ? 'Front' : 'Side'} {learnbagScanId}
+                                    </div>
+                                    <div className="learntit">레벨 : 1</div>
+                                </li>
+                                <li className="learnct02_center">
+                                    <div className="question">
+                                        문항
+                                        <span>
+                                            {ImageCount}/{ImageTotal}
+                                        </span>
+                                    </div>
+                                    <div className="question_box">
+                                        <dl>
+                                            <dd className="qsbox">{state.minutes < 10 ? `0${state.minutes}` : state.minutes}</dd>
+                                            <dd className="qsb_pd">:</dd>
+                                            <dd className="qsbox">{state.seconds < 10 ? `0${state.seconds}` : state.seconds}</dd>
+                                        </dl>
+                                    </div>
+                                </li>
+                                <li>
+                                    <button className="learnbtn btn_start" id="learn01_start" type="button" onClick={learn01_start}>
+                                        시작
+                                    </button>
+                                    <button className="learnbtn btn_end" id="learn01_start_on" type="button">
+                                        시작
+                                    </button>
+                                    <button
+                                        id="close-first-modal"
+                                        data-mact="close"
+                                        data-minfo="first-modal"
+                                        style={{ marginLeft: '23px' }}
+                                        className="modal_btn learnbtn btn_start"
+                                        onClick={ModalClose}
+                                    >
+                                        종료
+                                    </button>
+                                    <button
+                                        id="close-first-modal_on"
+                                        data-mact="close"
+                                        data-minfo="first-modal"
+                                        style={{ display: 'none' }}
+                                        className="modal_btn learnbtn btn_end"
+                                    >
+                                        종료
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div className="learnct02">
-                        <ul>
-                            <li className="learntit_con">
-                                <div className="learntit">OR Normal</div>
-                                <div className="learntit">Front</div>
-                                <div className="learntit">레벨 : 1</div>
-                            </li>
-                            <li className="learnct02_center">
-                                <div className="question">
-                                    문항{' '}
-                                    <span>
-                                        {ImageCount}/{ImageTotal}
-                                    </span>
-                                </div>
-                                <div className="question_box">
-                                    <dl>
-                                        <dd className="qsbox">{state.minutes < 10 ? `0${state.minutes}` : state.minutes}</dd>
-                                        <dd className="qsb_pd">:</dd>
-                                        <dd className="qsbox">{state.seconds < 10 ? `0${state.seconds}` : state.seconds}</dd>
-                                    </dl>
-                                </div>
-                            </li>
-                            <li>
-                                <button className="learnbtn btn_start" id="learn01_start" type="button" onClick={learn01_start}>
-                                    시작
-                                </button>
-                                <button className="learnbtn btn_end" id="learn01_start_on" type="button">
-                                    시작
-                                </button>
-                                <button
-                                    id="close-first-modal"
-                                    data-mact="close"
-                                    data-minfo="first-modal"
-                                    style={{ marginLeft: '23px' }}
-                                    className="modal_btn learnbtn btn_start"
-                                    onClick={ModalClose}
-                                >
-                                    종료
-                                </button>
-                                <button
-                                    id="close-first-modal_on"
-                                    data-mact="close"
-                                    data-minfo="first-modal"
-                                    style={{ display: 'none' }}
-                                    className="modal_btn learnbtn btn_end"
-                                >
-                                    종료
-                                </button>
-                            </li>
-                        </ul>
+                    {/* <!-- learnc_img --> */}
+                    <div className="learnc_img" id="learn01_img" style={{ height: '450px' }}>
+                        <div id="container">
+                            {wrongAnswerData?.WrongAnswerProblemList?.map((imgs, i) => {
+                                return (
+                                    <>
+                                        <img
+                                            key={i}
+                                            src={'data:image/png;base64,' + imgs.imgFront}
+                                            data-thum={'data:image/png;base64,' + imgs.imgSide}
+                                            data-value={imgs.bagScanId}
+                                            className="image"
+                                            alt="Preview"
+                                            title="Preview"
+                                        />
+                                    </>
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <input type="range" name="" id="myRange" max="1000" disabled style={{ width: '100%', visibility: 'hidden' }} />
+                    <Image
+                        style={{
+                            display: 'none'
+                        }}
+                        src={imgView}
+                        preview={{
+                            visible,
+                            onVisibleChange: (value) => {
+                                setVisible(value);
+                            }
+                        }}
+                    />
+                </div>
+                {/* <!-- learn_bottom --> */}
+                <div className="learn_bottom">
+                    {/* <!-- learn_btcon --> */}
+                    <div className="learn_btcon">
+                        {/* <!-- learnbtc01 --> */}
+                        <div className="learnbtc01">
+                            <ul>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group101' : 'color_group201'}
+                                        href="#"
+                                        onClick={() => copbtc01_Cho('01', learnbagScanId)}
+                                        className={copbtc01 === '01' ? 'on' : ''}
+                                    >
+                                        <img src={learnc_0101} alt="" data-value={textFrontSide === 'F' ? '101' : '201'} />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group102' : 'color_group202'}
+                                        href="#"
+                                        onClick={() => copbtc01_Cho('02', learnbagScanId)}
+                                        className={copbtc01 === '02' ? 'on' : ''}
+                                    >
+                                        <img src={learnc_0102} alt="" data-value={textFrontSide === 'F' ? '102' : '202'} />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group103' : 'color_group203'}
+                                        href="#"
+                                        onClick={() => copbtc01_Cho('03', learnbagScanId)}
+                                        className={copbtc01 === '03' ? 'on' : ''}
+                                    >
+                                        <img src={learnc_0103} alt="" data-value={textFrontSide === 'F' ? '103' : '203'} />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group104' : 'color_group204'}
+                                        href="#"
+                                        onClick={() => copbtc01_Cho('04', learnbagScanId)}
+                                        className={copbtc01 === '04' ? 'on' : ''}
+                                    >
+                                        <img src={learnc_0104} alt="" data-value={textFrontSide === 'F' ? '104' : '204'} />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group111' : 'color_group211'}
+                                        href="#"
+                                        onClick={() => copbtc01_Cho('05', learnbagScanId)}
+                                        className={copbtc01 === '05' ? 'on' : ''}
+                                    >
+                                        <img src={learnc_0201} alt="" data-value={textFrontSide === 'F' ? '111' : '211'} />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group112' : 'color_group212'}
+                                        href="#"
+                                        onClick={() => copbtc01_Cho('06', learnbagScanId)}
+                                        className={copbtc01 === '06' ? 'on' : ''}
+                                    >
+                                        <img src={learnc_0202} alt="" data-value={textFrontSide === 'F' ? '112' : '212'} />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group113' : 'color_group213'}
+                                        href="#"
+                                        onClick={() => copbtc01_Cho('07', learnbagScanId)}
+                                        className={copbtc01 === '07' ? 'on' : ''}
+                                    >
+                                        <img src={learnc_0203} alt="" data-value={textFrontSide === 'F' ? '113' : '213'} />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group114' : 'color_group214'}
+                                        href="#"
+                                        onClick={() => copbtc01_Cho('08', learnbagScanId)}
+                                        className={copbtc01 === '08' ? 'on' : ''}
+                                    >
+                                        <img src={learnc_0204} alt="" data-value={textFrontSide === 'F' ? '114' : '214'} />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        {/* <!-- learnbtc02 --> */}
+                        <div className="learnbtc02">
+                            <ul>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group105' : 'color_group205'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('09', learnbagScanId)}
+                                        className={copbtc02 === '09' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic01_01" data-value={textFrontSide === 'F' ? '105' : '205'}></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group106' : 'color_group206'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('10', learnbagScanId)}
+                                        className={copbtc02 === '10' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic01_02" data-value={textFrontSide === 'F' ? '106' : '206'}></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group107' : 'color_group207'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('11', learnbagScanId)}
+                                        className={copbtc02 === '11' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic01_03" data-value={textFrontSide === 'F' ? '107' : '207'}></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group108' : 'color_group208'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('12', learnbagScanId)}
+                                        className={copbtc02 === '12' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic01_04" data-value={textFrontSide === 'F' ? '108' : '208'}></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group109' : 'color_group209'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('13', learnbagScanId)}
+                                        className={copbtc02 === '13' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic01_05" data-value={textFrontSide === 'F' ? '109' : '209'}></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group110' : 'color_group210'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('14', learnbagScanId)}
+                                        className={copbtc02 === '14' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic01_06" data-value={textFrontSide === 'F' ? '110' : '210'}></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group115' : 'color_group215'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('15', learnbagScanId)}
+                                        className={copbtc02 === '15' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic02_01" data-value={textFrontSide === 'F' ? '115' : '215'}></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group116' : 'color_group216'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('16', learnbagScanId)}
+                                        className={copbtc02 === '16' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic02_02" data-value={textFrontSide === 'F' ? '116' : '216'}></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group117' : 'color_group217'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('17', learnbagScanId)}
+                                        className={copbtc02 === '17' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic02_03" data-value={textFrontSide === 'F' ? '117' : '217'}></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group118' : 'color_group218'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('18', learnbagScanId)}
+                                        className={copbtc02 === '18' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic02_04" data-value={textFrontSide === 'F' ? '118' : '218'}></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group119' : 'color_group219'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('19', learnbagScanId)}
+                                        className={copbtc02 === '19' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic02_05" data-value={textFrontSide === 'F' ? '119' : '219'}></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        id={textFrontSide === 'F' ? 'color_group120' : 'color_group220'}
+                                        href="#"
+                                        onClick={() => copbtc02_Cho('20', learnbagScanId)}
+                                        className={copbtc02 === '20' ? 'on' : ''}
+                                    >
+                                        <span className="brig_ic02_06" data-value={textFrontSide === 'F' ? '120' : '220'}></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        {/* <!-- learnbtc03 확대, 축소, 반전, 복구 --> */}
+                        <div className="learnbtc03">
+                            <ul>
+                                {/* 확대 */}
+                                <li>
+                                    <a
+                                        href="#"
+                                        id="color_glas_plus"
+                                        onClick={() => copbtc03_Cho('0')}
+                                        className={copbtc03 === '0' ? 'on' : ''}
+                                    >
+                                        <img src={glas_plus} alt="확대" title="확대" />
+                                    </a>
+                                </li>
+                                {/* 반전 */}
+                                <li>
+                                    <a
+                                        href="#"
+                                        id="color_transform"
+                                        onClick={() => copbtc03_Cho('1')}
+                                        className={copbtc03 === '1' ? 'on' : ''}
+                                    >
+                                        <img src={transform} alt="좌우반전" title="좌우반전" />
+                                    </a>
+                                </li>
+                                {/* 축소 */}
+                                <li>
+                                    <a
+                                        href="#"
+                                        id="color_glas_minus"
+                                        onClick={() => copbtc03_Cho('2')}
+                                        className={copbtc03 === '2' ? 'on' : ''}
+                                    >
+                                        <img src={glas_minus} alt="축소" title="축소" />
+                                    </a>
+                                </li>
+                                {/* 복원 */}
+                                <li>
+                                    <a
+                                        href="#"
+                                        id="color_restoration"
+                                        onClick={() => copbtc03_Cho('3')}
+                                        className={copbtc03 === '3' ? 'on' : ''}
+                                    >
+                                        <img src={restoration} alt="복원" title="복원" />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        {/* <!-- learnbtc04 --> */}
+
+                        <div className="learnbtc04">
+                            <ul>
+                                <li>
+                                    {answerType === 'OPEN' ? (
+                                        // 개봉/통과 Open/Pass [4]
+                                        <button
+                                            className="lnbtc_btn lnbtc_btnon next"
+                                            id="learn01_Open_Pass"
+                                            type="button"
+                                            data-value="4"
+                                            // onClick={() => answerEvent('4')}
+                                        >
+                                            <span>
+                                                <img src={pass} alt="" />
+                                            </span>
+                                            <p style={{ fontSize: '16px' }}>Pass</p>
+                                        </button>
+                                    ) : (
+                                        // 미개봉/통과 pass [2]
+                                        <button className="lnbtc_btn lnbtc_btnon next" id="learn01_pass" type="button" data-value="2">
+                                            <span>
+                                                <img src={pass} alt="" />
+                                            </span>
+                                            <p style={{ fontSize: '16px' }}>Pass</p>
+                                        </button>
+                                    )}
+                                </li>
+                                <li>
+                                    <button
+                                        className="lnbtc_btn lnbtc_btnon"
+                                        id="learn01_open"
+                                        type="button"
+                                        onClick={() => setAnswerType('OPEN')}
+                                    >
+                                        <span>
+                                            <img src={open} alt="" />
+                                        </span>
+                                        <p style={{ fontSize: '16px' }}>Open</p>
+                                    </button>
+                                </li>
+                                <li>
+                                    {answerType === 'OPEN' ? (
+                                        // 개봉/제한 Open/Resricted [3]
+                                        <button className="lnbtc_btn lnbtc_btnon" id="learn01_Open_Risricted" type="button" data-value="3">
+                                            <span>
+                                                <img src={prohibited} alt="" />
+                                            </span>
+                                            <p style={{ fontSize: '16px' }}>Resricted</p>
+                                        </button>
+                                    ) : (
+                                        // 미개봉/금지 prohibited [1]
+                                        <button className="lnbtc_btn lnbtc_btnon" id="learn01_prohibited" type="button" data-value="1">
+                                            <span>
+                                                <img src={prohibited} alt="" />
+                                            </span>
+                                            <p style={{ fontSize: '16px' }}>Prohibited</p>
+                                        </button>
+                                    )}
+                                </li>
+                            </ul>
+                        </div>
+                        {/* <!-- learnbtc05 멈춤 이미지 --> */}
+                        <div className="learnbtc05">
+                            <button className="lnbtc_btn stop" id="learn01_stop" type="button">
+                                <span>
+                                    <img src={stope} alt="" />
+                                </span>
+                                <p>Stop</p>
+                            </button>
+                        </div>
+                        {/* <!-- learnbtc06 측면 이미지 --> */}
+                        <div className="learnbtc06">
+                            <button onClick={() => (textFrontSide === 'S' ? setTextFrontSide('F') : setTextFrontSide('S'))}>
+                                <img src={learning_01_1} id="learn01_bimg" style={{ display: 'none', height: '74px' }} alt="" />
+                            </button>
+                        </div>
                     </div>
                 </div>
-                {/* <!-- learnc_img --> */}
-                <div className="learnc_img" id="learn01_img" style={{ height: '450px' }}>
-                    <img src={learning_01} data-thum={learning_0101} className="image" alt="" />
-                    <img src={learning_02} data-thum={learning_0201} className="image" alt="" />
-                    <img src={learning_03} data-thum={learning_0301} className="image" alt="" />
-                    <img src={learning_04} data-thum={learning_0401} className="image" alt="" />
-                    <img src={learning_05} data-thum={learning_0501} className="image" alt="" />
-                </div>
-                <input type="range" name="" id="myRange" max="1000" disabled style={{ width: '100%', visibility: 'hidden' }} />
-            </div>
-            {/* <!-- learn_bottom --> */}
-            <div className="learn_bottom">
-                {/* <!-- learn_btcon --> */}
-                <div className="learn_btcon">
-                    {/* <!-- learnbtc01 --> */}
-                    <div className="learnbtc01">
-                        <ul>
-                            <li>
-                                <a href="#" onClick={() => copbtc01_Cho('0')} className={copbtc01 === '0' ? 'on' : ''}>
-                                    <img src={learnc_0101} alt="" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc01_Cho('1')} className={copbtc01 === '1' ? 'on' : ''}>
-                                    <img src={learnc_0102} alt="" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc01_Cho('2')} className={copbtc01 === '2' ? 'on' : ''}>
-                                    <img src={learnc_0103} alt="" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc01_Cho('3')} className={copbtc01 === '3' ? 'on' : ''}>
-                                    <img src={learnc_0104} alt="" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc01_Cho('4')} className={copbtc01 === '4' ? 'on' : ''}>
-                                    <img src={learnc_0201} alt="" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc01_Cho('5')} className={copbtc01 === '5' ? 'on' : ''}>
-                                    <img src={learnc_0202} alt="" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc01_Cho('6')} className={copbtc01 === '6' ? 'on' : ''}>
-                                    <img src={learnc_0203} alt="" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc01_Cho('7')} className={copbtc01 === '7' ? 'on' : ''}>
-                                    <img src={learnc_0204} alt="" />
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    {/* <!-- learnbtc02 --> */}
-                    <div className="learnbtc02">
-                        <ul>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('0')} className={copbtc02 === '0' ? 'on' : ''}>
-                                    <span className="brig_ic01_01"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('1')} className={copbtc02 === '1' ? 'on' : ''}>
-                                    <span className="brig_ic01_02"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('2')} className={copbtc02 === '2' ? 'on' : ''}>
-                                    <span className="brig_ic01_03"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('3')} className={copbtc02 === '3' ? 'on' : ''}>
-                                    <span className="brig_ic01_04"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('4')} className={copbtc02 === '4' ? 'on' : ''}>
-                                    <span className="brig_ic01_05"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('5')} className={copbtc02 === '5' ? 'on' : ''}>
-                                    <span className="brig_ic01_06"></span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('6')} className={copbtc02 === '6' ? 'on' : ''}>
-                                    <span className="brig_ic02_01"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('7')} className={copbtc02 === '7' ? 'on' : ''}>
-                                    <span className="brig_ic02_02"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('8')} className={copbtc02 === '8' ? 'on' : ''}>
-                                    <span className="brig_ic02_03"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('9')} className={copbtc02 === '9' ? 'on' : ''}>
-                                    <span className="brig_ic02_04"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('10')} className={copbtc02 === '10' ? 'on' : ''}>
-                                    <span className="brig_ic02_05"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc02_Cho('11')} className={copbtc02 === '11' ? 'on' : ''}>
-                                    <span className="brig_ic02_06"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    {/* <!-- learnbtc03 --> */}
-                    <div className="learnbtc03">
-                        <ul>
-                            <li>
-                                <a href="#" onClick={() => copbtc03_Cho('0')} className={copbtc03 === '0' ? 'on' : ''}>
-                                    <img src={glas_plus} alt="" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc03_Cho('1')} className={copbtc03 === '1' ? 'on' : ''}>
-                                    <img src={transform} alt="" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc03_Cho('2')} className={copbtc03 === '2' ? 'on' : ''}>
-                                    <img src={glas_minus} alt="" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => copbtc03_Cho('3')} className={copbtc03 === '3' ? 'on' : ''}>
-                                    <img src={restoration} alt="" />
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    {/* <!-- learnbtc04 --> */}
-                    <div className="learnbtc04">
-                        <ul>
-                            <li>
-                                <button
-                                    className="lnbtc_btn lnbtc_btnon next"
-                                    id="learn01_pass"
-                                    type="button"
-                                    onClick={() => answerEvent('Pass')}
-                                >
-                                    <span>
-                                        <img src={pass} alt="" />
-                                    </span>
-                                    <p>Pass</p>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    className="lnbtc_btn lnbtc_btnon"
-                                    id="learn01_open"
-                                    type="button"
-                                    onClick={() => answerEvent('Open')}
-                                >
-                                    <span>
-                                        <img src={open} alt="" />
-                                    </span>
-                                    <p>Open</p>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    className="lnbtc_btn lnbtc_btnon"
-                                    id="learn01_prohibited"
-                                    type="button"
-                                    onClick={() => answerEvent('Prohibited')}
-                                >
-                                    <span>
-                                        <img src={prohibited} alt="" />
-                                    </span>
-                                    <p>Prohibited</p>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    {/* <!-- learnbtc05 --> */}
-                    <div className="learnbtc05">
-                        <button className="lnbtc_btn stop" id="learn01_stop" type="button" onClick={MoveStopEvent}>
-                            <span>
-                                <img src={stope} alt="" />
-                            </span>
-                            <p>Stop</p>
-                        </button>
-                    </div>
-                    {/* <!-- learnbtc06 --> */}
-                    <div className="learnbtc06">
-                        <img src={learning_01_1} id="learn01_bimg" style={{ display: 'none' }} alt="" />
-                    </div>
-                </div>
-            </div>
+            </Spin>
             {/* 반입금지물품 모달 창 Start */}
             <Modal
                 maskClosable={false}
                 open={ModalOpen}
                 onOk={handleOk}
                 closable={false}
-                // onCancel={handleCancel}
                 width={950}
                 style={{
                     zIndex: 999
@@ -664,7 +1246,6 @@ export const WrongAnswerS = (props) => {
                 open={PrintModalOpen}
                 onOk={PrinthandleOk}
                 closable={false}
-                // onCancel={handleCancel}
                 width={'97%'}
                 style={{
                     top: 15,
@@ -672,7 +1253,7 @@ export const WrongAnswerS = (props) => {
                 }}
                 footer={[]}
             >
-                <LearningP ModalClose={PrinthandleOk} />
+                <WrongAnswerP ModalClose2={ModalClose2} />
             </Modal>
             {/* 정답 확인 End */}
 
@@ -682,7 +1263,6 @@ export const WrongAnswerS = (props) => {
                 open={CompleteModalOpen}
                 onOk={CompletehandleOk}
                 closable={false}
-                // onCancel={handleCancel}
                 width={590}
                 style={{
                     zIndex: 999
@@ -691,10 +1271,10 @@ export const WrongAnswerS = (props) => {
             >
                 <div style={{ width: '542px', textAlign: 'center', padding: '50px 0px' }}>
                     <div className="scwd_txt01">
-                        <h1>평가를 마쳤습니다.</h1>
+                        <h1>오답문제풀이를 마쳤습니다.</h1>
                     </div>
                     <div className="scwd_txt02">
-                        <p>오답문제풀이가 끝났습니다. 수고하셨습니다.</p>
+                        <p>수고하셨습니다.</p>
                     </div>
                     <button
                         id="open-six-modal"
@@ -716,7 +1296,6 @@ export const WrongAnswerS = (props) => {
                 open={PassModalOpen}
                 onOk={PasshandleOk}
                 closable={false}
-                // onCancel={handleCancel}
                 width={590}
                 style={{
                     zIndex: 999
@@ -729,12 +1308,12 @@ export const WrongAnswerS = (props) => {
                     </div>
                     <div className="scwd_txt01">
                         <h3>
-                            X-ray 판독 초급 2023 - 1차 <span>평균 : 81</span>
+                            {wrongAnswerData?.moduleNm} <span>획득점수 : {endWrongAnswerData?.gainScore}</span>
                         </h3>
                     </div>
                     <div className="scwd_txt02">
                         <h1>
-                            금지물품 통과로 <span className="scwd_pass">합격입니다.</span>
+                            <span className="scwd_pass">합격입니다.</span>
                         </h1>
                     </div>
                     <button
@@ -757,7 +1336,6 @@ export const WrongAnswerS = (props) => {
                 open={FailModalOpen}
                 onOk={FailhandleOk}
                 closable={false}
-                // onCancel={handleCancel}
                 width={590}
                 style={{
                     zIndex: 999
@@ -770,7 +1348,7 @@ export const WrongAnswerS = (props) => {
                     </div>
                     <div className="scwd_txt01">
                         <h3>
-                            X-ray 판독 초급 2023 - 1차 <span>평균 : 50</span>
+                            {wrongAnswerData?.moduleNm} <span>획득점수 : {endWrongAnswerData?.gainScore}</span>
                         </h3>
                     </div>
                     <div className="scwd_txt02">

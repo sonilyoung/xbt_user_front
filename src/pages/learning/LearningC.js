@@ -305,26 +305,27 @@ export const LearningC = (props) => {
         // Pass, Open, Prohibited, Risricted 버튼 눌렀을 때 처리할 부분
         // 다음 이미지로 넘어감
         // 미개봉/금지 Prohibited [1]
+        // learn02_Open_Pass-4, learn02_pass-2, learn02_Open_Risricted-3, learn02_prohibited-1
         $('#learn02_prohibited').click(function () {
-            UpdateLearnAnswer_ApiCall('1', $(images[currentImageIndex]).data('value'));
+            UpdateLearnAnswer_ApiCall($(this).data('value'), $(images[currentImageIndex]).data('value'));
             learn02_btn();
         });
 
         // 미개봉/통과 Pass [2]
         $('#learn02_pass').click(function () {
-            UpdateLearnAnswer_ApiCall('2', $(images[currentImageIndex]).data('value'));
+            UpdateLearnAnswer_ApiCall($(this).data('value'), $(images[currentImageIndex]).data('value'));
             learn02_btn();
         });
 
         // 개봉/제한 Open/Risricted [3]
         $('#learn02_Open_Risricted').click(function () {
-            UpdateLearnAnswer_ApiCall('3', $(images[currentImageIndex]).data('value'));
+            UpdateLearnAnswer_ApiCall($(this).data('value'), $(images[currentImageIndex]).data('value'));
             learn02_btn();
         });
 
         // 개봉/통과 Open/Pass [4]
         $('#learn02_Open_Pass').click(function () {
-            UpdateLearnAnswer_ApiCall('4', $(images[currentImageIndex]).data('value'));
+            UpdateLearnAnswer_ApiCall($(this).data('value'), $(images[currentImageIndex]).data('value'));
             learn02_btn();
         });
         //======================>
@@ -687,7 +688,7 @@ export const LearningC = (props) => {
     // 합격 Modal 이벤트 처리
     const PasshandleOk = () => {
         setPassModalOpen(false);
-        setCompleteModalOpen(true); // 정답확인 modal 창 열기
+        setPrintModalOpen(true); // 정답확인 modal 창 열기
     };
 
     // 불합격 Modal 이벤트 처리
@@ -701,7 +702,6 @@ export const LearningC = (props) => {
         EndLearning_ApiCall();
         setCompleteModalOpen(false); // 학습완료 modal 창 닫기
     };
-
     const copbtc01_Cho = (ImgColorCode) => {
         setCopbtc01(ImgColorCode);
         setCopbtc02();
@@ -1132,12 +1132,7 @@ export const LearningC = (props) => {
                                 <li>
                                     {answerType === 'OPEN' ? (
                                         // 개봉/통과 Open/Pass [4]
-                                        <button
-                                            className="lnbtc_btn lnbtc_btnon next"
-                                            id="learn02_Open_Pass"
-                                            type="button"
-                                            // onClick={() => answerEvent('4')}
-                                        >
+                                        <button className="lnbtc_btn lnbtc_btnon next" id="learn02_Open_Pass" type="button" data-value="4">
                                             <span>
                                                 <img src={pass} alt="" />
                                             </span>
@@ -1145,12 +1140,7 @@ export const LearningC = (props) => {
                                         </button>
                                     ) : (
                                         // 미개봉/통과 pass [2]
-                                        <button
-                                            className="lnbtc_btn lnbtc_btnon next"
-                                            id="learn02_pass"
-                                            type="button"
-                                            // onClick={() => answerEvent('2')}
-                                        >
+                                        <button className="lnbtc_btn lnbtc_btnon next" id="learn02_pass" type="button" data-value="2">
                                             <span>
                                                 <img src={pass} alt="" />
                                             </span>
@@ -1174,12 +1164,7 @@ export const LearningC = (props) => {
                                 <li>
                                     {answerType === 'OPEN' ? (
                                         // 개봉/제한 Open/Resricted [3]
-                                        <button
-                                            className="lnbtc_btn lnbtc_btnon"
-                                            id="learn02_Open_Risricted"
-                                            type="button"
-                                            // onClick={() => answerEvent('3')}
-                                        >
+                                        <button className="lnbtc_btn lnbtc_btnon" id="learn02_Open_Risricted" type="button" data-value="3">
                                             <span>
                                                 <img src={prohibited} alt="" />
                                             </span>
@@ -1187,12 +1172,7 @@ export const LearningC = (props) => {
                                         </button>
                                     ) : (
                                         // 미개봉/금지 prohibited [1]
-                                        <button
-                                            className="lnbtc_btn lnbtc_btnon"
-                                            id="learn02_prohibited"
-                                            type="button"
-                                            // onClick={() => answerEvent('1')}
-                                        >
+                                        <button className="lnbtc_btn lnbtc_btnon" id="learn02_prohibited" type="button" data-value="1">
                                             <span>
                                                 <img src={prohibited} alt="" />
                                             </span>

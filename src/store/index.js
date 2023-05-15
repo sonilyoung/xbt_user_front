@@ -6,8 +6,8 @@ import { mainManagement } from '../hooks/api/MainManagement/MainManagement';
 import { noticeManagement } from '../hooks/api/NoticeManagement/NoticeManagement';
 import { learningManagement } from '../hooks/api/LearningManagement/LearningManagement';
 import { commonManagement } from '../hooks/api/CommonManagement/CommonManagement';
-// import { contentsManagement } from '../hooks/api/ContentsManagement/ContentsManagement';
-// import { eduManagement } from '../hooks/api/EduManagement/EduManagement';
+import { evaluationManagement } from '../hooks/api/EvaluationManagement/EvaluationManagement';
+import { wrongAnswerManagement } from '../hooks/api/WrongAnswerManagement/WrongAnswerManagement';
 // import { studentsManagement } from '../hooks/api/StudentsManagement/StudentsManagement';
 // import { preferencesManagement } from '../hooks/api/PreferencesManagement/PreferencesManagement';
 
@@ -19,9 +19,9 @@ export const store = configureStore({
         [loginManagement.reducerPath]: loginManagement.reducer,
         [noticeManagement.reducerPath]: noticeManagement.reducer,
         [learningManagement.reducerPath]: learningManagement.reducer,
-        [commonManagement.reducerPath]: commonManagement.reducer
-        // [eduManagement.reducerPath]: eduManagement.reducer,
-        // [studentsManagement.reducerPath]: studentsManagement.reducer,
+        [commonManagement.reducerPath]: commonManagement.reducer,
+        [evaluationManagement.reducerPath]: eduManagement.reducer,
+        [wrongAnswerManagement.reducerPath]: studentsManagement.reducer
         // [preferencesManagement.reducerPath]: preferencesManagement.reducer
     },
     middleware: (getDefaultMiddleware) =>
@@ -31,8 +31,8 @@ export const store = configureStore({
             .concat(noticeManagement.middleware)
             .concat(learningManagement.middleware)
             .concat(commonManagement.middleware)
-    // .concat(contentsManagement.middleware)
-    // .concat(eduManagement.middleware)
+            .concat(evaluationManagement.middleware)
+            .concat(wrongAnswerManagement.middleware)
     // .concat(studentsManagement.middleware)
     // .concat(preferencesManagement.middleware)
 });

@@ -37,9 +37,7 @@ export const LearningP = (props) => {
 
     const [ModalOpen, setModalOpen] = useState(false); // 반입금지물품 Modal창
 
-    const [copbtc01, setCopbtc01] = useState();
-    const [copbtc02, setCopbtc02] = useState();
-    const [copbtc03, setCopbtc03] = useState();
+    const [copbtc, setCopbtc] = useState();
     const [loading, setLoading] = useState(false); // 상단 (가방id) 테이블 로딩
     const [imgLoading, setImgLoading] = useState(false); // 이미지 영역 로딩
     const [subLoading, setSubLoading] = useState(false); // 하단 테이블 로딩
@@ -213,7 +211,7 @@ export const LearningP = (props) => {
 
     const ColorGroup = (command, bagscanid) => {
         bagscanid !== null
-            ? SelectCompleteColorImg_ApiCall(command, bagscanid)
+            ? (SelectCompleteColorImg_ApiCall(command, bagscanid), setCopbtc(command.slice(-2)))
             : Modal.warning({
                   title: 'Warning',
                   content: '가방ID가 선택되지 않았습니다.'
@@ -223,40 +221,26 @@ export const LearningP = (props) => {
     // 확대
     const handleZoomIn = () => {
         setScale(scale + 0.1);
+        setCopbtc('21');
     };
 
     // 축소
     const handleZoomOut = () => {
         setScale(scale - 0.1);
+        setCopbtc('23');
     };
 
     // 반전(좌우)
     const handleFlip = () => {
         setFlip(!flip);
+        setCopbtc('22');
     };
 
     // 복원
     const handleRestore = () => {
         setScale(1);
         setFlip(false);
-    };
-
-    const copbtc01_Cho = (ImgColorCode) => {
-        setCopbtc01(ImgColorCode);
-        setCopbtc02();
-        setCopbtc03();
-    };
-
-    const copbtc02_Cho = (ImgColorCode) => {
-        setCopbtc02(ImgColorCode);
-        setCopbtc01();
-        setCopbtc03();
-    };
-
-    const copbtc03_Cho = (ImgColorCode) => {
-        setCopbtc01();
-        setCopbtc02();
-        setCopbtc03(ImgColorCode);
+        setCopbtc('24');
     };
 
     // 상단 테이블 - 가방ID 선택
@@ -379,16 +363,16 @@ export const LearningP = (props) => {
                                 {/* <!-- learnbtc01 --> */}
                                 <div className="learnbtc01">
                                     <ul>
+                                        {/* 정면 컬러 101~104 Start */}
                                         <li>
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc01_Cho('01', choiceGoods),
                                                     textFrontSide === 'F'
                                                         ? () => ColorGroup('101', choiceGoods)
-                                                        : () => ColorGroup('201', choiceGoods))
+                                                        : () => ColorGroup('201', choiceGoods)
                                                 }
-                                                className={copbtc01 === '01' ? 'on' : ''}
+                                                className={copbtc === '01' ? 'on' : ''}
                                             >
                                                 <img src={learnc_0101} alt="" />
                                             </a>
@@ -397,12 +381,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc01_Cho('02', choiceGoods),
                                                     textFrontSide === 'F'
                                                         ? () => ColorGroup('102', choiceGoods)
-                                                        : () => ColorGroup('202', choiceGoods))
+                                                        : () => ColorGroup('202', choiceGoods)
                                                 }
-                                                className={copbtc01 === '02' ? 'on' : ''}
+                                                className={copbtc === '02' ? 'on' : ''}
                                             >
                                                 <img src={learnc_0102} alt="" />
                                             </a>
@@ -411,12 +394,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc01_Cho('03', choiceGoods),
                                                     textFrontSide === 'F'
                                                         ? () => ColorGroup('103', choiceGoods)
-                                                        : () => ColorGroup('203', choiceGoods))
+                                                        : () => ColorGroup('203', choiceGoods)
                                                 }
-                                                className={copbtc01 === '03' ? 'on' : ''}
+                                                className={copbtc === '03' ? 'on' : ''}
                                             >
                                                 <img src={learnc_0103} alt="" />
                                             </a>
@@ -425,26 +407,27 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc01_Cho('04', choiceGoods),
                                                     textFrontSide === 'F'
                                                         ? () => ColorGroup('104', choiceGoods)
-                                                        : () => ColorGroup('204', choiceGoods))
+                                                        : () => ColorGroup('204', choiceGoods)
                                                 }
-                                                className={copbtc01 === '04' ? 'on' : ''}
+                                                className={copbtc === '04' ? 'on' : ''}
                                             >
                                                 <img src={learnc_0104} alt="" />
                                             </a>
                                         </li>
+                                        {/* 정면 컬러 101~104 End */}
+
+                                        {/* 정면 흑백 111~114 Start */}
                                         <li>
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc01_Cho('05', choiceGoods),
                                                     textFrontSide === 'F'
-                                                        ? () => ColorGroup('105', choiceGoods)
-                                                        : () => ColorGroup('205', choiceGoods))
+                                                        ? () => ColorGroup('111', choiceGoods)
+                                                        : () => ColorGroup('211', choiceGoods)
                                                 }
-                                                className={copbtc01 === '05' ? 'on' : ''}
+                                                className={copbtc === '11' ? 'on' : ''}
                                             >
                                                 <img src={learnc_0201} alt="" />
                                             </a>
@@ -453,12 +436,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc01_Cho('06', choiceGoods),
                                                     textFrontSide === 'F'
-                                                        ? () => ColorGroup('106', choiceGoods)
-                                                        : () => ColorGroup('206', choiceGoods))
+                                                        ? () => ColorGroup('112', choiceGoods)
+                                                        : () => ColorGroup('212', choiceGoods)
                                                 }
-                                                className={copbtc01 === '06' ? 'on' : ''}
+                                                className={copbtc === '12' ? 'on' : ''}
                                             >
                                                 <img src={learnc_0202} alt="" />
                                             </a>
@@ -467,12 +449,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc01_Cho('07', choiceGoods),
                                                     textFrontSide === 'F'
-                                                        ? () => ColorGroup('107', choiceGoods)
-                                                        : () => ColorGroup('207', choiceGoods))
+                                                        ? () => ColorGroup('113', choiceGoods)
+                                                        : () => ColorGroup('213', choiceGoods)
                                                 }
-                                                className={copbtc01 === '07' ? 'on' : ''}
+                                                className={copbtc === '13' ? 'on' : ''}
                                             >
                                                 <img src={learnc_0203} alt="" />
                                             </a>
@@ -481,31 +462,31 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc01_Cho('08', choiceGoods),
                                                     textFrontSide === 'F'
-                                                        ? () => ColorGroup('108', choiceGoods)
-                                                        : () => ColorGroup('208', choiceGoods))
+                                                        ? () => ColorGroup('114', choiceGoods)
+                                                        : () => ColorGroup('214', choiceGoods)
                                                 }
-                                                className={copbtc01 === '08' ? 'on' : ''}
+                                                className={copbtc === '14' ? 'on' : ''}
                                             >
                                                 <img src={learnc_0204} alt="" />
                                             </a>
                                         </li>
+                                        {/* 정면 흑백 111~114 End */}
                                     </ul>
                                 </div>
                                 {/* <!-- learnbtc02 --> */}
                                 <div className="learnbtc02">
                                     <ul>
+                                        {/* 정면 컬러 채도 105~110 Start */}
                                         <li>
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('09', choiceGoods),
                                                     textFrontSide === 'F'
-                                                        ? () => ColorGroup('109', choiceGoods)
-                                                        : () => ColorGroup('209', choiceGoods))
+                                                        ? () => ColorGroup('105', choiceGoods)
+                                                        : () => ColorGroup('205', choiceGoods)
                                                 }
-                                                className={copbtc02 === '09' ? 'on' : ''}
+                                                className={copbtc === '05' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic01_01"></span>
                                             </a>
@@ -514,12 +495,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('10', choiceGoods),
                                                     textFrontSide === 'F'
-                                                        ? () => ColorGroup('110', choiceGoods)
-                                                        : () => ColorGroup('210', choiceGoods))
+                                                        ? () => ColorGroup('106', choiceGoods)
+                                                        : () => ColorGroup('206', choiceGoods)
                                                 }
-                                                className={copbtc02 === '10' ? 'on' : ''}
+                                                className={copbtc === '06' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic01_02"></span>
                                             </a>
@@ -528,12 +508,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('11', choiceGoods),
                                                     textFrontSide === 'F'
-                                                        ? () => ColorGroup('111', choiceGoods)
-                                                        : () => ColorGroup('211', choiceGoods))
+                                                        ? () => ColorGroup('107', choiceGoods)
+                                                        : () => ColorGroup('207', choiceGoods)
                                                 }
-                                                className={copbtc02 === '11' ? 'on' : ''}
+                                                className={copbtc === '07' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic01_03"></span>
                                             </a>
@@ -542,12 +521,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('12', choiceGoods),
                                                     textFrontSide === 'F'
-                                                        ? () => ColorGroup('112', choiceGoods)
-                                                        : () => ColorGroup('212', choiceGoods))
+                                                        ? () => ColorGroup('108', choiceGoods)
+                                                        : () => ColorGroup('208', choiceGoods)
                                                 }
-                                                className={copbtc02 === '12' ? 'on' : ''}
+                                                className={copbtc === '08' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic01_04"></span>
                                             </a>
@@ -556,12 +534,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('13', choiceGoods),
                                                     textFrontSide === 'F'
-                                                        ? () => ColorGroup('113', choiceGoods)
-                                                        : () => ColorGroup('213', choiceGoods))
+                                                        ? () => ColorGroup('109', choiceGoods)
+                                                        : () => ColorGroup('209', choiceGoods)
                                                 }
-                                                className={copbtc02 === '13' ? 'on' : ''}
+                                                className={copbtc === '09' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic01_05"></span>
                                             </a>
@@ -570,28 +547,28 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('14', choiceGoods),
                                                     textFrontSide === 'F'
-                                                        ? () => ColorGroup('114', choiceGoods)
-                                                        : () => ColorGroup('214', choiceGoods))
+                                                        ? () => ColorGroup('110', choiceGoods)
+                                                        : () => ColorGroup('210', choiceGoods)
                                                 }
-                                                className={copbtc02 === '14' ? 'on' : ''}
+                                                className={copbtc === '10' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic01_06"></span>
                                             </a>
                                         </li>
+                                        {/* 정면 컬러 채도 105~110 End */}
                                     </ul>
                                     <ul>
+                                        {/* 정면 흑백 채도 115~120 Start */}
                                         <li>
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('15', choiceGoods),
                                                     textFrontSide === 'F'
                                                         ? () => ColorGroup('115', choiceGoods)
-                                                        : () => ColorGroup('215', choiceGoods))
+                                                        : () => ColorGroup('215', choiceGoods)
                                                 }
-                                                className={copbtc02 === '15' ? 'on' : ''}
+                                                className={copbtc === '15' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic02_01"></span>
                                             </a>
@@ -600,12 +577,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('16', choiceGoods),
                                                     textFrontSide === 'F'
                                                         ? () => ColorGroup('116', choiceGoods)
-                                                        : () => ColorGroup('216', choiceGoods))
+                                                        : () => ColorGroup('216', choiceGoods)
                                                 }
-                                                className={copbtc02 === '16' ? 'on' : ''}
+                                                className={copbtc === '16' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic02_02"></span>
                                             </a>
@@ -614,12 +590,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('17', choiceGoods),
                                                     textFrontSide === 'F'
                                                         ? () => ColorGroup('117', choiceGoods)
-                                                        : () => ColorGroup('217', choiceGoods))
+                                                        : () => ColorGroup('217', choiceGoods)
                                                 }
-                                                className={copbtc02 === '17' ? 'on' : ''}
+                                                className={copbtc === '17' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic02_03"></span>
                                             </a>
@@ -628,12 +603,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('18', choiceGoods),
                                                     textFrontSide === 'F'
                                                         ? () => ColorGroup('118', choiceGoods)
-                                                        : () => ColorGroup('218', choiceGoods))
+                                                        : () => ColorGroup('218', choiceGoods)
                                                 }
-                                                className={copbtc02 === '18' ? 'on' : ''}
+                                                className={copbtc === '18' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic02_04"></span>
                                             </a>
@@ -642,12 +616,11 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('19', choiceGoods),
                                                     textFrontSide === 'F'
                                                         ? () => ColorGroup('119', choiceGoods)
-                                                        : () => ColorGroup('219', choiceGoods))
+                                                        : () => ColorGroup('219', choiceGoods)
                                                 }
-                                                className={copbtc02 === '19' ? 'on' : ''}
+                                                className={copbtc === '19' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic02_05"></span>
                                             </a>
@@ -656,16 +629,16 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 onClick={
-                                                    (() => copbtc02_Cho('20', choiceGoods),
                                                     textFrontSide === 'F'
                                                         ? () => ColorGroup('120', choiceGoods)
-                                                        : () => ColorGroup('220', choiceGoods))
+                                                        : () => ColorGroup('220', choiceGoods)
                                                 }
-                                                className={copbtc02 === '20' ? 'on' : ''}
+                                                className={copbtc === '20' ? 'on' : ''}
                                             >
                                                 <span className="brig_ic02_06"></span>
                                             </a>
                                         </li>
+                                        {/* 정면 흑백 채도 115~120 End */}
                                     </ul>
                                 </div>
                                 {/* <!-- learnbtc03 --> */}
@@ -673,23 +646,13 @@ export const LearningP = (props) => {
                                     <ul>
                                         {/* 확대 */}
                                         <li>
-                                            <a
-                                                href="#"
-                                                id="color_glas_plus"
-                                                onClick={(() => copbtc03_Cho('0'), handleZoomIn)}
-                                                className={copbtc03 === '0' ? 'on' : ''}
-                                            >
+                                            <a href="#" id="color_glas_plus" onClick={handleZoomIn} className={copbtc === '21' ? 'on' : ''}>
                                                 <img src={glas_plus} alt="확대" title="확대" />
                                             </a>
                                         </li>
                                         {/* 반전 */}
                                         <li>
-                                            <a
-                                                href="#"
-                                                id="color_transform"
-                                                onClick={(() => copbtc03_Cho('1'), handleFlip)}
-                                                className={copbtc03 === '1' ? 'on' : ''}
-                                            >
+                                            <a href="#" id="color_transform" onClick={handleFlip} className={copbtc === '22' ? 'on' : ''}>
                                                 <img src={transform} alt="좌우반전" title="좌우반전" />
                                             </a>
                                         </li>
@@ -698,8 +661,8 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 id="color_glas_minus"
-                                                onClick={(() => copbtc03_Cho('2'), handleZoomOut)}
-                                                className={copbtc03 === '2' ? 'on' : ''}
+                                                onClick={handleZoomOut}
+                                                className={copbtc === '23' ? 'on' : ''}
                                             >
                                                 <img src={glas_minus} alt="축소" title="축소" />
                                             </a>
@@ -709,8 +672,8 @@ export const LearningP = (props) => {
                                             <a
                                                 href="#"
                                                 id="color_restoration"
-                                                onClick={(() => copbtc03_Cho('3'), handleRestore)}
-                                                className={copbtc03 === '3' ? 'on' : ''}
+                                                onClick={handleRestore}
+                                                className={copbtc === '24' ? 'on' : ''}
                                             >
                                                 <img src={restoration} alt="복원" title="복원" />
                                             </a>
@@ -794,10 +757,10 @@ export const LearningP = (props) => {
                                         {selectLearnProblemsData?.map((pd, i) => {
                                             return (
                                                 <tr className="on" key={i}>
-                                                    <td>1</td>
-                                                    <td>머리 클립형 나이프</td>
-                                                    <td>Opened</td>
-                                                    <td>Restricte</td>
+                                                    <td>{i + 1}</td>
+                                                    <td>{pd.unitName}</td>
+                                                    <td>{pd.openYn}</td>
+                                                    <td>{pd.passYn}</td>
                                                 </tr>
                                             );
                                         })}
